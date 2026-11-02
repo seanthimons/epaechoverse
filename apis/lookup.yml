@@ -1,0 +1,276 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: lookup
+schemas:
+  files:
+  - schema/lookup.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: lookup_request
+authentication: {}
+defaults: {}
+groups:
+  lookup_lookups:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /rest_lookups.air_pollutants
+      - POST /rest_lookups.air_pollutants
+      - GET /rest_lookups.bio_analy_method_category
+      - POST /rest_lookups.bio_analy_method_category
+      - GET /rest_lookups.bio_analytical_method
+      - POST /rest_lookups.bio_analytical_method
+      - GET /rest_lookups.bio_container_type
+      - POST /rest_lookups.bio_container_type
+      - GET /rest_lookups.bio_mgmt_practice_handler
+      - POST /rest_lookups.bio_mgmt_practice_handler
+      - GET /rest_lookups.bio_mgmt_practice_subtype
+      - POST /rest_lookups.bio_mgmt_practice_subtype
+      - GET /rest_lookups.bio_mgmt_practice_type
+      - POST /rest_lookups.bio_mgmt_practice_type
+      - GET /rest_lookups.bio_mgmt_practice_typesubtype
+      - POST /rest_lookups.bio_mgmt_practice_typesubtype
+      - GET /rest_lookups.bio_pathogen_class
+      - POST /rest_lookups.bio_pathogen_class
+      - GET /rest_lookups.bio_pathogen_reduction
+      - POST /rest_lookups.bio_pathogen_reduction
+      - GET /rest_lookups.bio_treatment_process
+      - POST /rest_lookups.bio_treatment_process
+      - GET /rest_lookups.bio_vector_reduction
+      - POST /rest_lookups.bio_vector_reduction
+      - GET /rest_lookups.bio_vio_code
+      - POST /rest_lookups.bio_vio_code
+      - GET /rest_lookups.biosolids_by_registry_id
+      - POST /rest_lookups.biosolids_by_registry_id
+      - GET /rest_lookups.bp_tribes
+      - POST /rest_lookups.bp_tribes
+      - GET /rest_lookups.counties
+      - POST /rest_lookups.counties
+      - GET /rest_lookups.cp_citations
+      - POST /rest_lookups.cp_citations
+      - GET /rest_lookups.cwa_pagency_lu
+      - POST /rest_lookups.cwa_pagency_lu
+      - GET /rest_lookups.cwa_parameters
+      - POST /rest_lookups.cwa_parameters
+      - GET /rest_lookups.cwa_pollutants
+      - POST /rest_lookups.cwa_pollutants
+      - GET /rest_lookups.cwa_state_regions
+      - POST /rest_lookups.cwa_state_regions
+      - GET /rest_lookups.ecatt_eis_types
+      - POST /rest_lookups.ecatt_eis_types
+      - GET /rest_lookups.ecatt_most_rcnt_cmmn_yr
+      - POST /rest_lookups.ecatt_most_rcnt_cmmn_yr
+      - GET /rest_lookups.ecatt_most_rcnt_yr
+      - POST /rest_lookups.ecatt_most_rcnt_yr
+      - GET /rest_lookups.ecatt_nei_scc_codes
+      - POST /rest_lookups.ecatt_nei_scc_codes
+      - GET /rest_lookups.ecatt_pcat_pgm
+      - POST /rest_lookups.ecatt_pcat_pgm
+      - GET /rest_lookups.ecatt_poll_categories
+      - POST /rest_lookups.ecatt_poll_categories
+      - GET /rest_lookups.ecatt_poll_pgm
+      - POST /rest_lookups.ecatt_poll_pgm
+      - GET /rest_lookups.ecatt_pollutants
+      - POST /rest_lookups.ecatt_pollutants
+      - GET /rest_lookups.fac_universe_indicators
+      - POST /rest_lookups.fac_universe_indicators
+      - GET /rest_lookups.federal_agencies
+      - POST /rest_lookups.federal_agencies
+      - GET /rest_lookups.ghg_fac_types
+      - POST /rest_lookups.ghg_fac_types
+      - GET /rest_lookups.ghg_subparts
+      - POST /rest_lookups.ghg_subparts
+      - GET /rest_lookups.ghg_years
+      - POST /rest_lookups.ghg_years
+      - GET /rest_lookups.icis_inspection_types
+      - POST /rest_lookups.icis_inspection_types
+      - GET /rest_lookups.icis_law_sections
+      - POST /rest_lookups.icis_law_sections
+      - GET /rest_lookups.icis_ref_program
+      - POST /rest_lookups.icis_ref_program
+      - GET /rest_lookups.naics_codes
+      - POST /rest_lookups.naics_codes
+      - GET /rest_lookups.national_priorities
+      - POST /rest_lookups.national_priorities
+      - GET /rest_lookups.nei_pollutants
+      - POST /rest_lookups.nei_pollutants
+      - GET /rest_lookups.nei_years
+      - POST /rest_lookups.nei_years
+      - GET /rest_lookups.npdes_parameters
+      - POST /rest_lookups.npdes_parameters
+      - GET /rest_lookups.npl_site_link
+      - POST /rest_lookups.npl_site_link
+      - GET /rest_lookups.prog_deficiency
+      - POST /rest_lookups.prog_deficiency
+      - GET /rest_lookups.rcra_lu_state_districts
+      - POST /rest_lookups.rcra_lu_state_districts
+      - GET /rest_lookups.reporting_obligation
+      - POST /rest_lookups.reporting_obligation
+      - GET /rest_lookups.rpo_regions
+      - POST /rest_lookups.rpo_regions
+      - GET /rest_lookups.sdwa_contaminants
+      - POST /rest_lookups.sdwa_contaminants
+      - GET /rest_lookups.sdwis_tribes
+      - POST /rest_lookups.sdwis_tribes
+      - GET /rest_lookups.states
+      - POST /rest_lookups.states
+      - GET /rest_lookups.tri_current_year
+      - POST /rest_lookups.tri_current_year
+      - GET /rest_lookups.tri_pollutants
+      - POST /rest_lookups.tri_pollutants
+      - GET /rest_lookups.tri_years
+      - POST /rest_lookups.tri_years
+      - GET /rest_lookups.wbd_code_lu
+      - POST /rest_lookups.wbd_code_lu
+      - GET /rest_lookups.wbd_lu
+      - POST /rest_lookups.wbd_lu
+      - GET /rest_lookups.wbd_name_lu
+      - POST /rest_lookups.wbd_name_lu
+    names:
+      GET /rest_lookups.air_pollutants: lookup_air_pollutants
+      POST /rest_lookups.air_pollutants: lookup_air_pollutants_post
+      GET /rest_lookups.bio_analy_method_category: lookup_bio_analy_method_category
+      POST /rest_lookups.bio_analy_method_category: lookup_bio_analy_method_category_post
+      GET /rest_lookups.bio_analytical_method: lookup_bio_analytical_method
+      POST /rest_lookups.bio_analytical_method: lookup_bio_analytical_method_post
+      GET /rest_lookups.bio_container_type: lookup_bio_container_type
+      POST /rest_lookups.bio_container_type: lookup_bio_container_type_post
+      GET /rest_lookups.bio_mgmt_practice_handler: lookup_bio_mgmt_practice_handler
+      POST /rest_lookups.bio_mgmt_practice_handler: lookup_bio_mgmt_practice_handler_post
+      GET /rest_lookups.bio_mgmt_practice_subtype: lookup_bio_mgmt_practice_subtype
+      POST /rest_lookups.bio_mgmt_practice_subtype: lookup_bio_mgmt_practice_subtype_post
+      GET /rest_lookups.bio_mgmt_practice_type: lookup_bio_mgmt_practice_type
+      POST /rest_lookups.bio_mgmt_practice_type: lookup_bio_mgmt_practice_type_post
+      GET /rest_lookups.bio_mgmt_practice_typesubtype: lookup_bio_mgmt_practice_typesubtype
+      POST /rest_lookups.bio_mgmt_practice_typesubtype: lookup_bio_mgmt_practice_typesubtype_post
+      GET /rest_lookups.bio_pathogen_class: lookup_bio_pathogen_class
+      POST /rest_lookups.bio_pathogen_class: lookup_bio_pathogen_class_post
+      GET /rest_lookups.bio_pathogen_reduction: lookup_bio_pathogen_reduction
+      POST /rest_lookups.bio_pathogen_reduction: lookup_bio_pathogen_reduction_post
+      GET /rest_lookups.bio_treatment_process: lookup_bio_treatment_process
+      POST /rest_lookups.bio_treatment_process: lookup_bio_treatment_process_post
+      GET /rest_lookups.bio_vector_reduction: lookup_bio_vector_reduction
+      POST /rest_lookups.bio_vector_reduction: lookup_bio_vector_reduction_post
+      GET /rest_lookups.bio_vio_code: lookup_bio_vio_code
+      POST /rest_lookups.bio_vio_code: lookup_bio_vio_code_post
+      GET /rest_lookups.biosolids_by_registry_id: lookup_biosolids_by_registry_id
+      POST /rest_lookups.biosolids_by_registry_id: lookup_biosolids_by_registry_id_post
+      GET /rest_lookups.bp_tribes: lookup_bp_tribes
+      POST /rest_lookups.bp_tribes: lookup_bp_tribes_post
+      GET /rest_lookups.counties: lookup_counties
+      POST /rest_lookups.counties: lookup_counties_post
+      GET /rest_lookups.cp_citations: lookup_cp_citations
+      POST /rest_lookups.cp_citations: lookup_cp_citations_post
+      GET /rest_lookups.cwa_pagency_lu: lookup_cwa_pagency_lu
+      POST /rest_lookups.cwa_pagency_lu: lookup_cwa_pagency_lu_post
+      GET /rest_lookups.cwa_parameters: lookup_cwa_parameters
+      POST /rest_lookups.cwa_parameters: lookup_cwa_parameters_post
+      GET /rest_lookups.cwa_pollutants: lookup_cwa_pollutants
+      POST /rest_lookups.cwa_pollutants: lookup_cwa_pollutants_post
+      GET /rest_lookups.cwa_state_regions: lookup_cwa_state_regions
+      POST /rest_lookups.cwa_state_regions: lookup_cwa_state_regions_post
+      GET /rest_lookups.ecatt_eis_types: lookup_ecatt_eis_types
+      POST /rest_lookups.ecatt_eis_types: lookup_ecatt_eis_types_post
+      GET /rest_lookups.ecatt_most_rcnt_cmmn_yr: lookup_ecatt_most_rcnt_cmmn_yr
+      POST /rest_lookups.ecatt_most_rcnt_cmmn_yr: lookup_ecatt_most_rcnt_cmmn_yr_post
+      GET /rest_lookups.ecatt_most_rcnt_yr: lookup_ecatt_most_rcnt_yr
+      POST /rest_lookups.ecatt_most_rcnt_yr: lookup_ecatt_most_rcnt_yr_post
+      GET /rest_lookups.ecatt_nei_scc_codes: lookup_ecatt_nei_scc_codes
+      POST /rest_lookups.ecatt_nei_scc_codes: lookup_ecatt_nei_scc_codes_post
+      GET /rest_lookups.ecatt_pcat_pgm: lookup_ecatt_pcat_pgm
+      POST /rest_lookups.ecatt_pcat_pgm: lookup_ecatt_pcat_pgm_post
+      GET /rest_lookups.ecatt_poll_categories: lookup_ecatt_poll_categories
+      POST /rest_lookups.ecatt_poll_categories: lookup_ecatt_poll_categories_post
+      GET /rest_lookups.ecatt_poll_pgm: lookup_ecatt_poll_pgm
+      POST /rest_lookups.ecatt_poll_pgm: lookup_ecatt_poll_pgm_post
+      GET /rest_lookups.ecatt_pollutants: lookup_ecatt_pollutants
+      POST /rest_lookups.ecatt_pollutants: lookup_ecatt_pollutants_post
+      GET /rest_lookups.fac_universe_indicators: lookup_fac_universe_indicators
+      POST /rest_lookups.fac_universe_indicators: lookup_fac_universe_indicators_post
+      GET /rest_lookups.federal_agencies: lookup_federal_agencies
+      POST /rest_lookups.federal_agencies: lookup_federal_agencies_post
+      GET /rest_lookups.ghg_fac_types: lookup_ghg_fac_types
+      POST /rest_lookups.ghg_fac_types: lookup_ghg_fac_types_post
+      GET /rest_lookups.ghg_subparts: lookup_ghg_subparts
+      POST /rest_lookups.ghg_subparts: lookup_ghg_subparts_post
+      GET /rest_lookups.ghg_years: lookup_ghg_years
+      POST /rest_lookups.ghg_years: lookup_ghg_years_post
+      GET /rest_lookups.icis_inspection_types: lookup_icis_inspection_types
+      POST /rest_lookups.icis_inspection_types: lookup_icis_inspection_types_post
+      GET /rest_lookups.icis_law_sections: lookup_icis_law_sections
+      POST /rest_lookups.icis_law_sections: lookup_icis_law_sections_post
+      GET /rest_lookups.icis_ref_program: lookup_icis_ref_program
+      POST /rest_lookups.icis_ref_program: lookup_icis_ref_program_post
+      GET /rest_lookups.naics_codes: lookup_naics_codes
+      POST /rest_lookups.naics_codes: lookup_naics_codes_post
+      GET /rest_lookups.national_priorities: lookup_national_priorities
+      POST /rest_lookups.national_priorities: lookup_national_priorities_post
+      GET /rest_lookups.nei_pollutants: lookup_nei_pollutants
+      POST /rest_lookups.nei_pollutants: lookup_nei_pollutants_post
+      GET /rest_lookups.nei_years: lookup_nei_years
+      POST /rest_lookups.nei_years: lookup_nei_years_post
+      GET /rest_lookups.npdes_parameters: lookup_npdes_parameters
+      POST /rest_lookups.npdes_parameters: lookup_npdes_parameters_post
+      GET /rest_lookups.npl_site_link: lookup_npl_site_link
+      POST /rest_lookups.npl_site_link: lookup_npl_site_link_post
+      GET /rest_lookups.prog_deficiency: lookup_prog_deficiency
+      POST /rest_lookups.prog_deficiency: lookup_prog_deficiency_post
+      GET /rest_lookups.rcra_lu_state_districts: lookup_rcra_lu_state_districts
+      POST /rest_lookups.rcra_lu_state_districts: lookup_rcra_lu_state_districts_post
+      GET /rest_lookups.reporting_obligation: lookup_reporting_obligation
+      POST /rest_lookups.reporting_obligation: lookup_reporting_obligation_post
+      GET /rest_lookups.rpo_regions: lookup_rpo_regions
+      POST /rest_lookups.rpo_regions: lookup_rpo_regions_post
+      GET /rest_lookups.sdwa_contaminants: lookup_sdwa_contaminants
+      POST /rest_lookups.sdwa_contaminants: lookup_sdwa_contaminants_post
+      GET /rest_lookups.sdwis_tribes: lookup_sdwis_tribes
+      POST /rest_lookups.sdwis_tribes: lookup_sdwis_tribes_post
+      GET /rest_lookups.states: lookup_states
+      POST /rest_lookups.states: lookup_states_post
+      GET /rest_lookups.tri_current_year: lookup_tri_current_year
+      POST /rest_lookups.tri_current_year: lookup_tri_current_year_post
+      GET /rest_lookups.tri_pollutants: lookup_tri_pollutants
+      POST /rest_lookups.tri_pollutants: lookup_tri_pollutants_post
+      GET /rest_lookups.tri_years: lookup_tri_years
+      POST /rest_lookups.tri_years: lookup_tri_years_post
+      GET /rest_lookups.wbd_code_lu: lookup_wbd_code_lu
+      POST /rest_lookups.wbd_code_lu: lookup_wbd_code_lu_post
+      GET /rest_lookups.wbd_lu: lookup_wbd_lu
+      POST /rest_lookups.wbd_lu: lookup_wbd_lu_post
+      GET /rest_lookups.wbd_name_lu: lookup_wbd_name_lu
+      POST /rest_lookups.wbd_name_lu: lookup_wbd_name_lu_post
+    defaults:
+      file: R/lookup_lookups.R
+      docs:
+        tags:
+          family: Lookups endpoints
+    operations: {}

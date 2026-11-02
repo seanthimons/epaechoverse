@@ -1,0 +1,60 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: nncr
+schemas:
+  files:
+  - schema/nncr.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: nncr_request
+authentication: {}
+defaults: {}
+groups:
+  nncr_npdes_noncompliance_reports:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /nncr_services/quarters/
+      - GET /nncr_services/report/
+      - GET /nncr_services/search/
+      - GET /nncr_services/violations/
+    names:
+      GET /nncr_services/quarters/: nncr_quarters
+      GET /nncr_services/report/: nncr_report
+      GET /nncr_services/search/: nncr_search
+      GET /nncr_services/violations/: nncr_violations
+    defaults:
+      file: R/nncr_npdes_noncompliance_reports.R
+      docs:
+        tags:
+          family: NPDES Noncompliance Reports endpoints
+    operations: {}

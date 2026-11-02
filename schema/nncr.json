@@ -1,0 +1,2886 @@
+{
+ "swagger": "2.0"
+,"info": {
+    "title": "U.S. EPA Enforcement and Compliance History Online (ECHO)"
+   ,"contact": {
+       "name": "U.S. EPA, OECA Integration, Targeting and Access Branch"
+      ,"url": "https:\/\/echo.epa.gov\/resources\/general-info\/contact-us"
+   }
+   ,"license": {
+       "name": "U.S. Public Domain License"
+      ,"url": "https:\/\/edg.epa.gov\/EPA_Data_License.html"
+   }
+   ,"version": "2021.02.14"
+}
+,"host": "echodata.epa.gov"
+,"basePath": "\/echo"
+,"schemes": [
+    "https"
+]
+,"produces": [
+    "application\/json"
+]
+,"parameters": {
+    "q.frs_id": {
+       "name": "frs_id"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.npdes_id": {
+       "name": "npdes_id"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.epa_region": {
+       "name": "epa_region"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.frs_id__in": {
+       "name": "frs_id__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.fy_quarter": {
+       "name": "fy_quarter"
+      ,"in": "query"
+      ,"default": "FY24Q4"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.issue_date": {
+       "name": "issue_date"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_zip": {
+       "name": "permit_zip"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.designation": {
+       "name": "designation"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city": {
+       "name": "permit_city"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name": {
+       "name": "permit_name"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type": {
+       "name": "permit_type"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.npdes_id__in": {
+       "name": "npdes_id__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_state": {
+       "name": "permit_state"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county": {
+       "name": "permit_county"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status": {
+       "name": "permit_status"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date": {
+       "name": "effective_date"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.epa_region__in": {
+       "name": "epa_region__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issue_date__gt": {
+       "name": "issue_date__gt"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issue_date__lt": {
+       "name": "issue_date__lt"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency": {
+       "name": "issuing_agency"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address": {
+       "name": "permit_address"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_zip__in": {
+       "name": "permit_zip__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.designation__in": {
+       "name": "designation__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.exceptional_use": {
+       "name": "exceptional_use"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date": {
+       "name": "expiration_date"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issue_date__day": {
+       "name": "issue_date__day"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issue_date__gte": {
+       "name": "issue_date__gte"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issue_date__lte": {
+       "name": "issue_date__lte"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__in": {
+       "name": "permit_city__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__in": {
+       "name": "permit_name__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__in": {
+       "name": "permit_type__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_codes": {
+       "name": "watershed_codes"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names": {
+       "name": "watershed_names"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issue_date__year": {
+       "name": "issue_date__year"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_state__in": {
+       "name": "permit_state__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date": {
+       "name": "termination_date"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issue_date__month": {
+       "name": "issue_date__month"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components": {
+       "name": "permit_components"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__in": {
+       "name": "permit_county__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__in": {
+       "name": "permit_status__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permits__npdes_id": {
+       "name": "permits__npdes_id"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.state_facility_id": {
+       "name": "state_facility_id"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date__gt": {
+       "name": "effective_date__gt"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date__lt": {
+       "name": "effective_date__lt"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issue_date__isnull": {
+       "name": "issue_date__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__in": {
+       "name": "permit_address__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__regex": {
+       "name": "permit_city__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__regex": {
+       "name": "permit_name__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__regex": {
+       "name": "permit_type__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.designation__isnull": {
+       "name": "designation__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date__day": {
+       "name": "effective_date__day"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date__gte": {
+       "name": "effective_date__gte"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date__lte": {
+       "name": "effective_date__lte"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.exceptional_use__in": {
+       "name": "exceptional_use__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date__gt": {
+       "name": "expiration_date__gt"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date__lt": {
+       "name": "expiration_date__lt"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__iexact": {
+       "name": "permit_city__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__iregex": {
+       "name": "permit_city__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__iexact": {
+       "name": "permit_name__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__iregex": {
+       "name": "permit_name__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__isnull": {
+       "name": "permit_name__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__iexact": {
+       "name": "permit_type__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__iregex": {
+       "name": "permit_type__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__isnull": {
+       "name": "permit_type__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_codes__in": {
+       "name": "watershed_codes__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__in": {
+       "name": "watershed_names__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date__year": {
+       "name": "effective_date__year"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date__day": {
+       "name": "expiration_date__day"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date__gte": {
+       "name": "expiration_date__gte"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date__lte": {
+       "name": "expiration_date__lte"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__regex": {
+       "name": "permit_county__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name": {
+       "name": "permit_facility_name"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__regex": {
+       "name": "permit_status__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date__gt": {
+       "name": "termination_date__gt"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date__lt": {
+       "name": "termination_date__lt"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date__month": {
+       "name": "effective_date__month"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date__year": {
+       "name": "expiration_date__year"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__regex": {
+       "name": "issuing_agency__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.listed_for_impairment": {
+       "name": "listed_for_impairment"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__regex": {
+       "name": "permit_address__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__contains": {
+       "name": "permit_city__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__endswith": {
+       "name": "permit_city__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__iexact": {
+       "name": "permit_county__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__iregex": {
+       "name": "permit_county__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__contains": {
+       "name": "permit_name__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__endswith": {
+       "name": "permit_name__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__iexact": {
+       "name": "permit_status__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__iregex": {
+       "name": "permit_status__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__isnull": {
+       "name": "permit_status__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__contains": {
+       "name": "permit_type__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__endswith": {
+       "name": "permit_type__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permits__npdes_id__in": {
+       "name": "permits__npdes_id__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permitting_state_code": {
+       "name": "permitting_state_code"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.state_facility_id__in": {
+       "name": "state_facility_id__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date__day": {
+       "name": "termination_date__day"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date__gte": {
+       "name": "termination_date__gte"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date__lte": {
+       "name": "termination_date__lte"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date__isnull": {
+       "name": "effective_date__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date__month": {
+       "name": "expiration_date__month"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__iexact": {
+       "name": "issuing_agency__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__iregex": {
+       "name": "issuing_agency__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__isnull": {
+       "name": "issuing_agency__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__iexact": {
+       "name": "permit_address__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__iregex": {
+       "name": "permit_address__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__icontains": {
+       "name": "permit_city__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__iendswith": {
+       "name": "permit_city__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__icontains": {
+       "name": "permit_name__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__iendswith": {
+       "name": "permit_name__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__icontains": {
+       "name": "permit_type__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__iendswith": {
+       "name": "permit_type__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date__year": {
+       "name": "termination_date__year"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__regex": {
+       "name": "watershed_names__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.exceptional_use__isnull": {
+       "name": "exceptional_use__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date__isnull": {
+       "name": "expiration_date__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_type_indicator": {
+       "name": "facility_type_indicator"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issue_date__date__range": {
+       "name": "issue_date__date__range"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__startswith": {
+       "name": "permit_city__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__contains": {
+       "name": "permit_county__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__endswith": {
+       "name": "permit_county__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__startswith": {
+       "name": "permit_name__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__contains": {
+       "name": "permit_status__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__endswith": {
+       "name": "permit_status__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__startswith": {
+       "name": "permit_type__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date__month": {
+       "name": "termination_date__month"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_codes__isnull": {
+       "name": "watershed_codes__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__iexact": {
+       "name": "watershed_names__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__iregex": {
+       "name": "watershed_names__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__isnull": {
+       "name": "watershed_names__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__contains": {
+       "name": "issuing_agency__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__endswith": {
+       "name": "issuing_agency__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__contains": {
+       "name": "permit_address__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__endswith": {
+       "name": "permit_address__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_city__istartswith": {
+       "name": "permit_city__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__regex": {
+       "name": "permit_components__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__icontains": {
+       "name": "permit_county__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__iendswith": {
+       "name": "permit_county__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__in": {
+       "name": "permit_facility_name__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_name__istartswith": {
+       "name": "permit_name__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__icontains": {
+       "name": "permit_status__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__iendswith": {
+       "name": "permit_status__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_type__istartswith": {
+       "name": "permit_type__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date__isnull": {
+       "name": "termination_date__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__icontains": {
+       "name": "issuing_agency__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__iendswith": {
+       "name": "issuing_agency__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.listed_for_impairment__in": {
+       "name": "listed_for_impairment__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__icontains": {
+       "name": "permit_address__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__iendswith": {
+       "name": "permit_address__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__iexact": {
+       "name": "permit_components__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__iregex": {
+       "name": "permit_components__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__isnull": {
+       "name": "permit_components__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__startswith": {
+       "name": "permit_county__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__startswith": {
+       "name": "permit_status__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permitting_state_code__in": {
+       "name": "permitting_state_code__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.state_facility_id__isnull": {
+       "name": "state_facility_id__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__contains": {
+       "name": "watershed_names__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__endswith": {
+       "name": "watershed_names__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__startswith": {
+       "name": "issuing_agency__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__startswith": {
+       "name": "permit_address__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_county__istartswith": {
+       "name": "permit_county__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_status__istartswith": {
+       "name": "permit_status__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__icontains": {
+       "name": "watershed_names__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__iendswith": {
+       "name": "watershed_names__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.effective_date__date__range": {
+       "name": "effective_date__date__range"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_type_indicator__in": {
+       "name": "facility_type_indicator__in"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.issuing_agency__istartswith": {
+       "name": "issuing_agency__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_address__istartswith": {
+       "name": "permit_address__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__contains": {
+       "name": "permit_components__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__endswith": {
+       "name": "permit_components__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__regex": {
+       "name": "permit_facility_name__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__startswith": {
+       "name": "watershed_names__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.expiration_date__date__range": {
+       "name": "expiration_date__date__range"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__icontains": {
+       "name": "permit_components__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__iendswith": {
+       "name": "permit_components__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__iexact": {
+       "name": "permit_facility_name__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__iregex": {
+       "name": "permit_facility_name__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.watershed_names__istartswith": {
+       "name": "watershed_names__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group": {
+       "name": "causes_of_impairment_by_group"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.listed_for_impairment__isnull": {
+       "name": "listed_for_impairment__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__startswith": {
+       "name": "permit_components__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permitting_state_code__isnull": {
+       "name": "permitting_state_code__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.termination_date__date__range": {
+       "name": "termination_date__date__range"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_components__istartswith": {
+       "name": "permit_components__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__contains": {
+       "name": "permit_facility_name__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__endswith": {
+       "name": "permit_facility_name__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_type_indicator__isnull": {
+       "name": "facility_type_indicator__isnull"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__icontains": {
+       "name": "permit_facility_name__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__iendswith": {
+       "name": "permit_facility_name__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__startswith": {
+       "name": "permit_facility_name__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.permit_facility_name__istartswith": {
+       "name": "permit_facility_name__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group__regex": {
+       "name": "causes_of_impairment_by_group__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group__iexact": {
+       "name": "causes_of_impairment_by_group__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group__iregex": {
+       "name": "causes_of_impairment_by_group__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group__contains": {
+       "name": "causes_of_impairment_by_group__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group__endswith": {
+       "name": "causes_of_impairment_by_group__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group__icontains": {
+       "name": "causes_of_impairment_by_group__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group__iendswith": {
+       "name": "causes_of_impairment_by_group__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group__startswith": {
+       "name": "causes_of_impairment_by_group__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.causes_of_impairment_by_group__istartswith": {
+       "name": "causes_of_impairment_by_group__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment": {
+       "name": "facility_pollutants_potentially_contributing_to_impairment"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment__regex": {
+       "name": "facility_pollutants_potentially_contributing_to_impairment__regex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment__iexact": {
+       "name": "facility_pollutants_potentially_contributing_to_impairment__iexact"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment__iregex": 
+{
+       "name": "facility_pollutants_potentially_contributing_to_impairment__iregex"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment__contains": {
+       "name": "facility_pollutants_potentially_contributing_to_impairment__contains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment__endswith": {
+       "name": "facility_pollutants_potentially_contributing_to_impairment__endswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment__icontains": {
+       "name": "facility_pollutants_potentially_contributing_to_impairment__icontains"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment__iendswith": {
+       "name": "facility_pollutants_potentially_contributing_to_impairment__iendswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment__startswith": {
+       "name": "facility_pollutants_potentially_contributing_to_impairment__startswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.facility_pollutants_potentially_contributing_to_impairment__istartswith": {
+       "name": "facility_pollutants_potentially_contributing_to_impairment__istartswith"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+}
+,"paths": {
+    "\/nncr_services\/violations\/": {
+       "get": {
+          "summary": "NPDES Noncompliance Report (NNCR) Violations Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.fy_quarter"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.frs_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.npdes_id"
+            }
+         ]
+         ,"tags": [
+             "NPDES Noncompliance Reports"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "NNCR Violations Root"
+               ,"properties": {
+                   "data": {
+                      "type": "array"
+                     ,"items": {
+                         "$ref": "#\/definitions\/DEF.nncr_services.violations.data"
+                     }
+                  }
+                  ,"count": {
+                      "type": "string"
+                     ,"example": "56"
+                  }
+               }
+               ,"required": [
+                   "data"
+                  ,"count"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/nncr_services\/search\/": {
+       "get": {
+          "summary": "NPDES Noncompliance Report (NNCR) Search Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.fy_quarter"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.frs_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.frs_id__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_facility_name__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_address__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_city__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_county__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_state"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_state__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_zip"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_zip__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.epa_region"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.epa_region__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.npdes_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.npdes_id__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_name__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_type__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_components__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permit_status__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date__gt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date__gte"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date__lt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date__lte"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date__year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date__month"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date__day"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date__date__range"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issue_date__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date__gt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date__gte"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date__lt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date__lte"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date__year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date__month"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date__day"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date__date__range"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.effective_date__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date__gt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date__gte"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date__lt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date__lte"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date__year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date__month"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date__day"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date__date__range"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.expiration_date__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date__gt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date__gte"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date__lt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date__lte"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date__year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date__month"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date__day"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date__date__range"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.termination_date__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.designation"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.designation__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.designation__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_type_indicator"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_type_indicator__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_type_indicator__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.issuing_agency__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permitting_state_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permitting_state_code__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permitting_state_code__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.state_facility_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.state_facility_id__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.state_facility_id__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.exceptional_use"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.exceptional_use__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.exceptional_use__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.listed_for_impairment"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.listed_for_impairment__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.listed_for_impairment__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.facility_pollutants_potentially_contributing_to_impairment__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.causes_of_impairment_by_group__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_codes"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_codes__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_codes__isnull"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__iexact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__contains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__icontains"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__startswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__istartswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__endswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__iendswith"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__regex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__iregex"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.watershed_names__isnull"
+            }
+         ]
+         ,"tags": [
+             "NPDES Noncompliance Reports"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "NNCR Search Root"
+               ,"properties": {
+                   "data": {
+                      "type": "array"
+                     ,"items": {
+                         "$ref": "#\/definitions\/nncr2"
+                     }
+                  }
+                  ,"count": {
+                      "type": "string"
+                     ,"example": "56"
+                  }
+               }
+               ,"required": [
+                   "data"
+                  ,"count"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/nncr_services\/quarters\/": {
+       "get": {
+          "summary": "NPDES Noncompliance Report (NNCR) Quarters Service"
+         ,"tags": [
+             "NPDES Noncompliance Reports"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "NNCR Quarters Root"
+               ,"properties": {
+                   "data": {
+                      "type": "array"
+                     ,"items": {
+                         "$ref": "#\/definitions\/DEF.nncr_services.quarters.data"
+                     }
+                  }
+                  ,"count": {
+                      "type": "string"
+                     ,"example": "56"
+                  }
+               }
+               ,"required": [
+                   "data"
+                  ,"count"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/nncr_services\/report\/": {
+       "get": {
+          "summary": "NPDES Noncompliance Report (NNCR) Report Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.frs_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.frs_id__in"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permits__npdes_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.permits__npdes_id__in"
+            }
+         ]
+         ,"tags": [
+             "NPDES Noncompliance Reports"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "NNCR Report Root"
+               ,"properties": {
+                   "data": {
+                      "type": "array"
+                     ,"items": {
+                         "$ref": "#\/definitions\/nncr4"
+                     }
+                  }
+                  ,"count": {
+                      "type": "string"
+                     ,"example": "56"
+                  }
+               }
+               ,"required": [
+                   "data"
+                  ,"count"
+               ]
+            }
+         }
+         }
+      }
+   }
+}
+,"definitions": {
+    "DEF.nncr_services.quarters.data": {
+       "type": "object"
+      ,"description": "NNCR Quarters Data"
+      ,"properties": {
+          "quarter_start_date": {
+             "type": "string"
+         }
+         ,"quarter_end_date": {
+             "type": "string"
+         }
+         ,"fy_quarter": {
+             "type": "string"
+         }
+         ,"gov_release": {
+             "type": "string"
+            ,"example": "N"
+         }
+         ,"public_release": {
+             "type": "string"
+            ,"example": "Y"
+         }
+      }
+      ,"required": [
+          "quarter_start_date"
+         ,"quarter_end_date"
+         ,"fy_quarter"
+         ,"gov_release"
+         ,"public_release"
+      ]
+   }
+   ,"nncr6": {
+       "type": "object"
+      ,"description": "NNCR Report CS Violations"
+      ,"properties": {
+          "npdes_id": {
+             "type": "string"
+            ,"example": "NYP081003"
+         }
+         ,"violation_type": {
+             "type": "string"
+            ,"example": "DMR Reporting"
+         }
+         ,"comp_schedule_event_id": {
+             "type": "string"
+         }
+         ,"violation_category": {
+             "type": "string"
+            ,"example": "1"
+         }
+         ,"violation_status": {
+             "type": "string"
+            ,"example": "Resolved"
+         }
+         ,"violation_start_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2021-01-17"
+         }
+         ,"violation_end_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2020-11-24"
+         }
+         ,"violation_location": {
+             "type": "string"
+            ,"example": "001-0"
+         }
+         ,"schedule_event_desc": {
+             "type": "string"
+         }
+         ,"detection_desc": {
+             "type": "string"
+            ,"example": "DMR Reporting (Entire) \u2013 NODI"
+         }
+         ,"detection_date": {
+             "type": "string"
+            ,"example": "2021-05-12"
+         }
+         ,"resolution_description": {
+             "type": "string"
+         }
+         ,"resolution_date": {
+             "type": "string"
+            ,"example": "2019-04-01"
+         }
+         ,"days_late": {
+             "type": "integer"
+            ,"example": 21
+         }
+         ,"objectid": {
+             "type": "integer"
+            ,"example": 121
+         }
+         ,"permit_objectid": {
+             "type": "integer"
+            ,"example": 249019
+         }
+      }
+      ,"required": [
+          "npdes_id"
+         ,"violation_type"
+         ,"comp_schedule_event_id"
+         ,"violation_category"
+         ,"violation_status"
+         ,"violation_start_date"
+         ,"violation_end_date"
+         ,"violation_location"
+         ,"schedule_event_desc"
+         ,"detection_desc"
+         ,"detection_date"
+         ,"resolution_description"
+         ,"resolution_date"
+         ,"days_late"
+      ]
+   }
+   ,"nncr4": {
+       "type": "object"
+      ,"description": "NNCR Report Data"
+      ,"properties": {
+          "frs_id": {
+             "type": "string"
+            ,"example": "110070364311"
+         }
+         ,"facility_name": {
+             "type": "string"
+            ,"example": "MILK SPECIALTIES GLOBAL ADELL"
+         }
+         ,"facility_address": {
+             "type": "string"
+            ,"example": "633 COURT ST"
+         }
+         ,"facility_city": {
+             "type": "string"
+            ,"example": "LADYSMITH"
+         }
+         ,"facility_state": {
+             "type": "string"
+            ,"example": "PA"
+         }
+         ,"facility_zip": {
+             "type": "string"
+            ,"example": "88805"
+         }
+         ,"epa_region": {
+             "type": "string"
+            ,"example": "EP6"
+         }
+         ,"huc_code": {
+             "type": "string"
+            ,"example": "040400030101"
+         }
+         ,"watershed": {
+             "type": "string"
+            ,"example": "Silver Lake-Sugar Creek"
+         }
+         ,"objectid": {
+             "type": "integer"
+            ,"example": 121
+         }
+         ,"permits": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/nncr5"
+            }
+         }
+      }
+      ,"required": [
+          "frs_id"
+         ,"facility_name"
+         ,"facility_address"
+         ,"facility_city"
+         ,"facility_state"
+         ,"facility_zip"
+         ,"epa_region"
+         ,"huc_code"
+         ,"watershed"
+         ,"objectid"
+         ,"permits"
+      ]
+   }
+   ,"nncr8": {
+       "type": "object"
+      ,"description": "NNCR Report DMR Reporting Violations"
+      ,"properties": {
+          "npdes_id": {
+             "type": "string"
+            ,"example": "NYP081003"
+         }
+         ,"violation_type": 
+{
+             "type": "string"
+            ,"example": "DMR Reporting"
+         }
+         ,"dmr_form_value_id": {
+             "type": "integer"
+            ,"example": 3013653756
+         }
+         ,"violation_category": {
+             "type": "string"
+            ,"example": "1"
+         }
+         ,"violation_status": {
+             "type": "string"
+            ,"example": "Resolved"
+         }
+         ,"violation_start_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2021-01-17"
+         }
+         ,"violation_end_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2020-11-24"
+         }
+         ,"violation_location": {
+             "type": "string"
+            ,"example": "001-0"
+         }
+         ,"parameter_code": {
+             "type": "string"
+            ,"example": "50060"
+         }
+         ,"parameter_desc": {
+             "type": "string"
+            ,"example": "Chlorine, total residual"
+         }
+         ,"monitoring_location_code": {
+             "type": "string"
+            ,"example": "1"
+         }
+         ,"monitoring_location_desc": {
+             "type": "string"
+            ,"example": "Effluent Gross"
+         }
+         ,"dmr_value_type_code": {
+             "type": "string"
+            ,"example": "C3"
+         }
+         ,"exceedence_pct": {
+             "type": "integer"
+            ,"example": 2
+         }
+         ,"detection_desc": {
+             "type": "string"
+            ,"example": "DMR Reporting (Entire) \u2013 NODI"
+         }
+         ,"detection_date": {
+             "type": "string"
+            ,"example": "2021-05-12"
+         }
+         ,"resolution_description": {
+             "type": "string"
+         }
+         ,"resolution_date": {
+             "type": "string"
+            ,"example": "2019-04-01"
+         }
+         ,"days_late": {
+             "type": "integer"
+            ,"example": 21
+         }
+         ,"objectid": {
+             "type": "integer"
+            ,"example": 121
+         }
+         ,"permit_objectid": {
+             "type": "integer"
+            ,"example": 249019
+         }
+      }
+      ,"required": [
+          "npdes_id"
+         ,"violation_type"
+         ,"dmr_form_value_id"
+         ,"violation_category"
+         ,"violation_status"
+         ,"violation_start_date"
+         ,"violation_end_date"
+         ,"violation_location"
+         ,"parameter_code"
+         ,"parameter_desc"
+         ,"monitoring_location_code"
+         ,"monitoring_location_desc"
+         ,"dmr_value_type_code"
+         ,"exceedence_pct"
+         ,"detection_desc"
+         ,"detection_date"
+         ,"resolution_description"
+         ,"resolution_date"
+         ,"days_late"
+      ]
+   }
+   ,"nncr5": {
+       "type": "object"
+      ,"description": "NNCR Report Permits"
+      ,"properties": {
+          "npdes_id": {
+             "type": "string"
+            ,"example": "NYP081003"
+         }
+         ,"permit_name": {
+             "type": "string"
+            ,"example": "Turkey Valley Community School"
+         }
+         ,"permit_address": {
+             "type": "string"
+            ,"example": "3739 LAKESHORE DRIVE"
+         }
+         ,"permit_city": {
+             "type": "string"
+            ,"example": "BURLINGTON"
+         }
+         ,"permit_county": {
+             "type": "string"
+            ,"example": "Sheboygan"
+         }
+         ,"permit_state": {
+             "type": "string"
+            ,"example": "WI"
+         }
+         ,"permit_zip": {
+             "type": "string"
+            ,"example": "22201"
+         }
+         ,"permit_type": {
+             "type": "string"
+            ,"example": "NPDES Individual Permit"
+         }
+         ,"permit_components": {
+             "type": "string"
+            ,"example": "Storm Water Construction"
+         }
+         ,"permit_status": {
+             "type": "string"
+            ,"example": "Admin Continued"
+         }
+         ,"designation": {
+             "type": "string"
+            ,"example": "Y"
+         }
+         ,"facility_type_indicator": {
+             "type": "string"
+            ,"example": "NON-POTW"
+         }
+         ,"permitting_agency": {
+             "type": "string"
+            ,"example": "State"
+         }
+         ,"exceptional_use": {
+             "type": "string"
+            ,"example": "Y"
+         }
+         ,"discharging_into_impaired_water": {
+             "type": "string"
+            ,"example": "Y"
+         }
+         ,"causes_of_impairment": {
+             "type": "string"
+            ,"example": "TURBIDITY"
+         }
+         ,"discharging_pollutants_potentially_contributing_to_impairment": {
+             "type": "string"
+            ,"example": "Solids, total suspended"
+         }
+         ,"ps_violations": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/nncr7"
+            }
+         }
+         ,"cs_violations": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/nncr6"
+            }
+         }
+         ,"dmr_reporting_violations": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/nncr8"
+            }
+         }
+         ,"objectid": {
+             "type": "integer"
+            ,"example": 121
+         }
+         ,"frs_objectid": {
+             "type": "integer"
+            ,"example": 744019
+         }
+      }
+      ,"required": [
+          "npdes_id"
+         ,"permit_name"
+         ,"permit_address"
+         ,"permit_city"
+         ,"permit_county"
+         ,"permit_state"
+         ,"permit_zip"
+         ,"permit_type"
+         ,"permit_components"
+         ,"permit_status"
+         ,"designation"
+         ,"facility_type_indicator"
+         ,"permitting_agency"
+         ,"exceptional_use"
+         ,"discharging_into_impaired_water"
+         ,"causes_of_impairment"
+         ,"discharging_pollutants_potentially_contributing_to_impairment"
+         ,"ps_violations"
+         ,"cs_violations"
+         ,"dmr_reporting_violations"
+         ,"objectid"
+         ,"frs_objectid"
+      ]
+   }
+   ,"nncr7": {
+       "type": "object"
+      ,"description": "NNCR Report CS Violations"
+      ,"properties": {
+          "npdes_id": {
+             "type": "string"
+            ,"example": "NYP081003"
+         }
+         ,"violation_type": {
+             "type": "string"
+            ,"example": "DMR Reporting"
+         }
+         ,"perm_schedule_event_id": {
+             "type": "string"
+         }
+         ,"violation_category": {
+             "type": "string"
+            ,"example": "1"
+         }
+         ,"violation_status": {
+             "type": "string"
+            ,"example": "Resolved"
+         }
+         ,"violation_start_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2021-01-17"
+         }
+         ,"violation_end_date": {
+             "type": "string"
+         }
+         ,"violation_location": {
+             "type": "string"
+            ,"example": "001-0"
+         }
+         ,"schedule_event_desc": {
+             "type": "string"
+         }
+         ,"detection_desc": {
+             "type": "string"
+            ,"example": "DMR Reporting (Entire) \u2013 NODI"
+         }
+         ,"detection_date": {
+             "type": "string"
+            ,"example": "2021-05-12"
+         }
+         ,"resolution_description": {
+             "type": "string"
+         }
+         ,"resolution_date": {
+             "type": "string"
+            ,"example": "2019-04-01"
+         }
+         ,"days_late": {
+             "type": "integer"
+            ,"example": 21
+         }
+         ,"objectid": {
+             "type": "integer"
+            ,"example": 121
+         }
+         ,"permit_objectid": {
+             "type": "integer"
+            ,"example": 249019
+         }
+      }
+      ,"required": [
+          "npdes_id"
+         ,"violation_type"
+         ,"perm_schedule_event_id"
+         ,"violation_category"
+         ,"violation_status"
+         ,"violation_start_date"
+         ,"violation_end_date"
+         ,"violation_location"
+         ,"schedule_event_desc"
+         ,"detection_desc"
+         ,"detection_date"
+         ,"resolution_description"
+         ,"resolution_date"
+         ,"days_late"
+      ]
+   }
+   ,"nncr2": {
+       "type": "object"
+      ,"description": "NNCR Search Data"
+      ,"properties": {
+          "frs_id": {
+             "type": "string"
+            ,"example": "110070364311"
+         }
+         ,"permit_facility_name": {
+             "type": "string"
+            ,"example": "WI POWER & LIGHT EDGEWATER STN"
+         }
+         ,"permit_address": {
+             "type": "string"
+            ,"example": "3739 LAKESHORE DRIVE"
+         }
+         ,"permit_city": {
+             "type": "string"
+            ,"example": "BURLINGTON"
+         }
+         ,"permit_county": {
+             "type": "string"
+            ,"example": "Sheboygan"
+         }
+         ,"permit_state": {
+             "type": "string"
+            ,"example": "WI"
+         }
+         ,"permit_zip": {
+             "type": "string"
+            ,"example": "22201"
+         }
+         ,"epa_region": {
+             "type": "string"
+            ,"example": "EP6"
+         }
+         ,"npdes_id": {
+             "type": "string"
+            ,"example": "NYP081003"
+         }
+         ,"permit_name": {
+             "type": "string"
+            ,"example": "Turkey Valley Community School"
+         }
+         ,"permit_type": {
+             "type": "string"
+            ,"example": "NPDES Individual Permit"
+         }
+         ,"permit_components": {
+             "type": "string"
+            ,"example": "Storm Water Construction"
+         }
+         ,"permit_status": {
+             "type": "string"
+            ,"example": "Admin Continued"
+         }
+         ,"issue_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2009-06-09"
+         }
+         ,"effective_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2019-10-22"
+         }
+         ,"expiration_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2014-06-29"
+         }
+         ,"termination_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2013-11-20"
+         }
+         ,"designation": {
+             "type": "string"
+            ,"example": "Y"
+         }
+         ,"facility_type_indicator": {
+             "type": "string"
+            ,"example": "NON-POTW"
+         }
+         ,"issuing_agency": {
+             "type": "string"
+            ,"example": "MONTANA DEQ"
+         }
+         ,"permitting_state_code": {
+             "type": "string"
+            ,"example": "MD"
+         }
+         ,"exceptional_use": {
+             "type": "string"
+            ,"example": "Y"
+         }
+         ,"listed_for_impairment": {
+             "type": "string"
+            ,"example": "Y"
+         }
+         ,"facility_pollutants_potentially_contributing_to_impairment": {
+             "type": "string"
+            ,"example": "Solids, settleable | Solids, total suspended"
+         }
+         ,"causes_of_impairment_by_group": {
+             "type": "string"
+            ,"example": "CAUSE UNKNOWN - IMPAIRED BIOTA"
+         }
+         ,"watershed_codes": {
+             "type": "string"
+            ,"example": "030801020101"
+         }
+         ,"watershed_names": {
+             "type": "string"
+            ,"example": "Upper Settingdown Creek"
+         }
+         ,"objectid": {
+             "type": "integer"
+            ,"example": 121
+         }
+      }
+      ,"required": [
+          "frs_id"
+         ,"permit_facility_name"
+         ,"permit_address"
+         ,"permit_city"
+         ,"permit_county"
+         ,"permit_state"
+         ,"permit_zip"
+         ,"epa_region"
+         ,"npdes_id"
+         ,"permit_name"
+         ,"permit_type"
+         ,"permit_components"
+         ,"permit_status"
+         ,"issue_date"
+         ,"effective_date"
+         ,"expiration_date"
+         ,"termination_date"
+         ,"designation"
+         ,"facility_type_indicator"
+         ,"issuing_agency"
+         ,"permitting_state_code"
+         ,"exceptional_use"
+         ,"listed_for_impairment"
+         ,"facility_pollutants_potentially_contributing_to_impairment"
+         ,"causes_of_impairment_by_group"
+         ,"watershed_codes"
+         ,"watershed_names"
+         ,"objectid"
+      ]
+   }
+   ,"DEF.nncr_services.violations.data": {
+       "type": "object"
+      ,"description": "NNCR Violations Data"
+      ,"properties": {
+          "npdes_id": {
+             "type": "string"
+            ,"example": "NYP081003"
+         }
+         ,"frs_id": {
+             "type": "string"
+            ,"example": "110070364311"
+         }
+         ,"violation_type": {
+             "type": "string"
+            ,"example": "DMR Reporting"
+         }
+         ,"violation_start_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2021-01-17"
+         }
+         ,"violation_end_date": {
+             "type": "string"
+            ,"format": "date"
+            ,"example": "2020-11-24"
+         }
+         ,"violation_location": {
+             "type": "string"
+            ,"example": "001-0"
+         }
+         ,"parameter_code": {
+             "type": "string"
+            ,"example": "50060"
+         }
+         ,"parameter_desc": {
+             "type": "string"
+            ,"example": "Chlorine, total residual"
+         }
+         ,"violation_category": {
+             "type": "string"
+            ,"example": "1"
+         }
+         ,"violation_status": {
+             "type": "string"
+            ,"example": "Resolved"
+         }
+         ,"nncr_detection_code": {
+             "type": "string"
+         }
+         ,"nncr_detection_desc": {
+             "type": "string"
+         }
+         ,"nncr_detection_date": {
+             "type": "string"
+            ,"format": "date"
+         }
+         ,"nncr_resolution_code": {
+             "type": "string"
+         }
+         ,"nncr_resolution_desc": {
+             "type": "string"
+         }
+         ,"nncr_resolution_date": {
+             "type": "string"
+            ,"format": "date"
+         }
+         ,"npdes_violation_id": {
+             "type": "integer"
+         }
+         ,"comp_schedule_event_id": {
+             "type": "string"
+         }
+         ,"enf_identifier_activity_id": {
+             "type": "integer"
+            ,"title": "Enforcement Activity Identifier"
+            ,"example": 8888888888
+         }
+         ,"enf_identifier": {
+             "type": "string"
+            ,"title": "Enforcement Identifier"
+            ,"example": "AA-8888-AAA"
+         }
+         ,"perm_schedule_event_id": {
+             "type": "string"
+         }
+         ,"dmr_value_type_code": {
+             "type": "string"
+            ,"example": "C3"
+         }
+         ,"perm_feature_id": {
+             "type": "integer"
+         }
+         ,"monitoring_location_code": {
+             "type": "string"
+            ,"example": "1"
+         }
+         ,"monitoring_location_desc": {
+             "type": "string"
+            ,"example": "Effluent Gross"
+         }
+         ,"monitoring_period_end_date": {
+             "type": "string"
+            ,"format": "date"
+         }
+         ,"huc12": {
+             "type": "string"
+         }
+         ,"huc12_name": {
+             "type": "string"
+         }
+         ,"exceedence_pct": {
+             "type": "integer"
+            ,"example": 2
+         }
+         ,"exceedence_pct_nmbr": {
+             "type": "number"
+         }
+         ,"days_late": {
+             "type": "integer"
+            ,"example": 21
+         }
+         ,"created_date": {
+             "type": "string"
+            ,"format": "date"
+         }
+         ,"fy_quarter": {
+             "type": "string"
+         }
+         ,"quarter_start_date": {
+             "type": "string"
+         }
+         ,"quarter_end_date": {
+             "type": "string"
+         }
+         ,"objectid": {
+             "type": "integer"
+            ,"example": 121
+         }
+      }
+      ,"required": [
+          "npdes_id"
+         ,"frs_id"
+         ,"violation_type"
+         ,"violation_start_date"
+         ,"violation_end_date"
+         ,"violation_location"
+         ,"parameter_code"
+         ,"parameter_desc"
+         ,"violation_category"
+         ,"violation_status"
+         ,"nncr_detection_code"
+         ,"nncr_detection_desc"
+         ,"nncr_detection_date"
+         ,"nncr_resolution_code"
+         ,"nncr_resolution_desc"
+         ,"nncr_resolution_date"
+         ,"npdes_violation_id"
+         ,"comp_schedule_event_id"
+         ,"enf_identifier_activity_id"
+         ,"enf_identifier"
+         ,"perm_schedule_event_id"
+         ,"dmr_value_type_code"
+         ,"perm_feature_id"
+         ,"monitoring_location_code"
+         ,"monitoring_location_desc"
+         ,"monitoring_period_end_date"
+         ,"huc12"
+         ,"huc12_name"
+         ,"exceedence_pct"
+         ,"exceedence_pct_nmbr"
+         ,"days_late"
+         ,"created_date"
+         ,"fy_quarter"
+         ,"quarter_start_date"
+         ,"quarter_end_date"
+         ,"objectid"
+      ]
+   }
+}
+}

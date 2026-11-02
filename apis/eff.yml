@@ -1,0 +1,88 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: eff
+schemas:
+  files:
+  - schema/eff.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: eff_request
+authentication: {}
+defaults: {}
+groups:
+  eff_effluent_charts:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /eff_rest_services.download_effluent_chart
+      - POST /eff_rest_services.download_effluent_chart
+      - GET /eff_rest_services.get_effluent_chart
+      - POST /eff_rest_services.get_effluent_chart
+      - GET /eff_rest_services.get_summary_chart
+      - POST /eff_rest_services.get_summary_chart
+    names:
+      GET /eff_rest_services.download_effluent_chart: eff_download_effluent_chart
+      POST /eff_rest_services.download_effluent_chart: eff_download_effluent_chart_post
+      GET /eff_rest_services.get_effluent_chart: eff_get_effluent_chart
+      POST /eff_rest_services.get_effluent_chart: eff_get_effluent_chart_post
+      GET /eff_rest_services.get_summary_chart: eff_get_summary_chart
+      POST /eff_rest_services.get_summary_chart: eff_get_summary_chart_post
+    defaults:
+      file: R/eff_effluent_charts.R
+      docs:
+        tags:
+          family: Effluent Charts endpoints
+    operations: {}
+  eff_lookups:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /rest_lookups.cwa_parameters
+      - POST /rest_lookups.cwa_parameters
+    names:
+      GET /rest_lookups.cwa_parameters: eff_lookups_cwa_parameters
+      POST /rest_lookups.cwa_parameters: eff_lookups_cwa_parameters_post
+    defaults:
+      file: R/eff_lookups.R
+      docs:
+        tags:
+          family: Lookups endpoints
+    operations: {}

@@ -1,0 +1,845 @@
+{
+ "swagger": "2.0"
+,"info": {
+    "title": "U.S. EPA Enforcement and Compliance History Online (ECHO)"
+   ,"contact": {
+       "name": "U.S. EPA, OECA Integration, Targeting and Access Branch"
+      ,"url": "https:\/\/echo.epa.gov\/resources\/general-info\/contact-us"
+   }
+   ,"license": {
+       "name": "U.S. Public Domain License"
+      ,"url": "https:\/\/edg.epa.gov\/EPA_Data_License.html"
+   }
+   ,"version": "2021.02.14"
+}
+,"host": "echodata.epa.gov"
+,"basePath": "\/echo"
+,"schemes": [
+    "https"
+]
+,"produces": [
+    "application\/json"
+]
+,"parameters": {
+    "q.p_id": {
+       "name": "p_id"
+      ,"in": "query"
+      ,"default": "AL0032310"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.callback": {
+       "name": "callback"
+      ,"in": "query"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+}
+,"paths": {
+    "\/biosolids\/npdes_biosolids_services\/": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Biosolids Reporting"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"properties": {
+                   "status": {
+                      "type": "string"
+                  }
+                  ,"data": {
+                      "$ref": "#\/definitions\/bios01"
+                  }
+               }
+               ,"required": [
+                   "status"
+                  ,"data"
+               ]
+            }
+         }
+         }
+      }
+   }
+}
+,"definitions": {
+    "bios01": {
+       "type": "object"
+      ,"properties": {
+          "icp_control_dates": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/bios17"
+            }
+         }
+         ,"npdes_bios_permits": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/bios02"
+            }
+         }
+      }
+      ,"required": [
+          "icp_control_dates"
+         ,"npdes_bios_permits"
+      ]
+   }
+   ,"bios08": {
+       "type": "object"
+      ,"properties": {
+          "npdes_id": {
+             "type": "string"
+         }
+         ,"activity_id": {
+             "type": "number"
+         }
+         ,"statute_code": {
+             "type": "string"
+         }
+         ,"law_section_code": {
+             "type": "string"
+         }
+         ,"case_name": {
+             "type": "string"
+         }
+         ,"case_id": {
+             "type": "string"
+         }
+         ,"case_type": {
+             "type": "string"
+         }
+         ,"enf_summary_text": {
+             "type": "string"
+         }
+         ,"activity_name": {
+             "type": "string"
+         }
+         ,"region_code": {
+             "type": "string"
+         }
+         ,"lead_agency": {
+             "type": "string"
+         }
+         ,"issue_date": {
+             "type": "string"
+         }
+         ,"registry_id": {
+             "type": "string"
+         }
+         ,"settlement_date": {
+             "type": "string"
+         }
+         ,"state_local_penalty_amt": {
+             "type": "number"
+         }
+         ,"fed_penalty_assessed_amt": {
+             "type": "number"
+         }
+         ,"sep_cost_amt": {
+             "type": "number"
+         }
+         ,"injunctive_relief": {
+             "type": "number"
+         }
+         ,"number_settlements": {
+             "type": "number"
+         }
+         ,"cost_recovery_amt": {
+             "type": "number"
+         }
+         ,"activity_type_code": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "npdes_id"
+         ,"activity_id"
+         ,"statute_code"
+         ,"law_section_code"
+         ,"case_name"
+         ,"case_id"
+         ,"case_type"
+         ,"enf_summary_text"
+         ,"activity_name"
+         ,"region_code"
+         ,"lead_agency"
+         ,"issue_date"
+         ,"registry_id"
+         ,"settlement_date"
+         ,"state_local_penalty_amt"
+         ,"fed_penalty_assessed_amt"
+         ,"sep_cost_amt"
+         ,"injunctive_relief"
+         ,"number_settlements"
+         ,"cost_recovery_amt"
+         ,"activity_type_code"
+      ]
+   }
+   ,"bios17": {
+       "type": "object"
+      ,"properties": {
+          "start_5_year": {
+             "type": "string"
+         }
+         ,"start_3_year": {
+             "type": "string"
+         }
+         ,"qtr_1_start": {
+             "type": "string"
+         }
+         ,"qtr_1_end": {
+             "type": "string"
+         }
+         ,"qtr_2_start": {
+             "type": "string"
+         }
+         ,"qtr_2_end": {
+             "type": "string"
+         }
+         ,"qtr_3_start": {
+             "type": "string"
+         }
+         ,"qtr_3_end": {
+             "type": "string"
+         }
+         ,"qtr_4_start": {
+             "type": "string"
+         }
+         ,"qtr_4_end": {
+             "type": "string"
+         }
+         ,"qtr_5_start": {
+             "type": "string"
+         }
+         ,"qtr_5_end": {
+             "type": "string"
+         }
+         ,"qtr_6_start": {
+             "type": "string"
+         }
+         ,"qtr_6_end": {
+             "type": "string"
+         }
+         ,"qtr_7_start": {
+             "type": "string"
+         }
+         ,"qtr_7_end": {
+             "type": "string"
+         }
+         ,"qtr_8_start": {
+             "type": "string"
+         }
+         ,"qtr_8_end": {
+             "type": "string"
+         }
+         ,"qtr_9_start": {
+             "type": "string"
+         }
+         ,"qtr_9_end": {
+             "type": "string"
+         }
+         ,"qtr_10_start": {
+             "type": "string"
+         }
+         ,"qtr_10_end": {
+             "type": "string"
+         }
+         ,"qtr_11_start": {
+             "type": "string"
+         }
+         ,"qtr_11_end": {
+             "type": "string"
+         }
+         ,"qtr_12_start": {
+             "type": "string"
+         }
+         ,"qtr_12_end": {
+             "type": "string"
+         }
+         ,"qtr_13_start": {
+             "type": "string"
+         }
+         ,"qtr_13_end": {
+             "type": "string"
+         }
+         ,"run_date": {
+             "type": "string"
+         }
+         ,"start_dashboard": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "start_5_year"
+         ,"start_3_year"
+         ,"qtr_1_start"
+         ,"qtr_1_end"
+         ,"qtr_2_start"
+         ,"qtr_2_end"
+         ,"qtr_3_start"
+         ,"qtr_3_end"
+         ,"qtr_4_start"
+         ,"qtr_4_end"
+         ,"qtr_5_start"
+         ,"qtr_5_end"
+         ,"qtr_6_start"
+         ,"qtr_6_end"
+         ,"qtr_7_start"
+         ,"qtr_7_end"
+         ,"qtr_8_start"
+         ,"qtr_8_end"
+         ,"qtr_9_start"
+         ,"qtr_9_end"
+         ,"qtr_10_start"
+         ,"qtr_10_end"
+         ,"qtr_11_start"
+         ,"qtr_11_end"
+         ,"qtr_12_start"
+         ,"qtr_12_end"
+         ,"qtr_13_start"
+         ,"qtr_13_end"
+         ,"run_date"
+         ,"start_dashboard"
+      ]
+   }
+   ,"bios09": {
+       "type": "object"
+      ,"properties": {
+          "objectid": {
+             "type": "integer"
+            ,"format": "int32"
+         }
+         ,"npdes_id": {
+             "type": "string"
+         }
+         ,"registry_id": {
+             "type": "string"
+         }
+         ,"activity_id": {
+             "type": "number"
+         }
+         ,"agency": {
+             "type": "string"
+         }
+         ,"region_code": {
+             "type": "string"
+         }
+         ,"activity_type_code": {
+             "type": "string"
+         }
+         ,"enf_type_code": {
+             "type": "string"
+         }
+         ,"enf_type_desc": {
+             "type": "string"
+         }
+         ,"achieved_date": {
+             "type": "string"
+         }
+         ,"enf_identifier": {
+             "type": "string"
+         }
+         ,"official_flg": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "objectid"
+         ,"npdes_id"
+         ,"registry_id"
+         ,"activity_id"
+         ,"agency"
+         ,"region_code"
+         ,"activity_type_code"
+         ,"enf_type_code"
+         ,"enf_type_desc"
+         ,"achieved_date"
+         ,"enf_identifier"
+         ,"official_flg"
+      ]
+   }
+   ,"bios05": {
+       "type": "object"
+      ,"properties": {
+          "registry_id": {
+             "type": "string"
+         }
+         ,"npdes_id": {
+             "type": "string"
+         }
+         ,"activity_id": {
+             "type": "number"
+         }
+         ,"activity_type_code": {
+             "type": "string"
+         }
+         ,"actual_begin_date": {
+             "type": "string"
+         }
+         ,"actual_end_date": {
+             "type": "string"
+         }
+         ,"state_epa_flag": {
+             "type": "string"
+         }
+         ,"region_code": {
+             "type": "string"
+         }
+         ,"activity_status_code": {
+             "type": "string"
+         }
+         ,"comp_monitor_category_code": {
+             "type": "string"
+         }
+         ,"observed_deficiency_flag": {
+             "type": "string"
+         }
+         ,"comp_monitor_type_code": {
+             "type": "string"
+         }
+         ,"comp_monitor_type_desc": {
+             "type": "string"
+         }
+         ,"cms_flag": {
+             "type": "string"
+         }
+         ,"comp_monitor_id": {
+             "type": "string"
+         }
+         ,"activity_type_desc": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "registry_id"
+         ,"npdes_id"
+         ,"activity_id"
+         ,"activity_type_code"
+         ,"actual_begin_date"
+         ,"actual_end_date"
+         ,"state_epa_flag"
+         ,"region_code"
+         ,"activity_status_code"
+         ,"comp_monitor_category_code"
+         ,"observed_deficiency_flag"
+         ,"comp_monitor_type_code"
+         ,"comp_monitor_type_desc"
+         ,"cms_flag"
+         ,"comp_monitor_id"
+         ,"activity_type_desc"
+      ]
+   }
+   ,"bios02": {
+       "type": "object"
+      ,"properties": {
+          "npdes_id": {
+             "type": "string"
+         }
+         ,"registry_id": {
+             "type": "string"
+         }
+         ,"cwp_name": {
+             "type": "string"
+         }
+         ,"cwp_street": {
+             "type": "string"
+         }
+         ,"cwp_city": {
+             "type": "string"
+         }
+         ,"cwp_state": {
+             "type": "string"
+         }
+         ,"cwp_zip": {
+             "type": "string"
+         }
+         ,"cwp_county": {
+             "type": "string"
+         }
+         ,"cwp_epa_region": {
+             "type": "string"
+         }
+         ,"cwp_permit_status_code": {
+             "type": "string"
+         }
+         ,"cwp_permit_status_desc": {
+             "type": "string"
+         }
+         ,"cwp_permit_type_code": {
+             "type": "string"
+         }
+         ,"cwp_permit_type_desc": {
+             "type": "string"
+         }
+         ,"cwp_expiration_date": {
+             "type": "string"
+         }
+         ,"cwp_facility_type_indicator": {
+             "type": "string"
+         }
+         ,"cwp_facility_type_code": {
+             "type": "string"
+         }
+         ,"cwp_major_minor_status_flag": {
+             "type": "string"
+         }
+         ,"master_external_permit_nmbr": {
+             "type": "string"
+         }
+         ,"issuing_agency": {
+             "type": "string"
+         }
+         ,"cwp_issue_date": {
+             "type": "string"
+         }
+         ,"cwp_effective_date": {
+             "type": "string"
+         }
+         ,"cwp_termination_date": {
+             "type": "string"
+         }
+         ,"permit_components": {
+             "type": "string"
+         }
+         ,"universe_designation": {
+             "type": "string"
+         }
+         ,"fac_lat": {
+             "type": "number"
+         }
+         ,"fac_long": {
+             "type": "number"
+         }
+         ,"geo_pgm_source": {
+             "type": "string"
+         }
+         ,"biosolids_flag": {
+             "type": "string"
+         }
+         ,"bio_qtrs_with_vio": {
+             "type": "number"
+         }
+         ,"cwp_bio_insp_count": {
+             "type": "number"
+         }
+         ,"cwp_date_last_bio_insp": {
+             "type": "string"
+         }
+         ,"cwp_date_last_bio_violation": {
+             "type": "string"
+         }
+         ,"cwp_date_last_bio_deficiency": {
+             "type": "string"
+         }
+         ,"bio_vio_3yr_cnt": {
+             "type": "number"
+         }
+         ,"other_npdes_ids": {
+             "type": "string"
+         }
+         ,"inspections": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/bios05"
+            }
+         }
+         ,"violation_status": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/bios06"
+            }
+         }
+         ,"sev_violations": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/bios07"
+            }
+         }
+         ,"infml_enf_actions": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/bios09"
+            }
+         }
+         ,"formal_actions": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/bios08"
+            }
+         }
+      }
+      ,"required": [
+          "npdes_id"
+         ,"registry_id"
+         ,"cwp_name"
+         ,"cwp_street"
+         ,"cwp_city"
+         ,"cwp_state"
+         ,"cwp_zip"
+         ,"cwp_county"
+         ,"cwp_epa_region"
+         ,"cwp_permit_status_code"
+         ,"cwp_permit_status_desc"
+         ,"cwp_permit_type_code"
+         ,"cwp_permit_type_desc"
+         ,"cwp_expiration_date"
+         ,"cwp_facility_type_indicator"
+         ,"cwp_facility_type_code"
+         ,"cwp_major_minor_status_flag"
+         ,"master_external_permit_nmbr"
+         ,"issuing_agency"
+         ,"cwp_issue_date"
+         ,"cwp_effective_date"
+         ,"cwp_termination_date"
+         ,"permit_components"
+         ,"universe_designation"
+         ,"fac_lat"
+         ,"fac_long"
+         ,"geo_pgm_source"
+         ,"biosolids_flag"
+         ,"bio_qtrs_with_vio"
+         ,"cwp_bio_insp_count"
+         ,"cwp_date_last_bio_insp"
+         ,"cwp_date_last_bio_violation"
+         ,"cwp_date_last_bio_deficiency"
+         ,"bio_vio_3yr_cnt"
+         ,"other_npdes_ids"
+         ,"inspections"
+         ,"violation_status"
+         ,"sev_violations"
+         ,"infml_enf_actions"
+         ,"formal_actions"
+      ]
+   }
+   ,"bios07": {
+       "type": "object"
+      ,"properties": {
+          "source_id": {
+             "type": "string"
+         }
+         ,"epa_system": {
+             "type": "string"
+         }
+         ,"violation_desc": {
+             "type": "string"
+         }
+         ,"npdes_violation_id": {
+             "type": "number"
+         }
+         ,"registry_id": {
+             "type": "string"
+         }
+         ,"qtr1_status": {
+             "type": "string"
+         }
+         ,"qtr1_value": {
+             "type": "string"
+         }
+         ,"qtr2_status": {
+             "type": "string"
+         }
+         ,"qtr2_value": {
+             "type": "string"
+         }
+         ,"qtr3_status": {
+             "type": "string"
+         }
+         ,"qtr3_value": {
+             "type": "string"
+         }
+         ,"qtr4_status": {
+             "type": "string"
+         }
+         ,"qtr4_value": {
+             "type": "string"
+         }
+         ,"qtr5_status": {
+             "type": "string"
+         }
+         ,"qtr5_value": {
+             "type": "string"
+         }
+         ,"qtr6_status": {
+             "type": "string"
+         }
+         ,"qtr6_value": {
+             "type": "string"
+         }
+         ,"qtr7_status": {
+             "type": "string"
+         }
+         ,"qtr7_value": {
+             "type": "string"
+         }
+         ,"qtr8_status": {
+             "type": "string"
+         }
+         ,"qtr8_value": {
+             "type": "string"
+         }
+         ,"qtr9_status": {
+             "type": "string"
+         }
+         ,"qtr9_value": {
+             "type": "string"
+         }
+         ,"qtr10_status": {
+             "type": "string"
+         }
+         ,"qtr10_value": {
+             "type": "string"
+         }
+         ,"qtr11_status": {
+             "type": "string"
+         }
+         ,"qtr11_value": {
+             "type": "string"
+         }
+         ,"qtr12_status": {
+             "type": "string"
+         }
+         ,"qtr12_value": {
+             "type": "string"
+         }
+         ,"qtr13_status": {
+             "type": "string"
+         }
+         ,"qtr13_value": {
+             "type": "string"
+         }
+         ,"agency": {
+             "type": "string"
+         }
+         ,"violation_code": {
+             "type": "string"
+         }
+         ,"total_qtrs_vio": {
+             "type": "number"
+         }
+         ,"violation_type": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "source_id"
+         ,"epa_system"
+         ,"violation_desc"
+         ,"npdes_violation_id"
+         ,"registry_id"
+         ,"qtr1_status"
+         ,"qtr1_value"
+         ,"qtr2_status"
+         ,"qtr2_value"
+         ,"qtr3_status"
+         ,"qtr3_value"
+         ,"qtr4_status"
+         ,"qtr4_value"
+         ,"qtr5_status"
+         ,"qtr5_value"
+         ,"qtr6_status"
+         ,"qtr6_value"
+         ,"qtr7_status"
+         ,"qtr7_value"
+         ,"qtr8_status"
+         ,"qtr8_value"
+         ,"qtr9_status"
+         ,"qtr9_value"
+         ,"qtr10_status"
+         ,"qtr10_value"
+         ,"qtr11_status"
+         ,"qtr11_value"
+         ,"qtr12_status"
+         ,"qtr12_value"
+         ,"qtr13_status"
+         ,"qtr13_value"
+         ,"agency"
+         ,"violation_code"
+         ,"total_qtrs_vio"
+         ,"violation_type"
+      ]
+   }
+   ,"bios06": {
+       "type": "object"
+      ,"properties": {
+          "source_id": {
+             "type": "string"
+         }
+         ,"epa_system": {
+             "type": "string"
+         }
+         ,"registry_id": {
+             "type": "string"
+         }
+         ,"qtr1_status": {
+             "type": "string"
+         }
+         ,"qtr2_status": {
+             "type": "string"
+         }
+         ,"qtr3_status": {
+             "type": "string"
+         }
+         ,"qtr4_status": {
+             "type": "string"
+         }
+         ,"qtr5_status": {
+             "type": "string"
+         }
+         ,"qtr6_status": {
+             "type": "string"
+         }
+         ,"qtr7_status": {
+             "type": "string"
+         }
+         ,"qtr8_status": {
+             "type": "string"
+         }
+         ,"qtr9_status": {
+             "type": "string"
+         }
+         ,"qtr10_status": {
+             "type": "string"
+         }
+         ,"qtr11_status": {
+             "type": "string"
+         }
+         ,"qtr12_status": {
+             "type": "string"
+         }
+         ,"qtr13_status": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "source_id"
+         ,"epa_system"
+         ,"registry_id"
+         ,"qtr1_status"
+         ,"qtr2_status"
+         ,"qtr3_status"
+         ,"qtr4_status"
+         ,"qtr5_status"
+         ,"qtr6_status"
+         ,"qtr7_status"
+         ,"qtr8_status"
+         ,"qtr9_status"
+         ,"qtr10_status"
+         ,"qtr11_status"
+         ,"qtr12_status"
+         ,"qtr13_status"
+      ]
+   }
+}
+}

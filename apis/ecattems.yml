@@ -1,0 +1,64 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: ecattems
+schemas:
+  files:
+  - schema/ecattems.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: ecattems_request
+authentication: {}
+defaults: {}
+groups:
+  ecattems_ecatt_ems:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /ecatt_ems_rest_services.get_download
+      - POST /ecatt_ems_rest_services.get_download
+      - GET /ecatt_ems_rest_services.get_ems
+      - POST /ecatt_ems_rest_services.get_ems
+      - GET /ecatt_ems_rest_services.get_qid
+      - POST /ecatt_ems_rest_services.get_qid
+    names:
+      GET /ecatt_ems_rest_services.get_download: ecattems_get_download
+      POST /ecatt_ems_rest_services.get_download: ecattems_get_download_post
+      GET /ecatt_ems_rest_services.get_ems: ecattems_get_ems
+      POST /ecatt_ems_rest_services.get_ems: ecattems_get_ems_post
+      GET /ecatt_ems_rest_services.get_qid: ecattems_get_qid
+      POST /ecatt_ems_rest_services.get_qid: ecattems_get_qid_post
+    defaults:
+      file: R/ecattems_ecatt_ems.R
+      docs:
+        tags:
+          family: ECATT EMS endpoints
+    operations: {}

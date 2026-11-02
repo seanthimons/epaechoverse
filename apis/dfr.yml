@@ -1,0 +1,320 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: dfr
+schemas:
+  files:
+  - schema/dfr.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: dfr_request
+authentication: {}
+defaults: {}
+groups:
+  dfr_detailed_facility_report:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /dfr_rest_services.air_3_yr_download
+      - POST /dfr_rest_services.air_3_yr_download
+      - GET /dfr_rest_services.cwa_3_yr_compl_status_download
+      - POST /dfr_rest_services.cwa_3_yr_compl_status_download
+      - GET /dfr_rest_services.cwa_3_yr_cs_download
+      - POST /dfr_rest_services.cwa_3_yr_cs_download
+      - GET /dfr_rest_services.cwa_3_yr_effluent_download
+      - POST /dfr_rest_services.cwa_3_yr_effluent_download
+      - GET /dfr_rest_services.cwa_3_yr_effluent_download_exp
+      - POST /dfr_rest_services.cwa_3_yr_effluent_download_exp
+      - GET /dfr_rest_services.cwa_3_yr_ps_download
+      - POST /dfr_rest_services.cwa_3_yr_ps_download
+      - GET /dfr_rest_services.cwa_3_yr_se_download
+      - POST /dfr_rest_services.cwa_3_yr_se_download
+      - GET /dfr_rest_services.cwa_3_yr_sepscs_download
+      - POST /dfr_rest_services.cwa_3_yr_sepscs_download
+      - GET /dfr_rest_services.download_data
+      - POST /dfr_rest_services.download_data
+      - GET /dfr_rest_services.get_acs2023x_demographics
+      - POST /dfr_rest_services.get_acs2023x_demographics
+      - GET /dfr_rest_services.get_air_compliance
+      - POST /dfr_rest_services.get_air_compliance
+      - GET /dfr_rest_services.get_air_quality
+      - POST /dfr_rest_services.get_air_quality
+      - GET /dfr_rest_services.get_air_quality_naa
+      - POST /dfr_rest_services.get_air_quality_naa
+      - GET /dfr_rest_services.get_assessed_waters
+      - POST /dfr_rest_services.get_assessed_waters
+      - GET /dfr_rest_services.get_aws_docs
+      - POST /dfr_rest_services.get_aws_docs
+      - GET /dfr_rest_services.get_bflm_compliance
+      - POST /dfr_rest_services.get_bflm_compliance
+      - GET /dfr_rest_services.get_case_formal_actions
+      - POST /dfr_rest_services.get_case_formal_actions
+      - GET /dfr_rest_services.get_compliance_history
+      - POST /dfr_rest_services.get_compliance_history
+      - GET /dfr_rest_services.get_compliance_summary
+      - POST /dfr_rest_services.get_compliance_summary
+      - GET /dfr_rest_services.get_csv
+      - POST /dfr_rest_services.get_csv
+      - GET /dfr_rest_services.get_cwa_3yr_compliance
+      - POST /dfr_rest_services.get_cwa_3yr_compliance
+      - GET /dfr_rest_services.get_cwa_3yr_d80d90_counts
+      - POST /dfr_rest_services.get_cwa_3yr_d80d90_counts
+      - GET /dfr_rest_services.get_cwa_cs_compliance_new
+      - POST /dfr_rest_services.get_cwa_cs_compliance_new
+      - GET /dfr_rest_services.get_cwa_eff_alr
+      - POST /dfr_rest_services.get_cwa_eff_alr
+      - GET /dfr_rest_services.get_cwa_eff_alr_exp
+      - POST /dfr_rest_services.get_cwa_eff_alr_exp
+      - GET /dfr_rest_services.get_cwa_eff_compliance
+      - POST /dfr_rest_services.get_cwa_eff_compliance
+      - GET /dfr_rest_services.get_cwa_eff_compliance_exp
+      - POST /dfr_rest_services.get_cwa_eff_compliance_exp
+      - GET /dfr_rest_services.get_cwa_ps_compliance_new
+      - POST /dfr_rest_services.get_cwa_ps_compliance_new
+      - GET /dfr_rest_services.get_cwa_rnc_compliance
+      - POST /dfr_rest_services.get_cwa_rnc_compliance
+      - GET /dfr_rest_services.get_cwa_se_compliance
+      - POST /dfr_rest_services.get_cwa_se_compliance
+      - GET /dfr_rest_services.get_d80d90s_details
+      - POST /dfr_rest_services.get_d80d90s_details
+      - GET /dfr_rest_services.get_dfr
+      - POST /dfr_rest_services.get_dfr
+      - GET /dfr_rest_services.get_dfr_json_dowload
+      - POST /dfr_rest_services.get_dfr_json_dowload
+      - GET /dfr_rest_services.get_dmr_poll_loads
+      - POST /dfr_rest_services.get_dmr_poll_loads
+      - GET /dfr_rest_services.get_elg_codes
+      - POST /dfr_rest_services.get_elg_codes
+      - GET /dfr_rest_services.get_enforcement_summary
+      - POST /dfr_rest_services.get_enforcement_summary
+      - GET /dfr_rest_services.get_extract_dates
+      - POST /dfr_rest_services.get_extract_dates
+      - GET /dfr_rest_services.get_formal_actions
+      - POST /dfr_rest_services.get_formal_actions
+      - GET /dfr_rest_services.get_icis_formal_actions
+      - POST /dfr_rest_services.get_icis_formal_actions
+      - GET /dfr_rest_services.get_inspections
+      - POST /dfr_rest_services.get_inspections
+      - GET /dfr_rest_services.get_map
+      - POST /dfr_rest_services.get_map
+      - GET /dfr_rest_services.get_minortt_demographics_by_id
+      - POST /dfr_rest_services.get_minortt_demographics_by_id
+      - GET /dfr_rest_services.get_naics
+      - POST /dfr_rest_services.get_naics
+      - GET /dfr_rest_services.get_notices
+      - POST /dfr_rest_services.get_notices
+      - GET /dfr_rest_services.get_permits
+      - POST /dfr_rest_services.get_permits
+      - GET /dfr_rest_services.get_rcra_compliance
+      - POST /dfr_rest_services.get_rcra_compliance
+      - GET /dfr_rest_services.get_rcra_waste_history
+      - POST /dfr_rest_services.get_rcra_waste_history
+      - GET /dfr_rest_services.get_sab_acs2023_demographics_by_id
+      - POST /dfr_rest_services.get_sab_acs2023_demographics_by_id
+      - GET /dfr_rest_services.get_sdwa_lead_and_copper
+      - POST /dfr_rest_services.get_sdwa_lead_and_copper
+      - GET /dfr_rest_services.get_sdwa_sanitary_surveys
+      - POST /dfr_rest_services.get_sdwa_sanitary_surveys
+      - GET /dfr_rest_services.get_sdwa_site_visits
+      - POST /dfr_rest_services.get_sdwa_site_visits
+      - GET /dfr_rest_services.get_sdwa_violations
+      - POST /dfr_rest_services.get_sdwa_violations
+      - GET /dfr_rest_services.get_sdwis_compliance
+      - POST /dfr_rest_services.get_sdwis_compliance
+      - GET /dfr_rest_services.get_sic_codes
+      - POST /dfr_rest_services.get_sic_codes
+      - GET /dfr_rest_services.get_spatial_metadata
+      - POST /dfr_rest_services.get_spatial_metadata
+      - GET /dfr_rest_services.get_tri_history
+      - POST /dfr_rest_services.get_tri_history
+      - GET /dfr_rest_services.get_tri_releases
+      - POST /dfr_rest_services.get_tri_releases
+      - GET /dfr_rest_services.get_tribes
+      - POST /dfr_rest_services.get_tribes
+      - GET /dfr_rest_services.get_watersheds
+      - POST /dfr_rest_services.get_watersheds
+      - GET /dfr_rest_services.rcra_3_yr_download
+      - POST /dfr_rest_services.rcra_3_yr_download
+      - GET /dfr_rest_services.sdwa_3_yr_download
+      - POST /dfr_rest_services.sdwa_3_yr_download
+    names:
+      GET /dfr_rest_services.air_3_yr_download: dfr_air_3_yr_download
+      POST /dfr_rest_services.air_3_yr_download: dfr_air_3_yr_download_post
+      GET /dfr_rest_services.cwa_3_yr_compl_status_download: dfr_cwa_3_yr_compl_status_download
+      POST /dfr_rest_services.cwa_3_yr_compl_status_download: dfr_cwa_3_yr_compl_status_download_post
+      GET /dfr_rest_services.cwa_3_yr_cs_download: dfr_cwa_3_yr_cs_download
+      POST /dfr_rest_services.cwa_3_yr_cs_download: dfr_cwa_3_yr_cs_download_post
+      GET /dfr_rest_services.cwa_3_yr_effluent_download: dfr_cwa_3_yr_effluent_download
+      POST /dfr_rest_services.cwa_3_yr_effluent_download: dfr_cwa_3_yr_effluent_download_post
+      GET /dfr_rest_services.cwa_3_yr_effluent_download_exp: dfr_cwa_3_yr_effluent_download_exp
+      POST /dfr_rest_services.cwa_3_yr_effluent_download_exp: dfr_cwa_3_yr_effluent_download_exp_post
+      GET /dfr_rest_services.cwa_3_yr_ps_download: dfr_cwa_3_yr_ps_download
+      POST /dfr_rest_services.cwa_3_yr_ps_download: dfr_cwa_3_yr_ps_download_post
+      GET /dfr_rest_services.cwa_3_yr_se_download: dfr_cwa_3_yr_se_download
+      POST /dfr_rest_services.cwa_3_yr_se_download: dfr_cwa_3_yr_se_download_post
+      GET /dfr_rest_services.cwa_3_yr_sepscs_download: dfr_cwa_3_yr_sepscs_download
+      POST /dfr_rest_services.cwa_3_yr_sepscs_download: dfr_cwa_3_yr_sepscs_download_post
+      GET /dfr_rest_services.download_data: dfr_download_data
+      POST /dfr_rest_services.download_data: dfr_download_data_post
+      GET /dfr_rest_services.get_acs2023x_demographics: dfr_get_acs2023x_demographics
+      POST /dfr_rest_services.get_acs2023x_demographics: dfr_get_acs2023x_demographics_post
+      GET /dfr_rest_services.get_air_compliance: dfr_get_air_compliance
+      POST /dfr_rest_services.get_air_compliance: dfr_get_air_compliance_post
+      GET /dfr_rest_services.get_air_quality: dfr_get_air_quality
+      POST /dfr_rest_services.get_air_quality: dfr_get_air_quality_post
+      GET /dfr_rest_services.get_air_quality_naa: dfr_get_air_quality_naa
+      POST /dfr_rest_services.get_air_quality_naa: dfr_get_air_quality_naa_post
+      GET /dfr_rest_services.get_assessed_waters: dfr_get_assessed_waters
+      POST /dfr_rest_services.get_assessed_waters: dfr_get_assessed_waters_post
+      GET /dfr_rest_services.get_aws_docs: dfr_get_aws_docs
+      POST /dfr_rest_services.get_aws_docs: dfr_get_aws_docs_post
+      GET /dfr_rest_services.get_bflm_compliance: dfr_get_bflm_compliance
+      POST /dfr_rest_services.get_bflm_compliance: dfr_get_bflm_compliance_post
+      GET /dfr_rest_services.get_case_formal_actions: dfr_get_case_formal_actions
+      POST /dfr_rest_services.get_case_formal_actions: dfr_get_case_formal_actions_post
+      GET /dfr_rest_services.get_compliance_history: dfr_get_compliance_history
+      POST /dfr_rest_services.get_compliance_history: dfr_get_compliance_history_post
+      GET /dfr_rest_services.get_compliance_summary: dfr_get_compliance_summary
+      POST /dfr_rest_services.get_compliance_summary: dfr_get_compliance_summary_post
+      GET /dfr_rest_services.get_csv: dfr_get_csv
+      POST /dfr_rest_services.get_csv: dfr_get_csv_post
+      GET /dfr_rest_services.get_cwa_3yr_compliance: dfr_get_cwa_3yr_compliance
+      POST /dfr_rest_services.get_cwa_3yr_compliance: dfr_get_cwa_3yr_compliance_post
+      GET /dfr_rest_services.get_cwa_3yr_d80d90_counts: dfr_get_cwa_3yr_d80d90_counts
+      POST /dfr_rest_services.get_cwa_3yr_d80d90_counts: dfr_get_cwa_3yr_d80d90_counts_post
+      GET /dfr_rest_services.get_cwa_cs_compliance_new: dfr_get_cwa_cs_compliance_new
+      POST /dfr_rest_services.get_cwa_cs_compliance_new: dfr_get_cwa_cs_compliance_new_post
+      GET /dfr_rest_services.get_cwa_eff_alr: dfr_get_cwa_eff_alr
+      POST /dfr_rest_services.get_cwa_eff_alr: dfr_get_cwa_eff_alr_post
+      GET /dfr_rest_services.get_cwa_eff_alr_exp: dfr_get_cwa_eff_alr_exp
+      POST /dfr_rest_services.get_cwa_eff_alr_exp: dfr_get_cwa_eff_alr_exp_post
+      GET /dfr_rest_services.get_cwa_eff_compliance: dfr_get_cwa_eff_compliance
+      POST /dfr_rest_services.get_cwa_eff_compliance: dfr_get_cwa_eff_compliance_post
+      GET /dfr_rest_services.get_cwa_eff_compliance_exp: dfr_get_cwa_eff_compliance_exp
+      POST /dfr_rest_services.get_cwa_eff_compliance_exp: dfr_get_cwa_eff_compliance_exp_post
+      GET /dfr_rest_services.get_cwa_ps_compliance_new: dfr_get_cwa_ps_compliance_new
+      POST /dfr_rest_services.get_cwa_ps_compliance_new: dfr_get_cwa_ps_compliance_new_post
+      GET /dfr_rest_services.get_cwa_rnc_compliance: dfr_get_cwa_rnc_compliance
+      POST /dfr_rest_services.get_cwa_rnc_compliance: dfr_get_cwa_rnc_compliance_post
+      GET /dfr_rest_services.get_cwa_se_compliance: dfr_get_cwa_se_compliance
+      POST /dfr_rest_services.get_cwa_se_compliance: dfr_get_cwa_se_compliance_post
+      GET /dfr_rest_services.get_d80d90s_details: dfr_get_d80d90s_details
+      POST /dfr_rest_services.get_d80d90s_details: dfr_get_d80d90s_details_post
+      GET /dfr_rest_services.get_dfr: dfr_get_dfr
+      POST /dfr_rest_services.get_dfr: dfr_get_dfr_post
+      GET /dfr_rest_services.get_dfr_json_dowload: dfr_get_dfr_json_dowload
+      POST /dfr_rest_services.get_dfr_json_dowload: dfr_get_dfr_json_dowload_post
+      GET /dfr_rest_services.get_dmr_poll_loads: dfr_get_dmr_poll_loads
+      POST /dfr_rest_services.get_dmr_poll_loads: dfr_get_dmr_poll_loads_post
+      GET /dfr_rest_services.get_elg_codes: dfr_get_elg_codes
+      POST /dfr_rest_services.get_elg_codes: dfr_get_elg_codes_post
+      GET /dfr_rest_services.get_enforcement_summary: dfr_get_enforcement_summary
+      POST /dfr_rest_services.get_enforcement_summary: dfr_get_enforcement_summary_post
+      GET /dfr_rest_services.get_extract_dates: dfr_get_extract_dates
+      POST /dfr_rest_services.get_extract_dates: dfr_get_extract_dates_post
+      GET /dfr_rest_services.get_formal_actions: dfr_get_formal_actions
+      POST /dfr_rest_services.get_formal_actions: dfr_get_formal_actions_post
+      GET /dfr_rest_services.get_icis_formal_actions: dfr_get_icis_formal_actions
+      POST /dfr_rest_services.get_icis_formal_actions: dfr_get_icis_formal_actions_post
+      GET /dfr_rest_services.get_inspections: dfr_get_inspections
+      POST /dfr_rest_services.get_inspections: dfr_get_inspections_post
+      GET /dfr_rest_services.get_map: dfr_get_map
+      POST /dfr_rest_services.get_map: dfr_get_map_post
+      GET /dfr_rest_services.get_minortt_demographics_by_id: dfr_get_minortt_demographics_by_id
+      POST /dfr_rest_services.get_minortt_demographics_by_id: dfr_get_minortt_demographics_by_id_post
+      GET /dfr_rest_services.get_naics: dfr_get_naics
+      POST /dfr_rest_services.get_naics: dfr_get_naics_post
+      GET /dfr_rest_services.get_notices: dfr_get_notices
+      POST /dfr_rest_services.get_notices: dfr_get_notices_post
+      GET /dfr_rest_services.get_permits: dfr_get_permits
+      POST /dfr_rest_services.get_permits: dfr_get_permits_post
+      GET /dfr_rest_services.get_rcra_compliance: dfr_get_rcra_compliance
+      POST /dfr_rest_services.get_rcra_compliance: dfr_get_rcra_compliance_post
+      GET /dfr_rest_services.get_rcra_waste_history: dfr_get_rcra_waste_history
+      POST /dfr_rest_services.get_rcra_waste_history: dfr_get_rcra_waste_history_post
+      GET /dfr_rest_services.get_sab_acs2023_demographics_by_id: dfr_get_sab_acs2023_demographics_by_id
+      POST /dfr_rest_services.get_sab_acs2023_demographics_by_id: dfr_get_sab_acs2023_demographics_by_id_post
+      GET /dfr_rest_services.get_sdwa_lead_and_copper: dfr_get_sdwa_lead_and_copper
+      POST /dfr_rest_services.get_sdwa_lead_and_copper: dfr_get_sdwa_lead_and_copper_post
+      GET /dfr_rest_services.get_sdwa_sanitary_surveys: dfr_get_sdwa_sanitary_surveys
+      POST /dfr_rest_services.get_sdwa_sanitary_surveys: dfr_get_sdwa_sanitary_surveys_post
+      GET /dfr_rest_services.get_sdwa_site_visits: dfr_get_sdwa_site_visits
+      POST /dfr_rest_services.get_sdwa_site_visits: dfr_get_sdwa_site_visits_post
+      GET /dfr_rest_services.get_sdwa_violations: dfr_get_sdwa_violations
+      POST /dfr_rest_services.get_sdwa_violations: dfr_get_sdwa_violations_post
+      GET /dfr_rest_services.get_sdwis_compliance: dfr_get_sdwis_compliance
+      POST /dfr_rest_services.get_sdwis_compliance: dfr_get_sdwis_compliance_post
+      GET /dfr_rest_services.get_sic_codes: dfr_get_sic_codes
+      POST /dfr_rest_services.get_sic_codes: dfr_get_sic_codes_post
+      GET /dfr_rest_services.get_spatial_metadata: dfr_get_spatial_metadata
+      POST /dfr_rest_services.get_spatial_metadata: dfr_get_spatial_metadata_post
+      GET /dfr_rest_services.get_tri_history: dfr_get_tri_history
+      POST /dfr_rest_services.get_tri_history: dfr_get_tri_history_post
+      GET /dfr_rest_services.get_tri_releases: dfr_get_tri_releases
+      POST /dfr_rest_services.get_tri_releases: dfr_get_tri_releases_post
+      GET /dfr_rest_services.get_tribes: dfr_get_tribes
+      POST /dfr_rest_services.get_tribes: dfr_get_tribes_post
+      GET /dfr_rest_services.get_watersheds: dfr_get_watersheds
+      POST /dfr_rest_services.get_watersheds: dfr_get_watersheds_post
+      GET /dfr_rest_services.rcra_3_yr_download: dfr_rcra_3_yr_download
+      POST /dfr_rest_services.rcra_3_yr_download: dfr_rcra_3_yr_download_post
+      GET /dfr_rest_services.sdwa_3_yr_download: dfr_sdwa_3_yr_download
+      POST /dfr_rest_services.sdwa_3_yr_download: dfr_sdwa_3_yr_download_post
+    defaults:
+      file: R/dfr_detailed_facility_report.R
+      docs:
+        tags:
+          family: Detailed Facility Report endpoints
+    operations: {}
+  dfr_violation_report_caa:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /air_violation_rest_services.get_air_violation_rpt
+      - POST /air_violation_rest_services.get_air_violation_rpt
+    names:
+      GET /air_violation_rest_services.get_air_violation_rpt: dfr_air_violation_get_air_violation_rpt
+      POST /air_violation_rest_services.get_air_violation_rpt: dfr_air_violation_get_air_violation_rpt_post
+    defaults:
+      file: R/dfr_violation_report_caa.R
+      docs:
+        tags:
+          family: Violation Report CAA endpoints
+    operations: {}

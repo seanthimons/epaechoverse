@@ -1,0 +1,2678 @@
+{
+ "swagger": "2.0"
+,"info": {
+    "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Corporate Compliance Screener Rest Services"
+   ,"description": "Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use. ECHO provides integrated compliance and enforcement information for over one million regulated facilities nationwide. The Corporate Compliance Screener organizes existing ECHO facility data into reports that highlight recent compliance issues or enforcement actions based upon data entered into national data systems of record. \n\nFor guidance, please see https:\/\/echo.epa.gov\/help\/corporate-compliance-screener\/corporate-compliance-screener-help#results. "
+   ,"contact": {
+       "name": "U.S. EPA, OECA Integration, Targeting and Access Branch"
+      ,"url": "https:\/\/echo.epa.gov\/resources\/general-info\/contact-us"
+   }
+   ,"license": {
+       "name": "U.S. Public Domain License"
+      ,"url": "https:\/\/edg.epa.gov\/EPA_Data_License.html"
+   }
+   ,"version": "2019.10.15"
+}
+,"host": "echodata.epa.gov"
+,"basePath": "\/echo"
+,"schemes": [
+    "https"
+]
+,"consumes": [
+    "application\/x-www-form-urlencoded"
+]
+,"produces": [
+    "application\/json"
+   ,"application\/xml"
+]
+,"parameters": {
+    "q.output": {
+       "name": "output"
+      ,"in": "query"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.output": {
+       "name": "output"
+      ,"in": "formData"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_active": {
+       "name": "p_active"
+      ,"in": "query"
+      ,"description": "Active Facilities Flag.  Provide Y to filter results to facilities that are active."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_active": {
+       "name": "p_active"
+      ,"in": "formData"
+      ,"description": "Active Facilities Flag.  Provide Y to filter results to facilities that are active."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_id": {
+       "name": "p_id"
+      ,"in": "query"
+      ,"description": "Identifier for the service."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.p_id": {
+       "name": "p_id"
+      ,"in": "formData"
+      ,"description": "Identifier for the service."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.p_fn": {
+       "name": "p_fn"
+      ,"in": "query"
+      ,"description": "Facility Name Filter. Enter one or more case-insensitive facility names to filter results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_fn_excl": {
+       "name": "p_fn_excl"
+      ,"in": "formData"
+      ,"description": "Facility Name to Exclude Filter. Enter one or more case-insensitive facility names to exclude from results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_fn_excl": {
+       "name": "p_fn_excl"
+      ,"in": "query"
+      ,"description": "Facility Name to Exclude Filter. Enter one or more case-insensitive facility names to exclude from results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_fn": {
+       "name": "p_fn"
+      ,"in": "formData"
+      ,"description": "Facility Name Filter. Enter one or more case-insensitive facility names to filter results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.callback": {
+       "name": "callback"
+      ,"in": "query"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.callback": {
+       "name": "callback"
+      ,"in": "formData"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_yrs": {
+       "name": "p_yrs"
+      ,"in": "query"
+      ,"description": "Provide the number of years to limits results by the settlement entered date."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_yrs": {
+       "name": "p_yrs"
+      ,"in": "formData"
+      ,"description": "Provide the number of years to limits results by the settlement entered date."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_st": {
+       "name": "p_st"
+      ,"in": "query"
+      ,"description": "Facility State and State-Equivalent Filter.  Provide one or more USPS postal abbreviations for states and state-equivalents to filter results.  Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_st": {
+       "name": "p_st"
+      ,"in": "formData"
+      ,"description": "Facility State and State-Equivalent Filter.  Provide one or more USPS postal abbreviations for states and state-equivalents to filter results.  Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_frs": {
+       "name": "p_frs"
+      ,"in": "query"
+      ,"description": "Facility Registry Service ID Filter. Enter a single 12-digit FRS identifier to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_frs": {
+       "name": "p_frs"
+      ,"in": "formData"
+      ,"description": "Facility Registry Service ID Filter. Enter a single 12-digit FRS identifier to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_reg": {
+       "name": "p_reg"
+      ,"in": "query"
+      ,"description": "EPA Region Filter. Provide a single value of 01 thru 10 to restrict results to a single EPA region."
+      ,"enum": [
+          "01"
+         ,"02"
+         ,"03"
+         ,"04"
+         ,"05"
+         ,"06"
+         ,"07"
+         ,"08"
+         ,"09"
+         ,"10"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_reg": {
+       "name": "p_reg"
+      ,"in": "formData"
+      ,"description": "EPA Region Filter. Provide a single value of 01 thru 10 to restrict results to a single EPA region."
+      ,"enum": [
+          "01"
+         ,"02"
+         ,"03"
+         ,"04"
+         ,"05"
+         ,"06"
+         ,"07"
+         ,"08"
+         ,"09"
+         ,"10"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.queryset": {
+       "name": "queryset"
+      ,"in": "query"
+      ,"description": "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.queryset": {
+       "name": "queryset"
+      ,"in": "formData"
+      ,"description": "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.responseset": {
+       "name": "responseset"
+      ,"in": "query"
+      ,"description": "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.responseset": {
+       "name": "responseset"
+      ,"in": "formData"
+      ,"description": "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_pid": {
+       "name": "p_pid"
+      ,"in": "query"
+      ,"description": "Nine-digit permit IDs. May contain up to 2000 comma-separated values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pid": {
+       "name": "p_pid"
+      ,"in": "formData"
+      ,"description": "Nine-digit permit IDs. May contain up to 2000 comma-separated values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_fntype": {
+       "name": "p_fntype"
+      ,"in": "query"
+      ,"description": "Controls type of text search performed on facility name with parameter p_fn.\n- EXACT = Find facilities having the exact provided name(s).\n- BEGINS = Find facilities with names starting with the provided term(s).\n- ALL = Find facilities using Oracle text search terms.\n- CONTAINS = "
+      ,"enum": [
+          "ALL"
+         ,"CONTAINS"
+         ,"EXACT"
+         ,"BEGINS"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_fntype": {
+       "name": "p_fntype"
+      ,"in": "formData"
+      ,"description": "Controls type of text search performed on facility name with parameter p_fn.\n- EXACT = Find facilities having the exact provided name(s).\n- BEGINS = Find facilities with names starting with the provided term(s).\n- ALL = Find facilities using Oracle text search terms.\n- CONTAINS = "
+      ,"enum": [
+          "ALL"
+         ,"CONTAINS"
+         ,"EXACT"
+         ,"BEGINS"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.tablelist": {
+       "name": "tablelist"
+      ,"in": "query"
+      ,"description": "Table List Flag. Enter a Y to display the first page of facility results."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.tablelist": {
+       "name": "tablelist"
+      ,"in": "formData"
+      ,"description": "Table List Flag. Enter a Y to display the first page of facility results."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.summarylist": {
+       "name": "summarylist"
+      ,"in": "query"
+      ,"description": "Summary List Flag.  Enter a Y to return a list of summary statistics based on the parameters submitted to the query service."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.summarylist": {
+       "name": "summarylist"
+      ,"in": "formData"
+      ,"description": "Summary List Flag.  Enter a Y to return a list of summary statistics based on the parameters submitted to the query service."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.qid": {
+       "name": "qid"
+      ,"in": "query"
+      ,"description": "Query ID Selector.  Enter the QueryID number from a previously run query."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.qid": {
+       "name": "qid"
+      ,"in": "formData"
+      ,"description": "Query ID Selector.  Enter the QueryID number from a previously run query."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.pageno": {
+       "name": "pageno"
+      ,"in": "query"
+      ,"description": "Indicates the number of the page to display. It is used only when the results are paginated."
+      ,"default": 1
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.pageno": {
+       "name": "pageno"
+      ,"in": "formData"
+      ,"description": "Indicates the number of the page to display. It is used only when the results are paginated."
+      ,"default": 1
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.newsort": {
+       "name": "newsort"
+      ,"in": "query"
+      ,"description": "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.newsort": {
+       "name": "newsort"
+      ,"in": "formData"
+      ,"description": "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.descending": {
+       "name": "descending"
+      ,"in": "query"
+      ,"description": "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.descending": {
+       "name": "descending"
+      ,"in": "formData"
+      ,"description": "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_cercla": {
+       "name": "p_cercla"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_cercla": {
+       "name": "p_cercla"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_caa": {
+       "name": "p_caa"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_caa": {
+       "name": "p_caa"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_cwa": {
+       "name": "p_cwa"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_cwa": {
+       "name": "p_cwa"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_rcra": {
+       "name": "p_rcra"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_rcra": {
+       "name": "p_rcra"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_sdwa": {
+       "name": "p_sdwa"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_sdwa": {
+       "name": "p_sdwa"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_tsca": {
+       "name": "p_tsca"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_tsca": {
+       "name": "p_tsca"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.queryid": {
+       "name": "queryid"
+      ,"in": "query"
+      ,"description": "Query ID Selector.  Enter the QueryID number from a previously run query."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.queryid": {
+       "name": "queryid"
+      ,"in": "formData"
+      ,"description": "Query ID Selector.  Enter the QueryID number from a previously run query."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.qcolumns": {
+       "name": "qcolumns"
+      ,"in": "query"
+      ,"description": "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.qcolumns": {
+       "name": "qcolumns"
+      ,"in": "formData"
+      ,"description": "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions."
+      ,"type": "string"
+      ,"required": false
+   }
+}
+,"paths": {
+    "\/comp_screen_services.get_facilities": {
+       "get": {
+          "summary": "Corporate Compliance Screener Search"
+         ,"description": "Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_fn"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_fn_excl"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_fntype"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_st"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_frs"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_reg"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_active"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_yrs"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_caa"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_cwa"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_rcra"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_sdwa"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_tsca"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_cercla"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.queryset"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.responseset"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.tablelist"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.summarylist"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes summary statistics and an array of facilities and cases that match the selected criteria."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Service call container."
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css04"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Corporate Compliance Screener Search"
+         ,"description": "Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_fn"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_fn_excl"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_fntype"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_st"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_frs"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_reg"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_active"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_yrs"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_caa"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_cwa"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_rcra"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_sdwa"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_tsca"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_cercla"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.queryset"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.responseset"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.tablelist"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.summarylist"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes summary statistics and an array of facilities and cases that match the selected criteria."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Service call container."
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css04"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.get_qid": {
+       "get": {
+          "summary": "Corporate Compliance Screener Search by Query ID"
+         ,"description": "GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities and cases. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. "
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.pageno"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.newsort"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.descending"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array (page) of facilities with the number of facilities and cases equal to the responseset (page size). "
+            ,"schema": {
+                "type": "object"
+               ,"description": "Service call container."
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css07"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Corporate Compliance Screener Search by Query ID"
+         ,"description": "GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities and cases. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. "
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.pageno"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.newsort"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.descending"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array (page) of facilities with the number of facilities and cases equal to the responseset (page size). "
+            ,"schema": {
+                "type": "object"
+               ,"description": "Service call container."
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css07"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.get_report": {
+       "get": {
+          "summary": "Corporate Compliance Screener Report Service"
+         ,"description": "This procedure is the overall service for the Corporate Compliance Screener Report. It returns all of the data displayed in the web report by invoking individual procedures that each return a targeted portion of the report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_yrs"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a complex object containing facility violation information, EPA and State formal enforcement settlements, and EPA \"open\" civil enforcement cases for the provided search identifier (qid)."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Service call container."
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css10"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Corporate Compliance Screener Report Service"
+         ,"description": "This procedure is the overall service for the Corporate Compliance Screener Report. It returns all of the data displayed in the web report by invoking individual procedures that each return a targeted portion of the report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_yrs"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a complex object containing facility violation information, EPA and State formal enforcement settlements, and EPA \"open\" civil enforcement cases for the provided search identifier (qid)."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Service call container."
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css10"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.get_curr_fac_info": {
+       "get": {
+          "summary": "Corporate Compliance Screener Current Facility Violation Information Service"
+         ,"description": "Based on the queryid obtained from get_facilities returns a JSON object containing facility with current violations."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes facility-level information for facilities that have any known violation(s) in the most recent quarter."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Facility Violation Information Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css00"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Corporate Compliance Screener Current Facility Violation Information Service"
+         ,"description": "Based on the queryid obtained from get_facilities returns a JSON object containing facility with current violations."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes facility-level information for facilities that have any known violation(s) in the most recent quarter."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Facility Violation Information Object"
+               ,"xml": 
+{
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css00"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.get_settlements": {
+       "get": {
+          "summary": "Corporate Compliance Screener EPA and State Formal Enforcement Settlements Service"
+         ,"description": "Based on the queryid obtained from get_facilities returns a JSON object containing formal enforcement settlements."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_yrs"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes case-level information for facilities or cases that have had any penalty amount and that match the selected Settlement Time Period range."
+            ,"schema": {
+                "type": "object"
+               ,"description": "EPA and State Formal Enforcement Settlements Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css12"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Corporate Compliance Screener EPA and State Formal Enforcement Settlements Service"
+         ,"description": "Based on the queryid obtained from get_facilities returns a JSON object containing formal enforcement settlements."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_yrs"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes case-level information for facilities or cases that have had any penalty amount and that match the selected Settlement Time Period range."
+            ,"schema": {
+                "type": "object"
+               ,"description": "EPA and State Formal Enforcement Settlements Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css12"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.get_open_cases": {
+       "get": {
+          "summary": "Corporate Compliance Screener EPA \"Open\" Civil Enforcement Cases Service"
+         ,"description": "Based on the queryid obtained from get_facilities returns a JSON object containing EPA \"open\" civil enforcement cases."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes case-level information for enforcement cases that are led by EPA and have a current case status that is considered \"open\" (Complaint Filed, Stayed While Under Appeal)."
+            ,"schema": {
+                "type": "object"
+               ,"description": "EPA \"Open\" Civil Enforcement Cases Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css05"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Corporate Compliance Screener EPA \"Open\" Civil Enforcement Cases Service"
+         ,"description": "Based on the queryid obtained from get_facilities returns a JSON object containing EPA \"open\" civil enforcement cases."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes case-level information for enforcement cases that are led by EPA and have a current case status that is considered \"open\" (Complaint Filed, Stayed While Under Appeal)."
+            ,"schema": {
+                "type": "object"
+               ,"description": "EPA \"Open\" Civil Enforcement Cases Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css05"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.get_curr_fac_info_b": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css17"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css17"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.get_majors": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css15"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css15"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.get_superfund": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css16"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.queryid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_id"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/css16"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.get_download": {
+       "get": {
+          "summary": "Corporate Compliance Screener Download Data Service"
+         ,"description": "Based on the QID obtained from get_facilities returns a comma separated value (CSV) file of the facilities and cases found."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are a comma separated value (CSV) file."
+            ,"schema": {
+                "type": "file"
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Corporate Compliance Screener Download Data Service"
+         ,"description": "Based on the QID obtained from get_facilities returns a comma separated value (CSV) file of the facilities and cases found."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are a comma separated value (CSV) file."
+            ,"schema": {
+                "type": "file"
+            }
+         }
+         }
+      }
+   }
+   ,"\/comp_screen_services.metadata": {
+       "get": {
+          "summary": "Corporate Compliance Screener Metadata Service"
+         ,"description": "Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facilities, and other service endpoints."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array of columns\/objects."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/meta1"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Corporate Compliance Screener Metadata Service"
+         ,"description": "Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facilities, and other service endpoints."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Corporate Compliance Screener"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array of columns\/objects."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/meta1"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+}
+,"definitions": {
+    "css00": {
+       "type": "object"
+      ,"description": "Facility Violation Information Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"CurrFacInfo": {
+             "type": "array"
+            ,"title": "Facilities with Current Violations"
+            ,"description": "A complex array of facilities with current violations."
+            ,"items": {
+                "$ref": "#\/definitions\/css08"
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"CurrFacInfo"
+      ]
+   }
+   ,"css18": {
+       "type": "object"
+      ,"properties": {
+          "RegistryID": {
+             "type": "string"
+            ,"title": "FRS ID"
+            ,"example": "110020837601"
+            ,"description": "An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases."
+         }
+         ,"FacilityName": {
+             "type": "string"
+            ,"title": "Facility Name"
+            ,"example": "3M COMPANY"
+            ,"description": "The name of the facility."
+         }
+         ,"FacilityStreet": {
+             "type": "string"
+            ,"title": "Facility Street"
+            ,"example": "1400 STATE DOCKS RD."
+            ,"description": "The street address of the facility"
+         }
+         ,"FacilityCity": {
+             "type": "string"
+            ,"title": "Facility City"
+            ,"example": "DECATUR"
+            ,"description": "The city in which the facility is located"
+         }
+         ,"FacilityState": {
+             "type": "string"
+            ,"title": "Facility State"
+            ,"example": "AL"
+            ,"description": "The state in which the facility is located"
+         }
+         ,"EPASystem": {
+             "type": "string"
+            ,"title": "EPA Data System"
+            ,"example": "ICP"
+            ,"description": "The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: \n\n- AFS: Air Facility System for Clean Air Act stationary source programs.\n- ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.\n- RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.\n- NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).\n- TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.\n- NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.\n- TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals."
+         }
+         ,"SourceID": {
+             "type": "string"
+            ,"title": "EPA Source Identifier"
+            ,"example": "ALR040033"
+            ,"description": "Unique Identifier assigned by EPA."
+         }
+      }
+      ,"required": [
+          "RegistryID"
+         ,"FacilityName"
+         ,"FacilityStreet"
+         ,"FacilityCity"
+         ,"FacilityState"
+         ,"EPASystem"
+         ,"SourceID"
+      ]
+   }
+   ,"css17": {
+       "type": "object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"CurrFacInfo": {
+             "type": "array"
+            ,"title": "Current Facility Info"
+            ,"items": {
+                "$ref": "#\/definitions\/css18"
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"CurrFacInfo"
+      ]
+   }
+   ,"css02": {
+       "type": "object"
+      ,"description": "Case Defendants Object"
+      ,"xml": {
+          "name": "CaseDefendants"
+      }
+      ,"properties": {
+          "CaseDefName": {
+             "type": "string"
+            ,"title": "Defendant Name"
+            ,"description": "The name of the defendant, or respondent associated with the case."
+         }
+      }
+      ,"required": [
+          "CaseDefName"
+      ]
+   }
+   ,"css03": {
+       "type": "object"
+      ,"description": "Facilities Object"
+      ,"xml": {
+          "name": "Facility"
+      }
+      ,"properties": {
+          "FacilityCaseName": {
+             "type": "string"
+            ,"title": "Facility or Case Name"
+            ,"description": "Facility or case  name."
+         }
+         ,"FacilityCaseIDentifier": {
+             "type": "string"
+            ,"title": "Facility or Case Identifier"
+            ,"description": "Facility or case identifier."
+         }
+         ,"CaseDefendants": {
+             "type": "array"
+            ,"title": "Case Defendants"
+            ,"description": "An array of case defendants related to the facility or case."
+            ,"items": {
+                "$ref": "#\/definitions\/css02"
+            }
+         }
+         ,"Address": {
+             "type": "string"
+            ,"title": "Address"
+         }
+         ,"City": {
+             "type": "string"
+            ,"title": "City"
+            ,"description": "The name of the city, town, village or other locality, when identifiable, within whose boundaries (the majority of) the facility site is located. This is not always the same as the city used for USPS mail delivery."
+         }
+         ,"State": {
+             "type": "string"
+            ,"title": "State"
+            ,"example": "FL"
+            ,"description": "The two letter abbreviation that represents the state or state equivalent for the U.S."
+         }
+         ,"EPARegion": {
+             "type": "string"
+            ,"title": "EPA Region"
+            ,"example": "04"
+            ,"description": "The EPA region in which the facility is located"
+         }
+         ,"IcisAirNames": {
+             "type": "string"
+            ,"title": "Clean Air Act (CAA) Facility Name(s)"
+            ,"description": "Alternate facility name(s), as maintained in the CAA database."
+         }
+         ,"CamdNames": {
+             "type": "string"
+            ,"title": "Clean Air Markets Division (CAMD) Facility Name(s)"
+            ,"description": "Alternate facility name(s), as maintained in the CAMD database."
+         }
+         ,"EisNames": {
+             "type": "string"
+            ,"title": "Emission Inventory System (EIS) Facility Name(s)"
+            ,"description": "Alternate facility name(s), as maintained in the EIS database."
+         }
+         ,"CWANames": {
+             "type": "string"
+            ,"title": "Clean Water Act (CWA) Facility Name(s)"
+            ,"description": "Alternate facility name(s), as maintained in the CWA database."
+         }
+         ,"RCRANames": {
+             "type": "string"
+            ,"title": "Resources Conservation and Recovery Act (RCRA) Facility Name(s)"
+            ,"description": "Alternate facility name(s), as maintained in the RCRA database."
+         }
+         ,"SDWANames": {
+             "type": "string"
+            ,"title": "Safe Drinking Water Act (SDWA) Facility Name(s)"
+            ,"description": "Alternate facility name(s), as maintained in the SDWA database."
+         }
+         ,"TRINames": {
+             "type": "string"
+            ,"title": "Toxics Release Inventory (TRI) Facility Name(s)"
+            ,"description": "Alternate facility name(s), as maintained in the TRI database."
+         }
+         ,"TscaNames": {
+             "type": "string"
+            ,"title": "Toxic Substances Control Act (TSCA) Facility Name(s)"
+            ,"description": "Alternate facility name(s), as maintained in the TSCA database."
+         }
+         ,"AirIDs": {
+             "type": "string"
+            ,"title": "AIR Facility System ID"
+            ,"description": "Air Facility System (AFS) ID."
+         }
+         ,"NPDESIDs": {
+             "type": "string"
+            ,"title": "NPDES IDs"
+            ,"description": "Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)"
+         }
+         ,"RCRAIDs": {
+             "type": "string"
+            ,"title": "RCRA IDs"
+            ,"example": "VAD981111784"
+            ,"description": "A unique 12-character ID assigned for each record\/permit\/site\/facility within the RCRAInfo database."
+         }
+         ,"SDWAIDs": {
+             "type": "string"
+            ,"title": "SDWA IDs"
+            ,"example": "DC0000001"
+            ,"description": "A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS)."
+         }
+         ,"CERCLAIDs": {
+             "type": "string"
+         }
+         ,"RCRATsdFlag": {
+             "type": "string"
+         }
+         ,"MediaPrimaryLaw": {
+             "type": "string"
+            ,"title": "Statute in HPV\/SNC\/SV"
+            ,"description": "The statute(s) in which the facility is currently considered a High Priority Violator (HPV), in Significant Noncompliance (SNC), or a Serious Violator (SV)."
+         }
+         ,"CurrSvFlag": {
+             "type": "string"
+            ,"title": "Current Significant Violation Flag"
+            ,"example": "0"
+            ,"description": "Indicates if the facility has a current significant violation. 1 = Yes"
+         }
+         ,"CurrVioFlag": {
+             "type": "string"
+            ,"title": "Current Violation Flag"
+            ,"example": "0"
+            ,"description": "Indicates if the facility has a current violation. 1 = Yes"
+         }
+         ,"FacilityCurrSNC": {
+             "type": "string"
+            ,"title": "Violation Status"
+            ,"description": "An indication of the facility's current known overall compliance status."
+         }
+         ,"CAACurrHpvFlag": {
+             "type": "string"
+            ,"title": "Current CAA High Priority Violator (HPV) Flag"
+            ,"description": "Indicates if the facility  currently considered a  High Priority Violator (HPV) violation under CAA."
+         }
+         ,"CWACurrSNCFlag": {
+             "type": "string"
+            ,"title": "CWA Current SNC"
+            ,"description": "Indicates if the facility is currently considered to be in Significant Noncompliance (SNC) under CWA."
+         }
+         ,"RCRACurrSNCFlag": {
+             "type": "string"
+            ,"title": "Current RCRA Violation Flag"
+            ,"description": "Indicates if the facility is currently considered to be in Significant Noncompliance (SNC) under RCRA."
+         }
+         ,"SDWACurrSNCFlag": {
+             "type": "string"
+            ,"title": "SDWA SNC"
+            ,"description": "Indicates if the facility is currently considered to be a Serious Violator (SV) under SDWA."
+         }
+         ,"QtrsInSNC": {
+             "type": "string"
+            ,"title": "Quarters In Significant Noncompliance"
+            ,"example": "1"
+            ,"description": "The number of formal enforcement actions that have been taken against the facility, under the corresponding statute, within the five year time period"
+         }
+         ,"ActionCaseTypes": {
+             "type": "string"
+            ,"title": "Type of Action"
+            ,"description": "Identifies the type of action based on the enforcement authority used. The current options are Administrative - Formal or Judicial."
+         }
+         ,"LeadAgency": {
+             "type": "string"
+            ,"title": "Lead Agency"
+            ,"example": "State"
+            ,"description": "The lead agency (e.g., EPA, State) conducting the inspection"
+         }
+         ,"SettlementDate": {
+             "type": "string"
+            ,"title": "Settlement Date"
+            ,"example": "05\/5\/2005"
+            ,"description": "For federal judicial actions, this is the date the settlement document is signed by the presiding judge and entered by the Clerk of the Court. At that point, the settlement becomes a binding court order. For administrative actions, this is the date that the final order is signed and issued by the enforcement authority."
+         }
+         ,"StatusDate": {
+             "type": "string"
+            ,"title": "Case Status Date"
+            ,"description": "The date of the most recent milestone activity reported in the case record."
+         }
+         ,"PenaltiesGt50k": {
+             "type": "string"
+            ,"title": "Penalties Greater Than $50,000"
+            ,"description": "The count of penalties or injunctive relief greater than $50,000 in the past three years."
+         }
+         ,"ComplyingActionValue": {
+             "type": "string"
+            ,"title": "Complying Action Value"
+            ,"description": "For civil enforcement actions, the value of the costs incurred by the defendant\/respondent to attain compliance with the law and restore the environment. This value does not include penalties, cost recovery, or costs associated with SEPs."
+         }
+         ,"SepValue": {
+             "type": "string"
+            ,"title": "SEP Value"
+            ,"description": "For civil enforcement actions, as part of a settlement, a defendant may voluntarily agree to undertake an environmentally beneficial project (Supplement Environmental Project (SEP)) related to the violation in exchange for mitigation of the penalty to be paid."
+         }
+         ,"FacCaseFlag": {
+             "type": "string"
+            ,"title": "Facility or Case Flag"
+            ,"description": "Indicates if the record contains facility information or case information (values can be either FAC or CASE)."
+         }
+         ,"FacActiveFlag": 
+{
+             "type": "string"
+            ,"title": "Active Facility"
+            ,"example": "Y"
+            ,"description": "Indicates whether any of the associated ICIS-Air, ICIS-NPDES, RCRAInfo or SDWIS permits\/facilities are in an active status."
+         }
+         ,"CaseCurrStatus": {
+             "type": "string"
+            ,"title": "Current Case Status"
+            ,"description": "The current status of the enforcement action. Status is based on the most recent milestone activity reported in the case record."
+         }
+         ,"CAACurrViolFlag": {
+             "type": "string"
+            ,"title": "Current CAA Violation Flag"
+            ,"description": "Indicates if the facility has a current CAA violation."
+         }
+         ,"CWACurrViolFlag": {
+             "type": "string"
+            ,"title": "Current CWA Violation Flag"
+            ,"description": "Indicates if the facility has a current CWA violation."
+         }
+         ,"RCRACurrViolFlag": {
+             "type": "string"
+            ,"title": "Current RCRA Violation Flag"
+            ,"description": "Indicates if the facility has a current RCRA violation."
+         }
+         ,"SDWACurrViolFlag": {
+             "type": "string"
+            ,"title": "Current SDWA Violation Flag"
+            ,"description": "Indicates if the facility has a current SDWA violation."
+         }
+         ,"FacSicCodes": {
+             "type": "string"
+            ,"title": "SIC Codes"
+            ,"description": "Indicates the facility\u2019s or permit's primary Standard Industrial Classification (SIC) Code. The SIC code describes the primary activity of the facility."
+         }
+         ,"FacNaicsCodes": {
+             "type": "string"
+            ,"title": "Facility NAICS"
+            ,"example": "8111 8134"
+            ,"description": "The facility's North American Industry Classification System (NAICS) Codes."
+         }
+         ,"MaxScore": {
+             "type": "string"
+            ,"title": "Max Score"
+            ,"example": "1"
+            ,"description": "A sorting score for internal use."
+         }
+      }
+      ,"required": [
+          "FacilityCaseName"
+         ,"FacilityCaseIDentifier"
+         ,"CaseDefendants"
+         ,"Address"
+         ,"City"
+         ,"State"
+         ,"EPARegion"
+         ,"IcisAirNames"
+         ,"CamdNames"
+         ,"EisNames"
+         ,"CWANames"
+         ,"RCRANames"
+         ,"SDWANames"
+         ,"TRINames"
+         ,"TscaNames"
+         ,"AirIDs"
+         ,"NPDESIDs"
+         ,"RCRAIDs"
+         ,"SDWAIDs"
+         ,"CERCLAIDs"
+         ,"RCRATsdFlag"
+         ,"MediaPrimaryLaw"
+         ,"CurrSvFlag"
+         ,"CurrVioFlag"
+         ,"FacilityCurrSNC"
+         ,"CAACurrHpvFlag"
+         ,"CWACurrSNCFlag"
+         ,"RCRACurrSNCFlag"
+         ,"SDWACurrSNCFlag"
+         ,"QtrsInSNC"
+         ,"ActionCaseTypes"
+         ,"LeadAgency"
+         ,"SettlementDate"
+         ,"StatusDate"
+         ,"PenaltiesGt50k"
+         ,"ComplyingActionValue"
+         ,"SepValue"
+         ,"FacCaseFlag"
+         ,"FacActiveFlag"
+         ,"CaseCurrStatus"
+         ,"CAACurrViolFlag"
+         ,"CWACurrViolFlag"
+         ,"RCRACurrViolFlag"
+         ,"SDWACurrViolFlag"
+         ,"FacSicCodes"
+         ,"FacNaicsCodes"
+         ,"MaxScore"
+      ]
+   }
+   ,"css04": {
+       "type": "object"
+      ,"description": "The data returned by the service call."
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"QueryID": {
+             "type": "string"
+            ,"title": "Query Identifier"
+            ,"example": "245"
+            ,"description": "Sequential number assigned to entire search result"
+         }
+         ,"QueryRows": {
+             "type": "string"
+            ,"title": "Query Row Count"
+            ,"example": "5"
+            ,"description": "Number of query results returned"
+         }
+         ,"ActiveRows": {
+             "type": "string"
+            ,"title": "Active Facility Count"
+            ,"description": "Number of facilities designated as active (fac_active_flag=Y)."
+         }
+         ,"Over80UsRows": {
+             "type": "string"
+         }
+         ,"Over80StRows": {
+             "type": "string"
+         }
+         ,"VRows": {
+             "type": "string"
+         }
+         ,"SNCRows": {
+             "type": "string"
+            ,"title": "Significant Violation Result Count"
+            ,"description": "Number of facilities with curr_sv_flag populated (CWP_STATUS = \"Significant Violation\")"
+         }
+         ,"CAARows": {
+             "type": "string"
+            ,"title": "Clean Air Act Count"
+            ,"example": "50"
+            ,"description": "The number of facilities or cases within the result set that have Clean Air Act (CAA) permits."
+         }
+         ,"CWARows": {
+             "type": "string"
+            ,"title": "Clean Water Act Count"
+            ,"example": "50"
+            ,"description": "The number of facilities or cases within the results set that have Clean Water Act (CWA) permits."
+         }
+         ,"RCRRows": {
+             "type": "string"
+            ,"title": "Resource Recovery and Conservation Act Count"
+            ,"example": "50"
+            ,"description": "The number of facilities or cases within the results set that have Resource Conservation and Recovery Action (RCRA) permits."
+         }
+         ,"SDWARows": {
+             "type": "string"
+            ,"title": "Safe Drinking Water Act Count"
+            ,"example": "50"
+            ,"description": "The number of facilities or cases within the results set that have Safe Drinking Water Act (SDWA) permits."
+         }
+         ,"PageNo": {
+             "type": "string"
+            ,"title": "Page Number"
+            ,"example": "1"
+            ,"description": "The number of pages of results returned"
+         }
+         ,"Facilities": {
+             "type": "array"
+            ,"title": "Facilities"
+            ,"description": "A complex array of facility information."
+            ,"items": {
+                "$ref": "#\/definitions\/css03"
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"QueryID"
+         ,"QueryRows"
+         ,"ActiveRows"
+         ,"Over80UsRows"
+         ,"Over80StRows"
+         ,"VRows"
+         ,"SNCRows"
+         ,"CAARows"
+         ,"CWARows"
+         ,"RCRRows"
+         ,"SDWARows"
+         ,"PageNo"
+         ,"Facilities"
+      ]
+   }
+   ,"css20": {
+       "type": "object"
+      ,"properties": {
+          "RegistryID": {
+             "type": "string"
+            ,"title": "FRS ID"
+            ,"example": "110020837601"
+            ,"description": "An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases."
+         }
+         ,"FacilityName": {
+             "type": "string"
+            ,"title": "Facility Name"
+            ,"example": "3M COMPANY"
+            ,"description": "The name of the facility."
+         }
+         ,"FacilityStreet": {
+             "type": "string"
+            ,"title": "Facility Street"
+            ,"example": "1400 STATE DOCKS RD."
+            ,"description": "The street address of the facility"
+         }
+         ,"FacilityCity": {
+             "type": "string"
+            ,"title": "Facility City"
+            ,"example": "DECATUR"
+            ,"description": "The city in which the facility is located"
+         }
+         ,"FacilityState": {
+             "type": "string"
+            ,"title": "Facility State"
+            ,"example": "AL"
+            ,"description": "The state in which the facility is located"
+         }
+         ,"EPASystem": {
+             "type": "string"
+            ,"title": "EPA Data System"
+            ,"example": "ICP"
+            ,"description": "The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: \n\n- AFS: Air Facility System for Clean Air Act stationary source programs.\n- ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.\n- RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.\n- NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).\n- TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.\n- NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.\n- TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals."
+         }
+         ,"SourceID": {
+             "type": "string"
+            ,"title": "EPA Source Identifier"
+            ,"example": "ALR040033"
+            ,"description": "Unique Identifier assigned by EPA."
+         }
+         ,"RCRAUniverse": {
+             "type": "string"
+            ,"title": "RCRA Facility Universe"
+         }
+         ,"FacilityMajorFlag": {
+             "type": "string"
+         }
+         ,"NumberOfPRPs": {
+             "type": "string"
+         }
+         ,"SubjectToRCRACorrectiveAction": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "RegistryID"
+         ,"FacilityName"
+         ,"FacilityStreet"
+         ,"FacilityCity"
+         ,"FacilityState"
+         ,"EPASystem"
+         ,"SourceID"
+         ,"RCRAUniverse"
+         ,"FacilityMajorFlag"
+         ,"NumberOfPRPs"
+         ,"SubjectToRCRACorrectiveAction"
+      ]
+   }
+   ,"css15": {
+       "type": "object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"Majors": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/css20"
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"Majors"
+      ]
+   }
+   ,"css05": {
+       "type": "object"
+      ,"description": "EPA \"Open\" Civil Enforcement Cases Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"EnforcementCases": {
+             "type": "array"
+            ,"title": "Enforcement Cases"
+            ,"description": "A complex array of enforcement case information."
+            ,"items": {
+                "$ref": "#\/definitions\/css09"
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"EnforcementCases"
+      ]
+   }
+   ,"css07": {
+       "type": "object"
+      ,"description": "The data returned by the service call."
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"QueryRows": {
+             "type": "string"
+            ,"title": "Query Row Count"
+            ,"example": "5"
+            ,"description": "Number of query results returned"
+         }
+         ,"QueryID": {
+             "type": "string"
+            ,"title": "Query Identifier"
+            ,"example": "245"
+            ,"description": "Sequential number assigned to entire search result"
+         }
+         ,"PageNo": {
+             "type": "string"
+            ,"title": "Page Number"
+            ,"example": "1"
+            ,"description": "The number of pages of results returned"
+         }
+         ,"Facilities": {
+             "type": "array"
+            ,"title": "Facilities"
+            ,"description": "A complex array of facility information."
+            ,"items": {
+                "$ref": "#\/definitions\/css03"
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"QueryRows"
+         ,"QueryID"
+         ,"PageNo"
+         ,"Facilities"
+      ]
+   }
+   ,"css08": {
+       "type": "object"
+      ,"description": "Facility Violation Information Object"
+      ,"xml": {
+          "name": "CurrFacInfo"
+      }
+      ,"properties": {
+          "RegistryID": {
+             "type": "string"
+            ,"title": "FRS ID"
+            ,"example": "110020837601"
+            ,"description": "An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases."
+         }
+         ,"FacilityName": {
+             "type": "string"
+            ,"title": "Facility Name"
+            ,"example": "3M COMPANY"
+            ,"description": "The name of the facility."
+         }
+         ,"FacilityStreet": {
+             "type": "string"
+            ,"title": "Facility Street"
+            ,"example": "1400 STATE DOCKS RD."
+            ,"description": "The street address of the facility"
+         }
+         ,"FacilityCity": {
+             "type": "string"
+            ,"title": "Facility City"
+            ,"example": "DECATUR"
+            ,"description": "The city in which the facility is located"
+         }
+         ,"FacilityState": {
+             "type": "string"
+            ,"title": "Facility State"
+            ,"example": "AL"
+            ,"description": "The state in which the facility is located"
+         }
+         ,"EPASystem": {
+             "type": "string"
+            ,"title": "EPA Data System"
+            ,"example": "ICP"
+            ,"description": "The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: \n\n- AFS: Air Facility System for Clean Air Act stationary source programs.\n- ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.\n- RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.\n- NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).\n- TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.\n- NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.\n- TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals."
+         }
+         ,"SourceID": {
+             "type": "string"
+            ,"title": "EPA Source Identifier"
+            ,"example": "ALR040033"
+            ,"description": "Unique Identifier assigned by EPA."
+         }
+         ,"CurrViolStatus": {
+             "type": "string"
+         }
+         ,"EventDesc": {
+             "type": "string"
+         }
+         ,"QtrsInSNC": {
+             "type": "string"
+            ,"title": "Quarters In Significant Noncompliance"
+            ,"example": "1"
+            ,"description": "The number of formal enforcement actions that have been taken against the facility, under the corresponding statute, within the five year time period"
+         }
+         ,"CurrSNCStatus": {
+             "type": "string"
+            ,"title": "Current Significant Violation"
+         }
+      }
+      ,"required": [
+          "RegistryID"
+         ,"FacilityName"
+         ,"FacilityStreet"
+         ,"FacilityCity"
+         ,"FacilityState"
+         ,"EPASystem"
+         ,"SourceID"
+         ,"CurrViolStatus"
+         ,"EventDesc"
+         ,"QtrsInSNC"
+         ,"CurrSNCStatus"
+      ]
+   }
+   ,"css09": {
+       "type": "object"
+      ,"description": "EPA Open Civil Enforcement Cases Object"
+      ,"xml": {
+          "name": "EnforcementCases"
+      }
+      ,"properties": {
+          "CaseNumber": {
+             "type": "string"
+            ,"title": "Case Number"
+            ,"example": "05-200021274"
+            ,"description": "A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, \"HQ\" (headquarters initiated cases), and \"EF\" or \"WF\" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number."
+         }
+         ,"RegistryIDs": {
+             "type": "string"
+         }
+         ,"CaseName": {
+             "type": "string"
+            ,"title": "Case Name"
+            ,"example": "Baltes Real Estate Company"
+            ,"description": "A unique number identifying the enforcement action. For EPA civil cases, these numbers begin with either the two digit EPA Region Code, \"HQ\" (headquarters initiated cases), and \"EF\" or \"WF\" (Eastern or Western Field Office CAA Mobile Source Program cases); followed by the fiscal year in which the action was initiated. After the fiscal year there is a sequence number. State NPDES civil cases start with the two character post abbreviation, followed by a sequence number.\nFor criminal cases, the ID was generated in ECHO based on the following format: CR [prosecution_summary_id]. The source of the Prosecution Summary ID is the Summary of Criminal Prosecutions database."
+         }
+         ,"CaseType": {
+             "type": "string"
+            ,"title": "Case Type"
+            ,"example": "AFR"
+            ,"description": "The unique code that identifies a type of compliance event or enforcement action."
+         }
+         ,"CaseStatus": {
+             "type": "string"
+            ,"title": "Case Status"
+            ,"example": "Closed"
+            ,"description": "The status of the compliance event or enforcement action."
+         }
+         ,"StatusDate": {
+             "type": "string"
+            ,"title": "Case Status Date"
+            ,"description": "The date of the most recent milestone activity reported in the case record."
+         }
+         ,"PrimaryLawSection": {
+             "type": "string"
+            ,"title": "Primary Law Section"
+         }
+         ,"NumDefendants": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "CaseNumber"
+         ,"RegistryIDs"
+         ,"CaseName"
+         ,"CaseType"
+         ,"CaseStatus"
+         ,"StatusDate"
+         ,"PrimaryLawSection"
+         ,"NumDefendants"
+      ]
+   }
+   ,"css10": {
+       "type": "object"
+      ,"description": "The data returned by the service call."
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"QueryID": {
+             "type": "string"
+            ,"title": "Query Identifier"
+            ,"example": "245"
+            ,"description": "Sequential number assigned to entire search result"
+         }
+         ,"QueryRows": {
+             "type": "string"
+            ,"title": "Query Row Count"
+            ,"example": "5"
+            ,"description": "Number of query results returned"
+         }
+         ,"ActiveRows": {
+             "type": "string"
+            ,"title": "Active Facility Count"
+            ,"description": "Number of facilities designated as active (fac_active_flag=Y)."
+         }
+         ,"Over80UsRows": {
+             "type": "string"
+         }
+         ,"Over80StRows": {
+             "type": "string"
+         }
+         ,"VRows": {
+             "type": "string"
+         }
+         ,"SNCRows": {
+             "type": "string"
+            ,"title": "Significant Violation Result Count"
+            ,"description": "Number of facilities with curr_sv_flag populated (CWP_STATUS = \"Significant Violation\")"
+         }
+         ,"CAARows": {
+             "type": "string"
+            ,"title": "Clean Air Act Count"
+            ,"example": "50"
+            ,"description": "The number of facilities or cases within the result set that have Clean Air Act (CAA) permits."
+         }
+         ,"CWARows": {
+             "type": "string"
+            ,"title": "Clean Water Act Count"
+            ,"example": "50"
+            ,"description": "The number of facilities or cases within the results set that have Clean Water Act (CWA) permits."
+         }
+         ,"RCRRows": {
+             "type": "string"
+            ,"title": "Resource Recovery and Conservation Act Count"
+            ,"example": "50"
+            ,"description": "The number of facilities or cases within the results set that have Resource Conservation and Recovery Action (RCRA) permits."
+         }
+         ,"SDWARows": {
+             "type": "string"
+            ,"title": "Safe Drinking Water Act Count"
+            ,"example": "50"
+            ,"description": "The number of facilities or cases within the results set that have Safe Drinking Water Act (SDWA) permits."
+         }
+         ,"CurrFacInfo": {
+             "type": "array"
+            ,"title": "Facilities with Current Violations"
+            ,"description": "A complex array of facilities with current violations."
+            ,"items": {
+                "$ref": "#\/definitions\/css08"
+            }
+         }
+         ,"Settlements": {
+             "type": "array"
+            ,"title": "Settlements"
+            ,"description": "A complex array of settelement information."
+            ,"items": {
+                "$ref": "#\/definitions\/css11"
+            }
+         }
+         ,"EnforcementCases": {
+             "type": "array"
+            ,"title": "Enforcement Cases"
+            ,"description": "A complex array of enforcement case information."
+            ,"items": {
+                "$ref": "#\/definitions\/css09"
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"QueryID"
+         ,"QueryRows"
+         ,"ActiveRows"
+         ,"Over80UsRows"
+         ,"Over80StRows"
+         ,"VRows"
+         ,"SNCRows"
+         ,"CAARows"
+         ,"CWARows"
+         ,"RCRRows"
+         ,"SDWARows"
+         ,"CurrFacInfo"
+         ,"Settlements"
+         ,"EnforcementCases"
+      ]
+   }
+   ,"css11": {
+       "type": "object"
+      ,"description": "EPA and State Formal Enforcement Settlements Object"
+      ,"xml": {
+          "name": "Settlements"
+      }
+      ,"properties": {
+          "RegistryID": {
+             "type": "string"
+            ,"title": "FRS ID"
+            ,"example": "110020837601"
+            ,"description": "An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases."
+         }
+         ,"FacilityName": {
+             "type": "string"
+            ,"title": "Facility Name"
+            ,"example": "3M COMPANY"
+            ,"description": "The name of the facility."
+         }
+         ,"FacilityStreet": {
+             "type": "string"
+            ,"title": "Facility Street"
+            ,"example": "1400 STATE DOCKS RD."
+            ,"description": "The street address of the facility"
+         }
+         ,"FacilityCity": {
+             "type": "string"
+            ,"title": "Facility City"
+            ,"example": "DECATUR"
+            ,"description": "The city in which the facility is located"
+         }
+         ,"FacilityState": {
+             "type": "string"
+            ,"title": "Facility State"
+            ,"example": "AL"
+            ,"description": "The state in which the facility is located"
+         }
+         ,"EPASystem": {
+             "type": "string"
+            ,"title": "EPA Data System"
+            ,"example": "ICP"
+            ,"description": "The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: \n\n- AFS: Air Facility System for Clean Air Act stationary source programs.\n- ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.\n- RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.\n- NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).\n- TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.\n- NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.\n- TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals."
+         }
+         ,"SourceID": {
+             "type": "string"
+            ,"title": "EPA Source Identifier"
+            ,"example": "ALR040033"
+            ,"description": "Unique Identifier assigned by EPA."
+         }
+         ,"ActionType": {
+             "type": "string"
+         }
+         ,"LeadAgency": {
+             "type": "string"
+            ,"title": "Lead Agency"
+            ,"example": "State"
+            ,"description": "The lead agency (e.g., EPA, State) conducting the inspection"
+         }
+         ,"SettleDate": {
+             "type": "string"
+         }
+         ,"Penalty": {
+             "type": "string"
+         }
+         ,"CompActionValue": {
+             "type": "string"
+         }
+         ,"SEPValue": {
+             "type": "string"
+         }
+         ,"ActivityID": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "RegistryID"
+         ,"FacilityName"
+         ,"FacilityStreet"
+         ,"FacilityCity"
+         ,"FacilityState"
+         ,"EPASystem"
+         ,"SourceID"
+         ,"ActionType"
+         ,"LeadAgency"
+         ,"SettleDate"
+         ,"Penalty"
+         ,"CompActionValue"
+         ,"SEPValue"
+         ,"ActivityID"
+      ]
+   }
+   ,"css12": {
+       "type": "object"
+      ,"description": "EPA and State Formal Enforcement Settlements Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"Settlements": {
+             "type": "array"
+            ,"title": "Settlements"
+            ,"description": "A complex array of settelement information."
+            ,"items": {
+                "$ref": "#\/definitions\/css11"
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"Settlements"
+      ]
+   }
+   ,"css16": {
+       "type": "object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"Superfund": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/css19"
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"Superfund"
+      ]
+   }
+   ,"css19": {
+       "type": "object"
+      ,"properties": {
+          "RegistryID": {
+             "type": "string"
+            ,"title": "FRS ID"
+            ,"example": "110020837601"
+            ,"description": "An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases."
+         }
+         ,"FacilityName": {
+             "type": "string"
+            ,"title": "Facility Name"
+            ,"example": "3M COMPANY"
+            ,"description": "The name of the facility."
+         }
+         ,"FacilityStreet": {
+             "type": "string"
+            ,"title": "Facility Street"
+            ,"example": "1400 STATE DOCKS RD."
+            ,"description": "The street address of the facility"
+         }
+         ,"FacilityCity": {
+             "type": "string"
+            ,"title": "Facility City"
+            ,"example": "DECATUR"
+            ,"description": "The city in which the facility is located"
+         }
+         ,"FacilityState": {
+             "type": "string"
+            ,"title": "Facility State"
+            ,"example": "AL"
+            ,"description": "The state in which the facility is located"
+         }
+         ,"SEMSIDs": {
+             "type": "string"
+         }
+         ,"NumberOfPRPs": 
+{
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "RegistryID"
+         ,"FacilityName"
+         ,"FacilityStreet"
+         ,"FacilityCity"
+         ,"FacilityState"
+         ,"SEMSIDs"
+         ,"NumberOfPRPs"
+      ]
+   }
+   ,"meta3": {
+       "type": "object"
+      ,"description": "Results Column Object"
+      ,"xml": {
+          "name": "ResultColumn"
+      }
+      ,"properties": {
+          "ColumnName": {
+             "type": "string"
+            ,"title": "Column Name"
+         }
+         ,"DataType": {
+             "type": "string"
+            ,"title": "Data Type"
+            ,"example": "NUMBER"
+            ,"description": "Data type for EPA program database column."
+         }
+         ,"DataLength": {
+             "type": "string"
+            ,"title": "Data Length"
+            ,"example": "10"
+            ,"description": "Data length for EPA program database column."
+         }
+         ,"ColumnID": {
+             "type": "string"
+            ,"title": "Column ID"
+         }
+         ,"ObjectName": {
+             "type": "string"
+            ,"title": "Object Name"
+            ,"example": "CaseName"
+            ,"description": "The JSON name used for the database column."
+         }
+         ,"Description": {
+             "type": "string"
+            ,"title": "Column Description"
+         }
+      }
+      ,"required": [
+          "ColumnName"
+         ,"DataType"
+         ,"DataLength"
+         ,"ColumnID"
+         ,"ObjectName"
+         ,"Description"
+      ]
+   }
+   ,"meta1": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"ResultColumns": {
+             "type": "array"
+            ,"title": "Result Columns"
+            ,"items": {
+                "$ref": "#\/definitions\/meta3"
+            }
+            ,"xml": {
+                "name": "ResultColumns"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+}
+}

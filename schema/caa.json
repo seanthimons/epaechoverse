@@ -1,0 +1,1451 @@
+{
+ "swagger": "2.0"
+,"info": {
+    "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Air Pollutant Report Rest Services"
+   ,"description": "Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use. ECHO provides integrated compliance and enforcement information for over 1 million regulated facilities nationwide. The Air Pollutant Report presents ten years of EPA air emissions data from the National Emissions Inventory (NEI), Greenhouse Gas Reporting Program (GHGRP), Toxics Release Inventory (TRI), and Clean Air Markets Programs for a selected facility. Emissions are presented by pollutant for each program and each year that values are available. \n\nAdditional ECHO Resources: <a href=\"https:\/\/echo.epa.gov\/tools\/web-services\">Web Services<\/a>, <a href=\"https:\/\/echo.epa.gov\/resources\/echo-data\/about-the-data\">About ECHO's Data<\/a>, <a href=\"https:\/\/echo.epa.gov\/tools\/data-downloads\">Data Downloads<\/a>  "
+   ,"contact": {
+       "name": "US EPA, OECA Integration, Targeting and Access Branch"
+   }
+   ,"license": {
+       "name": "This page was built with the Swagger API."
+      ,"url": "https:\/\/swagger.io"
+   }
+   ,"version": "0.0.0"
+}
+,"host": "echodata.epa.gov"
+,"basePath": "\/echo"
+,"schemes": [
+    "https"
+]
+,"consumes": [
+    "application\/x-www-form-urlencoded"
+]
+,"produces": [
+    "application\/json"
+   ,"application\/xml"
+]
+,"parameters": {
+    "q.output": {
+       "name": "output"
+      ,"in": "query"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.output": {
+       "name": "output"
+      ,"in": "formData"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.callback": {
+       "name": "callback"
+      ,"in": "query"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.callback": {
+       "name": "callback"
+      ,"in": "formData"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_units": {
+       "name": "p_units"
+      ,"in": "query"
+      ,"description": "Units of Measurement.  For the Air Pollutant Report, the default value is 'lbs'.  Enter \"TWPE\" for Toxic Weighted Pounds Equivalents (TWPE). "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_units": {
+       "name": "p_units"
+      ,"in": "formData"
+      ,"description": "Units of Measurement.  For the Air Pollutant Report, the default value is 'lbs'.  Enter \"TWPE\" for Toxic Weighted Pounds Equivalents (TWPE). "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.nn2": {
+       "name": "nn2"
+      ,"in": "query"
+      ,"description": "Secondary statute filter, provide a single statute code to filter permit results (e.g., \"EP313\")"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.nn2": {
+       "name": "nn2"
+      ,"in": "formData"
+      ,"description": "Secondary statute filter, provide a single statute code to filter permit results (e.g., \"EP313\")"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.nnn": {
+       "name": "nnn"
+      ,"in": "query"
+      ,"description": "Statute filter, provide a single statute code to filter permit results (e.g., \"CAA\")"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.nnn": {
+       "name": "nnn"
+      ,"in": "formData"
+      ,"description": "Statute filter, provide a single statute code to filter permit results (e.g., \"CAA\")"
+      ,"type": "string"
+      ,"required": false
+   }
+}
+,"paths": {
+    "\/caa_poll_rpt_rest_services.get_caapr": {
+       "get": {
+          "summary": "Air Pollutant Report Service"
+         ,"description": "This procedure is the overall service for the Air Polltuant Report. It returns all of the data displayed in the Air Pollutant web report by invoking individual procedures that each return a targeted portion of the report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "query"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_units"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a complex object (Air Pollutant Report) composed of objects from all of the other procedures."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caah_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Air Pollutant Report Service"
+         ,"description": "This procedure is the overall service for the Air Polltuant Report. It returns all of the data displayed in the Air Pollutant web report by invoking individual procedures that each return a targeted portion of the report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "formData"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_units"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a complex object (Air Pollutant Report) composed of objects from all of the other procedures."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caah_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/caa_poll_rpt_rest_services.get_nnnPermits": {
+       "get": {
+          "summary": "Air Pollutant Report Permits Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.nnn"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.nn2"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "query"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes an array of permits."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caaf_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Air Pollutant Report Permits Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.nnn"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.nn2"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "formData"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes an array of permits."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caaf_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/caa_poll_rpt_rest_services.get_aggregate_emissions": {
+       "get": {
+          "summary": "Air Pollutant Report Aggregated Emissions Service"
+         ,"description": "This procedure obtains data for Total Aggregate Emissions in the Emissions section of the Air Pollutant Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "query"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_units"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes aggregate emissions."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caa7_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Air Pollutant Report Aggregated Emissions Service"
+         ,"description": "This procedure obtains data for Total Aggregate Emissions in the Emissions section of the Air Pollutant Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "formData"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_units"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes aggregate emissions."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caa7_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/caa_poll_rpt_rest_services.get_air_quality": {
+       "get": {
+          "summary": "Air Pollutant Report Air Quality Service"
+         ,"description": "This procedure obtains data for Air Quality in the Environmental Conditions Section of the Air Pollutant Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "query"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes information on air quality."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caa8_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Air Pollutant Report Air Quality Service"
+         ,"description": "This procedure obtains data for Air Quality in the Environmental Conditions Section of the Air Pollutant Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "formData"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes information on air quality."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caa8_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/caa_poll_rpt_rest_services.get_map": {
+       "get": {
+          "summary": "Air Pollutant Report Map Service"
+         ,"description": "Returns an object with the facility's latitude and longitude coordinates."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "query"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes information for displaying a map."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caae_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Air Pollutant Report Map Service"
+         ,"description": "Returns an object with the facility's latitude and longitude coordinates."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "formData"
+               ,"description": "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes information for displaying a map."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caae_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/caa_poll_rpt_rest_services.get_spatial_metadata": {
+       "get": {
+          "summary": "Air Pollutant Report Spatial Metadata Service"
+         ,"description": "Returns an object with the facility coordinate spatial metadata."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "query"
+               ,"description": "Identifier for the service."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes spatial metadata."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caag_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Air Pollutant Report Spatial Metadata Service"
+         ,"description": "Returns an object with the facility coordinate spatial metadata."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "name": "p_id"
+               ,"in": "formData"
+               ,"description": "Identifier for the service."
+               ,"type": "string"
+               ,"required": true
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Pollution Report"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes spatial metadata."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/caag_Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+}
+,"definitions": {
+    "caa1": {
+       "type": "object"
+      ,"description": "Air Quality Object"
+      ,"properties": {
+          "Ozone8hr1997Area": {
+             "type": "string"
+            ,"title": "Eight Hour Ozone Area - 1997"
+            ,"example": "Milwaukee-Racine, WI"
+            ,"description": "If null, the facility is not located in a designated non-attainment area. If populated, the value is the name of the non-attainment area; normally this is a city or county name"
+         }
+         ,"Ozone8hr2008Area": {
+             "type": "string"
+            ,"title": "Eight Hour Ozone Area - 2008"
+            ,"example": "Chicago-Naperville, IL-IN-WI"
+            ,"description": "If null, the facility is not located in a designated non-attainment area. If populated, the value is the name of the non-attainment area; normally this is a city or county name"
+         }
+         ,"Ozone8hr2015Area": {
+             "type": "string"
+         }
+         ,"Lead1978Area": {
+             "type": "string"
+         }
+         ,"Lead2008Area": {
+             "type": "string"
+            ,"title": "Lead Area - 2008"
+            ,"example": "Washington, DC-MD-VA"
+            ,"description": "If null, the facility is not located in a designated non-attainment area. If populated, the value is the name of the non-attainment area; normally this is a city or county name"
+         }
+         ,"CarbonMonoxide1971Area": {
+             "type": "string"
+         }
+         ,"NitrogenDioxide1971Area": {
+             "type": "string"
+         }
+         ,"SulfurDioxide1971Area": {
+             "type": "string"
+         }
+         ,"SulfurDioxide2010Area": {
+             "type": "string"
+            ,"title": "Sulfur Dioxide Area - 2010"
+            ,"example": "Washington, DC-MD-VA"
+            ,"description": "If null, the facility is not located in a designated non-attainment area. If populated, the value is the name of the non-attainment area; normally this is a city or county name"
+         }
+         ,"ParticulateMatter1987Area": {
+             "type": "string"
+         }
+         ,"ParticulateMatter1997Area": {
+             "type": "string"
+            ,"title": "Particulate Matter Area - 1997"
+            ,"example": "Washington, DC-MD-VA"
+            ,"description": "If null, the facility is not located in a designated non-attainment area. If populated, the value is the name of the non-attainment area; normally this is a city or county name"
+         }
+         ,"ParticulateMatter2006Area": {
+             "type": "string"
+            ,"title": "Particulate Matter Area - 2006"
+            ,"example": "Washington, DC-MD-VA"
+            ,"description": "If null, the facility is not located in a designated non-attainment area. If populated, the value is the name of the non-attainment area; normally this is a city or county name"
+         }
+         ,"ParticulateMatter2012Area": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "Ozone8hr1997Area"
+         ,"Ozone8hr2008Area"
+         ,"Ozone8hr2015Area"
+         ,"Lead1978Area"
+         ,"Lead2008Area"
+         ,"CarbonMonoxide1971Area"
+         ,"NitrogenDioxide1971Area"
+         ,"SulfurDioxide1971Area"
+         ,"SulfurDioxide2010Area"
+         ,"ParticulateMatter1987Area"
+         ,"ParticulateMatter1997Area"
+         ,"ParticulateMatter2006Area"
+         ,"ParticulateMatter2012Area"
+      ]
+   }
+   ,"caa2": {
+       "type": "object"
+      ,"description": "Emissions Object"
+      ,"xml": {
+          "name": "Emission"
+      }
+      ,"properties": {
+          "Program": {
+             "type": "string"
+            ,"title": "Program"
+            ,"example": "CWA"
+            ,"description": "The source database for the EPA programs information."
+         }
+         ,"Pollutant": {
+             "type": "string"
+            ,"title": "Pollutant"
+            ,"example": "Carbon monoxide"
+            ,"description": "The name that EPA has selected as its preferred name for a substance (also known as registry name). If the registry name is not available, use the systematic name instead."
+         }
+         ,"UnitsOfMeasure": {
+             "type": "string"
+            ,"example": "Pounds"
+         }
+         ,"Year1": {
+             "type": "string"
+         }
+         ,"Year2": {
+             "type": "string"
+         }
+         ,"Year3": {
+             "type": "string"
+         }
+         ,"Year4": {
+             "type": "string"
+         }
+         ,"Year5": {
+             "type": "string"
+         }
+         ,"Year6": {
+             "type": "string"
+         }
+         ,"Year7": {
+             "type": "string"
+         }
+         ,"Year8": {
+             "type": "string"
+         }
+         ,"Year9": {
+             "type": "string"
+         }
+         ,"Year10": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "Program"
+         ,"Pollutant"
+         ,"UnitsOfMeasure"
+         ,"Year1"
+         ,"Year2"
+         ,"Year3"
+         ,"Year4"
+         ,"Year5"
+         ,"Year6"
+         ,"Year7"
+         ,"Year8"
+         ,"Year9"
+         ,"Year10"
+      ]
+   }
+   ,"caa3": {
+       "type": "object"
+      ,"description": "Map Data Object"
+      ,"xml": {
+          "name": "Object"
+      }
+      ,"properties": {
+          "LAT": {
+             "type": "string"
+            ,"title": "Latitude"
+            ,"example": "38.798026"
+            ,"description": "The latitude of the facility in degrees, to four decimal places"
+         }
+         ,"LON": {
+             "type": "string"
+            ,"title": "Longitude"
+            ,"example": "-77.062981"
+            ,"description": "The longitude of the facility in degrees, to four decimal places"
+         }
+         ,"ICON": {
+             "type": "string"
+            ,"title": "Icon"
+            ,"example": "CAA-IC-MN-N.png"
+            ,"description": "Name of each individual icon file within the URL base"
+         }
+         ,"TYPE": {
+             "type": "string"
+            ,"title": "Type"
+            ,"example": "Facility"
+            ,"description": "For DFR, this is always facility"
+         }
+         ,"NAME": {
+             "type": "string"
+            ,"title": "Name"
+            ,"example": "VIRGINIA CONCRETE ALEXANDRIA PLANT"
+            ,"description": "For DFR, this is the Facility name. The name corresponds to the TYPE value"
+         }
+         ,"PUV": {
+             "type": "string"
+            ,"title": "Popup Value"
+            ,"example": "110001891506"
+            ,"description": "Pop up value. Combine with PopUpBaseURL to give the popup for the facility"
+         }
+      }
+      ,"required": [
+          "LAT"
+         ,"LON"
+         ,"ICON"
+         ,"TYPE"
+         ,"NAME"
+         ,"PUV"
+      ]
+   }
+   ,"caa4": {
+       "type": "object"
+      ,"description": "Map Output Object"
+      ,"properties": {
+          "IconBaseURL": {
+             "type": "string"
+            ,"title": "Icon Base URL"
+            ,"example": "https:\/\/echo.epa.gov\/app\/map\/icons\/"
+            ,"description": "URL where all the icons are located"
+         }
+         ,"PopUpBaseURL": {
+             "type": "string"
+            ,"title": "Popup Base URL"
+            ,"example": "https:\/\/ofmpub.epa.gov\/echo\/cwa_rest_services.pop_up?p_id="
+            ,"description": "Combine this URL with the PUC to get popup info"
+         }
+         ,"CenterLatitude": {
+             "type": "string"
+            ,"example": "38.798026"
+            ,"description": "The latitude of the facility in degrees, to four decimal places."
+         }
+         ,"CenterLongitude": {
+             "type": "string"
+            ,"example": "-77.062981"
+            ,"description": "The longitude of the facility in degrees, to four decimal places."
+         }
+         ,"MapData": {
+             "type": "array"
+            ,"title": "MapData Object"
+            ,"description": "An array of facility geospatial information."
+            ,"items": {
+                "$ref": "#\/definitions\/caa3"
+            }
+            ,"xml": {
+                "name": "MapData"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "IconBaseURL"
+         ,"PopUpBaseURL"
+         ,"CenterLatitude"
+         ,"CenterLongitude"
+         ,"MapData"
+      ]
+   }
+   ,"caa5": 
+{
+       "type": "object"
+      ,"description": "Permits Object"
+      ,"xml": {
+          "name": "Permits"
+      }
+      ,"properties": {
+          "Statute": {
+             "type": "string"
+            ,"title": "Regulatory Statute"
+            ,"example": "CWA"
+            ,"description": "The name of the statute associated with each of the permits and identifiers linked to the facility: \n- CAA = the Clean Air Act\n- CWA = the Clean Water Act\n- RCRA = the Resource Conservation and Recovery Act\n- EP313 = the Emergency Planning and Community Right-to-Know Act, Section 313 (also known as the Toxics Release Inventory Program)\n- TSCA = the Toxic Substances Control Act\n- SDWA = the Safe Drinking Water Act"
+         }
+         ,"EPASystem": {
+             "type": "string"
+            ,"title": "EPA Data System"
+            ,"example": "ICP"
+            ,"description": "The EPA data system in which permit and facility records are kept. EPA's Facility Registry System (FRS) links all program database records (such as permit IDs and IDs facilities use in reporting to EPA) together. The following list describes the individual data systems that are linked to from the detailed facility report: \n\n- AFS: Air Facility System for Clean Air Act stationary source programs.\n- ICP: Integrated Compliance Information System for Clean Water Act programs monitoring National Pollutant Discharge Elimination System (NPDES) permits.\n- RCR: Resource Conservation and Recovery Act Information System (RCRAInfo) for tracking the Resource Conservation and Recovery Act (RCRA) programs.\n- NCDB: National Compliance Database System for monitoring national performance of the Toxic Substance Control Act (TSCA); the Emergency Planning and Right-to-Know Act, Section 313 (EPCRA); the Asbestos Hazard Emergency Response (AHERA); and the Federal Insecticide, Fungicide, and Rodenticide Act (FIFRA).\n- TRI: Toxics Release Inventory for Emergency Planning and Community Right-to-Know Act, Section 313 submissions.\n- NEI: National Emissions Inventory database contains information on stationary and mobile sources that emit criteria air pollutants and their precursors, as well as hazardous air pollutants (HAPs). The database includes estimates of annual emissions, by source, of air pollutants in each area of the country, on an annual basis.\n- TSCA: Toxic Substances Control Act addressing the production, importation, use, and disposal of specific chemicals."
+         }
+         ,"SourceID": {
+             "type": "string"
+            ,"title": "EPA Source Identifier"
+            ,"example": "ALR040033"
+            ,"description": "Unique Identifier assigned by EPA."
+         }
+         ,"Universe": {
+             "type": "string"
+            ,"title": "Universe"
+            ,"example": "Minor: General Permit Covered Facility"
+            ,"description": "This field provides further description on type of permit or record for each data system as follows:\n- For CAA  = The program office defines each CAA Source ID and the associated permits as being Federally Reportable or Non-Federally Reportable. Under the CAA, federally reportable sources include majors, synthetic minors, NESHAP Part 61 minors, minors with an unresolved High Priority Violation (HPV), with recent enforcement actions, or included on a Compliance Monitoring Strategy plan. The Clean Air Act requires that delegated agencies and EPA track all federally reportable sources in Air Facility System (AFS).\n- For CWA  = Each CWA Source ID or National Pollutant Discharge Elimination System (NPDES) permit is defined by the program office as a Major or Minor discharger.\n- For RCRA = RCRA Source ID or permits for Treatment, Storage and Disposal facilities are identified by TSD, Large Quantity Generators are identified by LQG. Other values include Permit Workload (PMT), Closure Workload (CLO), Small Quantity Generator Universe (SQG), Conditionally-Exempt Small Quantity Generator (CESQG), Post-Closure Workload (POST CL), and Transporters."
+         }
+         ,"NAICS": {
+             "type": "string"
+         }
+         ,"NAICSDesc": {
+             "type": "string"
+            ,"title": "NAICS Description"
+            ,"example": "Ready-Mix Concrete Manufacturing"
+            ,"description": "The corresponding description of North American Industry Classification System (NAICS) code."
+         }
+         ,"SIC": {
+             "type": "string"
+         }
+         ,"FacilityStatus": {
+             "type": "string"
+            ,"title": "Facility Status"
+            ,"example": "Effective"
+            ,"description": "The Air Program Status is given for each source ID (Operating; Planned; Under construction; Temporarily closed;  Permanently closed; and Seasonal)\n\nFor CWA, the Permit Compliance System (PCS) designates a permitted facility as being Active or Inactive. Under the CWA, all facilities discharging pollutants from a point source (e.g., a pipe) to surface waters must have a NPDES permit. For CWA, ICISNPDES designates a permit as Effective, Administratively Continued, Expired, Not Needed, Pending, Retired, or Terminated. RCRA facilities (sites) are designated as Active or Inactive. The following provides RCRA site activity status definitions and explains site activity status designation."
+         }
+      }
+      ,"required": [
+          "Statute"
+         ,"EPASystem"
+         ,"SourceID"
+         ,"Universe"
+         ,"NAICS"
+         ,"NAICSDesc"
+         ,"SIC"
+         ,"FacilityStatus"
+      ]
+   }
+   ,"caa6": {
+       "type": "object"
+      ,"description": "Spatial Metadata Object"
+      ,"properties": {
+          "RegistryID": {
+             "type": "string"
+            ,"title": "FRS ID"
+            ,"example": "110020837601"
+            ,"description": "An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases."
+         }
+         ,"Latitude83": {
+             "type": "string"
+            ,"format": "double"
+            ,"title": "Latitude"
+            ,"example": "38.798026"
+            ,"description": "The latitude of the facility or permit holder as maintained in each data system."
+         }
+         ,"Longitude83": {
+             "type": "string"
+            ,"format": "double"
+            ,"title": "Longitude"
+            ,"example": "-77.062981"
+            ,"description": "The longitude of the facility or permit holder as maintained in each data system"
+         }
+         ,"CollectionMethod": {
+             "type": "string"
+            ,"title": "Collection Method"
+            ,"example": "ADDRESS MATCHING-HOUSE NUMBER"
+            ,"description": "??"
+         }
+         ,"ReferencePoint": {
+             "type": "string"
+            ,"title": "Reference Point"
+            ,"example": "ENTRANCE POINT OF A FACILITY OR STATION"
+            ,"description": "??"
+         }
+         ,"CalculatedAccuracy": {
+             "type": "string"
+            ,"title": "Calculated Accuracy"
+            ,"example": "50 Meters"
+            ,"description": "??"
+         }
+         ,"CoordinateSourceSystem": {
+             "type": "string"
+            ,"title": "Coordinate Source System"
+            ,"example": "FRS"
+            ,"description": "??"
+         }
+         ,"CoordinateSourceSystemId": {
+             "type": "string"
+            ,"title": "Coordinate Source System Identifier"
+            ,"example": "110001891506"
+            ,"description": "??"
+         }
+      }
+   }
+   ,"caa7_Results": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"AggregateEmissions": {
+             "$ref": "#\/definitions\/caa9"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"AggregateEmissions"
+      ]
+   }
+   ,"caa8_Results": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"AirQuality": {
+             "$ref": "#\/definitions\/caa1"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"AirQuality"
+      ]
+   }
+   ,"caa9": {
+       "type": "object"
+      ,"description": "Aggregate Emissions Object"
+      ,"properties": {
+          "Emissions": {
+             "type": "array"
+            ,"title": "Emissions Object"
+            ,"items": {
+                "$ref": "#\/definitions\/caa2"
+            }
+            ,"xml": {
+                "name": "Emissions"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Emissions"
+      ]
+   }
+   ,"caaa": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "RegistryIDs": {
+             "type": "array"
+            ,"title": "RegistryIDs Object"
+            ,"items": {
+                "$ref": "#\/definitions\/caad"
+            }
+            ,"xml": {
+                "name": "RegistryIDs"
+               ,"wrapped": true
+            }
+         }
+         ,"Pollutants": {
+             "type": "array"
+            ,"title": "Pollutants Object"
+            ,"items": {
+                "$ref": "#\/definitions\/caac"
+            }
+            ,"xml": {
+                "name": "Pollutants"
+               ,"wrapped": true
+            }
+         }
+         ,"Permits": {
+             "type": "array"
+            ,"title": "Permits Object"
+            ,"items": {
+                "$ref": "#\/definitions\/caa5"
+            }
+            ,"xml": {
+                "name": "Permits"
+               ,"wrapped": true
+            }
+         }
+         ,"AggregateEmissions": {
+             "$ref": "#\/definitions\/caa9"
+         }
+         ,"EnvironmentalConditions": {
+             "$ref": "#\/definitions\/caab"
+         }
+         ,"SpatialMetadata": {
+             "$ref": "#\/definitions\/caa6"
+         }
+         ,"MapOutput": {
+             "$ref": "#\/definitions\/caa4"
+         }
+      }
+      ,"required": [
+          "RegistryIDs"
+         ,"Pollutants"
+         ,"Permits"
+         ,"AggregateEmissions"
+         ,"EnvironmentalConditions"
+         ,"MapOutput"
+      ]
+   }
+   ,"caab": {
+       "type": "object"
+      ,"description": "Environmental Conditions Object"
+      ,"properties": {
+          "AirQuality": {
+             "$ref": "#\/definitions\/caa1"
+         }
+      }
+      ,"required": [
+          "AirQuality"
+      ]
+   }
+   ,"caac": {
+       "type": "object"
+      ,"description": "Pollutants Object"
+      ,"xml": {
+          "name": "Pollutants"
+      }
+      ,"properties": {
+          "RegistryId": {
+             "type": "string"
+            ,"title": "FRS Registry ID"
+            ,"example": "110020837601"
+            ,"description": "12-digit Facility Registry Service (FRS) identification number.  FRS uniquely identifies a facility by assigning an identification number (FRS ID), and uses this FRS ID to link together all EPA regulatory program database records"
+         }
+         ,"Program": {
+             "type": "string"
+            ,"title": "Program"
+            ,"example": "CWA"
+            ,"description": "The source database for the EPA programs information."
+         }
+         ,"System": {
+             "type": "string"
+         }
+         ,"ProgramSysId": {
+             "type": "string"
+         }
+         ,"PollutantType": {
+             "type": "string"
+         }
+         ,"Pollutant": {
+             "type": "string"
+            ,"title": "Pollutant"
+            ,"example": "Carbon monoxide"
+            ,"description": "The name that EPA has selected as its preferred name for a substance (also known as registry name). If the registry name is not available, use the systematic name instead."
+         }
+         ,"UnitsOfMeasure": {
+             "type": "string"
+            ,"example": "Pounds"
+         }
+         ,"Year1": {
+             "type": "string"
+         }
+         ,"Year2": {
+             "type": "string"
+         }
+         ,"Year3": {
+             "type": "string"
+         }
+         ,"Year4": {
+             "type": "string"
+         }
+         ,"Year5": {
+             "type": "string"
+         }
+         ,"Year6": {
+             "type": "string"
+         }
+         ,"Year7": {
+             "type": "string"
+         }
+         ,"Year8": {
+             "type": "string"
+         }
+         ,"Year9": {
+             "type": "string"
+         }
+         ,"Year10": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "RegistryId"
+         ,"Program"
+         ,"System"
+         ,"ProgramSysId"
+         ,"PollutantType"
+         ,"Pollutant"
+         ,"UnitsOfMeasure"
+         ,"Year1"
+         ,"Year2"
+         ,"Year3"
+         ,"Year4"
+         ,"Year5"
+         ,"Year6"
+         ,"Year7"
+         ,"Year8"
+         ,"Year9"
+         ,"Year10"
+      ]
+   }
+   ,"caad": {
+       "type": "object"
+      ,"description": "Registry IDs Object"
+      ,"xml": {
+          "name": "RegistryIDs"
+      }
+      ,"properties": {
+          "RegistryId": {
+             "type": "string"
+            ,"title": "FRS Registry ID"
+            ,"example": "110020837601"
+            ,"description": "12-digit Facility Registry Service (FRS) identification number.  FRS uniquely identifies a facility by assigning an identification number (FRS ID), and uses this FRS ID to link together all EPA regulatory program database records"
+         }
+         ,"SourceId": {
+             "type": "string"
+            ,"title": "EPA Source Identifier"
+            ,"example": "ALR040033"
+            ,"description": "Unique Identifier assigned by EPA."
+         }
+         ,"FacilityName": {
+             "type": "string"
+            ,"title": "Facility Name"
+            ,"example": "3M COMPANY"
+            ,"description": "The name of the facility."
+         }
+         ,"Street": {
+             "type": "string"
+         }
+         ,"City": {
+             "type": "string"
+            ,"title": "City"
+            ,"description": "The name of the city, town, village or other locality, when identifiable, within whose boundaries (the majority of) the facility site is located. This is not always the same as the city used for USPS mail delivery."
+         }
+         ,"State": {
+             "type": "string"
+            ,"title": "State"
+            ,"example": "FL"
+            ,"description": "The two letter abbreviation that represents the state or state equivalent for the U.S."
+         }
+         ,"Zip": {
+             "type": "string"
+            ,"title": "Zip Code"
+            ,"example": "53140"
+            ,"description": "US postal ZIP code, as maintained by ICIS."
+         }
+         ,"County": {
+             "type": "string"
+         }
+         ,"Region": {
+             "type": "string"
+         }
+         ,"Latitude": {
+             "type": "string"
+            ,"format": "double"
+            ,"title": "Latitude"
+            ,"example": "34.606651"
+            ,"description": "The latitude of the facility or permit holder as maintained in each data system."
+         }
+         ,"Longitude": {
+             "type": "string"
+            ,"format": "double"
+            ,"title": "Longitude"
+            ,"example": "-86.982419"
+            ,"description": "The longitude of the facility or permit holder as maintained in each data system"
+         }
+      }
+      ,"required": [
+          "RegistryId"
+         ,"SourceId"
+         ,"FacilityName"
+         ,"Street"
+         ,"City"
+         ,"State"
+         ,"Zip"
+         ,"County"
+         ,"Region"
+         ,"Latitude"
+         ,"Longitude"
+      ]
+   }
+   ,"caah_Results": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"REST_Status": {
+             "type": "string"
+         }
+         ,"REST_Note": {
+             "type": "string"
+         }
+         ,"REST_Version": {
+             "type": "string"
+         }
+         ,"TRI_year_01": {
+             "type": "string"
+         }
+         ,"TRI_year_02": {
+             "type": "string"
+         }
+         ,"TRI_year_03": {
+             "type": "string"
+         }
+         ,"TRI_year_04": {
+             "type": "string"
+         }
+         ,"TRI_year_05": {
+             "type": "string"
+         }
+         ,"TRI_year_06": {
+             "type": "string"
+         }
+         ,"TRI_year_07": {
+             "type": "string"
+         }
+         ,"TRI_year_08": {
+             "type": "string"
+         }
+         ,"TRI_year_09": {
+             "type": "string"
+         }
+         ,"TRI_year_10": {
+             "type": "string"
+         }
+         ,"CAAPollRpt": {
+             "$ref": "#\/definitions\/caaa"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"REST_Status"
+         ,"REST_Note"
+         ,"REST_Version"
+         ,"TRI_year_01"
+         ,"TRI_year_02"
+         ,"TRI_year_03"
+         ,"TRI_year_04"
+         ,"TRI_year_05"
+         ,"TRI_year_06"
+         ,"TRI_year_07"
+         ,"TRI_year_08"
+         ,"TRI_year_09"
+         ,"TRI_year_10"
+         ,"CAAPollRpt"
+      ]
+   }
+   ,"caae_Results": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"MapOutput": {
+             "$ref": "#\/definitions\/caa4"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"MapOutput"
+      ]
+   }
+   ,"caaf_Results": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"Permits": {
+             "type": "array"
+            ,"title": "Permits Object"
+            ,"items": {
+                "$ref": "#\/definitions\/caa5"
+            }
+            ,"xml": {
+                "name": "Permits"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"Permits"
+      ]
+   }
+   ,"caag_Results": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"SpatialMetadata": {
+             "$ref": "#\/definitions\/caa6"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"SpatialMetadata"
+      ]
+   }
+}
+}

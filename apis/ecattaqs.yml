@@ -1,0 +1,152 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: ecattaqs
+schemas:
+  files:
+  - schema/ecattaqs.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: ecattaqs_request
+authentication: {}
+defaults: {}
+groups:
+  ecattaqs_air_monitoring_station_criteria_air_pollutant_report_services:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /ecatt_aqs_rest_services.get_acs2023x_demographics_by_id
+      - POST /ecatt_aqs_rest_services.get_acs2023x_demographics_by_id
+      - GET /ecatt_aqs_rest_services.get_rpt_facs
+      - POST /ecatt_aqs_rest_services.get_rpt_facs
+      - GET /ecatt_aqs_rest_services.get_rpt_map
+      - POST /ecatt_aqs_rest_services.get_rpt_map
+      - GET /ecatt_aqs_rest_services.get_rpt_polls
+      - POST /ecatt_aqs_rest_services.get_rpt_polls
+      - GET /ecatt_aqs_rest_services.get_rpt_stats
+      - POST /ecatt_aqs_rest_services.get_rpt_stats
+      - GET /ecatt_aqs_rest_services.get_rpt_windrose
+      - POST /ecatt_aqs_rest_services.get_rpt_windrose
+      - GET /ecatt_aqs_rest_services.get_rpt_windrose_daily
+      - POST /ecatt_aqs_rest_services.get_rpt_windrose_daily
+    names:
+      GET /ecatt_aqs_rest_services.get_acs2023x_demographics_by_id: ecattaqs_get_acs2023x_demographics_by_id
+      POST /ecatt_aqs_rest_services.get_acs2023x_demographics_by_id: ecattaqs_get_acs2023x_demographics_by_id_post
+      GET /ecatt_aqs_rest_services.get_rpt_facs: ecattaqs_get_rpt_facs
+      POST /ecatt_aqs_rest_services.get_rpt_facs: ecattaqs_get_rpt_facs_post
+      GET /ecatt_aqs_rest_services.get_rpt_map: ecattaqs_get_rpt_map
+      POST /ecatt_aqs_rest_services.get_rpt_map: ecattaqs_get_rpt_map_post
+      GET /ecatt_aqs_rest_services.get_rpt_polls: ecattaqs_get_rpt_polls
+      POST /ecatt_aqs_rest_services.get_rpt_polls: ecattaqs_get_rpt_polls_post
+      GET /ecatt_aqs_rest_services.get_rpt_stats: ecattaqs_get_rpt_stats
+      POST /ecatt_aqs_rest_services.get_rpt_stats: ecattaqs_get_rpt_stats_post
+      GET /ecatt_aqs_rest_services.get_rpt_windrose: ecattaqs_get_rpt_windrose
+      POST /ecatt_aqs_rest_services.get_rpt_windrose: ecattaqs_get_rpt_windrose_post
+      GET /ecatt_aqs_rest_services.get_rpt_windrose_daily: ecattaqs_get_rpt_windrose_daily
+      POST /ecatt_aqs_rest_services.get_rpt_windrose_daily: ecattaqs_get_rpt_windrose_daily_post
+    defaults:
+      file: R/ecattaqs_air_monitoring_station_criteria_air_pollutant_report_services.R
+      docs:
+        tags:
+          family: Air Monitoring Station Criteria Air Pollutant Report Services endpoints
+    operations: {}
+  ecattaqs_air_monitoring_station_criteria_air_pollutant_search_services:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /ecatt_aqs_rest_services.get_download
+      - POST /ecatt_aqs_rest_services.get_download
+      - GET /ecatt_aqs_rest_services.get_facilities
+      - POST /ecatt_aqs_rest_services.get_facilities
+      - GET /ecatt_aqs_rest_services.get_qid
+      - POST /ecatt_aqs_rest_services.get_qid
+      - GET /ecatt_aqs_rest_services.get_rpt
+      - POST /ecatt_aqs_rest_services.get_rpt
+      - GET /ecatt_aqs_rest_services.metadata
+      - POST /ecatt_aqs_rest_services.metadata
+    names:
+      GET /ecatt_aqs_rest_services.get_download: ecattaqs_get_download
+      POST /ecatt_aqs_rest_services.get_download: ecattaqs_get_download_post
+      GET /ecatt_aqs_rest_services.get_facilities: ecattaqs_get_facilities
+      POST /ecatt_aqs_rest_services.get_facilities: ecattaqs_get_facilities_post
+      GET /ecatt_aqs_rest_services.get_qid: ecattaqs_get_qid
+      POST /ecatt_aqs_rest_services.get_qid: ecattaqs_get_qid_post
+      GET /ecatt_aqs_rest_services.get_rpt: ecattaqs_get_rpt
+      POST /ecatt_aqs_rest_services.get_rpt: ecattaqs_get_rpt_post
+      GET /ecatt_aqs_rest_services.metadata: ecattaqs_metadata
+      POST /ecatt_aqs_rest_services.metadata: ecattaqs_metadata_post
+    defaults:
+      file: R/ecattaqs_air_monitoring_station_criteria_air_pollutant_search_services.R
+      docs:
+        tags:
+          family: Air Monitoring Station Criteria Air Pollutant Search Services endpoints
+    operations: {}
+  ecattaqs_lookups:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /rest_lookups.ecatt_aqs_polls
+      - POST /rest_lookups.ecatt_aqs_polls
+      - GET /rest_lookups.ecatt_aqs_pollutant_standards
+      - POST /rest_lookups.ecatt_aqs_pollutant_standards
+      - GET /rest_lookups.ecatt_aqs_years
+      - POST /rest_lookups.ecatt_aqs_years
+    names:
+      GET /rest_lookups.ecatt_aqs_polls: ecattaqs_lookups_ecatt_aqs_polls
+      POST /rest_lookups.ecatt_aqs_polls: ecattaqs_lookups_ecatt_aqs_polls_post
+      GET /rest_lookups.ecatt_aqs_pollutant_standards: ecattaqs_lookups_ecatt_aqs_pollutant_standards
+      POST /rest_lookups.ecatt_aqs_pollutant_standards: ecattaqs_lookups_ecatt_aqs_pollutant_standards_post
+      GET /rest_lookups.ecatt_aqs_years: ecattaqs_lookups_ecatt_aqs_years
+      POST /rest_lookups.ecatt_aqs_years: ecattaqs_lookups_ecatt_aqs_years_post
+    defaults:
+      file: R/ecattaqs_lookups.R
+      docs:
+        tags:
+          family: Lookups endpoints
+    operations: {}

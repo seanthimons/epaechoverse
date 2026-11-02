@@ -1,0 +1,48 @@
+# One API configuration file per schema; endpoint tag groups are nested inside.
+# Package-wide settings; API and group filters can only narrow selection.
+# Authentication keys are API-name.scheme-name; values are environment variable names.
+# Never put tokens here. Share an environment variable only when explicitly intended.
+config_version: 1
+package: epaechoverse
+services:
+- apis/ecattaqs.yml
+- apis/ecattams.yml
+- apis/air.yml
+- apis/echo.yml
+- apis/compscreen.yml
+- apis/cwa.yml
+- apis/dfr.yml
+- apis/eff.yml
+- apis/ecattems.yml
+- apis/case.yml
+- apis/nncr.yml
+- apis/rcra.yml
+- apis/sdw.yml
+- apis/wplt.yml
+- apis/caa.yml
+- apis/biosolids.yml
+- apis/lookup.yml
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: api_request
+documentation: yes
+defaults:
+  implementation: generated
+  request_controls:
+    timeout: 30
+    max_retries: 0
+    retry_writes: no
+  batch:
+    max_items: ~
+    max_bytes: ~
+callback_files: []
+authentication: {}

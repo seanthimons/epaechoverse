@@ -1,0 +1,184 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: ecattams
+schemas:
+  files:
+  - schema/ecattams.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: ecattams_request
+authentication: {}
+defaults: {}
+groups:
+  ecattams_air_monitoring_station_hazardous_air_pollutant_report_services:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /ecatt_ams_rest_services.get_acs2023x_demographics_by_id
+      - POST /ecatt_ams_rest_services.get_acs2023x_demographics_by_id
+      - GET /ecatt_ams_rest_services.get_rpt
+      - POST /ecatt_ams_rest_services.get_rpt
+      - GET /ecatt_ams_rest_services.get_rpt_facs
+      - POST /ecatt_ams_rest_services.get_rpt_facs
+      - GET /ecatt_ams_rest_services.get_rpt_map
+      - POST /ecatt_ams_rest_services.get_rpt_map
+      - GET /ecatt_ams_rest_services.get_rpt_pollrose
+      - POST /ecatt_ams_rest_services.get_rpt_pollrose
+      - GET /ecatt_ams_rest_services.get_rpt_polls
+      - POST /ecatt_ams_rest_services.get_rpt_polls
+      - GET /ecatt_ams_rest_services.get_rpt_stats
+      - POST /ecatt_ams_rest_services.get_rpt_stats
+      - GET /ecatt_ams_rest_services.get_rpt_stats_download
+      - POST /ecatt_ams_rest_services.get_rpt_stats_download
+      - GET /ecatt_ams_rest_services.get_rpt_summary
+      - POST /ecatt_ams_rest_services.get_rpt_summary
+      - GET /ecatt_ams_rest_services.get_rpt_windrose
+      - POST /ecatt_ams_rest_services.get_rpt_windrose
+    names:
+      GET /ecatt_ams_rest_services.get_acs2023x_demographics_by_id: ecattams_get_acs2023x_demographics_by_id
+      POST /ecatt_ams_rest_services.get_acs2023x_demographics_by_id: ecattams_get_acs2023x_demographics_by_id_post
+      GET /ecatt_ams_rest_services.get_rpt: ecattams_get_rpt
+      POST /ecatt_ams_rest_services.get_rpt: ecattams_get_rpt_post
+      GET /ecatt_ams_rest_services.get_rpt_facs: ecattams_get_rpt_facs
+      POST /ecatt_ams_rest_services.get_rpt_facs: ecattams_get_rpt_facs_post
+      GET /ecatt_ams_rest_services.get_rpt_map: ecattams_get_rpt_map
+      POST /ecatt_ams_rest_services.get_rpt_map: ecattams_get_rpt_map_post
+      GET /ecatt_ams_rest_services.get_rpt_pollrose: ecattams_get_rpt_pollrose
+      POST /ecatt_ams_rest_services.get_rpt_pollrose: ecattams_get_rpt_pollrose_post
+      GET /ecatt_ams_rest_services.get_rpt_polls: ecattams_get_rpt_polls
+      POST /ecatt_ams_rest_services.get_rpt_polls: ecattams_get_rpt_polls_post
+      GET /ecatt_ams_rest_services.get_rpt_stats: ecattams_get_rpt_stats
+      POST /ecatt_ams_rest_services.get_rpt_stats: ecattams_get_rpt_stats_post
+      GET /ecatt_ams_rest_services.get_rpt_stats_download: ecattams_get_rpt_stats_download
+      POST /ecatt_ams_rest_services.get_rpt_stats_download: ecattams_get_rpt_stats_download_post
+      GET /ecatt_ams_rest_services.get_rpt_summary: ecattams_get_rpt_summary
+      POST /ecatt_ams_rest_services.get_rpt_summary: ecattams_get_rpt_summary_post
+      GET /ecatt_ams_rest_services.get_rpt_windrose: ecattams_get_rpt_windrose
+      POST /ecatt_ams_rest_services.get_rpt_windrose: ecattams_get_rpt_windrose_post
+    defaults:
+      file: R/ecattams_air_monitoring_station_hazardous_air_pollutant_report_services.R
+      docs:
+        tags:
+          family: Air Monitoring Station Hazardous Air Pollutant Report Services endpoints
+    operations: {}
+  ecattams_air_monitoring_station_hazardous_air_pollutant_search_services:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /ecatt_ams_rest_services.get_download
+      - POST /ecatt_ams_rest_services.get_download
+      - GET /ecatt_ams_rest_services.get_facilities
+      - POST /ecatt_ams_rest_services.get_facilities
+      - GET /ecatt_ams_rest_services.get_map
+      - POST /ecatt_ams_rest_services.get_map
+      - GET /ecatt_ams_rest_services.get_qid
+      - POST /ecatt_ams_rest_services.get_qid
+      - GET /ecatt_ams_rest_services.metadata
+      - POST /ecatt_ams_rest_services.metadata
+    names:
+      GET /ecatt_ams_rest_services.get_download: ecattams_get_download
+      POST /ecatt_ams_rest_services.get_download: ecattams_get_download_post
+      GET /ecatt_ams_rest_services.get_facilities: ecattams_get_facilities
+      POST /ecatt_ams_rest_services.get_facilities: ecattams_get_facilities_post
+      GET /ecatt_ams_rest_services.get_map: ecattams_get_map
+      POST /ecatt_ams_rest_services.get_map: ecattams_get_map_post
+      GET /ecatt_ams_rest_services.get_qid: ecattams_get_qid
+      POST /ecatt_ams_rest_services.get_qid: ecattams_get_qid_post
+      GET /ecatt_ams_rest_services.metadata: ecattams_metadata
+      POST /ecatt_ams_rest_services.metadata: ecattams_metadata_post
+    defaults:
+      file: R/ecattams_air_monitoring_station_hazardous_air_pollutant_search_services.R
+      docs:
+        tags:
+          family: Air Monitoring Station Hazardous Air Pollutant Search Services endpoints
+    operations: {}
+  ecattams_lookups:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /rest_lookups.ecatt_ams_cas
+      - POST /rest_lookups.ecatt_ams_cas
+      - GET /rest_lookups.ecatt_ams_polls
+      - POST /rest_lookups.ecatt_ams_polls
+      - GET /rest_lookups.ecatt_ams_systems
+      - POST /rest_lookups.ecatt_ams_systems
+      - GET /rest_lookups.ecatt_ams_years
+      - POST /rest_lookups.ecatt_ams_years
+      - GET /rest_lookups.ecatt_nata_polls
+      - POST /rest_lookups.ecatt_nata_polls
+      - GET /rest_lookups.ecatt_nata_sources
+      - POST /rest_lookups.ecatt_nata_sources
+      - GET /rest_lookups.ecatt_nata_systems
+      - POST /rest_lookups.ecatt_nata_systems
+      - GET /rest_lookups.ecatt_target_systems
+      - POST /rest_lookups.ecatt_target_systems
+    names:
+      GET /rest_lookups.ecatt_ams_cas: ecattams_lookups_ecatt_ams_cas
+      POST /rest_lookups.ecatt_ams_cas: ecattams_lookups_ecatt_ams_cas_post
+      GET /rest_lookups.ecatt_ams_polls: ecattams_lookups_ecatt_ams_polls
+      POST /rest_lookups.ecatt_ams_polls: ecattams_lookups_ecatt_ams_polls_post
+      GET /rest_lookups.ecatt_ams_systems: ecattams_lookups_ecatt_ams_systems
+      POST /rest_lookups.ecatt_ams_systems: ecattams_lookups_ecatt_ams_systems_post
+      GET /rest_lookups.ecatt_ams_years: ecattams_lookups_ecatt_ams_years
+      POST /rest_lookups.ecatt_ams_years: ecattams_lookups_ecatt_ams_years_post
+      GET /rest_lookups.ecatt_nata_polls: ecattams_lookups_ecatt_nata_polls
+      POST /rest_lookups.ecatt_nata_polls: ecattams_lookups_ecatt_nata_polls_post
+      GET /rest_lookups.ecatt_nata_sources: ecattams_lookups_ecatt_nata_sources
+      POST /rest_lookups.ecatt_nata_sources: ecattams_lookups_ecatt_nata_sources_post
+      GET /rest_lookups.ecatt_nata_systems: ecattams_lookups_ecatt_nata_systems
+      POST /rest_lookups.ecatt_nata_systems: ecattams_lookups_ecatt_nata_systems_post
+      GET /rest_lookups.ecatt_target_systems: ecattams_lookups_ecatt_target_systems
+      POST /rest_lookups.ecatt_target_systems: ecattams_lookups_ecatt_target_systems_post
+    defaults:
+      file: R/ecattams_lookups.R
+      docs:
+        tags:
+          family: Lookups endpoints
+    operations: {}

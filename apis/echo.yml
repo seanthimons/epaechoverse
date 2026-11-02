@@ -1,0 +1,104 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: echo
+schemas:
+  files:
+  - schema/echo.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: echo_request
+authentication: {}
+defaults: {}
+groups:
+  echo_facility_info:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /echo_rest_services.get_download
+      - POST /echo_rest_services.get_download
+      - GET /echo_rest_services.get_facilities
+      - POST /echo_rest_services.get_facilities
+      - GET /echo_rest_services.get_facility_info
+      - POST /echo_rest_services.get_facility_info
+      - GET /echo_rest_services.get_geojson
+      - POST /echo_rest_services.get_geojson
+      - GET /echo_rest_services.get_info_clusters
+      - POST /echo_rest_services.get_info_clusters
+      - GET /echo_rest_services.get_map
+      - POST /echo_rest_services.get_map
+      - GET /echo_rest_services.get_qid
+      - POST /echo_rest_services.get_qid
+    names:
+      GET /echo_rest_services.get_download: echo_get_download
+      POST /echo_rest_services.get_download: echo_get_download_post
+      GET /echo_rest_services.get_facilities: echo_get_facilities
+      POST /echo_rest_services.get_facilities: echo_get_facilities_post
+      GET /echo_rest_services.get_facility_info: echo_get_facility_info
+      POST /echo_rest_services.get_facility_info: echo_get_facility_info_post
+      GET /echo_rest_services.get_geojson: echo_get_geojson
+      POST /echo_rest_services.get_geojson: echo_get_geojson_post
+      GET /echo_rest_services.get_info_clusters: echo_get_info_clusters
+      POST /echo_rest_services.get_info_clusters: echo_get_info_clusters_post
+      GET /echo_rest_services.get_map: echo_get_map
+      POST /echo_rest_services.get_map: echo_get_map_post
+      GET /echo_rest_services.get_qid: echo_get_qid
+      POST /echo_rest_services.get_qid: echo_get_qid_post
+    defaults:
+      file: R/echo_facility_info.R
+      docs:
+        tags:
+          family: Facility Info endpoints
+    operations: {}
+  echo_metadata:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /echo_rest_services.metadata
+      - POST /echo_rest_services.metadata
+    names:
+      GET /echo_rest_services.metadata: echo_metadata
+      POST /echo_rest_services.metadata: echo_metadata_post
+    defaults:
+      file: R/echo_metadata.R
+      docs:
+        tags:
+          family: Metadata endpoints
+    operations: {}

@@ -1,0 +1,76 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: caa
+schemas:
+  files:
+  - schema/caa.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: caa_request
+authentication: {}
+defaults: {}
+groups:
+  caa_air_pollution_report:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /caa_poll_rpt_rest_services.get_aggregate_emissions
+      - POST /caa_poll_rpt_rest_services.get_aggregate_emissions
+      - GET /caa_poll_rpt_rest_services.get_air_quality
+      - POST /caa_poll_rpt_rest_services.get_air_quality
+      - GET /caa_poll_rpt_rest_services.get_caapr
+      - POST /caa_poll_rpt_rest_services.get_caapr
+      - GET /caa_poll_rpt_rest_services.get_map
+      - POST /caa_poll_rpt_rest_services.get_map
+      - GET /caa_poll_rpt_rest_services.get_nnnPermits
+      - POST /caa_poll_rpt_rest_services.get_nnnPermits
+      - GET /caa_poll_rpt_rest_services.get_spatial_metadata
+      - POST /caa_poll_rpt_rest_services.get_spatial_metadata
+    names:
+      GET /caa_poll_rpt_rest_services.get_aggregate_emissions: caa_get_aggregate_emissions
+      POST /caa_poll_rpt_rest_services.get_aggregate_emissions: caa_get_aggregate_emissions_post
+      GET /caa_poll_rpt_rest_services.get_air_quality: caa_get_air_quality
+      POST /caa_poll_rpt_rest_services.get_air_quality: caa_get_air_quality_post
+      GET /caa_poll_rpt_rest_services.get_caapr: caa_get_caapr
+      POST /caa_poll_rpt_rest_services.get_caapr: caa_get_caapr_post
+      GET /caa_poll_rpt_rest_services.get_map: caa_get_map
+      POST /caa_poll_rpt_rest_services.get_map: caa_get_map_post
+      GET /caa_poll_rpt_rest_services.get_nnnPermits: caa_get_nnn_permits
+      POST /caa_poll_rpt_rest_services.get_nnnPermits: caa_get_nnn_permits_post
+      GET /caa_poll_rpt_rest_services.get_spatial_metadata: caa_get_spatial_metadata
+      POST /caa_poll_rpt_rest_services.get_spatial_metadata: caa_get_spatial_metadata_post
+    defaults:
+      file: R/caa_air_pollution_report.R
+      docs:
+        tags:
+          family: Air Pollution Report endpoints
+    operations: {}

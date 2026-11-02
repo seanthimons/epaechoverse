@@ -1,0 +1,6512 @@
+{
+ "swagger": "2.0"
+,"info": {
+    "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Code Lookups"
+   ,"description": "Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use. ECHO provides integrated compliance and enforcement information for over 1 million regulated facilities nationwide."
+   ,"contact": {
+       "name": "U.S. EPA, OECA Integration, Targeting and Access Branch"
+      ,"url": "https:\/\/echo.epa.gov\/resources\/general-info\/contact-us"
+   }
+   ,"license": {
+       "name": "U.S. Public Domain License"
+      ,"url": "https:\/\/edg.epa.gov\/EPA_Data_License.html"
+   }
+   ,"version": "2019.10.15"
+}
+,"host": "echodata.epa.gov"
+,"basePath": "\/echo"
+,"schemes": [
+    "https"
+]
+,"consumes": [
+    "application\/x-www-form-urlencoded"
+]
+,"produces": [
+    "application\/json"
+   ,"application\/xml"
+]
+,"parameters": {
+    "q.output": {
+       "name": "output"
+      ,"in": "query"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.output": {
+       "name": "output"
+      ,"in": "formData"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.callback": {
+       "name": "callback"
+      ,"in": "query"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.callback": {
+       "name": "callback"
+      ,"in": "formData"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.search_term": {
+       "name": "search_term"
+      ,"in": "query"
+      ,"description": "Enter a partial or complete search phrase or word."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.search_term": {
+       "name": "search_term"
+      ,"in": "formData"
+      ,"description": "Enter a partial or complete search phrase or word."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.search_code": {
+       "name": "search_code"
+      ,"in": "query"
+      ,"description": "Enter a partial or complete code value."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.search_subcode": {
+       "name": "search_subcode"
+      ,"in": "formData"
+      ,"description": "Enter a partial or complete code value."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.search_subcode": {
+       "name": "search_subcode"
+      ,"in": "query"
+      ,"description": "Enter a partial or complete code value."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.search_code": {
+       "name": "search_code"
+      ,"in": "formData"
+      ,"description": "Enter a partial or complete code value."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.state_code": {
+       "name": "state_code"
+      ,"in": "query"
+      ,"description": "Two-letter state code"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.state_code": {
+       "name": "state_code"
+      ,"in": "formData"
+      ,"description": "Two-letter state code"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.wbd_code": {
+       "name": "wbd_code"
+      ,"in": "query"
+      ,"description": "Two-digit watershed code [Hydrologic Unit Code (HUC)]."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.wbd_code": {
+       "name": "wbd_code"
+      ,"in": "formData"
+      ,"description": "Two-digit watershed code [Hydrologic Unit Code (HUC)]."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.wbd_level": {
+       "name": "wbd_level"
+      ,"in": "query"
+      ,"description": "The number of digits of the watershed code [Hydrologic Unit Code (HUC)] returned in the ValueCode. Must be an even number between 4 and 12."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.wbd_level": {
+       "name": "wbd_level"
+      ,"in": "formData"
+      ,"description": "The number of digits of the watershed code [Hydrologic Unit Code (HUC)] returned in the ValueCode. Must be an even number between 4 and 12."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.wbd_name": {
+       "name": "wbd_name"
+      ,"in": "query"
+      ,"description": "Watershed Name Filter."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.wbd_name": {
+       "name": "wbd_name"
+      ,"in": "formData"
+      ,"description": "Watershed Name Filter."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.n_year": {
+       "name": "n_year"
+      ,"in": "query"
+      ,"description": "Year parameter in the YYYY format, defaults to 2022."
+      ,"default": 2022
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.n_year": {
+       "name": "n_year"
+      ,"in": "formData"
+      ,"description": "Year parameter in the YYYY format, defaults to 2022."
+      ,"default": 2022
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.scc_level": {
+       "name": "scc_level"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.scc_level": {
+       "name": "scc_level"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.sort_order": {
+       "name": "sort_order"
+      ,"in": "query"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.sort_order": {
+       "name": "sort_order"
+      ,"in": "formData"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.agency_desc": {
+       "name": "agency_desc"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.agency_desc": {
+       "name": "agency_desc"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.exact_match": {
+       "name": "exact_match"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.exact_match": {
+       "name": "exact_match"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.registry_id": {
+       "name": "registry_id"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.registry_id": {
+       "name": "registry_id"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.status_flag": {
+       "name": "status_flag"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.status_flag": {
+       "name": "status_flag"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.statute_code": {
+       "name": "statute_code"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.statute_code": {
+       "name": "statute_code"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.category_code": {
+       "name": "category_code"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.category_code": {
+       "name": "category_code"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+}
+,"paths": {
+    "\/rest_lookups.air_pollutants": {
+       "get": {
+          "summary": "ECHO Air Pollutants Lookup Service"
+         ,"description": "Look up Air pollutant codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup06"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Air Pollutants Lookup Service"
+         ,"description": "Look up Air pollutant codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup06"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_analy_method_category": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup07"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup07"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_analytical_method": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup08"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup08"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_container_type": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup09"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup09"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_mgmt_practice_handler": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup10"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup10"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_mgmt_practice_subtype": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_subcode"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup11"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_subcode"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup11"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_mgmt_practice_type": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup12"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup12"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_mgmt_practice_typesubtype": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup13"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup13"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_pathogen_class": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup14"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup14"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_pathogen_reduction": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_subcode"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup15"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_subcode"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup15"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_treatment_process": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup16"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,
+{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup16"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_vector_reduction": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup17"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup17"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.biosolids_by_registry_id": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.registry_id"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup19"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.registry_id"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup19"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bio_vio_code": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup18"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup18"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.bp_tribes": {
+       "get": {
+          "summary": "ECHO BP Tribes Lookup Service"
+         ,"description": "Returns the EPA Standard Indian Tribes and Native Alaskan Villages tribal_id and tribe_name."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of tribes containing the search term. If search term not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup20"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO BP Tribes Lookup Service"
+         ,"description": "Returns the EPA Standard Indian Tribes and Native Alaskan Villages tribal_id and tribe_name."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of tribes containing the search term. If search term not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup20"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.counties": {
+       "get": {
+          "summary": "ECHO Counties Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes a list of of U.S. counties."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup21"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Counties Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes a list of of U.S. counties."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup21"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.cp_citations": {
+       "get": {
+          "summary": "ECHO CP Citations Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of ??? based on search term or search code. If search term or search code not provided, returns all values. ValueCode is always null."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup22"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO CP Citations Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of ??? based on search term or search code. If search term or search code not provided, returns all values. ValueCode is always null."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup22"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.cwa_pagency_lu": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.agency_desc"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup78"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.agency_desc"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup78"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.cwa_state_regions": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.state_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup86"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.state_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup86"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.cwa_parameters": {
+       "get": {
+          "summary": "ECHO CWA Parameter Lookup Service"
+         ,"description": "Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of parameter codes and descriptions that contain the search_term or search_code entered. If search term or search code not provided, returns all values. ValueCode is the 5-digit parameter code.\nValueDescription is the parameter description."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup23"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO CWA Parameter Lookup Service"
+         ,"description": "Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of parameter codes and descriptions that contain the search_term or search_code entered. If search term or search code not provided, returns all values. ValueCode is the 5-digit parameter code.\nValueDescription is the parameter description."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup23"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.cwa_pollutants": {
+       "get": {
+          "summary": "ECHO CWA Pollutants Lookup Service"
+         ,"description": "Look up Clean Water Act pollutants by name"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of water pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup24"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO CWA Pollutants Lookup Service"
+         ,"description": "Look up Clean Water Act pollutants by name"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of water pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup24"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_eis_types": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool EIS Types Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup42"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool EIS Types Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup42"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_most_rcnt_cmmn_yr": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool Most Recent Common Year Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup43"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool Most Recent Common Year Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup43"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_most_rcnt_yr": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool Most Recent Year Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup44"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool Most Recent Year Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup44"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_nei_scc_codes": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool NEI SCC Code Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.scc_level"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup48"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool NEI SCC Code Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.scc_level"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": 
+{
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup48"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_pcat_pgm": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool Pollutant Category Programs Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup49"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool Pollutant Category Programs Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup49"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_poll_categories": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool Pollutant Categories Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup50"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool Pollutant Categories Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup50"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_poll_pgm": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool Pollutant Programs Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup51"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool Pollutant Programs Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup51"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_pollutants": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup52"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup52"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.fac_universe_indicators": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup85"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup85"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.federal_agencies": {
+       "get": {
+          "summary": "ECHO Federal Agency Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of federal agency codes and their descriptions."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup54"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Federal Agency Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of federal agency codes and their descriptions."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup54"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ghg_fac_types": {
+       "get": {
+          "summary": "ECHO GHG Facility Types Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of Green House Gas Facility Type codes and descriptions  based on the provided search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup55"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO GHG Facility Types Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of Green House Gas Facility Type codes and descriptions  based on the provided search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup55"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ghg_subparts": {
+       "get": {
+          "summary": "ECHO GHG Subparts Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array of Green House Gas Subpart codes and descriptions that meet the selection criteria.  If no criteria is provided, all codes and descriptions are returned."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup56"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO GHG Subparts Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array of Green House Gas Subpart codes and descriptions that meet the selection criteria.  If no criteria is provided, all codes and descriptions are returned."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup56"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ghg_years": {
+       "get": {
+          "summary": "ECHO GHG Years Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "name": "descending"
+               ,"in": "query"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to sort results in descending order."
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup57"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO GHG Years Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "name": "descending"
+               ,"in": "formData"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to sort results in descending order."
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup57"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.icis_inspection_types": {
+       "get": {
+          "summary": "ECHO ICIS NPDES Inspection Types Lookup Service"
+         ,"description": "Returns the ICIS NPDES Compliance Monitoring Type Code and Description."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of icis_inspection_types codes and their description. If search term or search code is  not provided, all values are returned."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup58"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO ICIS NPDES Inspection Types Lookup Service"
+         ,"description": "Returns the ICIS NPDES Compliance Monitoring Type Code and Description."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of icis_inspection_types codes and their description. If search term or search code is  not provided, all values are returned."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup58"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.icis_law_sections": {
+       "get": {
+          "summary": "ECHO ICIS Law Sections Lookup Service"
+         ,"description": "Returns the ICIS Law Section Descriptions."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.statute_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.status_flag"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.sort_order"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of icis_inspection_types codes and their description. If search term or search code is  not provided, all values are returned."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup59"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO ICIS Law Sections Lookup Service"
+         ,"description": "Returns the ICIS Law Section Descriptions."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.statute_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.status_flag"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.sort_order"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of icis_inspection_types codes and their description. If search term or search code is  not provided, all values are returned."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup59"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.icis_ref_program": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.statute_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.status_flag"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.sort_order"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup60"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.statute_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.status_flag"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.sort_order"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup60"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.naics_codes": {
+       "get": {
+          "summary": "ECHO NAICS Codes Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.n_year"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of NAICS codes and descriptions based on search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup61"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO NAICS Codes Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.n_year"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of NAICS codes and descriptions based on search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": 
+{
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup61"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.national_priorities": {
+       "get": {
+          "summary": "ECHO National Priorities Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.category_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup62"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO National Priorities Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.category_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup62"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.nei_pollutants": {
+       "get": {
+          "summary": "ECHO NEI Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup63"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO NEI Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup63"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.nei_years": {
+       "get": {
+          "summary": "ECHO NEI Years Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "name": "descending"
+               ,"in": "query"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to sort results in descending order."
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup64"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO NEI Years Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "name": "descending"
+               ,"in": "formData"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to sort results in descending order."
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup64"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.npdes_parameters": {
+       "get": {
+          "summary": "ECHO NPDES Parameters Lookup Service"
+         ,"description": "ICIS Limit Parameter Code and Name lookup based on the supply of a partial parameter name. (NPDES = National Pollutant Discharge Elimination System)"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of NPDES Parameter Codes and their description that meet the search term. If the search term is not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup65"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO NPDES Parameters Lookup Service"
+         ,"description": "ICIS Limit Parameter Code and Name lookup based on the supply of a partial parameter name. (NPDES = National Pollutant Discharge Elimination System)"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of NPDES Parameter Codes and their description that meet the search term. If the search term is not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup65"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.npl_site_link": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.registry_id"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup81"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.registry_id"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup81"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.prog_deficiency": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup66"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup66"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.rcra_lu_state_districts": {
+       "get": {
+          "summary": "ECHO RCRA State Districts Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.state_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of local districts for the given state."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup67"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO RCRA State Districts Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.state_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of local districts for the given state."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup67"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.reporting_obligation": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+            ,{
+                "name": "descending"
+               ,"in": "query"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to sort results in descending order."
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup68"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+            ,{
+                "name": "descending"
+               ,"in": "formData"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to sort results in descending order."
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup68"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.rpo_regions": {
+       "get": {
+          "summary": "ECHO RPO Regions Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of Regional Planning Organizations based on search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup69"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO RPO Regions Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of Regional Planning Organizations based on search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup69"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.sdwa_contaminants": {
+       "get": {
+          "summary": "ECHO SDWA Contaminants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of SDWA contaminants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup70"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO SDWA Contaminants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of SDWA contaminants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup70"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.sdwis_tribes": {
+       "get": {
+          "summary": "ECHO SDWIS Tribes Lookup Service"
+         ,"description": "Tribe Lookup (SDWIS = Safe Drinking Water Information System)"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of tribes containing the search term. If search term not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup71"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO SDWIS Tribes Lookup Service"
+         ,"description": "Tribe Lookup (SDWIS = Safe Drinking Water Information System)"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of tribes containing the search term. If search term not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup71"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.states": {
+       "get": {
+          "summary": "ECHO States Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes a list of U.S. states."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup72"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO States Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes a list of U.S. states."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup72"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.tri_pollutants": {
+       "get": {
+          "summary": "ECHO Tri Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup73"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Tri Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup73"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.tri_years": {
+       "get": {
+          "summary": "ECHO Tri Years Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,
+{
+                "name": "descending"
+               ,"in": "query"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to sort results in descending order."
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of valid TRI reporting years."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup74"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Tri Years Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "name": "descending"
+               ,"in": "formData"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to sort results in descending order."
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of valid TRI reporting years."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup74"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.tri_current_year": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "name": "descending"
+               ,"in": "query"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated."
+               ,"enum": [
+                   "Y"
+                  ,"N"
+               ]
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns the current (latest) year for which TRI data is available."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup79"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "name": "descending"
+               ,"in": "formData"
+               ,"description": "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated."
+               ,"enum": [
+                   "Y"
+                  ,"N"
+               ]
+               ,"type": "string"
+               ,"required": false
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns the current (latest) year for which TRI data is available."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup79"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.wbd_code_lu": {
+       "get": {
+          "summary": "ECHO WBD Code Lookup Service"
+         ,"description": "USGS Watershed Boundary Dataset (WBD) Name lookup based on a supplied WBD Code and Watershed Level"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.wbd_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.wbd_level"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of WBD names and codes based on the WBD code and WBD level provided. If WBD Code not provided, returns all values. ValueCode is the WBD Code containing the number of digits provided in the WBD level."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup75"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO WBD Code Lookup Service"
+         ,"description": "USGS Watershed Boundary Dataset (WBD) Name lookup based on a supplied WBD Code and Watershed Level"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.wbd_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.wbd_level"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of WBD names and codes based on the WBD code and WBD level provided. If WBD Code not provided, returns all values. ValueCode is the WBD Code containing the number of digits provided in the WBD level."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup75"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.wbd_lu": {
+       "get": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.wbd_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.wbd_name"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.wbd_level"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.exact_match"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup76"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "Placeholder"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.wbd_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.wbd_name"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.wbd_level"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.exact_match"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup76"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.wbd_name_lu": {
+       "get": {
+          "summary": "ECHO WBD Name Lookup Service"
+         ,"description": "USGS Watershed Boundary Dataset (WBD) Code lookup based on a supplied WBD Name and Watershed Level"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.wbd_name"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.wbd_level"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of WBD names and codes based on the WBD name and WBD level provided. ValueCode is the WBD Code containing the number of digits provided in the WBD level."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup77"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO WBD Name Lookup Service"
+         ,"description": "USGS Watershed Boundary Dataset (WBD) Code lookup based on a supplied WBD Name and Watershed Level"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.wbd_name"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.wbd_level"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of WBD names and codes based on the WBD name and WBD level provided. ValueCode is the WBD Code containing the number of digits provided in the WBD level."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup77"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+}
+,"definitions": {
+    "rlup01": {
+       "type": "object"
+      ,"description": "Lookup Values"
+      ,"xml": {
+          "name": "LuValue"
+      }
+      ,"properties": {
+          "ValueCode": {
+             "type": "string"
+            ,"title": "Value Code"
+            ,"example": "77034"
+         }
+         ,"ValueDescription": {
+             "type": "string"
+            ,"title": "Value Description"
+            ,"example": "1-Butanol"
+         }
+      }
+      ,"required": [
+          "ValueCode"
+         ,"ValueDescription"
+      ]
+   }
+   ,"rlup02": {
+       "type": "object"
+      ,"description": "Lookup Values"
+      ,"xml": {
+          "name": "LuValue"
+      }
+      ,"properties": {
+          "Category": {
+             "type": "string"
+            ,"title": "Category"
+            ,"description": "A code that uniquely identifies a category of Supplemental Environment Project (SEP) for a settlement (e.g., Assessments and Audits, Environmental Compliance Promotion, Emergency Planning and Preparedness, Environmental Restoration)."
+         }
+         ,"ValueCode": {
+             "type": "string"
+            ,"title": "Value Code"
+            ,"example": "77034"
+         }
+         ,"ValueDescription": {
+             "type": "string"
+            ,"title": "Value Description"
+            ,"example": "1-Butanol"
+         }
+      }
+      ,"required": [
+          "Category"
+         ,"ValueCode"
+         ,"ValueDescription"
+      ]
+   }
+   ,"rlup03": {
+       "type": "object"
+      ,"description": "Lookup Values"
+      ,"xml": {
+          "name": "LuValue"
+      }
+      ,"properties": {
+          "ValueCode": {
+             "type": "string"
+            ,"title": "Value Code"
+            ,"example": "77034"
+         }
+         ,"ValueSubCode": {
+             "type": "string"
+            ,"title": "Value SubCode"
+            ,"example": "77034"
+         }
+         ,"ValueDescription": {
+             "type": "string"
+            ,"title": "Value Description"
+            ,"example": "1-Butanol"
+         }
+      }
+      ,"required": [
+          "ValueCode"
+         ,"ValueSubCode"
+         ,"ValueDescription"
+      ]
+   }
+   ,"rlup04": {
+       "type": "object"
+      ,"description": "Lookup Values"
+      ,"xml": {
+          "name": "LuValue"
+      }
+      ,"properties": {
+          "Statute": {
+             "type": "string"
+            ,"title": "Statute"
+            ,"example": "CWA"
+            ,"description": "The name of the statute associated with each of the permits and identifiers linked to the facility: \n- CAA = the Clean Air Act\n- CWA = the Clean Water Act\n- RCRA = the Resource Conservation and Recovery Act\n- EP313 = the Emergency Planning and Community Right-to-Know Act, Section 313 (also known as the Toxics Release Inventory Program)\n- TSCA = the Toxic Substances Control Act\n- SDWA = the Safe Drinking Water Act"
+         }
+         ,"StatuteDescription": {
+             "type": "string"
+         }
+         ,"Program": {
+             "type": "string"
+            ,"title": "Program"
+            ,"example": "CWA"
+            ,"description": "The source database for the EPA programs information."
+         }
+         ,"ProgramDescription": {
+             "type": "string"
+            ,"title": "Program Description"
+         }
+         ,"Status": {
+             "type": "string"
+            ,"title": "Status"
+            ,"example": "Resolved"
+            ,"description": "Describes the status of the drinking water violation. Violation statuses include:\n- Resolved: The violation has at least one resolving enforcement action. In SDWIS, this indicates that either the system has returned to compliance from the violation, the rule that was violated was no longer applicable, or no further action was needed.\n- Archived: The violation is not Resolved, but is more than five years past its compliance period end date. In keeping with the Enforcement Response Policy, the violation no longer contributes to the public water system's overall compliance status. Unresolved violations are also marked as Archived when a system ceases operations (becomes inactive).\n- Addressed: The violation is not Resolved or Archived, and is addressed by one or more formal enforcement actions.\n- Unaddressed: The violation is not Resolved or Archived, and has not been addressed by formal enforcement."
+         }
+      }
+      ,"required": [
+          "Statute"
+         ,"StatuteDescription"
+         ,"Program"
+         ,"ProgramDescription"
+         ,"Status"
+      ]
+   }
+   ,"rlup05": {
+       "type": "object"
+      ,"description": "Lookup Values"
+      ,"xml": {
+          "name": "LuValue"
+      }
+      ,"properties": {
+          "IdPassed": {
+             "type": "string"
+         }
+         ,"IdReturned": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "IdPassed"
+         ,"IdReturned"
+      ]
+   }
+   ,"rlup80": {
+       "type": "object"
+      ,"description": "Lookup Values"
+      ,"xml": {
+          "name": "LuValue"
+      }
+      ,"properties": {
+          "ValueDescription": {
+             "type": "string"
+            ,"title": "Value Description"
+            ,"example": "1-Butanol"
+         }
+      }
+      ,"required": [
+          "ValueDescription"
+      ]
+   }
+   ,"rlup06": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup07": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup08": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup09": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup10": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup11": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup03"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup12": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup13": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup14": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup15": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup16": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup17": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup18": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup19": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup05"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"LuValues"
+      ]
+   }
+   ,"rlup20": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup21": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup22": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup78": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup80"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup23": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup24": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": 
+{
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup86": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup42": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup43": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup44": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup48": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup49": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup50": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup51": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup52": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup85": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup54": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup55": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup56": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup57": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup58": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup59": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup60": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup04"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup61": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup62": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup02"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup63": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup64": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup65": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup81": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup05"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup66": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup67": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup68": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup69": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup70": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup71": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup72": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup79": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup73": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup74": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup75": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup76": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup77": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+}
+}

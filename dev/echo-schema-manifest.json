@@ -1,0 +1,192 @@
+{
+  "description": "ECHO Swagger 2.0 schemas downloaded unchanged by dev/harvest_schemas.R.",
+  "files": [
+    {
+      "file": "echo-air-monitoring-criteria-pollutants.swagger.json",
+      "prefix": "ECATTAQS",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=ECATTAQS",
+      "retrieved_utc": "2026-11-02T18:48:13Z",
+      "sha256": "8517f864a58d7b30e7de51d579e846a1e3ef6e25a3ba71668e61030d91a186b1",
+      "bytes": 137479,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Air Tracking Tool Rest Services",
+      "paths": 15,
+      "definitions": 30
+    },
+    {
+      "file": "echo-air-monitoring-hazardous-pollutants.swagger.json",
+      "prefix": "ECATTAMS",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=ECATTAMS",
+      "retrieved_utc": "2026-11-02T18:48:13Z",
+      "sha256": "67442eb1a27ba1bf6dac60db6a8cd0388a3e8411ff4ae225da931d35de5d5800",
+      "bytes": 176914,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Air Tracking Tool Rest Services - Air Monitoring Stations",
+      "paths": 23,
+      "definitions": 37
+    },
+    {
+      "file": "echo-air.swagger.json",
+      "prefix": "AIR",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=AIR",
+      "retrieved_utc": "2026-11-02T18:48:14Z",
+      "sha256": "606363d112d3a4607df3dc323a8cd9bcb1144884bb27671eb25c8c4de24bbd7e",
+      "bytes": 306387,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Air Act",
+      "paths": 8,
+      "definitions": 16
+    },
+    {
+      "file": "echo-all-data.swagger.json",
+      "prefix": "ECHO",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=ECHO",
+      "retrieved_utc": "2026-11-02T18:48:15Z",
+      "sha256": "c2f2b1c851e7dbe4407452b5942287f3c9c03c7d97be63deacd3136674e831d9",
+      "bytes": 333392,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - All Data",
+      "paths": 8,
+      "definitions": 15
+    },
+    {
+      "file": "echo-compliance-screener.swagger.json",
+      "prefix": "COMPSCREEN",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=COMPSCREEN",
+      "retrieved_utc": "2026-11-02T18:48:15Z",
+      "sha256": "f10a79ba76b62fbe8e40837e2d46df663598aa777970074144197ff3ac2d48b4",
+      "bytes": 94872,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Corporate Compliance Screener Rest Services",
+      "paths": 11,
+      "definitions": 19
+    },
+    {
+      "file": "echo-cwa.swagger.json",
+      "prefix": "CWA",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=CWA",
+      "retrieved_utc": "2026-11-02T18:48:16Z",
+      "sha256": "28188ed995e98bd02bd8bbd11fe3f91e04154d237fd710b72fc5e11858bd2649",
+      "bytes": 488463,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Water Act (CWA) Rest Services",
+      "paths": 19,
+      "definitions": 30
+    },
+    {
+      "file": "echo-detailed-facility-report.swagger.json",
+      "prefix": "DFR",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=DFR",
+      "retrieved_utc": "2026-11-02T18:48:16Z",
+      "sha256": "8b20996d11e2ea1a2517fa969a75ac704ce108706dd09cea8963d2100e63c7ab",
+      "bytes": 556453,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Detailed Facility Report (DFR)",
+      "paths": 64,
+      "definitions": 188
+    },
+    {
+      "file": "echo-effluent-charts.swagger.json",
+      "prefix": "EFF",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=EFF",
+      "retrieved_utc": "2026-11-02T18:48:16Z",
+      "sha256": "c41b228f2cf754830f9117cd17c61035d9d57551af082f2a48f910a3dfbfef8b",
+      "bytes": 61813,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Effluent Charting and Reporting",
+      "paths": 4,
+      "definitions": 11
+    },
+    {
+      "file": "echo-emission-screener.swagger.json",
+      "prefix": "ECATTEMS",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=ECATTEMS",
+      "retrieved_utc": "2026-11-02T18:48:16Z",
+      "sha256": "571c9e4b1d937508e7c0c77ccb8ca90f91a60104b0e80c8e790f082d8c7335c0",
+      "bytes": 91712,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Air Tracking Tool Rest Services - Emission Screener",
+      "paths": 3,
+      "definitions": 4
+    },
+    {
+      "file": "echo-enforcement-cases.swagger.json",
+      "prefix": "CASE",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=CASE",
+      "retrieved_utc": "2026-11-02T18:48:17Z",
+      "sha256": "ed523ed0f49bd8431f21510c5ee520b71309cb4287e8a18c41328cb47a2336fe",
+      "bytes": 227729,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Enforcement Case Search",
+      "paths": 11,
+      "definitions": 41
+    },
+    {
+      "file": "echo-npdes-noncompliance-report.swagger.json",
+      "prefix": "NNCR",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=NNCR",
+      "retrieved_utc": "2026-11-02T18:48:17Z",
+      "sha256": "5a22f694bb93f70863de701d67cbad145211e4ed80d1f7d37162dd7c89aee2b2",
+      "bytes": 79109,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO)",
+      "paths": 4,
+      "definitions": 8
+    },
+    {
+      "file": "echo-rcra.swagger.json",
+      "prefix": "RCRA",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=RCRA",
+      "retrieved_utc": "2026-11-02T18:48:17Z",
+      "sha256": "9f52a4ce2e7b03f789925693832aca7972909b473cddaec686624555deaa1ee5",
+      "bytes": 239236,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Resource Conservation and Recovery Act ",
+      "paths": 8,
+      "definitions": 17
+    },
+    {
+      "file": "echo-sdwis.swagger.json",
+      "prefix": "SDW",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=SDW",
+      "retrieved_utc": "2026-11-02T18:48:18Z",
+      "sha256": "11018915d7acd25f309c0a02da649a30f08f8e57ddfa08b15096885ff96067b0",
+      "bytes": 96288,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Safe Drinking Water Act",
+      "paths": 4,
+      "definitions": 5
+    },
+    {
+      "file": "echo-water-pollutant-loading-tool.swagger.json",
+      "prefix": "DMR",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=DMR",
+      "retrieved_utc": "2026-11-02T18:48:18Z",
+      "sha256": "c235d41944d38d204dfe94599f31557ff6153feeba9c29d21eadac2562cc00ed",
+      "bytes": 528978,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Water Pollutant Loading Tool Rest Services",
+      "paths": 40,
+      "definitions": 120
+    },
+    {
+      "file": "echo-air-pollutant-report.swagger.json",
+      "prefix": "CAA",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=CAA",
+      "retrieved_utc": "2026-11-02T18:48:18Z",
+      "sha256": "c8617302aea5bbf1ac2b7ec31b8cb0e47541d7bb2ec83d3d1b7987ca134ee6a2",
+      "bytes": 51025,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Air Pollutant Report Rest Services",
+      "paths": 6,
+      "definitions": 17
+    },
+    {
+      "file": "echo-biosolids.swagger.json",
+      "prefix": "BIOSOLIDS",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=BIOSOLIDS",
+      "retrieved_utc": "2026-11-02T18:48:18Z",
+      "sha256": "fabdda14e52a9e76e59479e9b7601adcd800eb705139073a97a0be6db2577788",
+      "bytes": 19939,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO)",
+      "paths": 1,
+      "definitions": 8
+    },
+    {
+      "file": "echo-lookup.swagger.json",
+      "prefix": "LOOKUP",
+      "source_url": "https://echodata.epa.gov/echo/swaggerx.swagger_json?p_prefix=LOOKUP",
+      "retrieved_utc": "2026-11-02T18:48:19Z",
+      "sha256": "a4b982a4bc2938c3c520cffe767c094428a349a54e2884a601465458e07d7400",
+      "bytes": 178668,
+      "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Code Lookups",
+      "paths": 56,
+      "definitions": 62
+    }
+  ]
+}

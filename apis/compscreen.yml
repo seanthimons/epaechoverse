@@ -1,0 +1,96 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: compscreen
+schemas:
+  files:
+  - schema/compscreen.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: compscreen_request
+authentication: {}
+defaults: {}
+groups:
+  compscreen_corporate_compliance_screener:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /comp_screen_services.get_curr_fac_info
+      - POST /comp_screen_services.get_curr_fac_info
+      - GET /comp_screen_services.get_curr_fac_info_b
+      - POST /comp_screen_services.get_curr_fac_info_b
+      - GET /comp_screen_services.get_download
+      - POST /comp_screen_services.get_download
+      - GET /comp_screen_services.get_facilities
+      - POST /comp_screen_services.get_facilities
+      - GET /comp_screen_services.get_majors
+      - POST /comp_screen_services.get_majors
+      - GET /comp_screen_services.get_open_cases
+      - POST /comp_screen_services.get_open_cases
+      - GET /comp_screen_services.get_qid
+      - POST /comp_screen_services.get_qid
+      - GET /comp_screen_services.get_report
+      - POST /comp_screen_services.get_report
+      - GET /comp_screen_services.get_settlements
+      - POST /comp_screen_services.get_settlements
+      - GET /comp_screen_services.get_superfund
+      - POST /comp_screen_services.get_superfund
+      - GET /comp_screen_services.metadata
+      - POST /comp_screen_services.metadata
+    names:
+      GET /comp_screen_services.get_curr_fac_info: compscreen_get_curr_fac_info
+      POST /comp_screen_services.get_curr_fac_info: compscreen_get_curr_fac_info_post
+      GET /comp_screen_services.get_curr_fac_info_b: compscreen_get_curr_fac_info_b
+      POST /comp_screen_services.get_curr_fac_info_b: compscreen_get_curr_fac_info_b_post
+      GET /comp_screen_services.get_download: compscreen_get_download
+      POST /comp_screen_services.get_download: compscreen_get_download_post
+      GET /comp_screen_services.get_facilities: compscreen_get_facilities
+      POST /comp_screen_services.get_facilities: compscreen_get_facilities_post
+      GET /comp_screen_services.get_majors: compscreen_get_majors
+      POST /comp_screen_services.get_majors: compscreen_get_majors_post
+      GET /comp_screen_services.get_open_cases: compscreen_get_open_cases
+      POST /comp_screen_services.get_open_cases: compscreen_get_open_cases_post
+      GET /comp_screen_services.get_qid: compscreen_get_qid
+      POST /comp_screen_services.get_qid: compscreen_get_qid_post
+      GET /comp_screen_services.get_report: compscreen_get_report
+      POST /comp_screen_services.get_report: compscreen_get_report_post
+      GET /comp_screen_services.get_settlements: compscreen_get_settlements
+      POST /comp_screen_services.get_settlements: compscreen_get_settlements_post
+      GET /comp_screen_services.get_superfund: compscreen_get_superfund
+      POST /comp_screen_services.get_superfund: compscreen_get_superfund_post
+      GET /comp_screen_services.metadata: compscreen_metadata
+      POST /comp_screen_services.metadata: compscreen_metadata_post
+    defaults:
+      file: R/compscreen_corporate_compliance_screener.R
+      docs:
+        tags:
+          family: Corporate Compliance Screener endpoints
+    operations: {}

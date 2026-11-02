@@ -1,0 +1,273 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: wplt
+schemas:
+  files:
+  - schema/wplt.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: wplt_request
+authentication: {}
+defaults: {}
+groups:
+  wplt_custom_search:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /dmr_rest_services.get_custom_data_annual
+      - POST /dmr_rest_services.get_custom_data_annual
+      - GET /dmr_rest_services.get_custom_data_facility
+      - POST /dmr_rest_services.get_custom_data_facility
+      - GET /dmr_rest_services.get_custom_data_monitor_pd
+      - POST /dmr_rest_services.get_custom_data_monitor_pd
+    names:
+      GET /dmr_rest_services.get_custom_data_annual: wplt_get_custom_data_annual
+      POST /dmr_rest_services.get_custom_data_annual: wplt_get_custom_data_annual_post
+      GET /dmr_rest_services.get_custom_data_facility: wplt_get_custom_data_facility
+      POST /dmr_rest_services.get_custom_data_facility: wplt_get_custom_data_facility_post
+      GET /dmr_rest_services.get_custom_data_monitor_pd: wplt_get_custom_data_monitor_pd
+      POST /dmr_rest_services.get_custom_data_monitor_pd: wplt_get_custom_data_monitor_pd_post
+    defaults:
+      file: R/wplt_custom_search.R
+      docs:
+        tags:
+          family: Custom Search endpoints
+    operations: {}
+  wplt_everyday_searches_and_other_data_downloads:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /dmr_rest_services.get_comparison_dashboard
+      - POST /dmr_rest_services.get_comparison_dashboard
+      - GET /dmr_rest_services.get_dashboard_chemicals
+      - POST /dmr_rest_services.get_dashboard_chemicals
+      - GET /dmr_rest_services.get_dashboard_facilities
+      - POST /dmr_rest_services.get_dashboard_facilities
+      - GET /dmr_rest_services.get_dashboard_industries
+      - POST /dmr_rest_services.get_dashboard_industries
+      - GET /dmr_rest_services.get_dashboard_npdes
+      - POST /dmr_rest_services.get_dashboard_npdes
+      - GET /dmr_rest_services.get_eff_exceedances
+      - POST /dmr_rest_services.get_eff_exceedances
+      - GET /dmr_rest_services.get_eff_exceedances_report
+      - POST /dmr_rest_services.get_eff_exceedances_report
+      - GET /dmr_rest_services.get_monitoring_data
+      - POST /dmr_rest_services.get_monitoring_data
+      - GET /dmr_rest_services.get_monitoring_data_csv
+      - POST /dmr_rest_services.get_monitoring_data_csv
+      - GET /dmr_rest_services.get_state_stats
+      - POST /dmr_rest_services.get_state_stats
+      - GET /dmr_rest_services.get_watershed_facilities
+      - POST /dmr_rest_services.get_watershed_facilities
+      - GET /dmr_rest_services.get_watershed_stats
+      - POST /dmr_rest_services.get_watershed_stats
+    names:
+      GET /dmr_rest_services.get_comparison_dashboard: wplt_get_comparison_dashboard
+      POST /dmr_rest_services.get_comparison_dashboard: wplt_get_comparison_dashboard_post
+      GET /dmr_rest_services.get_dashboard_chemicals: wplt_get_dashboard_chemicals
+      POST /dmr_rest_services.get_dashboard_chemicals: wplt_get_dashboard_chemicals_post
+      GET /dmr_rest_services.get_dashboard_facilities: wplt_get_dashboard_facilities
+      POST /dmr_rest_services.get_dashboard_facilities: wplt_get_dashboard_facilities_post
+      GET /dmr_rest_services.get_dashboard_industries: wplt_get_dashboard_industries
+      POST /dmr_rest_services.get_dashboard_industries: wplt_get_dashboard_industries_post
+      GET /dmr_rest_services.get_dashboard_npdes: wplt_get_dashboard_npdes
+      POST /dmr_rest_services.get_dashboard_npdes: wplt_get_dashboard_npdes_post
+      GET /dmr_rest_services.get_eff_exceedances: wplt_get_eff_exceedances
+      POST /dmr_rest_services.get_eff_exceedances: wplt_get_eff_exceedances_post
+      GET /dmr_rest_services.get_eff_exceedances_report: wplt_get_eff_exceedances_report
+      POST /dmr_rest_services.get_eff_exceedances_report: wplt_get_eff_exceedances_report_post
+      GET /dmr_rest_services.get_monitoring_data: wplt_get_monitoring_data
+      POST /dmr_rest_services.get_monitoring_data: wplt_get_monitoring_data_post
+      GET /dmr_rest_services.get_monitoring_data_csv: wplt_get_monitoring_data_csv
+      POST /dmr_rest_services.get_monitoring_data_csv: wplt_get_monitoring_data_csv_post
+      GET /dmr_rest_services.get_state_stats: wplt_get_state_stats
+      POST /dmr_rest_services.get_state_stats: wplt_get_state_stats_post
+      GET /dmr_rest_services.get_watershed_facilities: wplt_get_watershed_facilities
+      POST /dmr_rest_services.get_watershed_facilities: wplt_get_watershed_facilities_post
+      GET /dmr_rest_services.get_watershed_stats: wplt_get_watershed_stats
+      POST /dmr_rest_services.get_watershed_stats: wplt_get_watershed_stats_post
+    defaults:
+      file: R/wplt_everyday_searches_and_other_data_downloads.R
+      docs:
+        tags:
+          family: Everyday Searches and Other Data Downloads endpoints
+    operations: {}
+  wplt_lookups:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /rest_lookups.dmr_cas_numbers
+      - POST /rest_lookups.dmr_cas_numbers
+      - GET /rest_lookups.dmr_naics2_codes
+      - POST /rest_lookups.dmr_naics2_codes
+      - GET /rest_lookups.dmr_parameters
+      - POST /rest_lookups.dmr_parameters
+      - GET /rest_lookups.dmr_point_source_cats
+      - POST /rest_lookups.dmr_point_source_cats
+      - GET /rest_lookups.dmr_poll_cats
+      - POST /rest_lookups.dmr_poll_cats
+      - GET /rest_lookups.dmr_pollutants
+      - POST /rest_lookups.dmr_pollutants
+      - GET /rest_lookups.dmr_reporting_year
+      - POST /rest_lookups.dmr_reporting_year
+      - GET /rest_lookups.dmr_sic2_codes
+      - POST /rest_lookups.dmr_sic2_codes
+      - GET /rest_lookups.dmr_treatment_technologies
+      - POST /rest_lookups.dmr_treatment_technologies
+      - GET /rest_lookups.dmr_tri_chemicals
+      - POST /rest_lookups.dmr_tri_chemicals
+      - GET /rest_lookups.dmr_tri_reporting_year
+      - POST /rest_lookups.dmr_tri_reporting_year
+      - GET /rest_lookups.dmr_watershed_groups
+      - POST /rest_lookups.dmr_watershed_groups
+      - GET /rest_lookups.dmr_watersheds
+      - POST /rest_lookups.dmr_watersheds
+    names:
+      GET /rest_lookups.dmr_cas_numbers: wplt_lookups_dmr_cas_numbers
+      POST /rest_lookups.dmr_cas_numbers: wplt_lookups_dmr_cas_numbers_post
+      GET /rest_lookups.dmr_naics2_codes: wplt_lookups_dmr_naics2_codes
+      POST /rest_lookups.dmr_naics2_codes: wplt_lookups_dmr_naics2_codes_post
+      GET /rest_lookups.dmr_parameters: wplt_lookups_dmr_parameters
+      POST /rest_lookups.dmr_parameters: wplt_lookups_dmr_parameters_post
+      GET /rest_lookups.dmr_point_source_cats: wplt_lookups_dmr_point_source_cats
+      POST /rest_lookups.dmr_point_source_cats: wplt_lookups_dmr_point_source_cats_post
+      GET /rest_lookups.dmr_poll_cats: wplt_lookups_dmr_poll_cats
+      POST /rest_lookups.dmr_poll_cats: wplt_lookups_dmr_poll_cats_post
+      GET /rest_lookups.dmr_pollutants: wplt_lookups_dmr_pollutants
+      POST /rest_lookups.dmr_pollutants: wplt_lookups_dmr_pollutants_post
+      GET /rest_lookups.dmr_reporting_year: wplt_lookups_dmr_reporting_year
+      POST /rest_lookups.dmr_reporting_year: wplt_lookups_dmr_reporting_year_post
+      GET /rest_lookups.dmr_sic2_codes: wplt_lookups_dmr_sic2_codes
+      POST /rest_lookups.dmr_sic2_codes: wplt_lookups_dmr_sic2_codes_post
+      GET /rest_lookups.dmr_treatment_technologies: wplt_lookups_dmr_treatment_technologies
+      POST /rest_lookups.dmr_treatment_technologies: wplt_lookups_dmr_treatment_technologies_post
+      GET /rest_lookups.dmr_tri_chemicals: wplt_lookups_dmr_tri_chemicals
+      POST /rest_lookups.dmr_tri_chemicals: wplt_lookups_dmr_tri_chemicals_post
+      GET /rest_lookups.dmr_tri_reporting_year: wplt_lookups_dmr_tri_reporting_year
+      POST /rest_lookups.dmr_tri_reporting_year: wplt_lookups_dmr_tri_reporting_year_post
+      GET /rest_lookups.dmr_watershed_groups: wplt_lookups_dmr_watershed_groups
+      POST /rest_lookups.dmr_watershed_groups: wplt_lookups_dmr_watershed_groups_post
+      GET /rest_lookups.dmr_watersheds: wplt_lookups_dmr_watersheds
+      POST /rest_lookups.dmr_watersheds: wplt_lookups_dmr_watersheds_post
+    defaults:
+      file: R/wplt_lookups.R
+      docs:
+        tags:
+          family: Lookups endpoints
+    operations: {}
+  wplt_water_pollution_search_facility_reports_and_loading_calculations:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /dmr_rest_services.get_all_dmr_facilities
+      - POST /dmr_rest_services.get_all_dmr_facilities
+      - GET /dmr_rest_services.get_all_tri_facilities
+      - POST /dmr_rest_services.get_all_tri_facilities
+      - GET /dmr_rest_services.get_dmr_loadings
+      - POST /dmr_rest_services.get_dmr_loadings
+      - GET /dmr_rest_services.get_facility_loads
+      - POST /dmr_rest_services.get_facility_loads
+      - GET /dmr_rest_services.get_facility_report
+      - POST /dmr_rest_services.get_facility_report
+      - GET /dmr_rest_services.get_loading_tool_params
+      - POST /dmr_rest_services.get_loading_tool_params
+      - GET /dmr_rest_services.get_monitor_pd_loads
+      - POST /dmr_rest_services.get_monitor_pd_loads
+      - GET /dmr_rest_services.get_multiyear_loading
+      - POST /dmr_rest_services.get_multiyear_loading
+      - GET /dmr_rest_services.get_multiyear_loading_detail
+      - POST /dmr_rest_services.get_multiyear_loading_detail
+      - GET /dmr_rest_services.get_permit_limits
+      - POST /dmr_rest_services.get_permit_limits
+      - GET /dmr_rest_services.get_tri_facility_report
+      - POST /dmr_rest_services.get_tri_facility_report
+      - GET /dmr_rest_services.get_tri_releases
+      - POST /dmr_rest_services.get_tri_releases
+    names:
+      GET /dmr_rest_services.get_all_dmr_facilities: wplt_get_all_dmr_facilities
+      POST /dmr_rest_services.get_all_dmr_facilities: wplt_get_all_dmr_facilities_post
+      GET /dmr_rest_services.get_all_tri_facilities: wplt_get_all_tri_facilities
+      POST /dmr_rest_services.get_all_tri_facilities: wplt_get_all_tri_facilities_post
+      GET /dmr_rest_services.get_dmr_loadings: wplt_get_dmr_loadings
+      POST /dmr_rest_services.get_dmr_loadings: wplt_get_dmr_loadings_post
+      GET /dmr_rest_services.get_facility_loads: wplt_get_facility_loads
+      POST /dmr_rest_services.get_facility_loads: wplt_get_facility_loads_post
+      GET /dmr_rest_services.get_facility_report: wplt_get_facility_report
+      POST /dmr_rest_services.get_facility_report: wplt_get_facility_report_post
+      GET /dmr_rest_services.get_loading_tool_params: wplt_get_loading_tool_params
+      POST /dmr_rest_services.get_loading_tool_params: wplt_get_loading_tool_params_post
+      GET /dmr_rest_services.get_monitor_pd_loads: wplt_get_monitor_pd_loads
+      POST /dmr_rest_services.get_monitor_pd_loads: wplt_get_monitor_pd_loads_post
+      GET /dmr_rest_services.get_multiyear_loading: wplt_get_multiyear_loading
+      POST /dmr_rest_services.get_multiyear_loading: wplt_get_multiyear_loading_post
+      GET /dmr_rest_services.get_multiyear_loading_detail: wplt_get_multiyear_loading_detail
+      POST /dmr_rest_services.get_multiyear_loading_detail: wplt_get_multiyear_loading_detail_post
+      GET /dmr_rest_services.get_permit_limits: wplt_get_permit_limits
+      POST /dmr_rest_services.get_permit_limits: wplt_get_permit_limits_post
+      GET /dmr_rest_services.get_tri_facility_report: wplt_get_tri_facility_report
+      POST /dmr_rest_services.get_tri_facility_report: wplt_get_tri_facility_report_post
+      GET /dmr_rest_services.get_tri_releases: wplt_get_tri_releases
+      POST /dmr_rest_services.get_tri_releases: wplt_get_tri_releases_post
+    defaults:
+      file: R/wplt_water_pollution_search_facility_reports_and_loading_calculations.R
+      docs:
+        tags:
+          family: Water Pollution Search, Facility Reports, and Loading Calculations
+            endpoints
+    operations: {}

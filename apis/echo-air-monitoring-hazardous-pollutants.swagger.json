@@ -1,0 +1,5634 @@
+{
+ "swagger": "2.0"
+,"info": {
+    "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Air Tracking Tool Rest Services - Air Monitoring Stations"
+   ,"description": "The ECATT Air Monitoring Stations (AMS) for Hazardous Air Pollutants web services provides access to search for ambient air quality measurements and pollutant hazard criteria from a network of monitoring stations across the U.S. An air monitoring station is a physical monitor permanently placed at a location to collect air quality data. Air quality monitoring measurements can also be compared to modeled risk levels from EPA\u2019s Air Toxics Screening Assessment (AirToxScreen). \n \nAdditional ECHO Resources:   <a href=\"https:\/\/echo.epa.gov\/tools\/web-services\">Web Services<\/a>, <a href=\"https:\/\/echo.epa.gov\/resources\/echo-data\/about-the-data\">About ECHO's Data<\/a>, <a href=\"https:\/\/echo.epa.gov\/tools\/data-downloads\">Data Downloads<\/a>, <a href=\"https:\/\/echo.epa.gov\/trends\/air-monitoring-stations\">ECATT Air Monitoring Stations Search<\/a>\n "
+   ,"contact": {
+       "name": "U.S. EPA, OECA Integration, Targeting and Access Branch"
+      ,"url": "https:\/\/echo.epa.gov\/resources\/general-info\/contact-us"
+   }
+   ,"license": {
+       "name": "U.S. Public Domain License"
+      ,"url": "https:\/\/edg.epa.gov\/EPA_Data_License.html"
+   }
+   ,"version": "2019.10.15"
+}
+,"host": "echodata.epa.gov"
+,"basePath": "\/echo"
+,"schemes": [
+    "https"
+]
+,"consumes": [
+    "application\/x-www-form-urlencoded"
+]
+,"produces": [
+    "application\/json"
+   ,"application\/xml"
+]
+,"parameters": {
+    "q.output": {
+       "name": "output"
+      ,"in": "query"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.output": {
+       "name": "output"
+      ,"in": "formData"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.callback": {
+       "name": "callback"
+      ,"in": "query"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.callback": {
+       "name": "callback"
+      ,"in": "formData"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.search_term": {
+       "name": "search_term"
+      ,"in": "query"
+      ,"description": "Enter a partial or complete search phrase or word."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.search_term": {
+       "name": "search_term"
+      ,"in": "formData"
+      ,"description": "Enter a partial or complete search phrase or word."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.search_code": {
+       "name": "search_code"
+      ,"in": "query"
+      ,"description": "Enter a partial or complete code value."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.search_code": {
+       "name": "search_code"
+      ,"in": "formData"
+      ,"description": "Enter a partial or complete code value."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_fips": {
+       "name": "p_fips"
+      ,"in": "query"
+      ,"description": "FIPS Code Filter. Enter a single 5-character Federal Information Processing Standards (FIPS) state + county value to restrict results. E.G. to limit results to Kenosha County, Wisconsin, use 55059."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_fips": {
+       "name": "p_fips"
+      ,"in": "formData"
+      ,"description": "FIPS Code Filter. Enter a single 5-character Federal Information Processing Standards (FIPS) state + county value to restrict results. E.G. to limit results to Kenosha County, Wisconsin, use 55059."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_zip": {
+       "name": "p_zip"
+      ,"in": "query"
+      ,"description": "5-Digit ZIP Code Filter. Provide one or more 5-digit postal zip codes to filter results.  May contain multiple comma-separated values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_zip": {
+       "name": "p_zip"
+      ,"in": "formData"
+      ,"description": "5-Digit ZIP Code Filter. Provide one or more 5-digit postal zip codes to filter results.  May contain multiple comma-separated values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_reg": {
+       "name": "p_reg"
+      ,"in": "query"
+      ,"description": "EPA Region Filter. Provide a single value of 01 through 10 to restrict results to a single EPA region."
+      ,"enum": [
+          "01"
+         ,"02"
+         ,"03"
+         ,"04"
+         ,"05"
+         ,"06"
+         ,"07"
+         ,"08"
+         ,"09"
+         ,"10"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_reg": {
+       "name": "p_reg"
+      ,"in": "formData"
+      ,"description": "EPA Region Filter. Provide a single value of 01 through 10 to restrict results to a single EPA region."
+      ,"enum": [
+          "01"
+         ,"02"
+         ,"03"
+         ,"04"
+         ,"05"
+         ,"06"
+         ,"07"
+         ,"08"
+         ,"09"
+         ,"10"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.xmin": {
+       "name": "xmin"
+      ,"in": "query"
+      ,"description": "Minimum longitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.xmin": {
+       "name": "xmin"
+      ,"in": "formData"
+      ,"description": "Minimum longitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.ymin": {
+       "name": "ymin"
+      ,"in": "query"
+      ,"description": "Minimum latitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.ymin": {
+       "name": "ymin"
+      ,"in": "formData"
+      ,"description": "Minimum latitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.xmax": {
+       "name": "xmax"
+      ,"in": "query"
+      ,"description": "Maximum longitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.xmax": {
+       "name": "xmax"
+      ,"in": "formData"
+      ,"description": "Maximum longitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.ymax": {
+       "name": "ymax"
+      ,"in": "query"
+      ,"description": "Maximum latitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.ymax": {
+       "name": "ymax"
+      ,"in": "formData"
+      ,"description": "Maximum latitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_c1lat": {
+       "name": "p_c1lat"
+      ,"in": "query"
+      ,"description": "In decimal degrees.  Latitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_c1lat": {
+       "name": "p_c1lat"
+      ,"in": "formData"
+      ,"description": "In decimal degrees.  Latitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_c1lon": {
+       "name": "p_c1lon"
+      ,"in": "query"
+      ,"description": "In decimal degrees.  Longitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_c1lon": {
+       "name": "p_c1lon"
+      ,"in": "formData"
+      ,"description": "In decimal degrees.  Longitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_c2lat": {
+       "name": "p_c2lat"
+      ,"in": "query"
+      ,"description": "In decimal degrees.  Latitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_c2lat": {
+       "name": "p_c2lat"
+      ,"in": "formData"
+      ,"description": "In decimal degrees.  Latitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_c2lon": {
+       "name": "p_c2lon"
+      ,"in": "query"
+      ,"description": "In decimal degrees.  Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_c2lon": {
+       "name": "p_c2lon"
+      ,"in": "formData"
+      ,"description": "In decimal degrees.  Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.queryset": {
+       "name": "queryset"
+      ,"in": "query"
+      ,"description": "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.queryset": {
+       "name": "queryset"
+      ,"in": "formData"
+      ,"description": "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.responseset": {
+       "name": "responseset"
+      ,"in": "query"
+      ,"description": "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.responseset": {
+       "name": "responseset"
+      ,"in": "formData"
+      ,"description": "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_pm": {
+       "name": "p_pm"
+      ,"in": "query"
+      ,"description": "Percent People of Color Limiter. Enter a value to restrict results to facilities with a given percentage of people of color within a 3-mile radius.\n\nNONE = 0%\nGTx = greater than x%\nGTEx = greater than or equal to x%"
+      ,"enum": [
+          "NONE"
+         ,"GT5"
+         ,"GE5"
+         ,"GT10"
+         ,"GE10"
+         ,"GT25"
+         ,"GE25"
+         ,"GT50"
+         ,"GE50"
+         ,"GT75"
+         ,"GE75"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pm": {
+       "name": "p_pm"
+      ,"in": "formData"
+      ,"description": "Percent People of Color Limiter. Enter a value to restrict results to facilities with a given percentage of people of color within a 3-mile radius.\n\nNONE = 0%\nGTx = greater than x%\nGTEx = greater than or equal to x%"
+      ,"enum": [
+          "NONE"
+         ,"GT5"
+         ,"GE5"
+         ,"GT10"
+         ,"GE10"
+         ,"GT25"
+         ,"GE25"
+         ,"GT50"
+         ,"GE50"
+         ,"GT75"
+         ,"GE75"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_pd": {
+       "name": "p_pd"
+      ,"in": "query"
+      ,"description": "Population Density Limiter (per sq mile). Enter a value to limit results to facilities located in area of a given population density.\n- NONE = 0 population density per square mile\n- GT100 = More than 100 population density per square mile\n- GT500 = More than 500 population density per square mile\n- GT1000 = More than 1000 population density per square mile\n- GT5000 = More than 5000 population density per square mile\n- GT10000 = More than 10000 population density per square mile\n- GT20000 = More than 20000 population density per square mile"
+      ,"enum": [
+          "NONE"
+         ,"GT100"
+         ,"GT500"
+         ,"GT1000"
+         ,"GT5000"
+         ,"GT10000"
+         ,"GT20000"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pd": {
+       "name": "p_pd"
+      ,"in": "formData"
+      ,"description": "Population Density Limiter (per sq mile). Enter a value to limit results to facilities located in area of a given population density.\n- NONE = 0 population density per square mile\n- GT100 = More than 100 population density per square mile\n- GT500 = More than 500 population density per square mile\n- GT1000 = More than 1000 population density per square mile\n- GT5000 = More than 5000 population density per square mile\n- GT10000 = More than 10000 population density per square mile\n- GT20000 = More than 20000 population density per square mile"
+      ,"enum": [
+          "NONE"
+         ,"GT100"
+         ,"GT500"
+         ,"GT1000"
+         ,"GT5000"
+         ,"GT10000"
+         ,"GT20000"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_tribedist": {
+       "name": "p_tribedist"
+      ,"in": "query"
+      ,"description": "Proximity to tribal land limiter. Enter a value of mile(s) between 0 and 25 to filter results. This parameter is only evaluated if p_tribeid is populated."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_tribedist": {
+       "name": "p_tribedist"
+      ,"in": "formData"
+      ,"description": "Proximity to tribal land limiter. Enter a value of mile(s) between 0 and 25 to filter results. This parameter is only evaluated if p_tribeid is populated."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.tablelist": {
+       "name": "tablelist"
+      ,"in": "query"
+      ,"description": "Table List Flag. Enter a Y to display the first page of facility results."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.tablelist": {
+       "name": "tablelist"
+      ,"in": "formData"
+      ,"description": "Table List Flag. Enter a Y to display the first page of facility results."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.maplist": {
+       "name": "maplist"
+      ,"in": "query"
+      ,"description": "Map List Flag.  Provide a Y to return mappable coordinates representing the full geographic extent of the queryset (all facilities that met the selection criteria)."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.maplist": {
+       "name": "maplist"
+      ,"in": "formData"
+      ,"description": "Map List Flag.  Provide a Y to return mappable coordinates representing the full geographic extent of the queryset (all facilities that met the selection criteria)."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.summarylist": {
+       "name": "summarylist"
+      ,"in": "query"
+      ,"description": "Summary List Flag.  Enter a Y to return a list of summary statistics based on the parameters submitted to the query service."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.summarylist": {
+       "name": "summarylist"
+      ,"in": "formData"
+      ,"description": "Summary List Flag.  Enter a Y to return a list of summary statistics based on the parameters submitted to the query service."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.qid": {
+       "name": "qid"
+      ,"in": "query"
+      ,"description": "Query ID Selector.  Enter the QueryID number from a previously run query."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.qid": {
+       "name": "qid"
+      ,"in": "formData"
+      ,"description": "Query ID Selector.  Enter the QueryID number from a previously run query."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.pageno": {
+       "name": "pageno"
+      ,"in": "query"
+      ,"description": "Indicates the number of the page to display. It is used only when the results are paginated."
+      ,"default": 1
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.pageno": {
+       "name": "pageno"
+      ,"in": "formData"
+      ,"description": "Indicates the number of the page to display. It is used only when the results are paginated."
+      ,"default": 1
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.newsort": {
+       "name": "newsort"
+      ,"in": "query"
+      ,"description": "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.newsort": {
+       "name": "newsort"
+      ,"in": "formData"
+      ,"description": "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.descending": {
+       "name": "descending"
+      ,"in": "query"
+      ,"description": "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.descending": {
+       "name": "descending"
+      ,"in": "formData"
+      ,"description": "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.c1_lat": {
+       "name": "c1_lat"
+      ,"in": "query"
+      ,"description": "Latitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.c1_lat": {
+       "name": "c1_lat"
+      ,"in": "formData"
+      ,"description": "Latitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.c1_long": {
+       "name": "c1_long"
+      ,"in": "query"
+      ,"description": "Longitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.c1_long": {
+       "name": "c1_long"
+      ,"in": "formData"
+      ,"description": "Longitude of 1st corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.c2_lat": {
+       "name": "c2_lat"
+      ,"in": "query"
+      ,"description": "Latitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.c2_lat": {
+       "name": "c2_lat"
+      ,"in": "formData"
+      ,"description": "Latitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.c2_long": {
+       "name": "c2_long"
+      ,"in": "query"
+      ,"description": "Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.c2_long": {
+       "name": "c2_long"
+      ,"in": "formData"
+      ,"description": "Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_nata_poll_cancer": {
+       "name": "p_nata_poll_cancer"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Pollutant Cancer Risk filter. Enter a single AQS pollutant code to filter results. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nata_poll_cancer": {
+       "name": "p_nata_poll_cancer"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Pollutant Cancer Risk filter. Enter a single AQS pollutant code to filter results. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nata_cancer_amt": {
+       "name": "p_nata_cancer_amt"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Long-Term Cancer Risk Level (in a million) filter. Enter a number to restrict results to stations with a cancer risk greater than or equal to the given number "
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_nata_cancer_amt": {
+       "name": "p_nata_cancer_amt"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Long-Term Cancer Risk Level (in a million) filter. Enter a number to restrict results to stations with a cancer risk greater than or equal to the given number "
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_nata_quot_amt": {
+       "name": "p_nata_quot_amt"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Hazard Quotient Level filter. Enter a number to restrict results to stations with a hazard quotient greater than or equal to the given number"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_nata_quot_amt": {
+       "name": "p_nata_quot_amt"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Hazard Quotient Level filter. Enter a number to restrict results to stations with a hazard quotient greater than or equal to the given number"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_poll_haz_amt": {
+       "name": "p_poll_haz_amt"
+      ,"in": "formData"
+      ,"description": "Monitored Hazard Quotient Level filter. Enter a number to restrict results to stations with a hazard quotient greater than or equal to the given number"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_poll_haz_amt": {
+       "name": "p_poll_haz_amt"
+      ,"in": "query"
+      ,"description": "Monitored Hazard Quotient Level filter. Enter a number to restrict results to stations with a hazard quotient greater than or equal to the given number"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_nata_haz_amt": {
+       "name": "p_nata_haz_amt"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Hazard Index Level filter. Enter a number to restrict results with a hazard index greater than or equal to the given number"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_nata_haz_amt": {
+       "name": "p_nata_haz_amt"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Hazard Index Level filter. Enter a number to restrict results with a hazard index greater than or equal to the given number"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_poll_cancer": {
+       "name": "p_poll_cancer"
+      ,"in": "formData"
+      ,"description": "Average Long-term Cancer Risk Level filter. Enter a number to filter on stations with Average Long-term Cancer Risk Level greater than or equal to the entered number. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_poll_cancer": {
+       "name": "p_poll_cancer"
+      ,"in": "query"
+      ,"description": "Average Long-term Cancer Risk Level filter. Enter a number to filter on stations with Average Long-term Cancer Risk Level greater than or equal to the entered number. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nata_cancer": {
+       "name": "p_nata_cancer"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Cancer Risk Source filter. Enter a single NATA cancer risk source to restrict results. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nata_cancer": {
+       "name": "p_nata_cancer"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Cancer Risk Source filter. Enter a single NATA cancer risk source to restrict results. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nata_agg_hl": {
+       "name": "p_nata_agg_hl"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Aggregate Pollutant Hazard Level filter. Enter Y\/N to restrict results on aggregate or a single pollutant."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nata_agg_hl": {
+       "name": "p_nata_agg_hl"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Aggregate Pollutant Hazard Level filter. Enter Y\/N to restrict results on aggregate or a single pollutant."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_naa_pol_cor": {
+       "name": "p_naa_pol_cor"
+      ,"in": "formData"
+      ,"description": "Pollutant Emissions Correspond to Nonattainment filter. Enter Y\/N to restrict searches to stations located in a nonattainment area"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_naa_pol_cor": {
+       "name": "p_naa_pol_cor"
+      ,"in": "query"
+      ,"description": "Pollutant Emissions Correspond to Nonattainment filter. Enter Y\/N to restrict searches to stations located in a nonattainment area"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_compare_amt": {
+       "name": "p_compare_amt"
+      ,"in": "formData"
+      ,"description": "Compare to Modeled Ambient Concentrations Amount filter. Enter a number to restrict results with measurements Nx the modeled concentration"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_compare_amt": {
+       "name": "p_compare_amt"
+      ,"in": "query"
+      ,"description": "Compare to Modeled Ambient Concentrations Amount filter. Enter a number to restrict results with measurements Nx the modeled concentration"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_annual_comp": {
+       "name": "p_annual_comp"
+      ,"in": "formData"
+      ,"description": "Best Rolling 12-months of data filter. Enter Y to restrict results to best rolling 12 months of data in the selected timeframe"
+      ,"default": "Y"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_annual_comp": {
+       "name": "p_annual_comp"
+      ,"in": "query"
+      ,"description": "Best Rolling 12-months of data filter. Enter Y to restrict results to best rolling 12 months of data in the selected timeframe"
+      ,"default": "Y"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_site_code": {
+       "name": "p_site_code"
+      ,"in": "formData"
+      ,"description": "The AMA site code of the station"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_site_code": {
+       "name": "p_site_code"
+      ,"in": "query"
+      ,"description": "The AMA site code of the station"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nata_quot": {
+       "name": "p_nata_quot"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Hazard Quotient System filter. Enter a single target system to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nata_quot": {
+       "name": "p_nata_quot"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Hazard Quotient System filter. Enter a single target system to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nata_poll": {
+       "name": "p_nata_poll"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Hazard Quotient Pollutant filter. Enter a single AQS Pollutant code to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nata_poll": {
+       "name": "p_nata_poll"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Hazard Quotient Pollutant filter. Enter a single AQS Pollutant code to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_rcra_5km": {
+       "name": "p_rcra_5km"
+      ,"in": "formData"
+      ,"description": "Enter Y to filter results on stations within 5km of an RCRA facility"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_rcra_5km": {
+       "name": "p_rcra_5km"
+      ,"in": "query"
+      ,"description": "Enter Y to filter results on stations within 5km of an RCRA facility"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_poll_haz": {
+       "name": "p_poll_haz"
+      ,"in": "formData"
+      ,"description": "Monitored Hazard Quotient System Filter. Enter a single targeted system to restrict results. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_poll_haz": {
+       "name": "p_poll_haz"
+      ,"in": "query"
+      ,"description": "Monitored Hazard Quotient System Filter. Enter a single targeted system to restrict results. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_poll_agg": {
+       "name": "p_poll_agg"
+      ,"in": "formData"
+      ,"description": "Aggregate Pollutant filter. Enter N to search cancer and noncancer risks of a single pollutant for the station."
+      ,"default": "Y"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_poll_agg": {
+       "name": "p_poll_agg"
+      ,"in": "query"
+      ,"description": "Aggregate Pollutant filter. Enter N to search cancer and noncancer risks of a single pollutant for the station."
+      ,"default": "Y"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nata_haz": {
+       "name": "p_nata_haz"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Hazard Index System filter. Enter a single target system to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nata_haz": 
+{
+       "name": "p_nata_haz"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Hazard Index System filter. Enter a single target system to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nata_agg": {
+       "name": "p_nata_agg"
+      ,"in": "formData"
+      ,"description": "AirToxScreen Modeled Aggregate Pollutant Cancer Risk filter. Enter Y\/N to restrict results on aggregate or a single pollutant."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nata_agg": {
+       "name": "p_nata_agg"
+      ,"in": "query"
+      ,"description": "AirToxScreen Modeled Aggregate Pollutant Cancer Risk filter. Enter Y\/N to restrict results on aggregate or a single pollutant."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_summary": {
+       "name": "p_summary"
+      ,"in": "formData"
+      ,"description": "Summary Data Flag. Enter a Y to retrieve monitor summary data only."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_summary": {
+       "name": "p_summary"
+      ,"in": "query"
+      ,"description": "Summary Data Flag. Enter a Y to retrieve monitor summary data only."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_naa_sev": {
+       "name": "p_naa_sev"
+      ,"in": "formData"
+      ,"description": "Nonattainment Area Pollutant Severity filter. Enter a severity level of the pollutant in the nonattainment area to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_naa_sev": {
+       "name": "p_naa_sev"
+      ,"in": "query"
+      ,"description": "Nonattainment Area Pollutant Severity filter. Enter a severity level of the pollutant in the nonattainment area to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_naa_pol": {
+       "name": "p_naa_pol"
+      ,"in": "formData"
+      ,"description": "Nonattainment Area Pollutant filter. Enter a single pollutant in the nonattainment area to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_naa_pol": {
+       "name": "p_naa_pol"
+      ,"in": "query"
+      ,"description": "Nonattainment Area Pollutant filter. Enter a single pollutant in the nonattainment area to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_compare": {
+       "name": "p_compare"
+      ,"in": "formData"
+      ,"description": "Compare to Modeled Ambient Concentrations filter. Enter Y\/N to compare monitored pollutant concentrations to AirToxScreen Modeled modeled pollutant concentrations"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_compare": {
+       "name": "p_compare"
+      ,"in": "query"
+      ,"description": "Compare to Modeled Ambient Concentrations filter. Enter Y\/N to compare monitored pollutant concentrations to AirToxScreen Modeled modeled pollutant concentrations"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nd_pct": {
+       "name": "p_nd_pct"
+      ,"in": "formData"
+      ,"description": "Nondetect Percentage filter. Enter \"NONE\" to include stations with 80% or greater non-detect measurements in the timeframe"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_nd_pct": {
+       "name": "p_nd_pct"
+      ,"in": "query"
+      ,"description": "Nondetect Percentage filter. Enter \"NONE\" to include stations with 80% or greater non-detect measurements in the timeframe"
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_trend": {
+       "name": "p_trend"
+      ,"in": "formData"
+      ,"description": "Ambient Concentration Trend Filter. Enter to filter results with increasing or decreasing pollutant concentrations."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_trend": {
+       "name": "p_trend"
+      ,"in": "query"
+      ,"description": "Ambient Concentration Trend Filter. Enter to filter results with increasing or decreasing pollutant concentrations."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_year": {
+       "name": "p_year"
+      ,"in": "formData"
+      ,"description": "Year filter. Available values: LAST10, LAST5, or a single calendar year"
+      ,"default": "LAST10"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.p_year": {
+       "name": "p_year"
+      ,"in": "query"
+      ,"description": "Year filter. Available values: LAST10, LAST5, or a single calendar year"
+      ,"default": "LAST10"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.p_name": {
+       "name": "p_name"
+      ,"in": "formData"
+      ,"description": "Pollutant Parameter Code filter. Enter a single AQS Pollutant Parameter Code to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_name": {
+       "name": "p_name"
+      ,"in": "query"
+      ,"description": "Pollutant Parameter Code filter. Enter a single AQS Pollutant Parameter Code to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_program_list": {
+       "name": "p_program_list"
+      ,"in": "formData"
+      ,"description": "AMS Program Code Filter.  Enter one or more AMS program codes to filter results.  Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_program_list": {
+       "name": "p_program_list"
+      ,"in": "query"
+      ,"description": "AMS Program Code Filter.  Enter one or more AMS program codes to filter results.  Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_loc": {
+       "name": "p_loc"
+      ,"in": "formData"
+      ,"description": "Location type filter. Enter a single location type to restrict results based on population density and land usage. Available values: RURAL, URBAN, SUBURBAN"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_loc": {
+       "name": "p_loc"
+      ,"in": "query"
+      ,"description": "Location type filter. Enter a single location type to restrict results based on population density and land usage. Available values: RURAL, URBAN, SUBURBAN"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_cas": {
+       "name": "p_cas"
+      ,"in": "formData"
+      ,"description": "Chemical Abstract Service (CAS) Number filter. Enter a single AQS CAS Number to filter results"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_cas": {
+       "name": "p_cas"
+      ,"in": "query"
+      ,"description": "Chemical Abstract Service (CAS) Number filter. Enter a single AQS CAS Number to filter results"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_st": {
+       "name": "p_st"
+      ,"in": "formData"
+      ,"description": "Air Monitoring Station State and State-Equivalent Filter. Provide one or more USPS postal abbreviations for states and state-equivalents to filter results. Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_st": {
+       "name": "p_st"
+      ,"in": "query"
+      ,"description": "Air Monitoring Station State and State-Equivalent Filter. Provide one or more USPS postal abbreviations for states and state-equivalents to filter results. Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nd": {
+       "name": "p_nd"
+      ,"in": "formData"
+      ,"description": "Nondetect methodology filter. Enter a single nondetect method to filter results. Available values: \"ROS\", \"ZERO\", \"HALF\""
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nd": {
+       "name": "p_nd"
+      ,"in": "query"
+      ,"description": "Nondetect methodology filter. Enter a single nondetect method to filter results. Available values: \"ROS\", \"ZERO\", \"HALF\""
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_ct": {
+       "name": "p_ct"
+      ,"in": "formData"
+      ,"description": "Air Monitoring Station County Filter. Enter a single case-insensitive county name  in combination with a state value provided via p_st."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_ct": {
+       "name": "p_ct"
+      ,"in": "query"
+      ,"description": "Air Monitoring Station County Filter. Enter a single case-insensitive county name  in combination with a state value provided via p_st."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pctlowinc": {
+       "name": "p_pctlowinc"
+      ,"in": "formData"
+      ,"description": "Percent Low Income filter. Enter a value to restrict results to facilities with a given percentage of low income population within a 3-mile radius."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_pctlowinc": {
+       "name": "p_pctlowinc"
+      ,"in": "query"
+      ,"description": "Percent Low Income filter. Enter a value to restrict results to facilities with a given percentage of low income population within a 3-mile radius."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.polltable": {
+       "name": "polltable"
+      ,"in": "formData"
+      ,"description": "Pollutant Table List Flag. Enter a Y to retrieve pollutant data."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.polltable": {
+       "name": "polltable"
+      ,"in": "query"
+      ,"description": "Pollutant Table List Flag. Enter a Y to retrieve pollutant data."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_wban": {
+       "name": "p_wban"
+      ,"in": "formData"
+      ,"description": "Weather Bureau Army Navy (WBAN) Station"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.p_wban": {
+       "name": "p_wban"
+      ,"in": "query"
+      ,"description": "Weather Bureau Army Navy (WBAN) Station"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.p_rpo": {
+       "name": "p_rpo"
+      ,"in": "formData"
+      ,"description": "EPA Regional Planning Organization filter. Available values: WRAP, CENRAP, MIDRPO, MAN-VU, VISTAS"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_rpo": {
+       "name": "p_rpo"
+      ,"in": "query"
+      ,"description": "EPA Regional Planning Organization filter. Available values: WRAP, CENRAP, MIDRPO, MAN-VU, VISTAS"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.qcolumns": {
+       "name": "qcolumns"
+      ,"in": "query"
+      ,"description": "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.qcolumns": {
+       "name": "qcolumns"
+      ,"in": "formData"
+      ,"description": "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_lat": {
+       "name": "p_lat"
+      ,"in": "query"
+      ,"description": "Latitude location in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_lat": {
+       "name": "p_lat"
+      ,"in": "formData"
+      ,"description": "Latitude location in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_long": {
+       "name": "p_long"
+      ,"in": "query"
+      ,"description": "Longitude location in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_long": {
+       "name": "p_long"
+      ,"in": "formData"
+      ,"description": "Longitude location in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_radius": {
+       "name": "p_radius"
+      ,"in": "query"
+      ,"description": "Spatial Search Radius.  Enter a radius up to 100 miles in which to spatially search for facilities."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_radius": {
+       "name": "p_radius"
+      ,"in": "formData"
+      ,"description": "Spatial Search Radius.  Enter a radius up to 100 miles in which to spatially search for facilities."
+      ,"type": "number"
+      ,"required": false
+   }
+}
+,"paths": {
+    "\/ecatt_ams_rest_services.get_acs2023x_demographics_by_id": {
+       "get": {
+          "summary": "ACS Demographics Data"
+         ,"description": "Provides demographic data within a circular area of a defined radius from the latest U.S. American Community Survey 5-year estimates that have been loaded into ECHO (see [About the Data | ECHO | US EPA|https:\/\/echo.epa.gov\/resources\/echo-data\/about-the-data] for specifics on vintage)."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.p_lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_long"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_radius"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/DEF.ecatt_ams_rest_services.get_acs2023x_demographics_by_id.Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ACS Demographics Data"
+         ,"description": "Provides demographic data within a circular area of a defined radius from the latest U.S. American Community Survey 5-year estimates that have been loaded into ECHO (see [About the Data | ECHO | US EPA|https:\/\/echo.epa.gov\/resources\/echo-data\/about-the-data] for specifics on vintage)."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.p_lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_long"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_radius"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/DEF.ecatt_ams_rest_services.get_acs2023x_demographics_by_id.Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_ams_cas": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool AMS Cases Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of chemical abstract service (CAS) number containing search term. If search term not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup38"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool AMS Cases Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of chemical abstract service (CAS) number containing search term. If search term not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup38"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_ams_polls": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool AMS Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup39"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool AMS Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of air pollutants containing search term or search code. If search term or search code not provided, returns all values."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup39"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_ams_systems": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool AMS Systems Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of systems including in AMS data."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup40"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool AMS Systems Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of systems including in AMS data."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup40"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_ams_years": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool AMS Available Reporting Years Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of distinct years available in AMS data."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup41"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool AMS Available Reporting Years Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an array of distinct years available in AMS data."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup41"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_nata_polls": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool NATA Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup45"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool NATA Pollutants Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup45"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_nata_sources": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool NATA Sources Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup46"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool NATA Sources Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup46"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_nata_systems": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool NATA Systems Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup47"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool NATA Systems Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup47"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/rest_lookups.ecatt_target_systems": {
+       "get": {
+          "summary": "ECHO Clean Air Targeting Tool Systems Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.search_term"
+            }
+            ,
+{
+                "$ref": "#\/parameters\/q.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup53"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECHO Clean Air Targeting Tool Systems Lookup Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_term"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.search_code"
+            }
+         ]
+         ,"tags": [
+             "Lookups"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results"
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/rlup53"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_facilities": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Search Service"
+         ,"description": "Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_zip"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_reg"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_rpo"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_st"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_fips"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ct"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_tribedist"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_loc"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_naa_pol"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_naa_sev"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_naa_pol_cor"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pd"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_poll_agg"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_name"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_cas"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_trend"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_poll_cancer"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_poll_haz"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_poll_haz_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_compare"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_compare_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_agg"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_agg_hl"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_poll_cancer"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_cancer"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_cancer_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_poll"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_quot"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_quot_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_haz"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nata_haz_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_rcra_5km"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_c1lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_c1lon"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_c2lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_c2lon"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pctlowinc"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pm"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.xmin"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.ymin"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.xmax"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.ymax"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.queryset"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.responseset"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.tablelist"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.summarylist"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.maplist"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qcolumns"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_program_list"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes summary statistics and an array of monitors that match the selected criteria."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat01"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Search Service"
+         ,"description": "Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_zip"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_reg"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_rpo"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_st"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_fips"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ct"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_tribedist"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_loc"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_naa_pol"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_naa_sev"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_naa_pol_cor"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pd"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_poll_agg"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_name"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_cas"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_trend"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_poll_cancer"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_poll_haz"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_poll_haz_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_compare"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_compare_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_agg"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_agg_hl"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_poll_cancer"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_cancer"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_cancer_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_poll"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_quot"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_quot_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_haz"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nata_haz_amt"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_rcra_5km"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_c1lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_c1lon"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_c2lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_c2lon"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pctlowinc"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pm"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.xmin"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.ymin"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.xmax"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.ymax"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.queryset"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.responseset"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.tablelist"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.summarylist"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.maplist"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qcolumns"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_program_list"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes summary statistics and an array of monitors that match the selected criteria."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat01"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_qid": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Search Paginated Results Service"
+         ,"description": "GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. "
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.pageno"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.xmin"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.ymin"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.xmax"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.ymax"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.polltable"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.newsort"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.descending"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array (page) of monitors with the number of results equal to the responseset (page size). "
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat03"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Search Paginated Results Service"
+         ,"description": "GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. "
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.pageno"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.xmin"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.ymin"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.xmax"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.ymax"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.polltable"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.newsort"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.descending"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array (page) of monitors with the number of results equal to the responseset (page size). "
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat03"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_map": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP SearchMap Service"
+         ,"description": "Returns coordinates and related to a get_facilities ECATT AMS query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.tablelist"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.c1_lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.c1_long"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.c2_lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.c2_long"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.xmin"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.ymin"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.xmax"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.ymax"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes information for displaying search results on a map."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "MapOutput": {
+                      "$ref": "#\/definitions\/ecat16"
+                  }
+               }
+               ,"required": [
+                   "MapOutput"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP SearchMap Service"
+         ,"description": "Returns coordinates and related to a get_facilities ECATT AMS query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.tablelist"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.c1_lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.c1_long"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.c2_lat"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.c2_long"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.xmin"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.ymin"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.xmax"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.ymax"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object that includes information for displaying search results on a map."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "MapOutput": {
+                      "$ref": "#\/definitions\/ecat16"
+                  }
+               }
+               ,"required": [
+                   "MapOutput"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_rpt": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure is the overall service for the ECATT Air Monitoring Station (AMS) HAPs Report. It returns all of the data displayed in the web report by invoking individual procedures that each return a targeted portion of the report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_summary"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a complex object containing detailed information about ambient air quality, weather station information, and facility emissions near an ambient air monitoring station for Hazardous Air Pollutants (HAPs)."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat04"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure is the overall service for the ECATT Air Monitoring Station (AMS) HAPs Report. It returns all of the data displayed in the web report by invoking individual procedures that each return a targeted portion of the report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_summary"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a complex object containing detailed information about ambient air quality, weather station information, and facility emissions near an ambient air monitoring station for Hazardous Air Pollutants (HAPs)."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat04"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_rpt_polls": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns data for Pollutants Monitoring in the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing data for Pollutants Monitoring in the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat08"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns data for Pollutants Monitoring in the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing data for Pollutants Monitoring in the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat08"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_rpt_stats": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns data for Annual Statistics Summary in the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing data for Annual Statistics Summary in the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat09"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns data for Annual Statistics Summary in the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_annual_comp"
+            }
+            ,
+{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing data for Annual Statistics Summary in the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat09"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_rpt_stats_download": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns CSV data for the Annual Statistics in the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns CSV data for the Annual Statistics in the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "file"
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns CSV data for the Annual Statistics in the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns CSV data for the Annual Statistics in the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "file"
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_rpt_windrose": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns windrose data for Ambient Conditions section of the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_wban"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing windrose data for Ambient Conditions section of the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat11"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns windrose data for Ambient Conditions section of the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_wban"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing windrose data for Ambient Conditions section of the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat11"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_rpt_summary": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns monitor summary data for the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_summary"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing monitor summary data for the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat10"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns monitor summary data for the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_summary"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing monitor summary data for the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat10"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_rpt_pollrose": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns pollutant rose data for the Ambient Conditions section of the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing pollutant rose data for the Ambient Conditions section of the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat07"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns pollutant rose data for the Ambient Conditions section of the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nd_pct"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_annual_comp"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing pollutant rose data for the Ambient Conditions section of the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat07"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_download": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Search Download Data Service"
+         ,"description": "Based on the QID obtained from a get_facilities query, returns a comma separated vaule (CSV) file of the results."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a comma separated value (CSV) file of the results."
+            ,"schema": {
+                "type": "file"
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Search Download Data Service"
+         ,"description": "Based on the QID obtained from a get_facilities query, returns a comma separated vaule (CSV) file of the results."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a comma separated value (CSV) file of the results."
+            ,"schema": {
+                "type": "file"
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.metadata": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Search Metadata Service"
+         ,"description": "Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facilities and other service endpoints."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array of columns\/objects."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/meta1"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Search Metadata Service"
+         ,"description": "Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facilities and other service endpoints."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Search Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array of columns\/objects."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/meta1"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_rpt_map": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "Returns coordinates and related to an ECATT AMS HAPs report. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing coordinates and related to an ECATT AMS report. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat06"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "Returns coordinates and related to an ECATT AMS HAPs report. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing coordinates and related to an ECATT AMS report. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat06"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ams_rest_services.get_rpt_facs": {
+       "get": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns facility data related to an air monitor for the Facility Emissions section of the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing facility data related to an air monitor for the Facility Emissions section of the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat05"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Air Monitoring Station (AMS) HAP Report Service"
+         ,"description": "This procedure returns facility data related to an air monitor for the Facility Emissions section of the ECATT AMS HAPs Report."
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_site_code"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "Air Monitoring Station Hazardous Air Pollutant Report Services"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing facility data related to an air monitor for the Facility Emissions section of the ECATT AMS HAP Report."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecat05"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+}
+,"definitions": {
+    "DEF.ACS2023Demographics": {
+       "type": "object"
+      ,"description": "2023 ACS Demographics Object"
+      ,"properties": {
+          "Radius": {
+             "type": "string"
+            ,"title": "Radius"
+            ,"example": "3"
+            ,"description": "The number of miles, in any direction, from the center point of the facility that is included in the demographic profile"
+         }
+         ,"CenterLatitude": {
+             "type": "string"
+            ,"example": "38.798026"
+            ,"description": "The latitude of the facility in degrees, to four decimal places."
+         }
+         ,"CenterLongitude": {
+             "type": "string"
+            ,"example": "-77.062981"
+            ,"description": "The longitude of the facility in degrees, to four decimal places."
+         }
+         ,"TotalAreaSQMiles": {
+             "type": "string"
+            ,"title": "TotalAreaSQMiles"
+            ,"example": "3.121 sq.mi."
+         }
+         ,"LandArea": {
+             "type": "string"
+            ,"title": "Land Area"
+            ,"example": "80%"
+            ,"description": "The percentage of the total area that is land (not water). This is calculated using the sum of the land areas of the Census Block Groups (CBG) within the selected radius"
+         }
+         ,"WaterArea": {
+             "type": "string"
+            ,"title": "Water Area"
+            ,"example": "20%"
+            ,"description": "The percentage of the total area that is water (not land). This is calculated using the sum of the water areas of the Census Block Groups (CBG) within the selected radius"
+         }
+         ,"PopulationDensity": {
+             "type": "string"
+            ,"title": "Population Density"
+            ,"example": "5,602\/sq.mi."
+            ,"description": "The number of persons per square mile in the area being profiled. This field is the ratio of total persons (displayed in the Total Persons field) to total land area (displayed in the Land Area field)"
+         }
+         ,"PercentMinority": {
+             "type": "string"
+            ,"title": "Percent Minority"
+            ,"example": "39%"
+            ,"description": "The percentage of the population of the given area that is minority. The field is calculated by subtracting the number of persons who are white (and not of Hispanic origin) from the total persons. This number is then divided by the total persons and multiplied by one hundred to determine the percentage."
+         }
+         ,"Households": {
+             "type": "string"
+            ,"title": "Household Count"
+            ,"example": "57,468"
+            ,"description": "The number of households in the area being profiled"
+         }
+         ,"HousingUnits": {
+             "type": "string"
+            ,"title": "Housing Unit Count"
+            ,"example": "61,459"
+            ,"description": "The number of housing units in the area being profiled"
+         }
+         ,"HouseholdsPublicAssistance": {
+             "type": "string"
+            ,"title": "Households with Public Assistance Count"
+            ,"example": "502"
+            ,"description": "The number of households that are on any type of public assistance (including subsidized housing, welfare, aid to dependent children, etc.)"
+         }
+         ,"PersonsBelowPovertyLevel": {
+             "type": "string"
+            ,"title": "Persons Below Poverty Level Count"
+            ,"example": "20,122"
+            ,"description": "The number of people in the selected area that are below the poverty level"
+         }
+         ,"PercentBelowPovertyLevel": {
+             "type": "string"
+         }
+         ,"PersonsBelowLowIncomeLevel": {
+             "type": "string"
+         }
+         ,"PercentBelowLowIncomeLevel": {
+             "type": "string"
+         }
+         ,"ACSPopulation": {
+             "type": "string"
+         }
+         ,"ACSPovertyBasis": {
+             "type": "string"
+         }
+         ,"PercentPeopleOfColor": {
+             "type": "string"
+            ,"title": "Percent People Of Color"
+            ,"example": "39"
+            ,"description": "The percentage of the population of the given area that is people of color. The field is calculated by subtracting the number of persons who are white (and not of Hispanic origin) from the total persons. This number is then divided by the total persons and multiplied by one hundred to determine the percentage."
+         }
+         ,"White": {
+             "type": "string"
+            ,"title": "White Population"
+            ,"example": "85,483 (67.87%)"
+            ,"description": "The number and percentage of persons living in the area who are white"
+         }
+         ,"AfricanAmerican": {
+             "type": "string"
+            ,"title": "African American Population"
+            ,"example": "20,125 (15.98%)"
+            ,"description": "The number and percentage of persons living in the area who are African American."
+         }
+         ,"HispanicOrigin": {
+             "type": "string"
+            ,"title": "Hispanic Origin Population"
+            ,"example": "19,967 (15.85%)"
+            ,"description": "The number and percentage of persons living in the area who are of Hispanic origin"
+         }
+         ,"Asian": {
+             "type": "string"
+            ,"title": "Asian Population"
+            ,"example": "19,967 (15.85%)"
+            ,"description": "The number and percentage of persons living in the area who are of Asian origin"
+         }
+         ,"AmericanIndian": {
+             "type": "string"
+            ,"title": "American Indian Population"
+            ,"example": "492 (.39%)"
+            ,"description": "The number and percentage of persons living in the area who are of American Indian origin."
+         }
+         ,"OtherMultiracial": {
+             "type": "string"
+            ,"title": "Other and Multiracial Population"
+            ,"example": "13,034 (10.35%)"
+            ,"description": "The number and percentage of persons living in the area who are not included in the above classifications or are multiracial"
+         }
+         ,"Child": {
+             "type": "string"
+            ,"title": "Child Population"
+            ,"example": "8,690 (6.9%)"
+            ,"description": "The number and percentage of persons living in the area who are five years old or younger."
+         }
+         ,"Minors": {
+             "type": "string"
+            ,"title": "Minors Population"
+            ,"example": "23,535 (18.68%)"
+            ,"description": "The number and percentage of persons living in the area that are seventeen years old or younger"
+         }
+         ,"Adults": {
+             "type": "string"
+            ,"title": "Adult Population"
+            ,"example": "102,422 (81.32%)"
+            ,"description": "The number and percentage of persons living in the area who are between eighteen years old and sixty-five years old."
+         }
+         ,"Seniors": {
+             "type": "string"
+            ,"title": "Senior Population"
+            ,"example": "13,217 (10.49%)"
+            ,"description": "The number and percentage of persons living in the area who are sixty-five years old or older"
+         }
+         ,"Less9thGrade": {
+             "type": "string"
+            ,"title": "Education Less than 9th Grade Population"
+            ,"example": "4,213 (4.7%)"
+            ,"description": "The number and percentage of persons living in the area who have less than a ninth grade education"
+         }
+         ,"Grades9to12": {
+             "type": "string"
+            ,"title": "Education 9th to 12th Grade Population"
+            ,"example": "3,706 (4.13%)"
+            ,"description": "The number and percentage of persons living in the area who have completed grades nine through twelve"
+         }
+         ,"HSDiploma": {
+             "type": "string"
+            ,"title": "Education High School Diploma Population"
+            ,"example": "12,433 (13.87%)"
+            ,"description": "The number and percentage of persons living in the area who have a high school diploma"
+         }
+         ,"SomeCollege": {
+             "type": "string"
+            ,"title": "Education Some College Population"
+            ,"example": "15,240 (17%)"
+            ,"description": "The number and percentage of persons living in the area who have some college or a two year college degree"
+         }
+         ,"BSBA": {
+             "type": "string"
+            ,"title": "Education BS\/BA Population"
+            ,"example": "54,050 (60.3%)"
+            ,"description": "The number and percentage of persons living in the area who have a bachelor's degree or higher."
+         }
+         ,"IncomeLess15k": {
+             "type": "string"
+            ,"title": "Income Less than 15K Population"
+            ,"example": "3,189 (5.78%)"
+            ,"description": "The number and percentage of households who earn less than $15,000 per year"
+         }
+         ,"Income15to25k": {
+             "type": "string"
+            ,"title": "Income 15k to 25k Population"
+            ,"example": "2,980 (5.4%)"
+            ,"description": "The number and percentage of households who earn greater than or equal to $15,000 but less than $25,000 per year"
+         }
+         ,"Income25to50k": 
+{
+             "type": "string"
+            ,"title": "Income 25k to 50k Population"
+            ,"example": "7,851 (14.24%)"
+            ,"description": "The number and percentage of households who earn greater than or equal to $25,000 but less than $50,000 per year"
+         }
+         ,"Income50to75k": {
+             "type": "string"
+            ,"title": "Income 50k to 75k Population"
+            ,"example": "8,563 (15.53%)"
+            ,"description": "The number and percentage of households who earn greater than or equal to $50,000 per year but less than $75,000 per year"
+         }
+         ,"Income75kPlus": {
+             "type": "string"
+            ,"title": "Income More than 75k Population"
+            ,"example": "32,568 (59.05%)"
+            ,"description": "The number and percentage of households who earn greater than or equal to $75,000 per year"
+         }
+      }
+   }
+   ,"col.ECATT": {
+       "type": "object"
+      ,"description": "Columns Object"
+      ,"xml": {
+          "name": "Data"
+      }
+      ,"properties": {
+          "columnID": {
+             "type": "string"
+         }
+         ,"fieldName": {
+             "type": "string"
+         }
+         ,"tagName": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "columnID"
+         ,"fieldName"
+         ,"tagName"
+      ]
+   }
+   ,"ecat12": {
+       "type": "object"
+      ,"description": "Annual Statistics Object"
+      ,"properties": {
+          "AMASiteCode": {
+             "type": "string"
+         }
+         ,"PollutantCode": {
+             "type": "string"
+         }
+         ,"PollutantDesc": {
+             "type": "string"
+         }
+         ,"TrendsPlotUrl": {
+             "type": "string"
+         }
+         ,"ReportingYear": {
+             "type": "string"
+            ,"title": "Reporting Year"
+         }
+         ,"MonitoringProgram": {
+             "type": "string"
+         }
+         ,"NmbrDailyMeas": {
+             "type": "string"
+         }
+         ,"AverageConc": {
+             "type": "string"
+         }
+         ,"MaximumConc": {
+             "type": "string"
+         }
+         ,"MedianConc": {
+             "type": "string"
+         }
+         ,"RecentConc": {
+             "type": "string"
+         }
+         ,"Variance": {
+             "type": "string"
+         }
+         ,"ReferenceConc": {
+             "type": "string"
+         }
+         ,"NATAModeledConc": {
+             "type": "string"
+         }
+         ,"PcntOverNata": {
+             "type": "string"
+         }
+         ,"SelectedTimeframe": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "AMASiteCode"
+         ,"PollutantCode"
+         ,"PollutantDesc"
+         ,"TrendsPlotUrl"
+         ,"ReportingYear"
+         ,"MonitoringProgram"
+         ,"NmbrDailyMeas"
+         ,"AverageConc"
+         ,"MaximumConc"
+         ,"MedianConc"
+         ,"RecentConc"
+         ,"Variance"
+         ,"ReferenceConc"
+         ,"NATAModeledConc"
+         ,"PcntOverNata"
+         ,"SelectedTimeframe"
+      ]
+   }
+   ,"ecat13": {
+       "type": "object"
+      ,"description": "Cancer Risk Years Object"
+      ,"xml": {
+          "name": "CancerRiskYears"
+      }
+      ,"properties": {
+          "Year": {
+             "type": "string"
+            ,"description": "The calendar year of a time dimension (reporting table) record."
+         }
+      }
+      ,"required": [
+          "Year"
+      ]
+   }
+   ,"ecat14": {
+       "type": "object"
+      ,"description": "Facility Emissions Object"
+      ,"xml": {
+          "name": "FacilityEmissions"
+      }
+      ,"properties": {
+          "RegistryID": {
+             "type": "string"
+            ,"title": "FRS ID"
+            ,"example": "110020837601"
+            ,"description": "An internal 12-digit Facility Registry Service (FRS) tracking number used to tie all facility data together in EPA regulatory program databases."
+         }
+         ,"FacilityName": {
+             "type": "string"
+            ,"title": "Facility Name"
+            ,"example": "3M COMPANY"
+            ,"description": "The name of the facility."
+         }
+         ,"PollutantName": {
+             "type": "string"
+            ,"title": "Pollutant Name"
+            ,"example": "NONE"
+            ,"description": "The name designating the waste material substance or chemical involved at the facility that has a Quantitative Environmental Impact addressed in the SEP or Complying Actions."
+         }
+         ,"TRIColumnLabel": {
+             "type": "string"
+            ,"title": "TRI Column Label"
+            ,"description": "The year the Toxics Release Inventory (TRI) Air Toxics data comes from."
+         }
+         ,"TRIEmission": {
+             "type": "string"
+            ,"title": "TRI Emissions"
+            ,"description": "The emissions reported under the Toxics Release Inventory (TRI) reporting program."
+         }
+         ,"TRIUnits": {
+             "type": "string"
+         }
+         ,"NEIColumnLabel": {
+             "type": "string"
+            ,"title": "NEI Column Label"
+            ,"description": "The year the National Emissions Inventory (NEI) Air Toxics data comes from."
+         }
+         ,"NEIEmission": {
+             "type": "string"
+            ,"title": "NEI Emissions"
+            ,"description": "The emissions reported under the National Emissions Inventory (NEI) reporting program."
+         }
+         ,"NEIUnits": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "RegistryID"
+         ,"FacilityName"
+         ,"PollutantName"
+         ,"TRIColumnLabel"
+         ,"TRIEmission"
+         ,"TRIUnits"
+         ,"NEIColumnLabel"
+         ,"NEIEmission"
+         ,"NEIUnits"
+      ]
+   }
+   ,"ecat15": {
+       "type": "object"
+      ,"description": "Map Data Object"
+      ,"properties": {
+          "LAT": {
+             "type": "string"
+            ,"title": "Latitude"
+            ,"example": "38.798026"
+            ,"description": "The latitude of the facility in degrees, to four decimal places"
+         }
+         ,"LON": {
+             "type": "string"
+            ,"title": "Longitude"
+            ,"example": "-77.062981"
+            ,"description": "The longitude of the facility in degrees, to four decimal places"
+         }
+         ,"ICON": {
+             "type": "string"
+            ,"title": "Icon"
+            ,"example": "CAA-IC-MN-N.png"
+            ,"description": "Name of each individual icon file within the URL base"
+         }
+         ,"TYPE": {
+             "type": "string"
+            ,"title": "Type"
+            ,"example": "Facility"
+            ,"description": "For DFR, this is always facility"
+         }
+         ,"NAME": {
+             "type": "string"
+            ,"title": "Name"
+            ,"example": "VIRGINIA CONCRETE ALEXANDRIA PLANT"
+            ,"description": "For DFR, this is the Facility name. The name corresponds to the TYPE value"
+         }
+         ,"PUV": {
+             "type": "string"
+            ,"title": "Popup Value"
+            ,"example": "110001891506"
+            ,"description": "Pop up value. Combine with PopUpBaseURL to give the popup for the facility"
+         }
+      }
+      ,"required": [
+          "LAT"
+         ,"LON"
+         ,"ICON"
+         ,"TYPE"
+         ,"NAME"
+         ,"PUV"
+      ]
+   }
+   ,"ecat16": {
+       "type": "object"
+      ,"description": "Map Output Object"
+      ,"properties": {
+          "QueryID": {
+             "type": "string"
+            ,"title": "Query Identifier"
+            ,"example": "245"
+            ,"description": "Sequential number assigned to entire search result"
+         }
+         ,"IconBaseURL": {
+             "type": "string"
+            ,"title": "Icon Base URL"
+            ,"example": "https:\/\/echo.epa.gov\/app\/map\/icons\/"
+            ,"description": "URL where all the icons are located"
+         }
+         ,"PopUpBaseURL": {
+             "type": "string"
+            ,"title": "Popup Base URL"
+            ,"example": "https:\/\/ofmpub.epa.gov\/echo\/cwa_rest_services.pop_up?p_id="
+            ,"description": "Combine this URL with the PUC to get popup info"
+         }
+         ,"MapData": {
+             "type": "array"
+            ,"title": "Map Data"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat15"
+            }
+            ,"xml": {
+                "name": "MapData"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "QueryID"
+         ,"IconBaseURL"
+         ,"PopUpBaseURL"
+         ,"MapData"
+      ]
+   }
+   ,"ecat17": {
+       "type": "object"
+      ,"description": "Map Output Object"
+      ,"properties": {
+          "IconBaseURL": {
+             "type": "string"
+            ,"title": "Icon Base URL"
+            ,"example": "https:\/\/echo.epa.gov\/app\/map\/icons\/"
+            ,"description": "URL where all the icons are located"
+         }
+         ,"PopUpBaseURL": {
+             "type": "string"
+            ,"title": "Popup Base URL"
+            ,"example": "https:\/\/ofmpub.epa.gov\/echo\/cwa_rest_services.pop_up?p_id="
+            ,"description": "Combine this URL with the PUC to get popup info"
+         }
+         ,"MapData": {
+             "type": "array"
+            ,"title": "Map Data"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat15"
+            }
+            ,"xml": {
+                "name": "MapData"
+               ,"wrapped": true
+            }
+         }
+         ,"MapDataFacilities": {
+             "type": "array"
+            ,"title": "Map Data Facilities"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat15"
+            }
+            ,"xml": {
+                "name": "MapDataFacilities"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "IconBaseURL"
+         ,"PopUpBaseURL"
+         ,"MapData"
+         ,"MapDataFacilities"
+      ]
+   }
+   ,"ecat18": {
+       "type": "object"
+      ,"description": "Map Output Object"
+      ,"properties": {
+          "IconBaseURL": {
+             "type": "string"
+            ,"title": "Icon Base URL"
+            ,"example": "https:\/\/echo.epa.gov\/app\/map\/icons\/"
+            ,"description": "URL where all the icons are located"
+         }
+         ,"PopUpBaseURL": {
+             "type": "string"
+            ,"title": "Popup Base URL"
+            ,"example": "https:\/\/ofmpub.epa.gov\/echo\/cwa_rest_services.pop_up?p_id="
+            ,"description": "Combine this URL with the PUC to get popup info"
+         }
+         ,"MapData": {
+             "type": "array"
+            ,"title": "Map Data"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat15"
+            }
+            ,"xml": {
+                "name": "MapData"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "IconBaseURL"
+         ,"PopUpBaseURL"
+         ,"MapData"
+      ]
+   }
+   ,"ecat19": {
+       "type": "object"
+      ,"description": "Monitor Summary Object"
+      ,"xml": {
+          "name": "MonitorSummary"
+      }
+      ,"properties": {
+          "AmaSiteCode": {
+             "type": "string"
+         }
+         ,"StateAbbr": {
+             "type": "string"
+         }
+         ,"MonitorLatitude": {
+             "type": "string"
+         }
+         ,"MonitorLongitude": {
+             "type": "string"
+         }
+         ,"LocationType": {
+             "type": "string"
+            ,"title": "Location Type"
+         }
+         ,"Programs": {
+             "type": "string"
+            ,"title": "Programs"
+            ,"example": "Imminent & Substantial Endangerment Order"
+            ,"description": "A description of the EPA program(s) under which an enforcement action has been taken, and which correspond to the cited statutes and sections."
+         }
+         ,"WeatherStation": {
+             "type": "string"
+         }
+         ,"WeatherStationState": {
+             "type": "string"
+         }
+         ,"WeatherStationLat": {
+             "type": "string"
+         }
+         ,"WeatherStationLong": {
+             "type": "string"
+         }
+         ,"AvgCancerRisk": {
+             "type": "string"
+         }
+         ,"MedianCancerRisk": {
+             "type": "string"
+         }
+         ,"MaxCancerRisk": {
+             "type": "string"
+         }
+         ,"RecentCancerRisk": {
+             "type": "string"
+            ,"title": "Recent Cancer Risk"
+         }
+         ,"AmaTtlHazResp": {
+             "type": "string"
+         }
+         ,"AmaTtlHazLiver": {
+             "type": "string"
+         }
+         ,"AmaTtlHazNeuro": {
+             "type": "string"
+         }
+         ,"AmaTtlHazDev": {
+             "type": "string"
+         }
+         ,"AmaTtlHazReprod": {
+             "type": "string"
+         }
+         ,"AmaTtlHazKidney": {
+             "type": "string"
+         }
+         ,"AmaTtlHazOcular": {
+             "type": "string"
+         }
+         ,"AmaTtlHazEndoc": {
+             "type": "string"
+         }
+         ,"AmaTtlHazHemato": {
+             "type": "string"
+         }
+         ,"AmaTtlHazImmune": {
+             "type": "string"
+         }
+         ,"AmaTtlHazSkeletal": {
+             "type": "string"
+         }
+         ,"AmaTtlHazSpleen": {
+             "type": "string"
+         }
+         ,"AmaTtlHazThyroid": {
+             "type": "string"
+         }
+         ,"AmaTtlHazWholebod": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "AmaSiteCode"
+         ,"StateAbbr"
+         ,"MonitorLatitude"
+         ,"MonitorLongitude"
+         ,"LocationType"
+         ,"Programs"
+         ,"WeatherStation"
+         ,"WeatherStationState"
+         ,"WeatherStationLat"
+         ,"WeatherStationLong"
+         ,"AvgCancerRisk"
+         ,"MedianCancerRisk"
+         ,"MaxCancerRisk"
+         ,"RecentCancerRisk"
+         ,"AmaTtlHazResp"
+         ,"AmaTtlHazLiver"
+         ,"AmaTtlHazNeuro"
+         ,"AmaTtlHazDev"
+         ,"AmaTtlHazReprod"
+         ,"AmaTtlHazKidney"
+         ,"AmaTtlHazOcular"
+         ,"AmaTtlHazEndoc"
+         ,"AmaTtlHazHemato"
+         ,"AmaTtlHazImmune"
+         ,"AmaTtlHazSkeletal"
+         ,"AmaTtlHazSpleen"
+         ,"AmaTtlHazThyroid"
+         ,"AmaTtlHazWholebod"
+      ]
+   }
+   ,"ecat20": {
+       "type": "object"
+      ,"description": "Pollutants Monitored Object"
+      ,"xml": {
+          "name": "PollutantsMonitored"
+      }
+      ,"properties": {
+          "PollutantCode": {
+             "type": "string"
+         }
+         ,"PollutantDesc": {
+             "type": "string"
+         }
+         ,"CancerRisk": {
+             "type": "string"
+            ,"title": "Cancer Risk"
+         }
+         ,"Year1": {
+             "type": "string"
+            ,"title": "Year 1"
+            ,"example": "2009"
+            ,"description": "The calendar year during which TRI releases and transfers occurred."
+         }
+         ,"Year2": {
+             "type": "string"
+            ,"title": "Year 2"
+            ,"example": "2010"
+            ,"description": "The calendar year during which TRI releases and transfers occurred."
+         }
+         ,"Year3": {
+             "type": "string"
+            ,"title": "Year 3"
+            ,"example": "2011"
+            ,"description": "The calendar year during which TRI releases and transfers occurred."
+         }
+         ,"Year4": {
+             "type": "string"
+            ,"title": "Year 4"
+            ,"example": "2012"
+            ,"description": "The calendar year during which TRI releases and transfers occurred."
+         }
+         ,"Year5": {
+             "type": "string"
+            ,"title": "Year 5"
+            ,"example": "2013"
+            ,"description": "The calendar year during which TRI releases and transfers occurred."
+         }
+         ,"Year6": {
+             "type": "string"
+            ,"title": "Year 6"
+            ,"example": "2014"
+            ,"description": "The calendar year during which TRI releases and transfers occurred."
+         }
+         ,"Year7": {
+             "type": "string"
+            ,"title": "Year 7"
+            ,"example": "2015"
+            ,"description": "The calendar year during which TRI releases and transfers occurred."
+         }
+         ,"Year8": {
+             "type": "string"
+            ,"title": "Year 8"
+            ,"example": "2016"
+            ,"description": "The calendar year during which TRI releases and transfers occurred."
+         }
+         ,"Year9": {
+             "type": "string"
+            ,"title": "Year 9"
+            ,"example": "2017"
+            ,"description": "The most recent calendar year during which TRI releases and transfer occurred."
+         }
+         ,"Year10": {
+             "type": "string"
+         }
+         ,"Yr1_Count": {
+             "type": "string"
+         }
+         ,"Yr2_Count": {
+             "type": "string"
+         }
+         ,"Yr3_Count": {
+             "type": "string"
+         }
+         ,"Yr4_Count": {
+             "type": "string"
+         }
+         ,"Yr5_Count": {
+             "type": "string"
+         }
+         ,"Yr6_Count": {
+             "type": "string"
+         }
+         ,"Yr7_Count": {
+             "type": "string"
+         }
+         ,"Yr8_Count": {
+             "type": "string"
+         }
+         ,"Yr9_Count": {
+             "type": "string"
+         }
+         ,"Yr10_Count": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "PollutantCode"
+         ,"PollutantDesc"
+         ,"CancerRisk"
+         ,"Year1"
+         ,"Year2"
+         ,"Year3"
+         ,"Year4"
+         ,"Year5"
+         ,"Year6"
+         ,"Year7"
+         ,"Year8"
+         ,"Year9"
+         ,"Year10"
+         ,"Yr1_Count"
+         ,"Yr2_Count"
+         ,"Yr3_Count"
+         ,"Yr4_Count"
+         ,"Yr5_Count"
+         ,"Yr6_Count"
+         ,"Yr7_Count"
+         ,"Yr8_Count"
+         ,"Yr9_Count"
+         ,"Yr10_Count"
+      ]
+   }
+   ,"ecat21": {
+       "type": "object"
+      ,"description": "Pollutants Monitored Years Object"
+      ,"xml": {
+          "name": "PollutantsMonitoredYears"
+      }
+      ,"properties": {
+          "Year": {
+             "type": "string"
+            ,"description": "The calendar year of a time dimension (reporting table) record."
+         }
+      }
+      ,"required": [
+          "Year"
+      ]
+   }
+   ,"ecat22": {
+       "type": "object"
+      ,"description": "Pollution Rose Object"
+      ,"properties": {
+          "PollroseName": {
+             "type": "string"
+         }
+         ,"AMASiteCode": {
+             "type": "string"
+         }
+         ,"ReportingYear": {
+             "type": "string"
+            ,"title": "Reporting Year"
+         }
+         ,"SampleDate": {
+             "type": "string"
+         }
+         ,"Concentration": {
+             "type": "string"
+         }
+         ,"XCoordinate": {
+             "type": "string"
+         }
+         ,"YCoordinate": {
+             "type": "string"
+         }
+         ,"AxisMin": {
+             "type": "string"
+         }
+         ,"AxisMax": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "PollroseName"
+         ,"AMASiteCode"
+         ,"ReportingYear"
+         ,"SampleDate"
+         ,"Concentration"
+         ,"XCoordinate"
+         ,"YCoordinate"
+         ,"AxisMin"
+         ,"AxisMax"
+      ]
+   }
+   ,"ecat23": {
+       "type": "object"
+      ,"description": "Wind Statistics Object"
+      ,"xml": {
+          "name": "WindStatistics"
+      }
+      ,"properties": {
+          "WindroseName": {
+             "type": "string"
+         }
+         ,"StationID": {
+             "type": "string"
+         }
+         ,"RecordYear": {
+             "type": "string"
+            ,"title": "Record Year"
+         }
+         ,"WindClass": {
+             "type": "string"
+         }
+         ,"WindSpeedClass": {
+             "type": "string"
+         }
+         ,"Frequency": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "WindroseName"
+         ,"StationID"
+         ,"RecordYear"
+         ,"WindClass"
+         ,"WindSpeedClass"
+         ,"Frequency"
+      ]
+   }
+   ,"DEF.ecatt_ams_rest_services.get_acs2023x_demographics_by_id.Results": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"ACS2023Demographics": {
+             "$ref": "#\/definitions\/DEF.ACS2023Demographics"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"ACS2023Demographics"
+      ]
+   }
+   ,"ecat24": {
+       "type": "object"
+      ,"description": "Facilities Object"
+      ,"xml": {
+          "name": "Facility"
+      }
+      ,"properties": {
+          "ReportingYear": {
+             "type": "string"
+            ,"title": "Reporting Year"
+         }
+         ,"AmaSiteCode": {
+             "type": "string"
+         }
+         ,"AmaSiteLocation": {
+             "type": "string"
+         }
+         ,"ParameterCode": {
+             "type": "string"
+            ,"title": "Parameter Code"
+            ,"example": "00400"
+            ,"description": "The unique 5 digit numeric code identifying the parameter. If the code is less than 5 digits in the .CSV, append zeros to the beginning of the number (e.g., 100 is equivalent to 00100)"
+         }
+         ,"ParameterDesc": {
+             "type": "string"
+            ,"title": "Parameter Description"
+            ,"example": "pH"
+            ,"description": "The pollutant name and form (e.g., dissolved, suspended) associated with the parameter code"
+         }
+         ,"Cas": {
+             "type": "string"
+         }
+         ,"CategoryCode": {
+             "type": "string"
+            ,"title": "Category Code"
+         }
+         ,"PTrend": {
+             "type": "string"
+         }
+         ,"StateAbbr": {
+             "type": "string"
+         }
+         ,"LocationType": {
+             "type": "string"
+            ,"title": "Location Type"
+         }
+         ,"ProgramDesc": {
+             "type": "string"
+         }
+         ,"ZipCode": {
+             "type": "string"
+         }
+         ,"FIPS": {
+             "type": "string"
+         }
+         ,"EPARegion": {
+             "type": "string"
+            ,"title": "EPA Region"
+            ,"example": "04"
+            ,"description": "The EPA region in which the facility is located"
+         }
+         ,"Rpo": {
+             "type": "string"
+         }
+         ,"MonitorLatitude": {
+             "type": "string"
+         }
+         ,"MonitorLongitude": {
+             "type": "string"
+         }
+         ,"PopulationDensity": {
+             "type": "string"
+            ,"title": "Population Density"
+            ,"example": "5,602\/sq.mi."
+            ,"description": "The number of persons per square mile in the area being profiled. This field is the ratio of total persons (displayed in the Total Persons field) to total land area (displayed in the Land Area field)"
+         }
+         ,"TribeDist": {
+             "type": "string"
+         }
+         ,"TotalRespiratoryHazIndex": {
+             "type": "string"
+         }
+         ,"TotalLiverHazIndex": {
+             "type": "string"
+         }
+         ,"TotalNeurologicalHazIndex": {
+             "type": "string"
+         }
+         ,"TotalDevelopmentalHazIndex": {
+             "type": "string"
+         }
+         ,"TotalReproductiveHazIndex": {
+             "type": "string"
+         }
+         ,"TotalKidneyHazIndex": {
+             "type": "string"
+         }
+         ,"TotalOcularHazIndex": {
+             "type": "string"
+         }
+         ,"TotalEndocrineHazIndex": {
+             "type": "string"
+         }
+         ,"TotalHematologicalHazIndex": {
+             "type": "string"
+         }
+         ,"TotalImmunologicalHazIndex": {
+             "type": "string"
+         }
+         ,"TotalSkeletalHazIndex": {
+             "type": "string"
+         }
+         ,"TotalSpleenHazIndex": {
+             "type": "string"
+         }
+         ,"TotalThyroidHazIndex": {
+             "type": "string"
+         }
+         ,"TotalWholebodyHazIndex": {
+             "type": "string"
+         }
+         ,"AvgAmaCancerRisk": {
+             "type": "string"
+         }
+         ,"AvgCancerRisk": {
+             "type": "string"
+         }
+         ,"MedianAmaCancerRisk": {
+             "type": "string"
+         }
+         ,"MedianCancerRisk": {
+             "type": "string"
+         }
+         ,"MaxAmaCancerRisk": {
+             "type": "string"
+         }
+         ,"MaxCancerRisk": {
+             "type": "string"
+         }
+         ,"MaxCancerRiskYear": {
+             "type": "string"
+         }
+         ,"TotalAmaCancerRisk": {
+             "type": "string"
+         }
+         ,"TotalSiteCancerRisk": {
+             "type": "string"
+         }
+         ,"TotalNataCancerRisk": {
+             "type": "string"
+         }
+         ,"TotalNataCancerRiskPerMil": {
+             "type": "string"
+         }
+         ,"TotalCancerRiskPerMil": {
+             "type": "string"
+         }
+         ,"AvgAmaConcUgM3": {
+             "type": "string"
+         }
+         ,"MaxAmaConcUgM3": {
+             "type": "string"
+         }
+         ,"MedAmaConcUgM3": {
+             "type": "string"
+         }
+         ,"MaxConcYear": {
+             "type": "string"
+         }
+         ,"RecentAmaConcUgM3": {
+             "type": "string"
+         }
+         ,"NataConcUgM3": {
+             "type": "string"
+         }
+         ,"CoNonattainmentArea": {
+             "type": "string"
+         }
+         ,"LeadNonattainmentArea": {
+             "type": "string"
+         }
+         ,"NO2NonattainmentArea": {
+             "type": "string"
+         }
+         ,"Pm10NonattainmentArea": {
+             "type": "string"
+         }
+         ,"Pm25NonattainmentArea": {
+             "type": "string"
+         }
+         ,"OzoneNonattainmentArea": {
+             "type": "string"
+         }
+         ,"SO2NonattainmentArea": {
+             "type": "string"
+         }
+         ,"NonAttainmentMatch": {
+             "type": "string"
+         }
+         ,"MapIcon": {
+             "type": "string"
+         }
+         ,"NondetectMethod": {
+             "type": "string"
+         }
+         ,"NdThreshold": {
+             "type": "string"
+         }
+         ,"AnnualCompleteness": {
+             "type": "string"
+         }
+         ,"AmaHazResp": {
+             "type": "string"
+         }
+         ,"AmaHazLiver": {
+             "type": "string"
+         }
+         ,"AmaHazNeuro": {
+             "type": "string"
+         }
+         ,"AmaHazDev": {
+             "type": "string"
+         }
+         ,"AmaHazReprod": {
+             "type": "string"
+         }
+         ,"AmaHazKidney": {
+             "type": "string"
+         }
+         ,"AmaHazOcular": {
+             "type": "string"
+         }
+         ,"AmaHazEndoc": {
+             "type": "string"
+         }
+         ,"AmaHazHemato": {
+             "type": "string"
+         }
+         ,"AmaHazImmune": {
+             "type": "string"
+         }
+         ,"AmaHazSkeletal": {
+             "type": "string"
+         }
+         ,"AmaHazSpleen": {
+             "type": "string"
+         }
+         ,"AmaHazThyroid": {
+             "type": "string"
+         }
+         ,"AmaHazWholebod": {
+             "type": "string"
+         }
+         ,"AmaTtlGt1x": {
+             "type": "string"
+         }
+         ,"AmaTtlGt2x": {
+             "type": "string"
+         }
+         ,"AmaTtlGt10x": {
+             "type": "string"
+         }
+         ,"AmaTtlGt100x": {
+             "type": "string"
+         }
+         ,"AmaTtlGt1000x": {
+             "type": "string"
+         }
+         ,"AmaTtlGt10000x": {
+             "type": "string"
+         }
+         ,"AmaTtlCountConc": {
+             "type": "string"
+         }
+         ,"AmaTtlHazResp": {
+             "type": "string"
+         }
+         ,"AmaTtlHazLiver": {
+             "type": "string"
+         }
+         ,"AmaTtlHazNeuro": {
+             "type": "string"
+         }
+         ,"AmaTtlHazDev": {
+             "type": "string"
+         }
+         ,"AmaTtlHazReprod": {
+             "type": "string"
+         }
+         ,"AmaTtlHazKidney": {
+             "type": "string"
+         }
+         ,"AmaTtlHazOcular": {
+             "type": "string"
+         }
+         ,"AmaTtlHazEndoc": {
+             "type": "string"
+         }
+         ,"AmaTtlHazHemato": {
+             "type": "string"
+         }
+         ,"AmaTtlHazImmune": {
+             "type": "string"
+         }
+         ,"AmaTtlHazSkeletal": {
+             "type": "string"
+         }
+         ,"AmaTtlHazSpleen": {
+             "type": "string"
+         }
+         ,"AmaTtlHazThyroid": {
+             "type": "string"
+         }
+         ,"AmaTtlHazWholebod": {
+             "type": "string"
+         }
+         ,"RecentAmaCancerRisk": {
+             "type": "string"
+            ,"title": "Recent AMA Cancer Risk"
+         }
+         ,"RecentCancerRisk": {
+             "type": "string"
+            ,"title": "Recent Cancer Risk"
+         }
+         ,"Gt1xModeled": {
+             "type": "string"
+         }
+         ,"Gt2xModeled": {
+             "type": "string"
+         }
+         ,"Gt10xModeled": {
+             "type": "string"
+         }
+         ,"Gt100xModeled": {
+             "type": "string"
+         }
+         ,"Gt1000xModeled": {
+             "type": "string"
+         }
+         ,"Gt10000xModeled": {
+             "type": "string"
+         }
+         ,"NataPollutantCode": {
+             "type": "string"
+         }
+         ,"NataPollutantName": {
+             "type": "string"
+         }
+         ,"BkgdCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"PtCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"PtAirportsCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"OrLgtDutyCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"OrHvyDutyCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"NrOthCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"NrCmvCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"Np10mRelHtCncrRskPerMil": {
+             "type": "string"
+         }
+         ,"NpLowRelHtCncrRskPerMil": {
+             "type": "string"
+         }
+         ,"ResWoodCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"BiogenAncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"FireCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"SecFormCncrRiskPerMil": {
+             "type": "string"
+         }
+         ,"NataRespHazIndex": {
+             "type": "string"
+         }
+         ,"NataLiverHazIndex": 
+{
+             "type": "string"
+         }
+         ,"NataNeuroHazIndex": {
+             "type": "string"
+         }
+         ,"NataDevelHazIndex": {
+             "type": "string"
+         }
+         ,"NataReprHazIndex": {
+             "type": "string"
+         }
+         ,"NataKidneyHazIndex": {
+             "type": "string"
+         }
+         ,"NataOcularHazIndex": {
+             "type": "string"
+         }
+         ,"NataEndocrineHazIndex": {
+             "type": "string"
+         }
+         ,"NataHemaHazIndex": {
+             "type": "string"
+         }
+         ,"NataImmunoHazIndex": {
+             "type": "string"
+         }
+         ,"NataSkeletalHazIndex": {
+             "type": "string"
+         }
+         ,"NataSpleenHazIndex": {
+             "type": "string"
+         }
+         ,"NataThyroidHazIndex": {
+             "type": "string"
+         }
+         ,"NataWholebodyHazIndex": {
+             "type": "string"
+         }
+         ,"RCRAFacWithin5km": {
+             "type": "string"
+            ,"example": "Y"
+         }
+         ,"PercentBelowLowincome3mile": {
+             "type": "string"
+            ,"title": "Percent Low Income (3 mi)"
+            ,"description": "The percentage of people in the selected area with an income less than two times the poverty level, based on the latest ACS 5-Year Summary."
+         }
+         ,"PercentPeopleOfColor3mile": {
+             "type": "string"
+            ,"title": "Percent People of Color (3 mi)"
+            ,"description": "The percentage of the population of the given area that consists of people of color, based on the latest ACS 5-Year Summary."
+         }
+      }
+      ,"required": [
+          "ReportingYear"
+         ,"AmaSiteCode"
+         ,"AmaSiteLocation"
+      ]
+   }
+   ,"ecat01": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Root"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"QueryRows": {
+             "type": "string"
+            ,"title": "Query Row Count"
+            ,"example": "5"
+            ,"description": "Number of query results returned"
+         }
+         ,"SearchResults": {
+             "type": "string"
+         }
+         ,"QueryID": {
+             "type": "string"
+            ,"title": "Query Identifier"
+            ,"example": "245"
+            ,"description": "Sequential number assigned to entire search result"
+         }
+         ,"PollQueryID": {
+             "type": "string"
+         }
+         ,"PageNo": {
+             "type": "string"
+            ,"title": "Page Number"
+            ,"example": "1"
+            ,"description": "The number of pages of results returned"
+         }
+         ,"Columns": {
+             "type": "array"
+            ,"title": "Columns"
+            ,"description": "Information related to columns provided in the results."
+            ,"items": {
+                "$ref": "#\/definitions\/col.ECATT"
+            }
+            ,"xml": {
+                "name": "Columns"
+               ,"wrapped": true
+            }
+         }
+         ,"Facilities": {
+             "type": "array"
+            ,"title": "Facilities"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat24"
+            }
+            ,"xml": {
+                "name": "Facilities"
+               ,"wrapped": true
+            }
+         }
+         ,"MapOutput": {
+             "$ref": "#\/definitions\/ecat16"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"QueryRows"
+         ,"SearchResults"
+         ,"QueryID"
+         ,"PollQueryID"
+         ,"PageNo"
+         ,"Columns"
+         ,"Facilities"
+         ,"MapOutput"
+      ]
+   }
+   ,"ecat03": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Results"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"QueryRows": {
+             "type": "string"
+            ,"title": "Query Row Count"
+            ,"example": "5"
+            ,"description": "Number of query results returned"
+         }
+         ,"SearchResults": {
+             "type": "string"
+         }
+         ,"QueryID": {
+             "type": "string"
+            ,"title": "Query Identifier"
+            ,"example": "245"
+            ,"description": "Sequential number assigned to entire search result"
+         }
+         ,"PageNo": {
+             "type": "string"
+            ,"title": "Page Number"
+            ,"example": "1"
+            ,"description": "The number of pages of results returned"
+         }
+         ,"Facilities": {
+             "type": "array"
+            ,"title": "Facilities"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat24"
+            }
+            ,"xml": {
+                "name": "Facilities"
+               ,"wrapped": true
+            }
+         }
+         ,"MapOutput": {
+             "$ref": "#\/definitions\/ecat16"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"QueryRows"
+         ,"SearchResults"
+         ,"QueryID"
+         ,"PageNo"
+         ,"Facilities"
+         ,"MapOutput"
+      ]
+   }
+   ,"ecat04": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Results"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"MonitorSummary": {
+             "$ref": "#\/definitions\/ecat19"
+         }
+         ,"CancerRiskYears": {
+             "type": "array"
+            ,"title": "Cancer Risk Years"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat13"
+            }
+            ,"xml": {
+                "name": "CancerRiskYears"
+               ,"wrapped": true
+            }
+         }
+         ,"PollutantsMonitoredYears": {
+             "type": "array"
+            ,"title": "Pollutants Monitored Years"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat21"
+            }
+            ,"xml": {
+                "name": "PollutantsMonitoredYears"
+               ,"wrapped": true
+            }
+         }
+         ,"PollutantsMonitored": {
+             "type": "array"
+            ,"title": "Pollutants Monitored"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat20"
+            }
+            ,"xml": {
+                "name": "PollutantsMonitored"
+               ,"wrapped": true
+            }
+         }
+         ,"MapOutput": {
+             "$ref": "#\/definitions\/ecat17"
+         }
+         ,"WindStatistics": {
+             "type": "array"
+            ,"title": "Wind Statistics"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat23"
+            }
+            ,"xml": {
+                "name": "WindStatistics"
+               ,"wrapped": true
+            }
+         }
+         ,"FacilityEmissions": {
+             "type": "array"
+            ,"title": "Facility Emissions"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat14"
+            }
+            ,"xml": {
+                "name": "FacilityEmissions"
+               ,"wrapped": true
+            }
+         }
+         ,"ACS2023Demographics": {
+             "$ref": "#\/definitions\/DEF.ACS2023Demographics"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"MonitorSummary"
+         ,"CancerRiskYears"
+         ,"PollutantsMonitoredYears"
+         ,"PollutantsMonitored"
+         ,"MapOutput"
+         ,"WindStatistics"
+         ,"FacilityEmissions"
+         ,"ACS2023Demographics"
+      ]
+   }
+   ,"ecat05": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Results"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"FacilityEmissions": {
+             "type": "array"
+            ,"title": "Facility Emissions"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat14"
+            }
+            ,"xml": {
+                "name": "FacilityEmissions"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"FacilityEmissions"
+      ]
+   }
+   ,"ecat06": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Results"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"MapOutput": {
+             "$ref": "#\/definitions\/ecat18"
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"MapOutput"
+      ]
+   }
+   ,"ecat07": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Results"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"PollutionRose": {
+             "type": "array"
+            ,"title": "Pollution Rose"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat22"
+            }
+            ,"xml": {
+                "name": "PollutionRose"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"PollutionRose"
+      ]
+   }
+   ,"ecat08": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Results"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"PollutantsMonitoredYears": {
+             "type": "array"
+            ,"title": "Pollutants Monitored Years"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat21"
+            }
+            ,"xml": {
+                "name": "PollutantsMonitoredYears"
+               ,"wrapped": true
+            }
+         }
+         ,"PollutantsMonitored": {
+             "type": "array"
+            ,"title": "Pollutants Monitored"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat20"
+            }
+            ,"xml": {
+                "name": "PollutantsMonitored"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"PollutantsMonitoredYears"
+         ,"PollutantsMonitored"
+      ]
+   }
+   ,"ecat09": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Results"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"AnnualStatistics": {
+             "type": "array"
+            ,"title": "Annual Statistics"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat12"
+            }
+            ,"xml": {
+                "name": "AnnualStatistics"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"AnnualStatistics"
+      ]
+   }
+   ,"ecat10": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Root"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"MonitorSummary": {
+             "$ref": "#\/definitions\/ecat19"
+         }
+         ,"CancerRiskYears": {
+             "type": "array"
+            ,"title": "Cancer Risk Years"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat13"
+            }
+            ,"xml": {
+                "name": "CancerRiskYears"
+               ,"wrapped": true
+            }
+         }
+         ,"PollutantsMonitoredYears": {
+             "type": "array"
+            ,"title": "Pollutants Monitored Years"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat21"
+            }
+            ,"xml": {
+                "name": "PollutantsMonitoredYears"
+               ,"wrapped": true
+            }
+         }
+         ,"PollutantsMonitored": {
+             "type": "array"
+            ,"title": "Pollutants Monitored"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat20"
+            }
+            ,"xml": {
+                "name": "PollutantsMonitored"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"MonitorSummary"
+         ,"CancerRiskYears"
+         ,"PollutantsMonitoredYears"
+         ,"PollutantsMonitored"
+      ]
+   }
+   ,"ecat11": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"xml": {
+          "name": "Root"
+      }
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"WindStatistics": {
+             "type": "array"
+            ,"title": "Wind Statistics"
+            ,"items": {
+                "$ref": "#\/definitions\/ecat23"
+            }
+            ,"xml": {
+                "name": "WindStatistics"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"WindStatistics"
+      ]
+   }
+   ,"meta3": {
+       "type": "object"
+      ,"description": "Results Column Object"
+      ,"xml": {
+          "name": "ResultColumn"
+      }
+      ,"properties": {
+          "ColumnName": {
+             "type": "string"
+            ,"title": "Column Name"
+         }
+         ,"DataType": {
+             "type": "string"
+            ,"title": "Data Type"
+            ,"example": "NUMBER"
+            ,"description": "Data type for EPA program database column."
+         }
+         ,"DataLength": {
+             "type": "string"
+            ,"title": "Data Length"
+            ,"example": "10"
+            ,"description": "Data length for EPA program database column."
+         }
+         ,"ColumnID": {
+             "type": "string"
+            ,"title": "Column ID"
+         }
+         ,"ObjectName": {
+             "type": "string"
+            ,"title": "Object Name"
+            ,"example": "CaseName"
+            ,"description": "The JSON name used for the database column."
+         }
+         ,"Description": {
+             "type": "string"
+            ,"title": "Column Description"
+         }
+      }
+      ,"required": [
+          "ColumnName"
+         ,"DataType"
+         ,"DataLength"
+         ,"ColumnID"
+         ,"ObjectName"
+         ,"Description"
+      ]
+   }
+   ,"meta1": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"ResultColumns": {
+             "type": "array"
+            ,"title": "Result Columns"
+            ,"items": {
+                "$ref": "#\/definitions\/meta3"
+            }
+            ,"xml": {
+                "name": "ResultColumns"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup01": {
+       "type": "object"
+      ,"description": "Lookup Values"
+      ,"xml": {
+          "name": "LuValue"
+      }
+      ,"properties": {
+          "ValueCode": {
+             "type": "string"
+            ,"title": "Value Code"
+            ,"example": "77034"
+         }
+         ,"ValueDescription": {
+             "type": "string"
+            ,"title": "Value Description"
+            ,"example": "1-Butanol"
+         }
+      }
+      ,"required": [
+          "ValueCode"
+         ,"ValueDescription"
+      ]
+   }
+   ,"rlup38": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup39": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup40": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup41": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup45": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup46": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup47": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+   ,"rlup53": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"LuValues": {
+             "type": "array"
+            ,"items": {
+                "$ref": "#\/definitions\/rlup01"
+            }
+            ,"xml": {
+                "name": "LuValues"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+      ]
+   }
+}
+}

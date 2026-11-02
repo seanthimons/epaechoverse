@@ -1,0 +1,136 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: case
+schemas:
+  files:
+  - schema/case.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: case_request
+authentication: {}
+defaults: {}
+groups:
+  case_case_enforcement:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /case_rest_services.get_case_info
+      - POST /case_rest_services.get_case_info
+      - GET /case_rest_services.get_case_report
+      - POST /case_rest_services.get_case_report
+      - GET /case_rest_services.get_cases
+      - POST /case_rest_services.get_cases
+      - GET /case_rest_services.get_cases_from_facility
+      - POST /case_rest_services.get_cases_from_facility
+      - GET /case_rest_services.get_crcase_report
+      - POST /case_rest_services.get_crcase_report
+      - GET /case_rest_services.get_download
+      - POST /case_rest_services.get_download
+      - GET /case_rest_services.get_facilities_from_case
+      - POST /case_rest_services.get_facilities_from_case
+      - GET /case_rest_services.get_map
+      - POST /case_rest_services.get_map
+      - GET /case_rest_services.get_qid
+      - POST /case_rest_services.get_qid
+    names:
+      GET /case_rest_services.get_case_info: case_get_case_info
+      POST /case_rest_services.get_case_info: case_get_case_info_post
+      GET /case_rest_services.get_case_report: case_get_case_report
+      POST /case_rest_services.get_case_report: case_get_case_report_post
+      GET /case_rest_services.get_cases: case_get_cases
+      POST /case_rest_services.get_cases: case_get_cases_post
+      GET /case_rest_services.get_cases_from_facility: case_get_cases_from_facility
+      POST /case_rest_services.get_cases_from_facility: case_get_cases_from_facility_post
+      GET /case_rest_services.get_crcase_report: case_get_crcase_report
+      POST /case_rest_services.get_crcase_report: case_get_crcase_report_post
+      GET /case_rest_services.get_download: case_get_download
+      POST /case_rest_services.get_download: case_get_download_post
+      GET /case_rest_services.get_facilities_from_case: case_get_facilities_from_case
+      POST /case_rest_services.get_facilities_from_case: case_get_facilities_from_case_post
+      GET /case_rest_services.get_map: case_get_map
+      POST /case_rest_services.get_map: case_get_map_post
+      GET /case_rest_services.get_qid: case_get_qid
+      POST /case_rest_services.get_qid: case_get_qid_post
+    defaults:
+      file: R/case_case_enforcement.R
+      docs:
+        tags:
+          family: Case Enforcement endpoints
+    operations: {}
+  case_lookups:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /rest_lookups.icis_law_sections
+      - POST /rest_lookups.icis_law_sections
+    names:
+      GET /rest_lookups.icis_law_sections: case_lookups_icis_law_sections
+      POST /rest_lookups.icis_law_sections: case_lookups_icis_law_sections_post
+    defaults:
+      file: R/case_lookups.R
+      docs:
+        tags:
+          family: Lookups endpoints
+    operations: {}
+  case_metadata:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /case_rest_services.metadata
+      - POST /case_rest_services.metadata
+    names:
+      GET /case_rest_services.metadata: case_metadata
+      POST /case_rest_services.metadata: case_metadata_post
+    defaults:
+      file: R/case_metadata.R
+      docs:
+        tags:
+          family: Metadata endpoints
+    operations: {}

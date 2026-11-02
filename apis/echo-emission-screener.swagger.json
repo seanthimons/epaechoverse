@@ -1,0 +1,2563 @@
+{
+ "swagger": "2.0"
+,"info": {
+    "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Clean Air Tracking Tool Rest Services - Emission Screener"
+   ,"description": "The ECATT Emission Screener (EMS) provides data on stationary sources regulated under the Clean Air Act."
+   ,"contact": {
+       "name": "U.S. EPA, OECA Integration, Targeting and Access Branch"
+      ,"url": "https:\/\/echo.epa.gov\/resources\/general-info\/contact-us"
+   }
+   ,"license": {
+       "name": "U.S. Public Domain License"
+      ,"url": "https:\/\/edg.epa.gov\/EPA_Data_License.html"
+   }
+   ,"version": "2019.10.15"
+}
+,"host": "echodata.epa.gov"
+,"basePath": "\/echo"
+,"schemes": [
+    "https"
+]
+,"consumes": [
+    "application\/x-www-form-urlencoded"
+]
+,"produces": [
+    "application\/json"
+   ,"application\/xml"
+]
+,"parameters": {
+    "q.output": {
+       "name": "output"
+      ,"in": "query"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.output": {
+       "name": "output"
+      ,"in": "formData"
+      ,"description": "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language."
+      ,"enum": [
+          "JSONP"
+         ,"JSON"
+         ,"XML"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_fn": {
+       "name": "p_fn"
+      ,"in": "query"
+      ,"description": "Facility Name Filter. Enter one or more case-insensitive facility name to filter results. Provide multiple values as a comma-delimited list. See p_fntype for additional modifiers."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_fn": {
+       "name": "p_fn"
+      ,"in": "formData"
+      ,"description": "Facility Name Filter. Enter one or more case-insensitive facility name to filter results. Provide multiple values as a comma-delimited list. See p_fntype for additional modifiers."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.callback": {
+       "name": "callback"
+      ,"in": "query"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.callback": {
+       "name": "callback"
+      ,"in": "formData"
+      ,"description": "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_ct": {
+       "name": "p_ct"
+      ,"in": "query"
+      ,"description": "Facility City Filter. Enter a single case-insensitive city name to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_ct": {
+       "name": "p_ct"
+      ,"in": "formData"
+      ,"description": "Facility City Filter. Enter a single case-insensitive city name to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_fips": {
+       "name": "p_fips"
+      ,"in": "query"
+      ,"description": "FIPS Code Filter. Enter a single 5-character Federal Information Processing Standards (FIPS) state + county value to restrict results. E.G. to limit results to Kenosha County, Wisconsin, use 55059."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_fips": {
+       "name": "p_fips"
+      ,"in": "formData"
+      ,"description": "FIPS Code Filter. Enter a single 5-character Federal Information Processing Standards (FIPS) state + county value to restrict results. E.G. to limit results to Kenosha County, Wisconsin, use 55059."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_st": {
+       "name": "p_st"
+      ,"in": "query"
+      ,"description": "Facility State and State-Equivalent Filter. Provide one or more USPS postal abbreviations for states and state-equivalents to filter results. Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_st": {
+       "name": "p_st"
+      ,"in": "formData"
+      ,"description": "Facility State and State-Equivalent Filter. Provide one or more USPS postal abbreviations for states and state-equivalents to filter results. Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_zip": {
+       "name": "p_zip"
+      ,"in": "query"
+      ,"description": "5-Digit ZIP Code Filter. Provide one or more 5-digit postal zip codes to filter results.  May contain multiple comma-separated values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_zip": {
+       "name": "p_zip"
+      ,"in": "formData"
+      ,"description": "5-Digit ZIP Code Filter. Provide one or more 5-digit postal zip codes to filter results.  May contain multiple comma-separated values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_reg": {
+       "name": "p_reg"
+      ,"in": "query"
+      ,"description": "EPA Region Filter. Provide a single value of 01 through 10 to restrict results to a single EPA region."
+      ,"enum": [
+          "01"
+         ,"02"
+         ,"03"
+         ,"04"
+         ,"05"
+         ,"06"
+         ,"07"
+         ,"08"
+         ,"09"
+         ,"10"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_reg": {
+       "name": "p_reg"
+      ,"in": "formData"
+      ,"description": "EPA Region Filter. Provide a single value of 01 through 10 to restrict results to a single EPA region."
+      ,"enum": [
+          "01"
+         ,"02"
+         ,"03"
+         ,"04"
+         ,"05"
+         ,"06"
+         ,"07"
+         ,"08"
+         ,"09"
+         ,"10"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_ncs": {
+       "name": "p_ncs"
+      ,"in": "query"
+      ,"description": "North American Industry Classification System Filter. Enter two to six digits to filter results to facilities having matching NAICS codes.  Digits less than six will match to all codes beginning with the provided values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_ncs": {
+       "name": "p_ncs"
+      ,"in": "formData"
+      ,"description": "North American Industry Classification System Filter. Enter two to six digits to filter results to facilities having matching NAICS codes.  Digits less than six will match to all codes beginning with the provided values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.xmin": {
+       "name": "xmin"
+      ,"in": "query"
+      ,"description": "Minimum longitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_owop": {
+       "name": "p_owop"
+      ,"in": "formData"
+      ,"description": "Owner\/Operator code filter. Enter one of the following values.\n\nFederal = Federal facilities regulated under the NPDES program.\nPOTW = Publicly owned treatment works. Treatment works that are owned by a State, Tribe, or municipality.\nNon-POTW = Non-publicly owned treatment works. Often referred to as \"non-municipals\" or \"industrials\".\n"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_owop": {
+       "name": "p_owop"
+      ,"in": "query"
+      ,"description": "Owner\/Operator code filter. Enter one of the following values.\n\nFederal = Federal facilities regulated under the NPDES program.\nPOTW = Publicly owned treatment works. Treatment works that are owned by a State, Tribe, or municipality.\nNon-POTW = Non-publicly owned treatment works. Often referred to as \"non-municipals\" or \"industrials\".\n"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.xmin": {
+       "name": "xmin"
+      ,"in": "formData"
+      ,"description": "Minimum longitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.ymin": {
+       "name": "ymin"
+      ,"in": "query"
+      ,"description": "Minimum latitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.ymin": {
+       "name": "ymin"
+      ,"in": "formData"
+      ,"description": "Minimum latitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.xmax": {
+       "name": "xmax"
+      ,"in": "query"
+      ,"description": "Maximum longitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.xmax": {
+       "name": "xmax"
+      ,"in": "formData"
+      ,"description": "Maximum longitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.ymax": {
+       "name": "ymax"
+      ,"in": "query"
+      ,"description": "Maximum latitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_prog": {
+       "name": "p_prog"
+      ,"in": "formData"
+      ,"description": "Air Program Code Filter.  Enter one or more Air program codes to filter results.  Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_prog": {
+       "name": "p_prog"
+      ,"in": "query"
+      ,"description": "Air Program Code Filter.  Enter one or more Air program codes to filter results.  Provide multiple values as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.ymax": {
+       "name": "ymax"
+      ,"in": "formData"
+      ,"description": "Maximum latitude value in decimal degrees."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_fa": {
+       "name": "p_fa"
+      ,"in": "query"
+      ,"description": "Federal Agency. 1 character or 5-character values; may contain multiple comma-separated values. ALL will retrieve all facilities where the federal agency code is not null. \nUse the Federal Agencies lookup service to obtain a list of values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_opst": {
+       "name": "p_opst"
+      ,"in": "formData"
+      ,"description": "Operating status filter.  Enter one or more operating status codes to limit results.   Provide multiple codes as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_opst": {
+       "name": "p_opst"
+      ,"in": "query"
+      ,"description": "Operating status filter.  Enter one or more operating status codes to limit results.   Provide multiple codes as a comma-delimited list."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_otr": {
+       "name": "p_otr"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_otr": {
+       "name": "p_otr"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_fa": {
+       "name": "p_fa"
+      ,"in": "formData"
+      ,"description": "Federal Agency. 1 character or 5-character values; may contain multiple comma-separated values. ALL will retrieve all facilities where the federal agency code is not null. \nUse the Federal Agencies lookup service to obtain a list of values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_mact": {
+       "name": "p_mact"
+      ,"in": "query"
+      ,"description": "CAA Maximum Achievable Control Technology (MACT) Subpart codes (alpha ID between 1 and 7 characters) applicable to the facility."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_mact": {
+       "name": "p_mact"
+      ,"in": "formData"
+      ,"description": "CAA Maximum Achievable Control Technology (MACT) Subpart codes (alpha ID between 1 and 7 characters) applicable to the facility."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_fea": {
+       "name": "p_fea"
+      ,"in": "query"
+      ,"description": "Formal Enforcement Actions [within \/ not within] specified date range indicator. The date range is determined by parameters p_fead1 and p_fead2 or by parameter p_feay.\n\nW = within date range\nN = not within date range"
+      ,"enum": [
+          "W"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_fea": {
+       "name": "p_fea"
+      ,"in": "formData"
+      ,"description": "Formal Enforcement Actions [within \/ not within] specified date range indicator. The date range is determined by parameters p_fead1 and p_fead2 or by parameter p_feay.\n\nW = within date range\nN = not within date range"
+      ,"enum": [
+          "W"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_feay": {
+       "name": "p_feay"
+      ,"in": "query"
+      ,"description": "Years (1 to 5) Range. This value is used to create a date range for Formal Enforcement Actions (FEA). Used along with p_fea (which indicates whether to look within or outside of the date range) to find FEAs within (or not within) the number of years specified."
+      ,"enum": [
+          1
+         ,2
+         ,3
+         ,4
+         ,5
+      ]
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.queryset": {
+       "name": "queryset"
+      ,"in": "formData"
+      ,"description": "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.queryset": {
+       "name": "queryset"
+      ,"in": "query"
+      ,"description": "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_feay": {
+       "name": "p_feay"
+      ,"in": "formData"
+      ,"description": "Years (1 to 5) Range. This value is used to create a date range for Formal Enforcement Actions (FEA). Used along with p_fea (which indicates whether to look within or outside of the date range) to find FEAs within (or not within) the number of years specified."
+      ,"enum": [
+          1
+         ,2
+         ,3
+         ,4
+         ,5
+      ]
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_feaa": {
+       "name": "p_feaa"
+      ,"in": "query"
+      ,"description": "Agency associated with Formal Enforcement Actions:\n\nE = EPA\nS = State\nA = All"
+      ,"enum": [
+          "A"
+         ,"E"
+         ,"S"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.responseset": {
+       "name": "responseset"
+      ,"in": "formData"
+      ,"description": "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.responseset": {
+       "name": "responseset"
+      ,"in": "query"
+      ,"description": "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_feaa": {
+       "name": "p_feaa"
+      ,"in": "formData"
+      ,"description": "Agency associated with Formal Enforcement Actions:\n\nE = EPA\nS = State\nA = All"
+      ,"enum": [
+          "A"
+         ,"E"
+         ,"S"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_iea": {
+       "name": "p_iea"
+      ,"in": "query"
+      ,"description": "Informal Enforcement Actions [within \/ not within] specified date range. The date range is determined by parameters p_iead1 and p_iead2 or by parameter p_ieay.\n\nW = within date range\nN = not within date range"
+      ,"enum": [
+          "W"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_iea": {
+       "name": "p_iea"
+      ,"in": "formData"
+      ,"description": "Informal Enforcement Actions [within \/ not within] specified date range. The date range is determined by parameters p_iead1 and p_iead2 or by parameter p_ieay.\n\nW = within date range\nN = not within date range"
+      ,"enum": [
+          "W"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_ieay": {
+       "name": "p_ieay"
+      ,"in": "query"
+      ,"description": "Years (1 to 5) Range. This value is used to create a date range for Informal Enforcement Actions (IEA). Used along with p_iea (which indicates whether to look within or outside of the date range) to find IEAs within (or not within) the number of years specified."
+      ,"enum": [
+          1
+         ,2
+         ,3
+         ,4
+         ,5
+      ]
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_ieay": {
+       "name": "p_ieay"
+      ,"in": "formData"
+      ,"description": "Years (1 to 5) Range. This value is used to create a date range for Informal Enforcement Actions (IEA). Used along with p_iea (which indicates whether to look within or outside of the date range) to find IEAs within (or not within) the number of years specified."
+      ,"enum": [
+          1
+         ,2
+         ,3
+         ,4
+         ,5
+      ]
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_ieaa": {
+       "name": "p_ieaa"
+      ,"in": "query"
+      ,"description": "Agency associated with Informal Enforcement Actions. If left blank, both agencies are included.\n\nE = EPA\nS = State"
+      ,"enum": [
+          "E"
+         ,"S"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_ieaa": {
+       "name": "p_ieaa"
+      ,"in": "formData"
+      ,"description": "Agency associated with Informal Enforcement Actions. If left blank, both agencies are included.\n\nE = EPA\nS = State"
+      ,"enum": [
+          "E"
+         ,"S"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_pm": {
+       "name": "p_pm"
+      ,"in": "query"
+      ,"description": "Percent People of Color Limiter. Enter a value to restrict results to facilities with a given percentage of people of color within a 3-mile radius.\n\nNONE = 0%\nGTx = greater than x%\nGTEx = greater than or equal to x%"
+      ,"enum": [
+          "NONE"
+         ,"GT5"
+         ,"GE5"
+         ,"GT10"
+         ,"GE10"
+         ,"GT25"
+         ,"GE25"
+         ,"GT50"
+         ,"GE50"
+         ,"GT75"
+         ,"GE75"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pm": {
+       "name": "p_pm"
+      ,"in": "formData"
+      ,"description": "Percent People of Color Limiter. Enter a value to restrict results to facilities with a given percentage of people of color within a 3-mile radius.\n\nNONE = 0%\nGTx = greater than x%\nGTEx = greater than or equal to x%"
+      ,"enum": [
+          "NONE"
+         ,"GT5"
+         ,"GE5"
+         ,"GT10"
+         ,"GE10"
+         ,"GT25"
+         ,"GE25"
+         ,"GT50"
+         ,"GE50"
+         ,"GT75"
+         ,"GE75"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_pd": {
+       "name": "p_pd"
+      ,"in": "query"
+      ,"description": "Population Density Limiter (per sq mile). Enter a value to limit results to facilities located in area of a given population density.\n- NONE = 0 population density per square mile\n- GT100 = More than 100 population density per square mile\n- GT500 = More than 500 population density per square mile\n- GT1000 = More than 1000 population density per square mile\n- GT5000 = More than 5000 population density per square mile\n- GT10000 = More than 10000 population density per square mile\n- GT20000 = More than 20000 population density per square mile"
+      ,"enum": [
+          "NONE"
+         ,"GT100"
+         ,"GT500"
+         ,"GT1000"
+         ,"GT5000"
+         ,"GT10000"
+         ,"GT20000"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pd": {
+       "name": "p_pd"
+      ,"in": "formData"
+      ,"description": "Population Density Limiter (per sq mile). Enter a value to limit results to facilities located in area of a given population density.\n- NONE = 0 population density per square mile\n- GT100 = More than 100 population density per square mile\n- GT500 = More than 500 population density per square mile\n- GT1000 = More than 1000 population density per square mile\n- GT5000 = More than 5000 population density per square mile\n- GT10000 = More than 10000 population density per square mile\n- GT20000 = More than 20000 population density per square mile"
+      ,"enum": [
+          "NONE"
+         ,"GT100"
+         ,"GT500"
+         ,"GT1000"
+         ,"GT5000"
+         ,"GT10000"
+         ,"GT20000"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_ico": {
+       "name": "p_ico"
+      ,"in": "query"
+      ,"description": "Indian Country Flag.  Enter a Y or N to restrict searches to facilities inside or outside Indian Country."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_ico": {
+       "name": "p_ico"
+      ,"in": "formData"
+      ,"description": "Indian Country Flag.  Enter a Y or N to restrict searches to facilities inside or outside Indian Country."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_pid": {
+       "name": "p_pid"
+      ,"in": "query"
+      ,"description": "Nine-digit permit IDs. May contain up to 2000 comma-separated values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pid": {
+       "name": "p_pid"
+      ,"in": "formData"
+      ,"description": "Nine-digit permit IDs. May contain up to 2000 comma-separated values."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_ysl": {
+       "name": "p_ysl"
+      ,"in": "query"
+      ,"description": "Last facility inspection [within \/ not within] specified date range indicator. The date range is determined by parameters p_idt1 and p_idt2 or by parameter p_ysly.\n\nW = within date range\nN = not within date range\nNV= never"
+      ,"enum": [
+          "W"
+         ,"N"
+         ,"NV"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_ysl": {
+       "name": "p_ysl"
+      ,"in": "formData"
+      ,"description": "Last facility inspection [within \/ not within] specified date range indicator. The date range is determined by parameters p_idt1 and p_idt2 or by parameter p_ysly.\n\nW = within date range\nN = not within date range\nNV= never"
+      ,"enum": [
+          "W"
+         ,"N"
+         ,"NV"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_ysly": {
+       "name": "p_ysly"
+      ,"in": "query"
+      ,"description": "Number of years (1 to 5) since last facility inspection. A value of 1 means that it has been inspected within the year."
+      ,"enum": [
+          "1"
+         ,"2"
+         ,"3"
+         ,"4"
+         ,"5"
+      ]
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_ysly": {
+       "name": "p_ysly"
+      ,"in": "formData"
+      ,"description": "Number of years (1 to 5) since last facility inspection. A value of 1 means that it has been inspected within the year."
+      ,"enum": [
+          "1"
+         ,"2"
+         ,"3"
+         ,"4"
+         ,"5"
+      ]
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_ysla": {
+       "name": "p_ysla"
+      ,"in": "query"
+      ,"description": "Facility last inspection filter. If left blank, both agencies are included. Enter a value to limit results:\n\nE = EPA\nS = State"
+      ,"enum": [
+          "E"
+         ,"S"
+         ,"A"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_ysla": {
+       "name": "p_ysla"
+      ,"in": "formData"
+      ,"description": "Facility last inspection filter. If left blank, both agencies are included. Enter a value to limit results:\n\nE = EPA\nS = State"
+      ,"enum": [
+          "E"
+         ,"S"
+         ,"A"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_tribeid": {
+       "name": "p_tribeid"
+      ,"in": "query"
+      ,"description": "Numeric code for tribe (or list of tribes)."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_tribeid": {
+       "name": "p_tribeid"
+      ,"in": "formData"
+      ,"description": "Numeric code for tribe (or list of tribes)."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_tribename": {
+       "name": "p_tribename"
+      ,"in": "query"
+      ,"description": "Tribe Name Filter.  Enter a single tribe name to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_tribename": {
+       "name": "p_tribename"
+      ,"in": "formData"
+      ,"description": "Tribe Name Filter.  Enter a single tribe name to filter results."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_tribedist": {
+       "name": "p_tribedist"
+      ,"in": "query"
+      ,"description": "Proximity to tribal land limiter. Enter a value of mile(s) between 0 and 25 to filter results. This parameter is only evaluated if p_tribeid is populated."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.p_tribedist": {
+       "name": "p_tribedist"
+      ,"in": "formData"
+      ,"description": "Proximity to tribal land limiter. Enter a value of mile(s) between 0 and 25 to filter results. This parameter is only evaluated if p_tribeid is populated."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.p_fntype": {
+       "name": "p_fntype"
+      ,"in": "query"
+      ,"description": "Controls type of text search performed on facility name with parameter p_fn.\n- EXACT = Find facilities having the exact provided name(s).\n- BEGINS = Find facilities with names starting with the provided term(s).\n- ALL = Find facilities using Oracle text search terms.\n- CONTAINS = "
+      ,"enum": [
+          "ALL"
+         ,"CONTAINS"
+         ,"EXACT"
+         ,"BEGINS"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_fntype": {
+       "name": "p_fntype"
+      ,"in": "formData"
+      ,"description": "Controls type of text search performed on facility name with parameter p_fn.\n- EXACT = Find facilities having the exact provided name(s).\n- BEGINS = Find facilities with names starting with the provided term(s).\n- ALL = Find facilities using Oracle text search terms.\n- CONTAINS = "
+      ,"enum": [
+          "ALL"
+         ,"CONTAINS"
+         ,"EXACT"
+         ,"BEGINS"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_agoo": {
+       "name": "p_agoo"
+      ,"in": "query"
+      ,"description": "Indicates whether to AND or OR the Owner\/Operator parameter (p_owop) and the federal agency code (p_fa) parameters."
+      ,"enum": [
+          "AND"
+         ,"OR"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_agoo": {
+       "name": "p_agoo"
+      ,"in": "formData"
+      ,"description": "Indicates whether to AND or OR the Owner\/Operator parameter (p_owop) and the federal agency code (p_fa) parameters."
+      ,"enum": [
+          "AND"
+         ,"OR"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_pidall": {
+       "name": "p_pidall"
+      ,"in": "query"
+      ,"description": "Controls whether search is restricted to existing system. Y means the search will match the p_pid parameter against all associated permits (AIR, RCRA, SDWIS, etc)."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pidall": {
+       "name": "p_pidall"
+      ,"in": "formData"
+      ,"description": "Controls whether search is restricted to existing system. Y means the search will match the p_pid parameter against all associated permits (AIR, RCRA, SDWIS, etc)."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.qid": {
+       "name": "qid"
+      ,"in": "query"
+      ,"description": "Query ID Selector.  Enter the QueryID number from a previously run query."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.qid": {
+       "name": "qid"
+      ,"in": "formData"
+      ,"description": "Query ID Selector.  Enter the QueryID number from a previously run query."
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.pageno": {
+       "name": "pageno"
+      ,"in": "query"
+      ,"description": "Indicates the number of the page to display. It is used only when the results are paginated."
+      ,"default": 1
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.pageno": {
+       "name": "pageno"
+      ,"in": "formData"
+      ,"description": "Indicates the number of the page to display. It is used only when the results are paginated."
+      ,"default": 1
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.newsort": {
+       "name": "newsort"
+      ,"in": "query"
+      ,"description": "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"f.newsort": {
+       "name": "newsort"
+      ,"in": "formData"
+      ,"description": "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column."
+      ,"type": "number"
+      ,"required": false
+   }
+   ,"q.descending": {
+       "name": "descending"
+      ,"in": "query"
+      ,"description": "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.descending": {
+       "name": "descending"
+      ,"in": "formData"
+      ,"description": "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated."
+      ,"enum": [
+          "Y"
+         ,"N"
+      ]
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_cas": {
+       "name": "p_cas"
+      ,"in": "query"
+      ,"description": "Chemical Abstracts Service (CAS) Registry Number."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_naa_pol_cor": {
+       "name": "p_naa_pol_cor"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_naa_pol_cor": {
+       "name": "p_naa_pol_cor"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pctlowinc": {
+       "name": "p_pctlowinc"
+      ,"in": "formData"
+      ,"description": "Percent Low Income filter. Enter a value to restrict results to facilities with a given percentage of low income population within a 3-mile radius."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_pctlowinc": 
+{
+       "name": "p_pctlowinc"
+      ,"in": "query"
+      ,"description": "Percent Low Income filter. Enter a value to restrict results to facilities with a given percentage of low income population within a 3-mile radius."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_ghgftype": {
+       "name": "p_ghgftype"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_ghgftype": {
+       "name": "p_ghgftype"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_eisftype": {
+       "name": "p_eisftype"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_eisftype": {
+       "name": "p_eisftype"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_rpttype": {
+       "name": "p_rpttype"
+      ,"in": "formData"
+      ,"description": "The report type. The default is facility report. "
+      ,"default": "FAC"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_rpttype": {
+       "name": "p_rpttype"
+      ,"in": "query"
+      ,"description": "The report type. The default is facility report. "
+      ,"default": "FAC"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_program": {
+       "name": "p_program"
+      ,"in": "formData"
+      ,"description": "The emission inventories or reporting programs associated with facility emissions (TRI, NEI). "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_program": {
+       "name": "p_program"
+      ,"in": "query"
+      ,"description": "The emission inventories or reporting programs associated with facility emissions (TRI, NEI). "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_naa_sev": {
+       "name": "p_naa_sev"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_naa_sev": {
+       "name": "p_naa_sev"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_naa_pol": {
+       "name": "p_naa_pol"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_naa_pol": {
+       "name": "p_naa_pol"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_aggtype": {
+       "name": "p_aggtype"
+      ,"in": "formData"
+      ,"description": "Search for aggregate emissions (AGG) or single pollutant emissions (POL). If POL is used, must be used in combination with p_pname or p_cas."
+      ,"default": "AGG"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_aggtype": {
+       "name": "p_aggtype"
+      ,"in": "query"
+      ,"description": "Search for aggregate emissions (AGG) or single pollutant emissions (POL). If POL is used, must be used in combination with p_pname or p_cas."
+      ,"default": "AGG"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_ghgsub": {
+       "name": "p_ghgsub"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_ghgsub": {
+       "name": "p_ghgsub"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_frsflg": {
+       "name": "p_frsflg"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_frsflg": {
+       "name": "p_frsflg"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_toxwt": {
+       "name": "p_toxwt"
+      ,"in": "formData"
+      ,"description": "Indicates whether toxic weighting is applied. (Y\/N, default is N). "
+      ,"default": "No"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_toxwt": {
+       "name": "p_toxwt"
+      ,"in": "query"
+      ,"description": "Indicates whether toxic weighting is applied. (Y\/N, default is N). "
+      ,"default": "No"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_pname": {
+       "name": "p_pname"
+      ,"in": "formData"
+      ,"description": "The name of the single pollutant."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_pname": {
+       "name": "p_pname"
+      ,"in": "query"
+      ,"description": "The name of the single pollutant."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nspsm": {
+       "name": "p_nspsm"
+      ,"in": "formData"
+      ,"description": "Air Programl New Source Performance Standards Minors (NSPSM) Subpart Code Search.  One or more valid Air Program NSPSM Subpart codes can be passed.  "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nspsm": {
+       "name": "p_nspsm"
+      ,"in": "query"
+      ,"description": "Air Programl New Source Performance Standards Minors (NSPSM) Subpart Code Search.  One or more valid Air Program NSPSM Subpart codes can be passed.  "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_desig": {
+       "name": "p_desig"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_desig": {
+       "name": "p_desig"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_year": {
+       "name": "p_year"
+      ,"in": "formData"
+      ,"description": "The calendar year for the annual pollutant loadings. The year must be 2007 or later."
+      ,"default": "2023"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"q.p_year": {
+       "name": "p_year"
+      ,"in": "query"
+      ,"description": "The calendar year for the annual pollutant loadings. The year must be 2007 or later."
+      ,"default": "2023"
+      ,"type": "string"
+      ,"required": true
+   }
+   ,"f.p_pcat": {
+       "name": "p_pcat"
+      ,"in": "formData"
+      ,"description": "The pollutant category or categories for an aggregate emissions query. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_pcat": {
+       "name": "p_pcat"
+      ,"in": "query"
+      ,"description": "The pollutant category or categories for an aggregate emissions query. "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_nsps": {
+       "name": "p_nsps"
+      ,"in": "formData"
+      ,"description": "Air Program New Source Performance Standards (NSPS)  Subpart Code Search.  One or more valid Air Program NSPS Program codes cand be passed.  "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_nsps": {
+       "name": "p_nsps"
+      ,"in": "query"
+      ,"description": "Air Program New Source Performance Standards (NSPS)  Subpart Code Search.  One or more valid Air Program NSPS Program codes cand be passed.  "
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_cas": {
+       "name": "p_cas"
+      ,"in": "formData"
+      ,"description": "Chemical Abstracts Service (CAS) Registry Number."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_rpo": {
+       "name": "p_rpo"
+      ,"in": "query"
+      ,"description": "EPA Regional Planning Organization filter. Available values: WRAP, CENRAP, MIDRPO, MAN-VU, VISTAS"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_rpo": {
+       "name": "p_rpo"
+      ,"in": "formData"
+      ,"description": "EPA Regional Planning Organization filter. Available values: WRAP, CENRAP, MIDRPO, MAN-VU, VISTAS"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_scc": {
+       "name": "p_scc"
+      ,"in": "query"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_scc": {
+       "name": "p_scc"
+      ,"in": "formData"
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.qcolumns": {
+       "name": "qcolumns"
+      ,"in": "query"
+      ,"description": "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.qcolumns": {
+       "name": "qcolumns"
+      ,"in": "formData"
+      ,"description": "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"q.p_icoo": {
+       "name": "p_icoo"
+      ,"in": "query"
+      ,"description": "Indian country search and\/or flag. Enter Y to set Indian country search conditions to return any results found using p_ico, p_fac_ico or p_fac_icoo. Otherwise only results matching all provided p_ico, p_fac_ico or p_fac_icoo conditions will be returned."
+      ,"type": "string"
+      ,"required": false
+   }
+   ,"f.p_icoo": {
+       "name": "p_icoo"
+      ,"in": "formData"
+      ,"description": "Indian country search and\/or flag. Enter Y to set Indian country search conditions to return any results found using p_ico, p_fac_ico or p_fac_icoo. Otherwise only results matching all provided p_ico, p_fac_ico or p_fac_icoo conditions will be returned."
+      ,"type": "string"
+      ,"required": false
+   }
+}
+,"paths": {
+    "\/ecatt_ems_rest_services.get_ems": {
+       "get": {
+          "summary": "ECATT Emission Screener (EMS) Search Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_rpttype"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_aggtype"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pcat"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pname"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_cas"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_toxwt"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_program"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ct"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_fips"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_st"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_zip"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_reg"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ncs"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_mact"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nsps"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_nspsm"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_naa_pol"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_naa_sev"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_naa_pol_cor"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_tribedist"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pd"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pm"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pctlowinc"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_tribeid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_tribename"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_rpo"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_otr"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_scc"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_eisftype"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ghgftype"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ghgsub"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_desig"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_frsflg"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ysl"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ysly"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ysla"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_fea"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_feay"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_feaa"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_iea"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ieay"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ieaa"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_ico"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_icoo"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_fn"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_fntype"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_pidall"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_prog"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_opst"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_fa"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_agoo"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.p_owop"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.responseset"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.xmin"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.queryset"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qcolumns"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.ymin"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.xmax"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.ymax"
+            }
+         ]
+         ,"tags": [
+             "ECATT EMS"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing facility data related to the Emissions Screener."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecem01"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Emission Screener (EMS) Search Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_year"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_rpttype"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_aggtype"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pcat"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pname"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_cas"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_toxwt"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_program"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ct"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_fips"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_st"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_zip"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_reg"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ncs"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_mact"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nsps"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_nspsm"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_naa_pol"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_naa_sev"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_naa_pol_cor"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_tribedist"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pd"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pm"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pctlowinc"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_tribeid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_tribename"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_rpo"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_otr"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_scc"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_eisftype"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ghgftype"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ghgsub"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_desig"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_frsflg"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ysl"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ysly"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ysla"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_fea"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_feay"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_feaa"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_iea"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ieay"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ieaa"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_ico"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_icoo"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_fn"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_fntype"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_pidall"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_prog"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_opst"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_fa"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_agoo"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.p_owop"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.responseset"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.xmin"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.queryset"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qcolumns"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.ymin"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.xmax"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.ymax"
+            }
+         ]
+         ,"tags": [
+             "ECATT EMS"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns an object containing facility data related to the Emissions Screener."
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/ecem01"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ems_rest_services.get_qid": {
+       "get": {
+          "summary": "ECATT Emission Screener (EMS) Paginated Results Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.pageno"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.newsort"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.descending"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.callback"
+            }
+         ]
+         ,"tags": [
+             "ECATT EMS"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array (page) of facilities with the number of results equal to the responseset (page size). "
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/DEF.ecatt_ems_rest_services.get_qid.Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Emission Screener (EMS) Paginated Results Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.output"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.pageno"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.newsort"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.descending"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.callback"
+            }
+         ]
+         ,"tags": [
+             "ECATT EMS"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Results are an array (page) of facilities with the number of results equal to the responseset (page size). "
+            ,"schema": {
+                "type": "object"
+               ,"description": "Root Object"
+               ,"xml": {
+                   "name": "Root"
+               }
+               ,"properties": {
+                   "Results": {
+                      "$ref": "#\/definitions\/DEF.ecatt_ems_rest_services.get_qid.Results"
+                  }
+               }
+               ,"required": [
+                   "Results"
+               ]
+            }
+         }
+         }
+      }
+   }
+   ,"\/ecatt_ems_rest_services.get_download": {
+       "get": {
+          "summary": "ECATT Emission Screener (EMS) Search Download Data Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/q.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/q.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "ECATT EMS"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a comma separated value (CSV) file of the results."
+            ,"schema": {
+                "type": "file"
+            }
+         }
+         }
+      }
+      ,"post": {
+          "summary": "ECATT Emission Screener (EMS) Search Download Data Service"
+         ,"parameters": [
+             {
+                "$ref": "#\/parameters\/f.qid"
+            }
+            ,{
+                "$ref": "#\/parameters\/f.qcolumns"
+            }
+         ]
+         ,"tags": [
+             "ECATT EMS"
+         ]
+         ,"responses": {
+          "200": {
+             "description": "Returns a comma separated value (CSV) file of the results."
+            ,"schema": {
+                "type": "file"
+            }
+         }
+         }
+      }
+   }
+}
+,"definitions": {
+    "col": {
+       "type": "object"
+      ,"description": "Columns Object"
+      ,"xml": {
+          "name": "Data"
+      }
+      ,"properties": {
+          "fieldName": {
+             "type": "string"
+         }
+         ,"tagName": {
+             "type": "string"
+         }
+      }
+      ,"required": [
+          "fieldName"
+         ,"tagName"
+      ]
+   }
+   ,"ecem03": {
+       "type": "object"
+      ,"description": "Facility Aggregated Emissions Object"
+      ,"xml": {
+          "name": "FacilityAggregatedEmissions"
+      }
+      ,"properties": {
+          "ObjectId": {
+             "type": "string"
+            ,"title": "Object Identifier"
+            ,"example": "1"
+            ,"description": "Sequential number assigned to each facility or cluster returned."
+         }
+         ,"SearchYear": {
+             "type": "string"
+            ,"title": "Search Year"
+            ,"description": "The year selected in the search criteria."
+         }
+         ,"PollutantName": {
+             "type": "string"
+            ,"title": "Pollutant Name"
+            ,"description": "The name of the pollutant with violations reported in the search year."
+         }
+         ,"PollutantCategory": {
+             "type": "string"
+            ,"title": "Polltuant Category"
+            ,"description": "The name of the pollutant categories with violations reported in the search year."
+         }
+         ,"FacCount": {
+             "type": "string"
+            ,"title": "Count of Facilities Returned"
+            ,"description": "Displays the count of facilities returned based on the unique search."
+         }
+         ,"NaicsCode": {
+             "type": "string"
+            ,"title": "Facility NAICS Code"
+            ,"description": "The facility's North American Industry Classification System (NAICS) code."
+         }
+         ,"NaicsDesc": {
+             "type": "string"
+            ,"title": "Facility NAICS Description"
+            ,"description": "The description of the North American Industry Classification System (NAICS) code associated with the facility."
+         }
+         ,"RegistryId": {
+             "type": "string"
+            ,"title": "FRS Registry ID"
+            ,"example": "110020837601"
+            ,"description": "12-digit Facility Registry Service (FRS) identification number.  FRS uniquely identifies a facility by assigning an identification number (FRS ID), and uses this FRS ID to link together all EPA regulatory program database records"
+         }
+         ,"FacName": {
+             "type": "string"
+            ,"title": "Facility Name"
+            ,"example": "W M A T A CENTRAL MAINT FAC"
+            ,"description": "Name of facility"
+         }
+         ,"FacStreet": {
+             "type": "string"
+            ,"title": "Facility Street"
+            ,"example": "3101 EISENHOWER AVENUE"
+            ,"description": "Street address where facility is located, as maintained by each data system. Certain data systems also maintain mailing address information, which is not used in this report. The street address may differ across EPA databases due to differences in reported information (e.g., use of mailing address), change in ownership, use of parent or subsidiary address, etc."
+         }
+         ,"FacCity": {
+             "type": "string"
+            ,"title": "Facility City"
+            ,"example": "ALEXANDRIA"
+            ,"description": "The city where the facility is located."
+         }
+         ,"FacState": {
+             "type": "string"
+            ,"title": "Facility State"
+            ,"example": "VA"
+            ,"description": "Facility state"
+         }
+         ,"FacZip": {
+             "type": "string"
+            ,"title": "Zip Code"
+            ,"example": "22314"
+            ,"description": "Facility ZIP code"
+         }
+         ,"FacCounty": {
+             "type": "string"
+            ,"title": "Facility County"
+            ,"example": "ALEXANDRIA CITY"
+            ,"description": "The county where the facility is located."
+         }
+         ,"FipsCode": {
+             "type": "string"
+            ,"title": "FIPS Code"
+            ,"example": "11001"
+            ,"description": "A 5 digit combination of the 2 digit Federal Information Processing Standards (FIPS) code for the state and the 3 digit FIPS code of the county that a facility is located in."
+         }
+         ,"FacEpaRegion": {
+             "type": "string"
+            ,"title": "Facility EPA Region"
+            ,"example": "04"
+            ,"description": "The EPA region in which the facility is located"
+         }
+         ,"FacRpo": {
+             "type": "string"
+            ,"title": "Regional Planning Organization (RPO)"
+            ,"example": "WRAP"
+            ,"description": "One of the five EPA funded RPOs to address air quality issues in which the facility is located."
+         }
+         ,"FacLat": {
+             "type": "string"
+            ,"title": "Latitude"
+            ,"example": "38.803076"
+            ,"description": "The latitude of the facility in decimal degrees expressed using the NAD83 horizontal datum. The coordinate comes from the FRS EPA Locational Reference Tables (LRT) file which represents the most accurate value for the facility based on the available spatial metadata."
+         }
+         ,"FacLong": {
+             "type": "string"
+            ,"title": "Longitude"
+            ,"example": "-77.085951"
+            ,"description": "The longitude of the facility in decimal degrees expressed using the NAD83 horizontal datum. The coordinate comes from the FRS EPA Locational Reference Tables (LRT) file which represents the most accurate value for the facility based on the available spatial metadata."
+         }
+         ,"FederalAgency": {
+             "type": "string"
+            ,"title": "EPA Federal Agency"
+            ,"example": "D5700"
+            ,"description": "The facility's federal agency code."
+         }
+         ,"PopulationDensity": {
+             "type": "string"
+            ,"title": "Population Density"
+            ,"example": "5,602\/sq.mi."
+            ,"description": "The number of persons per square mile in the area being profiled. This field is the ratio of total persons (displayed in the Total Persons field) to total land area (displayed in the Land Area field)"
+         }
+         ,"OzoneNonAttainment": 
+{
+             "type": "string"
+            ,"title": "Ozone Nonattainment Area"
+            ,"example": "Y"
+            ,"description": "Indicates whether the facility is in a nonattainment area for ozone according to the national ambient air quality standards."
+         }
+         ,"PmNonAttainment": {
+             "type": "string"
+            ,"title": "Particulate Matter Nonattainment Area"
+            ,"example": "Y"
+            ,"description": "Indicates whether the facility is in a nonattainment area for particulate matter according to the national ambient air quality standards."
+         }
+         ,"LeadNonAttainment": {
+             "type": "string"
+            ,"title": "Lead Nonattainment Area"
+            ,"example": "Y"
+            ,"description": "Indicates whether the facility is in a nonattainment area for lead according to the national ambient air quality standards."
+         }
+         ,"So2NonAttainment": {
+             "type": "string"
+            ,"title": "Sulfur Dioxide (SO2) Nonattainment Area"
+            ,"example": "Y"
+            ,"description": "Indicates whether the facility is in a nonattainment area for sulfur dioxide (SO2) according to the national ambient air quality standards."
+         }
+         ,"TribeDistance": {
+             "type": "string"
+            ,"title": "Distance to Tribal Lands"
+            ,"description": "The distance from the facility to the nearest tribal lands."
+         }
+         ,"NaicsCodes": {
+             "type": "string"
+            ,"title": "NAICS Codes"
+            ,"description": "Indicates the facility's North American Industry Classification System (NAICS) Codes."
+         }
+         ,"NeiSccs": {
+             "type": "string"
+            ,"title": "NEI SCC Codes"
+            ,"description": "Source Classification Code from the National Emission Inventory (NEI)."
+         }
+         ,"EisTypes": {
+             "type": "string"
+            ,"title": "EIS Types"
+            ,"description": "Facility Classification from the Emissions Inventory System (EIS)."
+         }
+         ,"GhgTypes": {
+             "type": "string"
+            ,"title": "GHG Facility Types"
+            ,"description": "The Greenhouse Gas Reporting Program facility classification."
+         }
+         ,"GhgSubparts": {
+             "type": "string"
+            ,"title": "GHG Subparts"
+            ,"description": "The Greenhouse Gas Reporting Program subpart the facility is subject to."
+         }
+         ,"AirSourceClassification": {
+             "type": "string"
+            ,"title": "Air Source Classification"
+            ,"description": "The ICIS-Air source categorization of the facility (major, minor, synthetic minor) and pollutant emission status."
+         }
+         ,"NeiIds": {
+             "type": "string"
+            ,"title": "NEI IDs"
+            ,"description": "The National Emissions Inventory (NEI) ID."
+         }
+         ,"TriIds": {
+             "type": "string"
+            ,"title": "TRI IDs"
+            ,"description": "A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program."
+         }
+         ,"GhgIds": {
+             "type": "string"
+            ,"title": "GHG IDs"
+            ,"example": "110000"
+            ,"description": "A unique ID assigned for each facility within EPA\u2019s Greenhouse Gas Reporting Program (GHGRP) Emissions Data Sets."
+         }
+         ,"CamdIds": {
+             "type": "string"
+            ,"title": "Clean Air Markets Division Identifiers"
+            ,"description": "A unique 4-digit number assigned for each facility in the Clean Air Markets program."
+         }
+         ,"IcisAirIds": {
+             "type": "string"
+            ,"title": "ICIS-AIR Facility IDs"
+            ,"example": "DC0000001100195254"
+            ,"description": "Air Facility System (AFS) ID."
+         }
+         ,"CaaEvaluationCount": {
+             "type": "string"
+            ,"title": "CAA Evaluations (5 years)"
+            ,"description": "The number of compliance evaluations, under the Clean Air Act, occurring at the facility within the last five years."
+         }
+         ,"CaaFormalActionCount": {
+             "type": "string"
+            ,"title": "CAA Formal Enforcement Actions"
+            ,"description": "Indicates the total number of enforcement actions taken against the facility within the last five years."
+         }
+         ,"CaaInformalCount": {
+             "type": "string"
+            ,"title": "CAA Informal Enforcement Actions"
+            ,"description": "Indicates the total number of informal enforcement actions\/notices of violations (NOVs) taken against the facility within the last five years."
+         }
+         ,"MaxScore": {
+             "type": "string"
+            ,"title": "Max Score"
+            ,"example": "1"
+            ,"description": "A sorting score for internal use."
+         }
+         ,"AirMactsFull": {
+             "type": "string"
+            ,"title": "Maximum Achievable Control Technology"
+            ,"example": "ZZZZZ"
+            ,"description": "The Maximum Achievable Control Technology (MACT) Subpart that is associated with the facility. Includes the subpart description."
+         }
+         ,"AirNspsFull": {
+             "type": "string"
+            ,"title": "NSPS Subpart"
+            ,"description": "The New Source Performance Standards (NSPS) Subpart associated with the facility. Includes the subpart description."
+         }
+         ,"AirNspsmFull": {
+             "type": "string"
+            ,"title": "NSPS Subpart (Non-Major)"
+            ,"description": "The Non-Major New Source Performance Standards (NSPS) Subpart associated with the facility. Includes the subpart description."
+         }
+         ,"TriToxLabel": {
+             "type": "string"
+            ,"title": "TRI Air Toxics Emissions Year"
+            ,"description": "The year the Toxics Release Inventory (TRI) Air Toxics data comes from."
+         }
+         ,"TriTox": {
+             "type": "string"
+            ,"title": "TRI Air Toxics Emissions"
+            ,"description": "The amount of chemicals released to air, classified as Air Toxics, reported to the Toxics Release Inventory (TRI)."
+         }
+         ,"TriEmission": {
+             "type": "string"
+            ,"title": "TRI Emissions"
+            ,"description": "The emissions reported under the Toxics Release Inventory (TRI) reporting program."
+         }
+         ,"TriUnits": {
+             "type": "string"
+            ,"title": "TRI Air Toxics Emissions Units"
+            ,"description": "The units associated with the Toxics Release Inventory (TRI) Air Toxics emissions."
+         }
+         ,"NeiToxLabel": {
+             "type": "string"
+            ,"title": "NEI Air Toxics Emissions Year"
+            ,"description": "The year the National Emissions Inventory (NEI) Air Toxics data comes from."
+         }
+         ,"NeiTox": {
+             "type": "string"
+            ,"title": "NEI Air Toxics Emissions"
+            ,"description": "The amount of chemicals released to air, classified as Air Toxics, based on the National Emission Inventory (NEI)."
+         }
+         ,"NeiColumnLabel": {
+             "type": "string"
+            ,"title": "NEI Column Label"
+            ,"description": "The year the National Emissions Inventory (NEI) Air Toxics data comes from."
+         }
+         ,"NeiEmission": {
+             "type": "string"
+            ,"title": "NEI Emissions"
+            ,"description": "The emissions reported under the National Emissions Inventory (NEI) reporting program."
+         }
+         ,"NeiUnits": {
+             "type": "string"
+            ,"title": "NEI Air Toxics Emissions Units"
+            ,"description": "The units associated with the National Emissions Inventory (NEI) Air Toxics emissions."
+         }
+         ,"TriCapLabel": {
+             "type": "string"
+            ,"title": "TRI CAP Emissions Year"
+            ,"description": "The year the Toxics Release Inventory (TRI) Air Toxics data comes from for criteria air pollutants."
+         }
+         ,"TriCap": {
+             "type": "string"
+            ,"title": "TRI CAP Emissions"
+            ,"description": "The criteria air pollutants emitted from facilities that are reported under the Toxics Release Inventory (TRI) program."
+         }
+         ,"TriCapUnits": {
+             "type": "string"
+            ,"title": "TRI CAP Emissions Units"
+            ,"description": "The units associated with the Toxics Release Inventory (TRI) Air Toxics data for criteria air pollutants."
+         }
+         ,"TriColumnLabel": {
+             "type": "string"
+            ,"title": "TRI Column Label"
+            ,"description": "The year the Toxics Release Inventory (TRI) Air Toxics data comes from."
+         }
+         ,"NeiCapLabel": {
+             "type": "string"
+            ,"title": "NEI CAP Emissions Year"
+            ,"description": "The year the National Emissions Inventory (NEI) Air Toxics data comes from for criteria air pollutants."
+         }
+         ,"NeiCap": {
+             "type": "string"
+            ,"title": "NEI CAP Emissions"
+            ,"description": "The criteria air pollutants emitted from facilities that are reported under the National Emissions Inventory (NEI) program."
+         }
+         ,"NeiCapUnits": {
+             "type": "string"
+            ,"title": "NEI CAP Emissions Units"
+            ,"description": "The units associated with the National Emissions Inventory (NEI) Air Toxics data for criteria air pollutants."
+         }
+         ,"TriHapLabel": {
+             "type": "string"
+            ,"title": "TRI HAP Emissions Year"
+            ,"description": "The year the Toxics Release Inventory (TRI) Air Toxics data comes from for hazardous air pollutants."
+         }
+         ,"TriHap": {
+             "type": "string"
+            ,"title": "TRI HAP Emissions"
+            ,"description": "The hazardous air pollutants emitted from facilities that are reported under the Toxics Release Inventory (TRI) program."
+         }
+         ,"TriHapUnits": {
+             "type": "string"
+            ,"title": "TRI HAP Emissions Units"
+            ,"description": "The units associated with the Toxics Release Inventory (TRI) Air Toxics data."
+         }
+         ,"NeiHapLabel": {
+             "type": "string"
+            ,"title": "NEI HAP Emissions Year"
+            ,"description": "The year the National Emissions Inventory (NEI) Air Toxics data comes from."
+         }
+         ,"NeiHap": {
+             "type": "string"
+            ,"title": "NEI HAP Emissions"
+            ,"description": "The hazardous air pollutants emitted from facilities that are reported under the National Emissions Inventory (NEI) program."
+         }
+         ,"NeiHapUnits": {
+             "type": "string"
+            ,"title": "NEI HAP Emissions Units"
+            ,"description": "The units associated with the National Emissions Inventory (NEI) Air Toxics data for hazardous air pollutants."
+         }
+         ,"TriOzdLabel": {
+             "type": "string"
+            ,"title": "TRI Ozone Depleting Substance Emissions Year"
+            ,"description": "The year the Toxics Release Inventory (TRI) Air Toxics data comes from for ozone depleting substances."
+         }
+         ,"TriOzd": {
+             "type": "string"
+            ,"title": "TRI Ozone Depleting Substance Emissions"
+            ,"description": "The ozone depleting substances emitted from facilities that are reported under the Toxics Release Inventory (TRI) program."
+         }
+         ,"TriOzdUnits": {
+             "type": "string"
+            ,"title": "TRI Ozone Depleting Substance Emissions Units"
+            ,"description": "The units associated with the Toxics Release Inventory (TRI) Air Toxics data for ozone depleting substances."
+         }
+         ,"NeiOzdLabel": {
+             "type": "string"
+            ,"title": "NEI Ozone Depleting Substance Emissions Year"
+            ,"description": "The year the National Emissions Inventory (NEI) Air Toxics data comes from for ozone depleting substances."
+         }
+         ,"NeiOzd": {
+             "type": "string"
+            ,"title": "NEI Ozone Depleting Substance Emissions"
+            ,"description": "The ozone depleting substances emitted from facilities that are reported under the National Emissions Inventory (NEI) program."
+         }
+         ,"NeiOzdUnits": {
+             "type": "string"
+            ,"title": "NEI Ozone Depleting Substance Emissions Units"
+            ,"description": "The units associated with the National Emissions Inventory (NEI) Air Toxics data for ozone depleting substances."
+         }
+         ,"TriOzpLabel": {
+             "type": "string"
+            ,"title": "TRI Ozone Precursor Emissions Year"
+            ,"description": "The year the Toxics Release Inventory (TRI) Air Toxics data comes from for ozone precursors."
+         }
+         ,"TriOzp": {
+             "type": "string"
+            ,"title": "TRI Ozone Precursor Emissions"
+            ,"description": "The ozone precursors emitted from facilities that are reported under the National Emissions Inventory (NEI) program."
+         }
+         ,"TriOzpUnits": {
+             "type": "string"
+            ,"title": "TRI Ozone Precursor Emissions Units"
+            ,"description": "The units associated with the Toxics Release Inventory (TRI) Air Toxics data for ozone precursors."
+         }
+         ,"NeiOzpLabel": {
+             "type": "string"
+            ,"title": "NEI Ozone Precursor Emissions Year"
+            ,"description": "The year the National Emissions Inventory (NEI) Air Toxics data comes from for ozone precursors."
+         }
+         ,"NeiOzp": {
+             "type": "string"
+            ,"title": "NEI Ozone Precursor Emissions"
+            ,"description": "The ozone precursors emitted from facilities that are reported under the National Emissions Inventory (NEI) program."
+         }
+         ,"NeiOzpUnits": {
+             "type": "string"
+            ,"title": "NEI Ozone Precursor Emissions Units"
+            ,"description": "The units associated with the National Emissions Inventory (NEI) Air Toxics data for ozone precursors."
+         }
+         ,"TriPbtLabel": {
+             "type": "string"
+            ,"title": "TRI PBT Emissions Year"
+            ,"description": "The year the Toxics Release Inventory (TRI) Air Toxics data comes from for persistant bioaccumulative toxic (PBT) chemicals."
+         }
+         ,"TriPbt": {
+             "type": "string"
+            ,"title": "TRI PBT Emissions"
+            ,"description": "The persistent bioaccumulative toxic (PBT) chemicals emitted from facilities that are reported under the Toxics Release Inventory (TRI) program."
+         }
+         ,"TriPbtUnits": {
+             "type": "string"
+            ,"title": "TRI PBT Emissions Units"
+            ,"description": "The units associated with the Toxics Release Inventory (TRI) Air Toxics data for persistant bioaccumulative toxic (PBT) chemicals."
+         }
+         ,"NeiPbtLabel": {
+             "type": "string"
+            ,"title": "NEI PBT Emissions Year"
+            ,"description": "The year the National Emissions Inventory (NEI) Air Toxics data comes from for persistant bioaccumulative toxic (PBT) chemicals."
+         }
+         ,"NeiPbt": {
+             "type": "string"
+            ,"title": "NEI PBT Emissions"
+            ,"description": "The persistent bioaccumulative toxic (PBT) chemicals emitted from facilities that are reported under the National Emissions Inventory (NEI) program."
+         }
+         ,"NeiPbtUnits": {
+             "type": "string"
+            ,"title": "NEI PBT Emissions Units"
+            ,"description": "The units associated with the National Emissions Inventory (NEI) Air Toxics data for persistant bioaccumulative toxic (PBT) chemicals."
+         }
+         ,"GhgColumnLabel": {
+             "type": "string"
+            ,"title": "GHG Emissions Year"
+            ,"description": "The year the Greenhouse Gas (GHG) Reporting Progam data comes from."
+         }
+         ,"GhgEmission": {
+             "type": "string"
+            ,"title": "GHG Emissions"
+            ,"description": "The greenhouse gas emissions associated with the faciliy(ies) through the Greeenhouse Gas Reporting Program (GHGRP)."
+         }
+         ,"GhgUnits": {
+             "type": "string"
+            ,"title": "GHG Emissions  Units"
+            ,"description": "The units associated with the Greenhouse Gas (GHG) Reporting Program data."
+         }
+         ,"NeiGhgColumnLabel": {
+             "type": "string"
+            ,"title": "NEI GHG Emissions Year"
+            ,"description": "The year the National Emissions Inventory (NEI) Greenhouse Gas (GHG) data comes from."
+         }
+         ,"NeiGhgUnits": {
+             "type": "string"
+            ,"title": "NEI GHG Emissions  Units"
+            ,"description": "The units associated with the National Emissions Inventory (NEI) Greenhouse Gas (GHG) data."
+         }
+         ,"NeiGhgEmission": {
+             "type": "string"
+            ,"title": "NEI GHG Emissions"
+            ,"description": "The Greenhouse Gas (GHG) emissions associated with the faciliy(ies) through the National Emissions Inventory (NEI)."
+         }
+         ,"CamdSo2Label": {
+             "type": "string"
+            ,"title": "CAMD Sulfur Dioxide Emissions Year"
+            ,"description": "The year the Clean Air Markerts Division (CAMD) sulfur dioxide data comes from."
+         }
+         ,"CamdSo2": {
+             "type": "string"
+            ,"title": "CAMD Sulfur Dioxide Emissions"
+            ,"description": "The sulfer dioxide emissions associated with the facility(ies) through the Clean Air Markets Division (CAMD) program."
+         }
+         ,"CamdNoxLabel": {
+             "type": "string"
+            ,"title": "CAMD Nitrogen Oxide Emissions Year"
+            ,"description": "The year the Clean Air Markerts Division (CAMD) nitrogen oxide data comes from."
+         }
+         ,"CamdNox": {
+             "type": "string"
+            ,"title": "CAMD Nitrogen Oxide Emissions"
+            ,"description": "The nitrogen oxide data associated with the facility(ies) through the Clean Air Markets Division (CAMD)."
+         }
+         ,"CamdCo2Label": {
+             "type": "string"
+            ,"title": "CAMD Carbon Dioxide Emissions Year"
+            ,"description": "The year the Clean Air Markerts Division (CAMD) carbon dioxide data comes from."
+         }
+         ,"CamdCo2": {
+             "type": "string"
+            ,"title": "CAMD Carbon Dioxide Emissions"
+            ,"description": "The carbon dioxide data associated with the facility(ies) through the Clean Air Markets Division."
+         }
+         ,"CamdColumnLabel": {
+             "type": "string"
+            ,"title": "CAMD Emissions Year"
+            ,"description": "The year the Clean Air Markets Division (CAMD) data comes from."
+         }
+         ,"CamdEmission": {
+             "type": "string"
+            ,"title": "CAMD Emissions"
+            ,"description": "The emissions reported under the Clean Air Markets Division (CAMD) reporting program."
+         }
+         ,"CamdUnits": {
+             "type": "string"
+            ,"title": "CAMD Emissions Units"
+            ,"description": "The units associated with the emissions data from the Clean Air Markets Division dataset."
+         }
+         ,"PercentPeopleOfColor": {
+             "type": "string"
+            ,"title": "Percent People Of Color"
+            ,"example": "39"
+            ,"description": "The percentage of the population of the given area that is people of color. The field is calculated by subtracting the number of persons who are white (and not of Hispanic origin) from the total persons. This number is then divided by the total persons and multiplied by one hundred to determine the percentage."
+         }
+         ,"PercentBelowLowincome3mile": {
+             "type": "string"
+            ,"title": "Percent Low Income (3 mi)"
+            ,"description": "The percentage of people in the selected area with an income less than two times the poverty level, based on the latest ACS 5-Year Summary."
+         }
+         ,"FacDerivedTribes": {
+             "type": "string"
+            ,"title": "Nearby Tribes"
+            ,"example": "Chickasaw OTSA|The Chickasaw Nation|100000041|13||Kickapoo OTSA|Kickapoo Tribe of Oklahoma|100000127|14||Sac and Fox OTSA|Sac & Fox Nation, Oklahoma|100000248|17||Seminole OTSA|The Seminole Nation of Oklahoma|100000265|25"
+            ,"description": "The tribes or tribal territories located within 25 miles of the facility's location. Entries consist of tribe name, EPA Tribal ID, and distance in miles."
+         }
+         ,"NearestAmaSiteCode": {
+             "type": "string"
+            ,"title": "Nearest AMA Site Code"
+            ,"description": "The nearest ambient monitoring archive site code which identifies a unique Ambient Monitoring Station (AMS)."
+         }
+         ,"FacilityMonitorDistanceKm": {
+             "type": "string"
+            ,"title": "Distance to Nearest Air Monitor"
+            ,"description": "The distance in kilometers from the facility to the nearest Air Monitor."
+         }
+         ,"AmsReportLink": {
+             "type": "string"
+            ,"title": "Related AMS Report URL"
+            ,"description": "The URL for the facility's Air Monitoring Station report."
+         }
+         ,"CurrentCedriId": {
+             "type": "string"
+            ,"title": "CEDRI ID"
+            ,"description": "CEDRI ID associated with the facility."
+         }
+         ,"MaxPeriodPeriodAvgV2": {
+             "type": "string"
+            ,"title": "Most Recent Sampling Period Concentration Change"
+            ,"description": "Most Recent Sampling Period Concentration Change"
+         }
+         ,"MaxPeriodAnnualAvgV2": {
+             "type": "string"
+            ,"title": "Most Recent Rolling Annual Avg Concentration Change"
+            ,"description": "Most Recent Rolling Annual Avg Concentration Change"
+         }
+         ,"AnnualAvgTotalExceedances": {
+             "type": "string"
+            ,"title": "Count of Exceedances of Annual Avg Concentration Change (2 Years)"
+            ,"description": "Count of Exceedances of Annual Avg Concentration Change (2 Years)"
+         }
+         ,"CurrentPeriodStart": {
+             "type": "string"
+            ,"title": "Most Recent Sampling Period Start Date"
+            ,"description": "Most Recent Sampling Period Start Date"
+         }
+         ,"ProgramCode": {
+             "type": "string"
+            ,"title": "Air Program Code"
+            ,"description": "The code used to identify the regulatory air program(s) that applies to a particular plant or point and the regulatory air program(s) authorizing and associated with an action taken by a local, state, or federal regulatory agency."
+         }
+         ,"OperatingStatus": {
+             "type": "string"
+            ,"title": "Operating Status"
+            ,"description": "Indicates whether the site is active or inactive. There are Clean Air Act (CAA) program status codes for each source ID."
+         }
+         ,"FederalAgencyName": {
+             "type": "string"
+            ,"title": "Federal Agency"
+            ,"description": "Indicates the name of the federal agency, as classified in the Facility Registry Service (FRS). Federal agencies are installations that are owned and operated by the U.S. government."
+         }
+         ,"AirFacilityTypeCode": {
+             "type": "string"
+            ,"title": "Air Facility Type Code"
+            ,"description": "The air facility type code associated with the facility."
+         }
+         ,"AirFacilityTypeDesc": {
+             "type": "string"
+            ,"title": "Air Facility Type Description"
+            ,"description": "The description of the air facility type code associated with the facility."
+         }
+         ,"OzoneTransportRegion": {
+             "type": "string"
+            ,"title": "Ozone Nonattainment Transport Region"
+            ,"description": "Returns \"Y\" if a facility is flagged as being located within an Ozone Nonattainment of Ozone Transport Region. Displays \"N\" if a facility is not located within an Ozone Nonattainment or Ozone Transport Region."
+         }
+      }
+      ,"required": [
+          "ObjectId"
+         ,"SearchYear"
+         ,"RegistryId"
+         ,"FacName"
+         ,"FacStreet"
+         ,"FacCity"
+         ,"FacState"
+         ,"FacZip"
+         ,"FacCounty"
+         ,"FipsCode"
+         ,"FacEpaRegion"
+         ,"FacRpo"
+         ,"FacLat"
+         ,"FacLong"
+         ,"FederalAgency"
+         ,"PopulationDensity"
+         ,"OzoneNonAttainment"
+         ,"PmNonAttainment"
+         ,"LeadNonAttainment"
+         ,"So2NonAttainment"
+         ,"TribeDistance"
+         ,"NaicsCodes"
+         ,"NeiSccs"
+         ,"EisTypes"
+         ,"GhgTypes"
+         ,"GhgSubparts"
+         ,"AirSourceClassification"
+         ,"NeiIds"
+         ,"TriIds"
+         ,"GhgIds"
+         ,"CamdIds"
+         ,"IcisAirIds"
+         ,"CaaEvaluationCount"
+         ,"CaaFormalActionCount"
+         ,"CaaInformalCount"
+         ,"MaxScore"
+      ]
+   }
+   ,"ecem01": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"QueryId": {
+             "type": "string"
+            ,"title": "Query Identifier"
+            ,"example": "234"
+            ,"description": "Sequential number assigned to entire search result"
+         }
+         ,"QueryRows": {
+             "type": "string"
+            ,"title": "Query Row Count"
+            ,"example": "5"
+            ,"description": "Number of query results returned"
+         }
+         ,"QueryRowsPage": {
+             "type": "string"
+            ,"title": "Query Current Page Count"
+            ,"description": "Count of records provide in the current page of results"
+         }
+         ,"MajorRows": {
+             "type": "string"
+            ,"title": "Majors"
+            ,"description": "Displays the number of facilities in the search results having a Major Designation, based on a count of unique FRS IDs."
+         }
+         ,"MinorRows": {
+             "type": "string"
+            ,"title": "Minors"
+            ,"description": "Displays the number of facilities in the search results have a Minor Designation, based on a count of unique FRS IDs."
+         }
+         ,"SyntheticRows": {
+             "type": "string"
+            ,"title": "Synthetic Minors"
+            ,"description": "Displays the number of facilities in the search results having a Synthetic Minor Designation based on a count of unique FRS IDs."
+         }
+         ,"Columns": {
+             "type": "array"
+            ,"title": "Columns"
+            ,"description": "Information related to columns provided in the results."
+            ,"items": {
+                "$ref": "#\/definitions\/col"
+            }
+            ,"xml": {
+                "name": "Columns"
+               ,"wrapped": true
+            }
+         }
+         ,"FacilityAggregatedEmissions": {
+             "type": "array"
+            ,"title": "Facility Aggregated Emissions"
+            ,"description": "A complex array of facility information."
+            ,"items": {
+                "$ref": "#\/definitions\/ecem03"
+            }
+            ,"xml": {
+                "name": "FacilityAggregatedEmissions"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"QueryId"
+         ,"QueryRows"
+         ,"QueryRowsPage"
+         ,"MajorRows"
+         ,"MinorRows"
+         ,"SyntheticRows"
+         ,"Columns"
+         ,"FacilityAggregatedEmissions"
+      ]
+   }
+   ,"DEF.ecatt_ems_rest_services.get_qid.Results": {
+       "type": "object"
+      ,"description": "Results Object"
+      ,"properties": {
+          "Message": {
+             "type": "string"
+            ,"title": "Message"
+            ,"example": "Success"
+            ,"description": "Field to record messages (typically performance-related) about packet processing"
+         }
+         ,"QueryRows": {
+             "type": "string"
+            ,"title": "Query Row Count"
+            ,"example": "5"
+            ,"description": "Number of query results returned"
+         }
+         ,"QueryRowsPage": {
+             "type": "string"
+            ,"title": "Query Current Page Count"
+            ,"description": "Count of records provide in the current page of results"
+         }
+         ,"QueryID": {
+             "type": "string"
+            ,"title": "Query Identifier"
+            ,"example": "245"
+            ,"description": "Sequential number assigned to entire search result"
+         }
+         ,"PageNo": {
+             "type": "string"
+            ,"title": "Page Number"
+            ,"example": "1"
+            ,"description": "The number of pages of results returned"
+         }
+         ,"FacilityAggregatedEmissions": {
+             "type": "array"
+            ,"title": "Facility Aggregated Emissions"
+            ,"description": "A complex array of facility information."
+            ,"items": {
+                "$ref": "#\/definitions\/ecem03"
+            }
+            ,"xml": {
+                "name": "FacilityAggregatedEmissions"
+               ,"wrapped": true
+            }
+         }
+      }
+      ,"required": [
+          "Message"
+         ,"QueryRows"
+         ,"QueryRowsPage"
+         ,"QueryID"
+         ,"PageNo"
+         ,"FacilityAggregatedEmissions"
+      ]
+   }
+}
+}

@@ -1,0 +1,8 @@
+^specmill\.yml$
+^apis$
+^schema$
+^\.specmill$
+^specmill-apis\.yml$
+^build\.R$
+^.*\.(json|ya?ml)$
+^dev$
