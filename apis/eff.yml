@@ -25,7 +25,7 @@ selection:
   - HEAD
   - OPTIONS
   - TRACE
-  exclude: []
+  exclude: ['^/rest_lookups[.](cwa_parameters)$']
 helper: eff_request
 authentication: {}
 defaults: {}

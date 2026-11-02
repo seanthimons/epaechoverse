@@ -25,7 +25,7 @@ selection:
   - HEAD
   - OPTIONS
   - TRACE
-  exclude: []
+  exclude: ['^/rest_lookups[.](bp_tribes|cwa_parameters|cwa_pollutants|federal_agencies|icis_inspection_types|icis_law_sections|naics_codes|npdes_parameters|wbd_code_lu|wbd_name_lu)$']
 helper: cwa_request
 authentication: {}
 defaults: {}

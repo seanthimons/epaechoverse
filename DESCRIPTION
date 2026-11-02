@@ -1,10 +1,10 @@
 Package: epaechoverse
 Title: Client for the EPA ECHO Web Services
 Version: 0.0.0.9000
-Authors@R: person("Sean", "Thimons", email = "thimons.sean@gmail.com", role
-        = c('aut', 'cre'))
+Authors@R: person("Sean", "Thimons", email = "thimons.sean@gmail.com",
+        role = c('aut', 'cre'))
 Description: Generated client for the U.S. EPA Enforcement and Compliance
-    History Online (ECHO) web service APIs (25 APIs, 603 operations),
+    History Online (ECHO) web service APIs (25 APIs, 579 operations),
     built with specmill from local Swagger schemas.
 License: MIT + file LICENSE
 Encoding: UTF-8

@@ -64,7 +64,8 @@ namespaces <- list(
 )
 stopifnot(setequal(names(namespaces), services$api))
 
-# Every GET and POST operation in the schemas is generated.
+# Every GET and POST operation in the schemas is generated, except the duplicated
+# lookups excluded below.
 expected <- sum(vapply(schemas, function(path) {
   paths <- jsonlite::fromJSON(path, simplifyVector = FALSE)$paths
   sum(vapply(paths, function(item) sum(names(item) %in% c('get', 'post')), numeric(1)))
@@ -139,6 +140,34 @@ for (api in services$api) {
 }
 stopifnot(renamed == expected)
 
+# The `lookup` API carries every route of ECHO's LOOKUP service. Exclude the copies
+# the other services also describe (API-level selection.exclude, a regex over paths);
+# lookups only a service describes stay in that service's own API.
+count_ops <- function(item) sum(names(item) %in% c('get', 'post'))
+lookup_paths <- jsonlite::fromJSON(
+  schemas[[which(services$api == 'lookup')]],
+  simplifyVector = FALSE
+)$paths
+duplicate_ops <- 0
+for (i in which(services$api != 'lookup')) {
+  paths <- jsonlite::fromJSON(schemas[[i]], simplifyVector = FALSE)$paths
+  duplicate <- intersect(names(paths)[startsWith(names(paths), '/rest_lookups.')], names(lookup_paths))
+  if (!length(duplicate)) {
+    next
+  }
+  duplicate_ops <- duplicate_ops + sum(vapply(paths[duplicate], count_ops, numeric(1)))
+  regex <- paste0("'^/rest_lookups[.](", paste(sub('^/rest_lookups[.]', '', duplicate), collapse = '|'), ")$'")
+  path <- file.path(root, 'apis', paste0(services$api[[i]], '.yml'))
+  lines <- readLines(path, encoding = 'UTF-8')
+  start <- which(lines == 'selection:')
+  stopifnot(length(start) == 1L)
+  # schemas.exclude comes earlier at the same indent and filters filenames.
+  target <- start + which(lines[-seq_len(start)] == '  exclude: []')[[1L]]
+  lines[target] <- paste0('  exclude: [', regex, ']')
+  writeLines(lines, path, useBytes = TRUE)
+}
+selected <- expected - duplicate_ops
+
 # Package description and build ignores (apis/ and the root YAML/JSON are already
 # ignored by the scaffold; keep dev/ out of builds too).
 description <- file.path(root, 'DESCRIPTION')
@@ -148,7 +177,7 @@ text <- sub(
   paste0(
     'Description: Generated client for the U.S. EPA Enforcement and Compliance\n',
     '    History Online (ECHO) web service APIs (', nrow(services), ' APIs, ',
-    expected, ' operations),\n',
+    selected, ' operations),\n',
     '    built with specmill from local Swagger schemas.\nLicense'
   ),
   text
@@ -163,7 +192,7 @@ if (file.exists(file.path(root, 'renv.lock'))) {
 writeLines(c(rules, '^dev$', '^\\.github$', '^\\.gitleaks\\.toml$', '^\\.gitattributes$'), ignore)
 
 plan <- specmill::generate_client(root, config = 'specmill.yml', mode = 'plan')
-stopifnot(length(plan$operations) == expected, !length(plan$diagnostics))
+stopifnot(length(plan$operations) == selected, !length(plan$diagnostics))
 names_all <- vapply(plan$operations, function(op) op$name, character(1))
 stopifnot(!anyDuplicated(names_all), all(grepl('^[a-z][a-z0-9_]*$', names_all)))
 specmill::generate_client(root, config = 'specmill.yml', mode = 'apply')
