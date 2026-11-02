@@ -17,4 +17,4 @@ jobs:
   r-cmd-check:
     name: R CMD check
     # Pinned to the baseline v1.2.0 commit. Dependabot bumps this.
-    uses: seanthimons/baseline/.github/workflows/r-cmd-check.yaml@c99a0a60eed152a08d1e34841d45573fef812af2 # v1.2.0
+    uses: seanthimons/baseline/.github/workflows/r-cmd-check.yaml@733a6e4554870ab2fa8dd7495fa67bea029bb38c # v1.3.0
