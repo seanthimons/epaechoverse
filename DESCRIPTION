@@ -1,7 +1,7 @@
 Package: epaechoverse
 Title: Client for the EPA ECHO Web Services
 Version: 0.0.0.9000
-Authors@R: person("Sean", "Thimons", email = "sxthi@outlook.com", role
+Authors@R: person("Sean", "Thimons", email = "thimons.sean@gmail.com", role
         = c('aut', 'cre'))
 Description: Generated client for the U.S. EPA Enforcement and Compliance
     History Online (ECHO) web service APIs (25 APIs, 603 operations),

@@ -13,6 +13,6 @@ biosolids_npdes_biosolids_services <- function(p_id, callback = NULL) {
   params <- base::list("p_id" = p_id, "callback" = callback)
   if (base::is.character(params[["p_id"]]) && base::any(!base::nzchar(params[["p_id"]]))) base::stop("Empty query parameter: p_id")
   if (base::is.character(params[["callback"]]) && base::any(!base::nzchar(params[["callback"]]))) base::stop("Empty query parameter: callback")
-  result <- biosolids_request(method = "GET", path = "/biosolids/npdes_biosolids_services/", path_params = base::list(), query = base::list("p_id" = params[["p_id"]], "callback" = params[["callback"]]), body = NULL, request_controls = list(timeout = 30L, max_retries = 0L, retry_writes = FALSE), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
+  result <- biosolids_request(method = "GET", path = "/biosolids/npdes_biosolids_services/", path_params = base::list(), query = base::list("p_id" = params[["p_id"]], "callback" = params[["callback"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
 }

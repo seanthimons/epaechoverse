@@ -45,10 +45,14 @@ helper: api_request
 documentation: yes
 defaults:
   implementation: generated
+  # ECHO's POST routes are read-only searches, so retrying them is safe. 60 s covers
+  # slow searches; downloads and large result pages can take longer.
   request_controls:
-    timeout: 30
-    max_retries: 0
-    retry_writes: no
+    timeout: 60
+    max_retries: 2
+    retry_writes: yes
+    retry_policy: echo_retry_policy
+  response_policy: echo_response_policy
   batch:
     max_items: ~
     max_bytes: ~

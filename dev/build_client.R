@@ -8,8 +8,8 @@
 #
 # This is a one-time bootstrap: it initializes the package and refuses to run
 # when DESCRIPTION exists. To regenerate from scratch, move the generated files
-# (DESCRIPTION, NAMESPACE, LICENSE, R/, man/, schema/, apis/*.yml, specmill*.yml,
-# .specmill/, .Rbuildignore) aside first. To change the client afterwards, edit
+# (DESCRIPTION, NAMESPACE, LICENSE, R/ except echo_response_policy.R, man/, schema/,
+# apis/*.yml, specmill*.yml, .specmill/, .Rbuildignore) aside first; tests/ stays. To change the client afterwards, edit
 # apis/*.yml and use specmill::generate_client() in plan -> apply -> check mode.
 #
 # On a fresh clone run renv::restore() first. It installs specmill from GitHub
@@ -83,11 +83,32 @@ specmill::initialize_client(
   catalogue,
   package = 'epaechoverse',
   title = 'Client for the EPA ECHO Web Services',
-  author = list(given = 'Sean', family = 'Thimons', email = 'sxthi@outlook.com'),
+  author = list(given = 'Sean', family = 'Thimons', email = 'thimons.sean@gmail.com'),
   license = 'MIT + file LICENSE',
   naming = 'path',
   name_case = 'snake_case'
 )
+
+# Retry and error-handling defaults. echo_retry_policy and echo_response_policy live
+# in R/echo_response_policy.R, which is client-owned: leave it (and tests/) in place
+# when moving generated files aside, because specmill resolves the names from it.
+stopifnot(file.exists(file.path(root, 'R', 'echo_response_policy.R')))
+config <- file.path(root, 'specmill.yml')
+text <- paste(readLines(config, encoding = 'UTF-8'), collapse = '\n')
+old_controls <- '  request_controls:\n    timeout: 30\n    max_retries: 0\n    retry_writes: no\n'
+stopifnot(grepl(old_controls, text, fixed = TRUE))
+text <- sub(
+  old_controls,
+  paste0(
+    "  # ECHO's POST routes are read-only searches, so retrying them is safe. 60 s covers\n",
+    '  # slow searches; downloads and large result pages can take longer.\n',
+    '  request_controls:\n    timeout: 60\n    max_retries: 2\n    retry_writes: yes\n',
+    '    retry_policy: echo_retry_policy\n  response_policy: echo_response_policy\n'
+  ),
+  text,
+  fixed = TRUE
+)
+writeLines(text, config)
 
 # Drop the namespace segment that route-derived naming leaves in each name
 # (sdw_sdw_rest_services_get_systems -> sdw_get_systems). Names live in the
