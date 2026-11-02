@@ -15,4 +15,4 @@ concurrency:
 jobs:
   commit-lint:
     name: Commit Lint
-    uses: seanthimons/baseline/.github/workflows/commit-lint.yaml@c99a0a60eed152a08d1e34841d45573fef812af2 # v1.2.0
+    uses: seanthimons/baseline/.github/workflows/commit-lint.yaml@e53831a23ef8f543c3fee58edd390089b0f13a27 # v1.4.0
