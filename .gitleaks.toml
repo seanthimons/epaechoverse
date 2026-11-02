@@ -1,0 +1,11 @@
+title = "gitleaks configuration"
+
+[extend]
+useDefault = true
+
+# Per-repo allowlist. Keep entries narrow: one path, one regex, AND-ed.
+[allowlist]
+description = "specmill records SHA-256 file hashes keyed by file path; names such as api_auth.R and api_token.Rd trip the generic-api-key rule"
+paths = ['''\.specmill/manifest\.json''']
+regexes = ['''[0-9a-f]{64}''']
+condition = "AND"

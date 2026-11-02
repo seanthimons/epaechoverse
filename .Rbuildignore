@@ -9,3 +9,6 @@
 ^renv\.lock$
 ^\.Rprofile$
 ^dev$
+^\.github$
+^\.gitleaks\.toml$
+^\.gitattributes$

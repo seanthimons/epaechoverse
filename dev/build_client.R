@@ -139,7 +139,7 @@ stopifnot('^apis$' %in% rules)
 if (file.exists(file.path(root, 'renv.lock'))) {
   rules <- c(rules, '^renv$', '^renv\\.lock$', '^\\.Rprofile$')
 }
-writeLines(c(rules, '^dev$'), ignore)
+writeLines(c(rules, '^dev$', '^\\.github$', '^\\.gitleaks\\.toml$', '^\\.gitattributes$'), ignore)
 
 plan <- specmill::generate_client(root, config = 'specmill.yml', mode = 'plan')
 stopifnot(length(plan$operations) == expected, !length(plan$diagnostics))
