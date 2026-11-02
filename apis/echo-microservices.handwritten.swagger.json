@@ -1,0 +1,198 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ECHO (hand-authored) - Microservices",
+    "description": "HAND-AUTHORED, not an EPA-published schema. Written 2026-11-02 from the behavior of the live service and from how the echo.epa.gov front end calls it. Only parameters that were exercised against the live service are listed; the service may accept or ignore others, and it can change without notice. Service micro_services. Both routes were verified with p_id. get_frs_id returns an empty or malformed JSON array (no closing bracket) when the id is not a program system ID, which breaks JSON parsing; pass a program system ID such as an ICIS-Air ID.",
+    "version": "handwritten-2026-11-02"
+  },
+  "host": "echodata.epa.gov",
+  "basePath": "/echo",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "paths": {
+    "/micro_services.get_frs_id": {
+      "get": {
+        "summary": "FRS registry ID lookup",
+        "description": "Maps a program system ID (for example an ICIS-Air ID such as OH0000000123010434) to the FRS registry ID. Returns FRSIds with PgmSysAcrnm, PgmSysId and RegistryId.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_id",
+            "description": "Program system ID, e.g. an ICIS-Air ID.",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "Microservices"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "FRS registry ID lookup",
+        "description": "Maps a program system ID (for example an ICIS-Air ID such as OH0000000123010434) to the FRS registry ID. Returns FRSIds with PgmSysAcrnm, PgmSysId and RegistryId.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_id",
+            "description": "Program system ID, e.g. an ICIS-Air ID.",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "Microservices"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/micro_services.get_ama_sites_5k": {
+      "get": {
+        "summary": "Air monitoring sites within 5 km (AMA sites)",
+        "description": "Returns MonitorStations for the facility. Often empty. Name and meaning inferred from the route name.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_id",
+            "description": "Facility identifier (FRS registry ID or program system ID).",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "Microservices"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Air monitoring sites within 5 km (AMA sites)",
+        "description": "Returns MonitorStations for the facility. Often empty. Name and meaning inferred from the route name.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_id",
+            "description": "Facility identifier (FRS registry ID or program system ID).",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "Microservices"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}

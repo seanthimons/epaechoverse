@@ -1,0 +1,200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ECHO (hand-authored) - Clean Air Tracking Tool NIF Rest Services (SSO)",
+    "description": "HAND-AUTHORED, not an EPA-published schema. Written 2026-11-02 from how the echo.epa.gov front end calls the service. Only the existence and access behavior of the routes was observed; their parameters were never exercised against a live service. NOT SERVED ON THE PUBLIC PATH. On /echo this service returns HTTP 404 (checked 2026-11-02). The ECHO front end sends government and EPA users to /echogov, /echoepa or /echoes instead, and an anonymous request to /echogov is redirected (HTTP 303) to the EPA SAML login, so the service looks access-controlled rather than down. This schema keeps the public /echo base path so calls fail loudly with a 404; set the package base_url to https://echodata.epa.gov/echogov only if you hold an EPA session, which this client cannot establish. Only output, callback, qid, pageno and qcolumns are listed, copied from the front end and sibling services and never exercised against a live session. Service ecatt_nif_rest_services. Its search filters are unknown, so get_facilities lists none.",
+    "version": "handwritten-2026-11-02"
+  },
+  "host": "echodata.epa.gov",
+  "basePath": "/echo",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "paths": {
+    "/ecatt_nif_rest_services.get_facilities": {
+      "get": {
+        "summary": "ECATT NIF search",
+        "description": "Runs a search and returns a QueryID. Search filters are unknown.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "ECATT NIF"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "ECATT NIF search",
+        "description": "Runs a search and returns a QueryID. Search filters are unknown.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "ECATT NIF"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/ecatt_nif_rest_services.get_qid": {
+      "get": {
+        "summary": "ECATT NIF paginated results",
+        "description": "One page of results for a QueryID.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "qid",
+            "description": "Query ID returned by a previous search call (QueryID in its Results).",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          },
+          {
+            "name": "pageno",
+            "description": "Page number of results to return.",
+            "type": "number",
+            "required": false,
+            "default": 1,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "ECATT NIF"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "ECATT NIF paginated results",
+        "description": "One page of results for a QueryID.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "qid",
+            "description": "Query ID returned by a previous search call (QueryID in its Results).",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          },
+          {
+            "name": "pageno",
+            "description": "Page number of results to return.",
+            "type": "number",
+            "required": false,
+            "default": 1,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "ECATT NIF"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}

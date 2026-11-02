@@ -1,0 +1,198 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ECHO (hand-authored) - Detailed Facility Report Demographics by ID",
+    "description": "HAND-AUTHORED, not an EPA-published schema. Written 2026-11-02 from the behavior of the live service and from how the echo.epa.gov front end calls it. Only parameters that were exercised against the live service are listed; the service may accept or ignore others, and it can change without notice. Fills gaps in the EPA DFR schema, whose get_acsx_demographics and get_sab_acs_demographics_by_id entries are empty and whose get_acs2023x_demographics takes latitude/longitude/radius. get_acs2023x_demographics_by_id was verified: it returns ACS 2023 demographics for an FRS registry ID. get_demographics_by_id is the unversioned name used by the front end; it returned HTTP 500 for every registry ID tried on 2026-11-02, so treat it as currently failing.",
+    "version": "handwritten-2026-11-02"
+  },
+  "host": "echodata.epa.gov",
+  "basePath": "/echo",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "paths": {
+    "/dfr_rest_services.get_acs2023x_demographics_by_id": {
+      "get": {
+        "summary": "ACS 2023 demographics by facility ID",
+        "description": "Returns American Community Survey demographics around the facility with the given FRS registry ID.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_id",
+            "description": "FRS registry ID, e.g. 110000381989.",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "DFR Demographics"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "ACS 2023 demographics by facility ID",
+        "description": "Returns American Community Survey demographics around the facility with the given FRS registry ID.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_id",
+            "description": "FRS registry ID, e.g. 110000381989.",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "DFR Demographics"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/dfr_rest_services.get_demographics_by_id": {
+      "get": {
+        "summary": "Demographics by facility ID (unversioned name)",
+        "description": "Name used by the ECHO front end. Currently returns HTTP 500.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_id",
+            "description": "FRS registry ID.",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "DFR Demographics"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Demographics by facility ID (unversioned name)",
+        "description": "Name used by the ECHO front end. Currently returns HTTP 500.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_id",
+            "description": "FRS registry ID.",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "DFR Demographics"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}

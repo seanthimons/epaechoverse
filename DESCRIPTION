@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: person("Sean", "Thimons", email = "sxthi@outlook.com", role
         = c('aut', 'cre'))
 Description: Generated client for the U.S. EPA Enforcement and Compliance
-    History Online (ECHO) web service APIs (17 APIs, 561 operations),
+    History Online (ECHO) web service APIs (25 APIs, 603 operations),
     built with specmill from local Swagger schemas.
 License: MIT + file LICENSE
 Encoding: UTF-8

@@ -1,20 +1,31 @@
 # One-time bootstrap of the epaechoverse package with specmill.
 #
-# Usage:
-#   Rscript dev/harvest_schemas.R <project root>/apis
-#   Rscript dev/build_client.R <project root>
+# Usage, from the project root so .Rprofile activates renv and the build uses the
+# specmill release pinned in renv.lock, not whatever is installed in your user
+# library:
+#   Rscript dev/harvest_schemas.R apis
+#   Rscript dev/build_client.R .
 #
-# The schemas stay in apis/ exactly as downloaded; specmill copies them to
-# schema/ and writes the per-API YAML next to them. This script initializes the
-# package, so it cannot be re-run on an existing client. To change the client
-# afterwards, edit apis/*.yml and use specmill::generate_client() in
-# plan -> apply -> check mode.
+# This is a one-time bootstrap: it initializes the package and refuses to run
+# when DESCRIPTION exists. To regenerate from scratch, move the generated files
+# (DESCRIPTION, NAMESPACE, LICENSE, R/, man/, schema/, apis/*.yml, specmill*.yml,
+# .specmill/, .Rbuildignore) aside first. To change the client afterwards, edit
+# apis/*.yml and use specmill::generate_client() in plan -> apply -> check mode.
+#
+# On a fresh clone run renv::restore() first. It installs specmill from GitHub
+# (seanthimons/specmill, pinned in renv.lock) and compiles V8 and yaml12 from
+# source, which needs a system libv8 and a Rust toolchain.
+#
+# Downloaded schemas stay in apis/ exactly as served, next to the hand-written
+# ones (rows with source 'hand' in echo_services.csv). Specmill copies them to
+# schema/ and writes the per-API YAML next to them.
 
 script_dir <- dirname(normalizePath(sub('^--file=', '', grep('^--file=', commandArgs(FALSE), value = TRUE)[[1L]])))
 root <- normalizePath(commandArgs(TRUE)[[1L]], winslash = '/', mustWork = TRUE)
 stopifnot(!file.exists(file.path(root, 'DESCRIPTION')))
 
-# prefix, file and API id for each schema (the API id is the function prefix).
+# prefix, file, API id and source (download or hand) for each schema; the API id
+# is the function prefix.
 services <- utils::read.csv(file.path(script_dir, 'echo_services.csv'), stringsAsFactors = FALSE)
 schemas <- file.path(root, 'apis', services$file)
 stopifnot(all(file.exists(schemas)))
@@ -40,7 +51,16 @@ namespaces <- list(
   wplt = c(dmr_rest_services = '', rest_lookups = 'lookups'),
   caa = c(caa_poll_rpt_rest_services = ''),
   biosolids = character(),
-  lookup = c(rest_lookups = '')
+  lookup = c(rest_lookups = ''),
+  # Hand-authored schemas (source 'hand' in echo_services.csv).
+  cwa_viotrack = c(cwa_viotrack_services = ''),
+  rcra_viotrack = c(rcra_viotrack_services = ''),
+  air_viotrack = c(air_viotrack_services = ''),
+  ecatt_nif = c(ecatt_nif_rest_services = ''),
+  dfr_demographics = c(dfr_rest_services = ''),
+  micro = c(micro_services = ''),
+  pipeline = c(pipeline_rest_services = ''),
+  caa_csv = c(caa_poll_rpt_rest_services = '')
 )
 stopifnot(setequal(names(namespaces), services$api))
 
@@ -116,6 +136,9 @@ writeLines(text, description)
 ignore <- file.path(root, '.Rbuildignore')
 rules <- readLines(ignore)
 stopifnot('^apis$' %in% rules)
+if (file.exists(file.path(root, 'renv.lock'))) {
+  rules <- c(rules, '^renv$', '^renv\\.lock$', '^\\.Rprofile$')
+}
 writeLines(c(rules, '^dev$'), ignore)
 
 plan <- specmill::generate_client(root, config = 'specmill.yml', mode = 'plan')

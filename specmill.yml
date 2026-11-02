@@ -22,6 +22,14 @@ services:
 - apis/caa.yml
 - apis/biosolids.yml
 - apis/lookup.yml
+- apis/cwa_viotrack.yml
+- apis/rcra_viotrack.yml
+- apis/air_viotrack.yml
+- apis/ecatt_nif.yml
+- apis/dfr_demographics.yml
+- apis/micro.yml
+- apis/pipeline.yml
+- apis/caa_csv.yml
 selection:
   methods:
   - GET

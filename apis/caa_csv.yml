@@ -1,0 +1,56 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: caa_csv
+schemas:
+  files:
+  - schema/caa_csv.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: caa_csv_request
+authentication: {}
+defaults: {}
+groups:
+  caa_csv_air_pollutant_report:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /caa_poll_rpt_rest_services.get_caa_csv
+      - POST /caa_poll_rpt_rest_services.get_caa_csv
+    names:
+      GET /caa_poll_rpt_rest_services.get_caa_csv: caa_csv_get_caa_csv
+      POST /caa_poll_rpt_rest_services.get_caa_csv: caa_csv_get_caa_csv_post
+    defaults:
+      file: R/caa_csv_air_pollutant_report.R
+      docs:
+        tags:
+          family: Air Pollutant Report endpoints
+    operations: {}

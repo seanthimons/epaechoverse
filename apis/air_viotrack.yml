@@ -1,0 +1,68 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: air_viotrack
+schemas:
+  files:
+  - schema/air_viotrack.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: air_viotrack_request
+authentication: {}
+defaults: {}
+groups:
+  air_viotrack_violation_tracker:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /air_viotrack_services.get_cases
+      - POST /air_viotrack_services.get_cases
+      - GET /air_viotrack_services.get_download
+      - POST /air_viotrack_services.get_download
+      - GET /air_viotrack_services.get_qid
+      - POST /air_viotrack_services.get_qid
+      - GET /air_viotrack_services.metadata
+      - POST /air_viotrack_services.metadata
+    names:
+      GET /air_viotrack_services.get_cases: air_viotrack_get_cases
+      POST /air_viotrack_services.get_cases: air_viotrack_get_cases_post
+      GET /air_viotrack_services.get_download: air_viotrack_get_download
+      POST /air_viotrack_services.get_download: air_viotrack_get_download_post
+      GET /air_viotrack_services.get_qid: air_viotrack_get_qid
+      POST /air_viotrack_services.get_qid: air_viotrack_get_qid_post
+      GET /air_viotrack_services.metadata: air_viotrack_metadata
+      POST /air_viotrack_services.metadata: air_viotrack_metadata_post
+    defaults:
+      file: R/air_viotrack_violation_tracker.R
+      docs:
+        tags:
+          family: Violation Tracker endpoints
+    operations: {}

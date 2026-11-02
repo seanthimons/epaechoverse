@@ -1,0 +1,78 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ECHO (hand-authored) - Air Pollutant Report CSV Download",
+    "description": "HAND-AUTHORED, not an EPA-published schema. Written 2026-11-02 from the behavior of the live service and from how the echo.epa.gov front end calls it. Only parameters that were exercised against the live service are listed; the service may accept or ignore others, and it can change without notice. Route caa_poll_rpt_rest_services.get_caa_csv, used by the ECHO Air Pollutant Report download button. The documented get_caapr route rejects output=CSV (HTTP 200 with an error), and no other documented route returns this table as CSV, so it is added here. p_id is an FRS registry ID; the service itself returns only the header row for a missing or unmatched id. Columns: registry_id, air_program, pgm_sys_acrnm, pgm_sys_ids, pollutant_name, unit_of_measure, one column per year, nei_type, nei_hap_voc_flag.",
+    "version": "handwritten-2026-11-02"
+  },
+  "host": "echodata.epa.gov",
+  "basePath": "/echo",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "paths": {
+    "/caa_poll_rpt_rest_services.get_caa_csv": {
+      "get": {
+        "summary": "Air pollutant report as CSV",
+        "description": "Returns the facility air pollutant emissions table as a CSV file.",
+        "parameters": [
+          {
+            "name": "p_id",
+            "description": "FRS registry ID, e.g. 110000381989.",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "Air Pollutant Report"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results are a comma separated value (CSV) file.",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "produces": [
+          "text/csv"
+        ]
+      },
+      "post": {
+        "summary": "Air pollutant report as CSV",
+        "description": "Returns the facility air pollutant emissions table as a CSV file.",
+        "parameters": [
+          {
+            "name": "p_id",
+            "description": "FRS registry ID, e.g. 110000381989.",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "Air Pollutant Report"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results are a comma separated value (CSV) file.",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "produces": [
+          "text/csv"
+        ]
+      }
+    }
+  }
+}

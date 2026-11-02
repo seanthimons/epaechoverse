@@ -1,0 +1,422 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ECHO (hand-authored) - Clean Water Act Violation Tracker Rest Services",
+    "description": "HAND-AUTHORED, not an EPA-published schema. Written 2026-11-02 from the behavior of the live service and from how the echo.epa.gov front end calls it. Only parameters that were exercised against the live service are listed; the service may accept or ignore others, and it can change without notice. Service cwa_viotrack_services on the public /echo path. Honored filters found by probing: p_st, p_ptype, p_maj, p_ico. Filters of the documented CWA facility search such as p_zip, p_co, p_act, p_fips, p_reg, p_pid, p_fn and p_naics did not change the result when probed.",
+    "version": "handwritten-2026-11-02"
+  },
+  "host": "echodata.epa.gov",
+  "basePath": "/echo",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "paths": {
+    "/cwa_viotrack_services.metadata": {
+      "get": {
+        "summary": "CWA Violation Tracker metadata",
+        "description": "Lists the output columns (name, type, column ID) available to cwa_viotrack_services.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "Violation Tracker"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "CWA Violation Tracker metadata",
+        "description": "Lists the output columns (name, type, column ID) available to cwa_viotrack_services.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "Violation Tracker"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/cwa_viotrack_services.get_facilities": {
+      "get": {
+        "summary": "CWA Violation Tracker search",
+        "description": "Runs a search and returns a QueryID and row count (QueryRows). Use get_qid to page through results or get_download for CSV. Searches that would return too many rows return an error asking for more selective parameters.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_st",
+            "description": "Facility state or state-equivalent (USPS abbreviation, e.g. RI). Without a narrowing filter such as this, searches usually exceed the row limit.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_ptype",
+            "description": "Permit type code, e.g. NPD (NPDES individual permit). Same codes as the CWA facility search.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_maj",
+            "description": "Major designation. The service reports the allowed values as none, 'M', 'N'.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_ico",
+            "description": "Indian Country flag. Y or N.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "Y",
+              "N"
+            ],
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "Violation Tracker"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "CWA Violation Tracker search",
+        "description": "Runs a search and returns a QueryID and row count (QueryRows). Use get_qid to page through results or get_download for CSV. Searches that would return too many rows return an error asking for more selective parameters.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_st",
+            "description": "Facility state or state-equivalent (USPS abbreviation, e.g. RI). Without a narrowing filter such as this, searches usually exceed the row limit.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_ptype",
+            "description": "Permit type code, e.g. NPD (NPDES individual permit). Same codes as the CWA facility search.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_maj",
+            "description": "Major designation. The service reports the allowed values as none, 'M', 'N'.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_ico",
+            "description": "Indian Country flag. Y or N.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "Y",
+              "N"
+            ],
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "Violation Tracker"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/cwa_viotrack_services.get_qid": {
+      "get": {
+        "summary": "CWA Violation Tracker paginated results",
+        "description": "Returns one page of results for a QueryID from get_facilities.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "qid",
+            "description": "Query ID returned by a previous search call (QueryID in its Results).",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          },
+          {
+            "name": "pageno",
+            "description": "Page number of results to return.",
+            "type": "number",
+            "required": false,
+            "default": 1,
+            "in": "query"
+          },
+          {
+            "name": "qcolumns",
+            "description": "Comma-separated column IDs to return; see the metadata route for the IDs.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "Violation Tracker"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "CWA Violation Tracker paginated results",
+        "description": "Returns one page of results for a QueryID from get_facilities.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "qid",
+            "description": "Query ID returned by a previous search call (QueryID in its Results).",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          },
+          {
+            "name": "pageno",
+            "description": "Page number of results to return.",
+            "type": "number",
+            "required": false,
+            "default": 1,
+            "in": "formData"
+          },
+          {
+            "name": "qcolumns",
+            "description": "Comma-separated column IDs to return; see the metadata route for the IDs.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "Violation Tracker"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/cwa_viotrack_services.get_download": {
+      "get": {
+        "summary": "CWA Violation Tracker download",
+        "description": "Returns the results for a QueryID as CSV (always CSV, whatever output says).",
+        "parameters": [
+          {
+            "name": "qid",
+            "description": "Query ID returned by a previous search call (QueryID in its Results).",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          },
+          {
+            "name": "qcolumns",
+            "description": "Comma-separated column IDs to return; see the metadata route for the IDs.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "Violation Tracker"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results are a comma separated value (CSV) file.",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "produces": [
+          "text/csv"
+        ]
+      },
+      "post": {
+        "summary": "CWA Violation Tracker download",
+        "description": "Returns the results for a QueryID as CSV (always CSV, whatever output says).",
+        "parameters": [
+          {
+            "name": "qid",
+            "description": "Query ID returned by a previous search call (QueryID in its Results).",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          },
+          {
+            "name": "qcolumns",
+            "description": "Comma-separated column IDs to return; see the metadata route for the IDs.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "Violation Tracker"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results are a comma separated value (CSV) file.",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "produces": [
+          "text/csv"
+        ]
+      }
+    }
+  }
+}

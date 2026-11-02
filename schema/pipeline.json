@@ -1,0 +1,198 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ECHO (hand-authored) - Pipeline Rest Services",
+    "description": "HAND-AUTHORED, not an EPA-published schema. Written 2026-11-02 from the behavior of the live service and from how the echo.epa.gov front end calls it. Only parameters that were exercised against the live service are listed; the service may accept or ignore others, and it can change without notice. Service pipeline_rest_services. Both routes were verified: they return inspections, violations and enforcement actions for a facility (with a PipelineFlag), and accept either an FRS registry ID or the program system ID. XML output works. KNOWN SERVER BUG: when the id has no matching records (cnt 0) or is unknown, the JSON response has a trailing comma and is invalid, so strict JSON parsers fail; facilities that have records return valid JSON.",
+    "version": "handwritten-2026-11-02"
+  },
+  "host": "echodata.epa.gov",
+  "basePath": "/echo",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "paths": {
+    "/pipeline_rest_services.get_pipeline_air": {
+      "get": {
+        "summary": "Air inspections, violations and enforcement actions",
+        "description": "Returns AirInspectionsViolationsEnforcementActions for an ICIS-Air ID or FRS registry ID.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_id",
+            "description": "ICIS-Air ID (e.g. OH0000000123010434) or FRS registry ID.",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "Pipeline"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Air inspections, violations and enforcement actions",
+        "description": "Returns AirInspectionsViolationsEnforcementActions for an ICIS-Air ID or FRS registry ID.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_id",
+            "description": "ICIS-Air ID (e.g. OH0000000123010434) or FRS registry ID.",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "Pipeline"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/pipeline_rest_services.get_pipeline_rcra": {
+      "get": {
+        "summary": "RCRA inspections, violations and enforcement actions",
+        "description": "Returns RcraInspectionsViolationsEnforcementActions for a RCRA handler ID or FRS registry ID.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "query"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "query"
+          },
+          {
+            "name": "p_id",
+            "description": "RCRA handler ID or FRS registry ID.",
+            "type": "string",
+            "required": true,
+            "in": "query"
+          }
+        ],
+        "tags": [
+          "Pipeline"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "RCRA inspections, violations and enforcement actions",
+        "description": "Returns RcraInspectionsViolationsEnforcementActions for a RCRA handler ID or FRS registry ID.",
+        "parameters": [
+          {
+            "name": "output",
+            "description": "Output format. JSON (default), JSONP, or XML.",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "JSON",
+              "JSONP",
+              "XML"
+            ],
+            "in": "formData"
+          },
+          {
+            "name": "callback",
+            "description": "JSONP callback. Name of the function in which to wrap the JSON response; used only with output=JSONP.",
+            "type": "string",
+            "required": false,
+            "in": "formData"
+          },
+          {
+            "name": "p_id",
+            "description": "RCRA handler ID or FRS registry ID.",
+            "type": "string",
+            "required": true,
+            "in": "formData"
+          }
+        ],
+        "tags": [
+          "Pipeline"
+        ],
+        "responses": {
+          "200": {
+            "description": "Results object (JSON) or XML.",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}

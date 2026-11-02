@@ -1,0 +1,60 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: micro
+schemas:
+  files:
+  - schema/micro.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: micro_request
+authentication: {}
+defaults: {}
+groups:
+  micro_microservices:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /micro_services.get_ama_sites_5k
+      - POST /micro_services.get_ama_sites_5k
+      - GET /micro_services.get_frs_id
+      - POST /micro_services.get_frs_id
+    names:
+      GET /micro_services.get_ama_sites_5k: micro_get_ama_sites_5k
+      POST /micro_services.get_ama_sites_5k: micro_get_ama_sites_5k_post
+      GET /micro_services.get_frs_id: micro_get_frs_id
+      POST /micro_services.get_frs_id: micro_get_frs_id_post
+    defaults:
+      file: R/micro_microservices.R
+      docs:
+        tags:
+          family: Microservices endpoints
+    operations: {}

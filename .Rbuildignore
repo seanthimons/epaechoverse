@@ -5,4 +5,7 @@
 ^specmill-apis\.yml$
 ^build\.R$
 ^.*\.(json|ya?ml)$
+^renv$
+^renv\.lock$
+^\.Rprofile$
 ^dev$

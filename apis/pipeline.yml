@@ -1,0 +1,60 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: pipeline
+schemas:
+  files:
+  - schema/pipeline.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: pipeline_request
+authentication: {}
+defaults: {}
+groups:
+  pipeline_pipeline:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /pipeline_rest_services.get_pipeline_air
+      - POST /pipeline_rest_services.get_pipeline_air
+      - GET /pipeline_rest_services.get_pipeline_rcra
+      - POST /pipeline_rest_services.get_pipeline_rcra
+    names:
+      GET /pipeline_rest_services.get_pipeline_air: pipeline_get_pipeline_air
+      POST /pipeline_rest_services.get_pipeline_air: pipeline_get_pipeline_air_post
+      GET /pipeline_rest_services.get_pipeline_rcra: pipeline_get_pipeline_rcra
+      POST /pipeline_rest_services.get_pipeline_rcra: pipeline_get_pipeline_rcra_post
+    defaults:
+      file: R/pipeline_pipeline.R
+      docs:
+        tags:
+          family: Pipeline endpoints
+    operations: {}
