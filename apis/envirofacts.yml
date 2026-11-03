@@ -1,0 +1,1078 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: envirofacts
+schemas:
+  files:
+  - schema/envirofacts.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: ['^/(?!(sdwis)[.])']
+helper: envirofacts_request
+authentication: {}
+defaults:
+  inputs:
+    filter: {type: character, default: ~, description: "Conditions as column/operator/value, for example pwsid/beginsWith/RI; several are combined with and. Values may not contain a slash, backslash or percent sign, and the service rejected a value containing a dot when tested. NULL for none."}
+    first: {type: integer, default: 1, minimum: 1, description: First row to return (1-based).}
+    last: {type: integer, default: 100, minimum: 1, description: "Last row to return; at most options(epaechoverse.max_rows) = 10000 rows per call."}
+    format: {type: character, default: json, description: "Output format: json, csv or xml."}
+  request:
+    arguments:
+      method: {value: GET}
+      path: {callback: dmap_path}
+      path_params: {object: {}}
+      query: {object: {}}
+      body: {value: ~}
+      request_controls: {value: {timeout: 120, max_retries: 2, retry_writes: true, retry_policy: echo_retry_policy}}
+      response_policy: {value: echo_response_policy}
+groups:
+  envirofacts_acres:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /acres.award_classification
+      - GET /acres.census_da_burden_assoc
+      - GET /acres.cimc_grants_juris_cd_assoc
+      - GET /acres.comments
+      - GET /acres.congressional_district_assoc
+      - GET /acres.contaminant_assoc
+      - GET /acres.economic_zone_assoc
+      - GET /acres.efficiency_measure
+      - GET /acres.gpa_financial
+      - GET /acres.gpa_financial_rlf
+      - GET /acres.grant_awp_activity
+      - GET /acres.grant_awp_catalyst_site
+      - GET /acres.grant_awp_site_usage_acres
+      - GET /acres.grant_awp_usage_acres
+      - GET /acres.grant_expected_accomp
+      - GET /acres.grant_financial
+      - GET /acres.grant_levg_financial
+      - GET /acres.grant_multiregion_assoc
+      - GET /acres.grant_place_performance
+      - GET /acres.grant_property
+      - GET /acres.grant_property_accomplishment
+      - GET /acres.grant_property_assoc
+      - GET /acres.grant_rlf_program_income
+      - GET /acres.grant_supplemental
+      - GET /acres.grants
+      - GET /acres.job_training_accomplishment
+      - GET /acres.job_training_cohort_dates
+      - GET /acres.job_training_financial
+      - GET /acres.jurisdiction
+      - GET /acres.jurisdiction_assoc
+      - GET /acres.media_assoc
+      - GET /acres.news_alert
+      - GET /acres.p_pilot_accomplishment
+      - GET /acres.prop_climate_change_assoc
+      - GET /acres.property_review_comments
+      - GET /acres.property_usage
+      - GET /acres.ref_award
+      - GET /acres.ref_awp_activity
+      - GET /acres.ref_ca_closeout_explain
+      - GET /acres.ref_census_da_burden
+      - GET /acres.ref_census_da_category
+      - GET /acres.ref_census_tract_disadvantaged
+      - GET /acres.ref_cleanup_unknown
+      - GET /acres.ref_comment_type
+      - GET /acres.ref_contact_type_old
+      - GET /acres.ref_contaminant
+      - GET /acres.ref_economic_zone
+      - GET /acres.ref_entity_type
+      - GET /acres.ref_financial_amendment
+      - GET /acres.ref_financial_category
+      - GET /acres.ref_glf_resource_use
+      - GET /acres.ref_gp_funding_type
+      - GET /acres.ref_gpa_type
+      - GET /acres.ref_gpf_source_type
+      - GET /acres.ref_gpf_type
+      - GET /acres.ref_grant_expected_accomp
+      - GET /acres.ref_grant_status_type
+      - GET /acres.ref_grant_type
+      - GET /acres.ref_jta_type
+      - GET /acres.ref_jurisdiction_type
+      - GET /acres.ref_lat_long_datum_code
+      - GET /acres.ref_lat_long_hcm
+      - GET /acres.ref_lat_long_ref_point
+      - GET /acres.ref_media
+      - GET /acres.ref_module
+      - GET /acres.ref_ownership_entity
+      - GET /acres.ref_par
+      - GET /acres.ref_program
+      - GET /acres.ref_prop_climate_change
+      - GET /acres.ref_property_deletion
+      - GET /acres.ref_quarter
+      - GET /acres.ref_region
+      - GET /acres.ref_role
+      - GET /acres.ref_role_group
+      - GET /acres.ref_state
+      - GET /acres.ref_ta_activity
+      - GET /acres.ref_ta_budget_item
+      - GET /acres.ref_ta_climate_change
+      - GET /acres.ref_ta_engagement
+      - GET /acres.ref_ta_funding_type
+      - GET /acres.ref_ta_recipient_type
+      - GET /acres.ref_tab_assistance_type
+      - GET /acres.ref_tab_community_type
+      - GET /acres.ref_tab_project_type
+      - GET /acres.ref_tab_relevant_loc
+      - GET /acres.ref_usage_type
+      - GET /acres.ref_zip_code
+      - GET /acres.role_assoc
+      - GET /acres.role_module_access
+      - GET /acres.ta_activity_assoc
+      - GET /acres.ta_budget_item_assoc
+      - GET /acres.ta_census_tracts
+      - GET /acres.ta_climate_change_assoc
+      - GET /acres.ta_engagement_assoc
+      - GET /acres.ta_engagement_assoc_dates
+      - GET /acres.ta_funding_type_activity_assoc
+      - GET /acres.ta_grant_assoc
+      - GET /acres.ta_grant_property_assoc
+      - GET /acres.ta_submission_archive
+      - GET /acres.tab_proj_region_assoc
+      - GET /acres.tab_proj_ta_census_tracts
+      - GET /acres.tab_proj_ta_climate_assoc
+      - GET /acres.tab_proj_ta_dates
+      - GET /acres.tab_proj_tech_assist
+      - GET /acres.tab_proj_training_dates
+      - GET /acres.tab_project
+      - GET /acres.tech_assist_contractors
+      - GET /acres.tech_assist_proj
+      - GET /acres.xref_grant_type_gea
+      - GET /acres.xref_property_clnup_ukn_assoc
+    names:
+      GET /acres.award_classification: envirofacts_acres_award_classification
+      GET /acres.census_da_burden_assoc: envirofacts_acres_census_da_burden_assoc
+      GET /acres.cimc_grants_juris_cd_assoc: envirofacts_acres_cimc_grants_juris_cd_assoc
+      GET /acres.comments: envirofacts_acres_comments
+      GET /acres.congressional_district_assoc: envirofacts_acres_congressional_district_assoc
+      GET /acres.contaminant_assoc: envirofacts_acres_contaminant_assoc
+      GET /acres.economic_zone_assoc: envirofacts_acres_economic_zone_assoc
+      GET /acres.efficiency_measure: envirofacts_acres_efficiency_measure
+      GET /acres.gpa_financial: envirofacts_acres_gpa_financial
+      GET /acres.gpa_financial_rlf: envirofacts_acres_gpa_financial_rlf
+      GET /acres.grant_awp_activity: envirofacts_acres_grant_awp_activity
+      GET /acres.grant_awp_catalyst_site: envirofacts_acres_grant_awp_catalyst_site
+      GET /acres.grant_awp_site_usage_acres: envirofacts_acres_grant_awp_site_usage_acres
+      GET /acres.grant_awp_usage_acres: envirofacts_acres_grant_awp_usage_acres
+      GET /acres.grant_expected_accomp: envirofacts_acres_grant_expected_accomp
+      GET /acres.grant_financial: envirofacts_acres_grant_financial
+      GET /acres.grant_levg_financial: envirofacts_acres_grant_levg_financial
+      GET /acres.grant_multiregion_assoc: envirofacts_acres_grant_multiregion_assoc
+      GET /acres.grant_place_performance: envirofacts_acres_grant_place_performance
+      GET /acres.grant_property: envirofacts_acres_grant_property
+      GET /acres.grant_property_accomplishment: envirofacts_acres_grant_property_accomplishment
+      GET /acres.grant_property_assoc: envirofacts_acres_grant_property_assoc
+      GET /acres.grant_rlf_program_income: envirofacts_acres_grant_rlf_program_income
+      GET /acres.grant_supplemental: envirofacts_acres_grant_supplemental
+      GET /acres.grants: envirofacts_acres_grants
+      GET /acres.job_training_accomplishment: envirofacts_acres_job_training_accomplishment
+      GET /acres.job_training_cohort_dates: envirofacts_acres_job_training_cohort_dates
+      GET /acres.job_training_financial: envirofacts_acres_job_training_financial
+      GET /acres.jurisdiction: envirofacts_acres_jurisdiction
+      GET /acres.jurisdiction_assoc: envirofacts_acres_jurisdiction_assoc
+      GET /acres.media_assoc: envirofacts_acres_media_assoc
+      GET /acres.news_alert: envirofacts_acres_news_alert
+      GET /acres.p_pilot_accomplishment: envirofacts_acres_p_pilot_accomplishment
+      GET /acres.prop_climate_change_assoc: envirofacts_acres_prop_climate_change_assoc
+      GET /acres.property_review_comments: envirofacts_acres_property_review_comments
+      GET /acres.property_usage: envirofacts_acres_property_usage
+      GET /acres.ref_award: envirofacts_acres_ref_award
+      GET /acres.ref_awp_activity: envirofacts_acres_ref_awp_activity
+      GET /acres.ref_ca_closeout_explain: envirofacts_acres_ref_ca_closeout_explain
+      GET /acres.ref_census_da_burden: envirofacts_acres_ref_census_da_burden
+      GET /acres.ref_census_da_category: envirofacts_acres_ref_census_da_category
+      GET /acres.ref_census_tract_disadvantaged: envirofacts_acres_ref_census_tract_disadvantaged
+      GET /acres.ref_cleanup_unknown: envirofacts_acres_ref_cleanup_unknown
+      GET /acres.ref_comment_type: envirofacts_acres_ref_comment_type
+      GET /acres.ref_contact_type_old: envirofacts_acres_ref_contact_type_old
+      GET /acres.ref_contaminant: envirofacts_acres_ref_contaminant
+      GET /acres.ref_economic_zone: envirofacts_acres_ref_economic_zone
+      GET /acres.ref_entity_type: envirofacts_acres_ref_entity_type
+      GET /acres.ref_financial_amendment: envirofacts_acres_ref_financial_amendment
+      GET /acres.ref_financial_category: envirofacts_acres_ref_financial_category
+      GET /acres.ref_glf_resource_use: envirofacts_acres_ref_glf_resource_use
+      GET /acres.ref_gp_funding_type: envirofacts_acres_ref_gp_funding_type
+      GET /acres.ref_gpa_type: envirofacts_acres_ref_gpa_type
+      GET /acres.ref_gpf_source_type: envirofacts_acres_ref_gpf_source_type
+      GET /acres.ref_gpf_type: envirofacts_acres_ref_gpf_type
+      GET /acres.ref_grant_expected_accomp: envirofacts_acres_ref_grant_expected_accomp
+      GET /acres.ref_grant_status_type: envirofacts_acres_ref_grant_status_type
+      GET /acres.ref_grant_type: envirofacts_acres_ref_grant_type
+      GET /acres.ref_jta_type: envirofacts_acres_ref_jta_type
+      GET /acres.ref_jurisdiction_type: envirofacts_acres_ref_jurisdiction_type
+      GET /acres.ref_lat_long_datum_code: envirofacts_acres_ref_lat_long_datum_code
+      GET /acres.ref_lat_long_hcm: envirofacts_acres_ref_lat_long_hcm
+      GET /acres.ref_lat_long_ref_point: envirofacts_acres_ref_lat_long_ref_point
+      GET /acres.ref_media: envirofacts_acres_ref_media
+      GET /acres.ref_module: envirofacts_acres_ref_module
+      GET /acres.ref_ownership_entity: envirofacts_acres_ref_ownership_entity
+      GET /acres.ref_par: envirofacts_acres_ref_par
+      GET /acres.ref_program: envirofacts_acres_ref_program
+      GET /acres.ref_prop_climate_change: envirofacts_acres_ref_prop_climate_change
+      GET /acres.ref_property_deletion: envirofacts_acres_ref_property_deletion
+      GET /acres.ref_quarter: envirofacts_acres_ref_quarter
+      GET /acres.ref_region: envirofacts_acres_ref_region
+      GET /acres.ref_role: envirofacts_acres_ref_role
+      GET /acres.ref_role_group: envirofacts_acres_ref_role_group
+      GET /acres.ref_state: envirofacts_acres_ref_state
+      GET /acres.ref_ta_activity: envirofacts_acres_ref_ta_activity
+      GET /acres.ref_ta_budget_item: envirofacts_acres_ref_ta_budget_item
+      GET /acres.ref_ta_climate_change: envirofacts_acres_ref_ta_climate_change
+      GET /acres.ref_ta_engagement: envirofacts_acres_ref_ta_engagement
+      GET /acres.ref_ta_funding_type: envirofacts_acres_ref_ta_funding_type
+      GET /acres.ref_ta_recipient_type: envirofacts_acres_ref_ta_recipient_type
+      GET /acres.ref_tab_assistance_type: envirofacts_acres_ref_tab_assistance_type
+      GET /acres.ref_tab_community_type: envirofacts_acres_ref_tab_community_type
+      GET /acres.ref_tab_project_type: envirofacts_acres_ref_tab_project_type
+      GET /acres.ref_tab_relevant_loc: envirofacts_acres_ref_tab_relevant_loc
+      GET /acres.ref_usage_type: envirofacts_acres_ref_usage_type
+      GET /acres.ref_zip_code: envirofacts_acres_ref_zip_code
+      GET /acres.role_assoc: envirofacts_acres_role_assoc
+      GET /acres.role_module_access: envirofacts_acres_role_module_access
+      GET /acres.ta_activity_assoc: envirofacts_acres_ta_activity_assoc
+      GET /acres.ta_budget_item_assoc: envirofacts_acres_ta_budget_item_assoc
+      GET /acres.ta_census_tracts: envirofacts_acres_ta_census_tracts
+      GET /acres.ta_climate_change_assoc: envirofacts_acres_ta_climate_change_assoc
+      GET /acres.ta_engagement_assoc: envirofacts_acres_ta_engagement_assoc
+      GET /acres.ta_engagement_assoc_dates: envirofacts_acres_ta_engagement_assoc_dates
+      GET /acres.ta_funding_type_activity_assoc: envirofacts_acres_ta_funding_type_activity_assoc
+      GET /acres.ta_grant_assoc: envirofacts_acres_ta_grant_assoc
+      GET /acres.ta_grant_property_assoc: envirofacts_acres_ta_grant_property_assoc
+      GET /acres.ta_submission_archive: envirofacts_acres_ta_submission_archive
+      GET /acres.tab_proj_region_assoc: envirofacts_acres_tab_proj_region_assoc
+      GET /acres.tab_proj_ta_census_tracts: envirofacts_acres_tab_proj_ta_census_tracts
+      GET /acres.tab_proj_ta_climate_assoc: envirofacts_acres_tab_proj_ta_climate_assoc
+      GET /acres.tab_proj_ta_dates: envirofacts_acres_tab_proj_ta_dates
+      GET /acres.tab_proj_tech_assist: envirofacts_acres_tab_proj_tech_assist
+      GET /acres.tab_proj_training_dates: envirofacts_acres_tab_proj_training_dates
+      GET /acres.tab_project: envirofacts_acres_tab_project
+      GET /acres.tech_assist_contractors: envirofacts_acres_tech_assist_contractors
+      GET /acres.tech_assist_proj: envirofacts_acres_tech_assist_proj
+      GET /acres.xref_grant_type_gea: envirofacts_acres_xref_grant_type_gea
+      GET /acres.xref_property_clnup_ukn_assoc: envirofacts_acres_xref_property_clnup_ukn_assoc
+    defaults:
+      file: R/envirofacts_acres.R
+      docs:
+        tags:
+          family: acres endpoints
+    operations: {}
+  envirofacts_frs:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /frs.frs_agency_ref
+      - GET /frs.frs_alt_name
+      - GET /frs.frs_code_description
+      - GET /frs.frs_facility_site
+      - GET /frs.frs_interest
+      - GET /frs.frs_interest_ref
+      - GET /frs.frs_naics
+      - GET /frs.frs_program_facility
+      - GET /frs.frs_sic
+      - GET /frs.frs_supplemental_interest
+      - GET /frs.geo_collect_mth_lk
+      - GET /frs.geo_facility_point
+      - GET /frs.geo_horiz_datum_lk
+      - GET /frs.geo_pgm_facility_coordinate
+      - GET /frs.geo_ref_point_lk
+      - GET /frs.v_frs_facility_site_geo_tribes
+      - GET /frs.v_frs_facility_site_geopgm
+      - GET /frs.v_frs_pgm_facility_geotribes
+      - GET /frs.v_pub_frs_naics_ez
+      - GET /frs.v_pub_frs_sic_ez
+    names:
+      GET /frs.frs_agency_ref: envirofacts_frs_frs_agency_ref
+      GET /frs.frs_alt_name: envirofacts_frs_frs_alt_name
+      GET /frs.frs_code_description: envirofacts_frs_frs_code_description
+      GET /frs.frs_facility_site: envirofacts_frs_frs_facility_site
+      GET /frs.frs_interest: envirofacts_frs_frs_interest
+      GET /frs.frs_interest_ref: envirofacts_frs_frs_interest_ref
+      GET /frs.frs_naics: envirofacts_frs_frs_naics
+      GET /frs.frs_program_facility: envirofacts_frs_frs_program_facility
+      GET /frs.frs_sic: envirofacts_frs_frs_sic
+      GET /frs.frs_supplemental_interest: envirofacts_frs_frs_supplemental_interest
+      GET /frs.geo_collect_mth_lk: envirofacts_frs_geo_collect_mth_lk
+      GET /frs.geo_facility_point: envirofacts_frs_geo_facility_point
+      GET /frs.geo_horiz_datum_lk: envirofacts_frs_geo_horiz_datum_lk
+      GET /frs.geo_pgm_facility_coordinate: envirofacts_frs_geo_pgm_facility_coordinate
+      GET /frs.geo_ref_point_lk: envirofacts_frs_geo_ref_point_lk
+      GET /frs.v_frs_facility_site_geo_tribes: envirofacts_frs_v_frs_facility_site_geo_tribes
+      GET /frs.v_frs_facility_site_geopgm: envirofacts_frs_v_frs_facility_site_geopgm
+      GET /frs.v_frs_pgm_facility_geotribes: envirofacts_frs_v_frs_pgm_facility_geotribes
+      GET /frs.v_pub_frs_naics_ez: envirofacts_frs_v_pub_frs_naics_ez
+      GET /frs.v_pub_frs_sic_ez: envirofacts_frs_v_pub_frs_sic_ez
+    defaults:
+      file: R/envirofacts_frs.R
+      docs:
+        tags:
+          family: frs endpoints
+    operations: {}
+  envirofacts_icis:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /icis.air_facility_interest
+      - GET /icis.air_stack_test
+      - GET /icis.air_tvacc
+      - GET /icis.air_tvacc_review
+      - GET /icis.icis_activity
+      - GET /icis.icis_activity_report
+      - GET /icis.icis_comp_monitor
+      - GET /icis.icis_comp_monitor_pretreatment
+      - GET /icis.icis_contact
+      - GET /icis.icis_contact_electronic_addr
+      - GET /icis.icis_contact_phone
+      - GET /icis.icis_dmr
+      - GET /icis.icis_dmr_event
+      - GET /icis.icis_dmr_form_parameter
+      - GET /icis.icis_dmr_form_value
+      - GET /icis.icis_dmr_parameter
+      - GET /icis.icis_dmr_value
+      - GET /icis.icis_enf_conclusion
+      - GET /icis.icis_enf_regional_docket
+      - GET /icis.icis_enforcement
+      - GET /icis.icis_facility_interest
+      - GET /icis.icis_limit
+      - GET /icis.icis_limit_set
+      - GET /icis.icis_limit_set_schedule
+      - GET /icis.icis_limit_set_status
+      - GET /icis.icis_limit_value
+      - GET /icis.icis_npdes_violation
+      - GET /icis.icis_perm_association
+      - GET /icis.icis_perm_biosolid
+      - GET /icis.icis_perm_comp_status
+      - GET /icis.icis_perm_feature
+      - GET /icis.icis_perm_feature_coord
+      - GET /icis.icis_perm_narrative_condition
+      - GET /icis.icis_perm_pretreatment
+      - GET /icis.icis_perm_schedule_event
+      - GET /icis.icis_perm_track_event
+      - GET /icis.icis_permit
+      - GET /icis.icis_prog_rpt
+      - GET /icis.icis_prog_rpt_pretreatment
+      - GET /icis.icis_rpt_pre_removal_credit
+      - GET /icis.ref_activity_status
+      - GET /icis.ref_activity_type
+      - GET /icis.ref_affiliation_type
+      - GET /icis.ref_agency_type
+      - GET /icis.ref_air_lcon
+      - GET /icis.ref_air_operating_status
+      - GET /icis.ref_air_pollutant_class
+      - GET /icis.ref_air_program_subpart
+      - GET /icis.ref_air_stack_test_status
+      - GET /icis.ref_change_limit_status
+      - GET /icis.ref_city
+      - GET /icis.ref_comp_monitor_type
+      - GET /icis.ref_component_type
+      - GET /icis.ref_county
+      - GET /icis.ref_enf_type
+      - GET /icis.ref_facility_type
+      - GET /icis.ref_horizontal_collect_method
+      - GET /icis.ref_horizontal_ref_datum
+      - GET /icis.ref_limit_set_type
+      - GET /icis.ref_limit_type
+      - GET /icis.ref_monitoring_location
+      - GET /icis.ref_naics
+      - GET /icis.ref_parameter
+      - GET /icis.ref_perm_feature_type
+      - GET /icis.ref_perm_track_event
+      - GET /icis.ref_permit_status
+      - GET /icis.ref_permit_type
+      - GET /icis.ref_phone_type
+      - GET /icis.ref_pollutant
+      - GET /icis.ref_pretreatment_indicator
+      - GET /icis.ref_program
+      - GET /icis.ref_region
+      - GET /icis.ref_report_frequency
+      - GET /icis.ref_rnc_detection
+      - GET /icis.ref_rnc_resolution
+      - GET /icis.ref_schedule_event
+      - GET /icis.ref_sic
+      - GET /icis.ref_statistical_base
+      - GET /icis.ref_stay_type
+      - GET /icis.ref_unit
+      - GET /icis.ref_violation
+      - GET /icis.xref_activity_contact
+      - GET /icis.xref_activity_facility_int
+      - GET /icis.xref_activity_program
+      - GET /icis.xref_air_fac_int_pollut_class
+      - GET /icis.xref_air_fac_int_pollut_class_orig
+      - GET /icis.xref_air_fac_int_pollutant
+      - GET /icis.xref_air_fac_int_prog_status
+      - GET /icis.xref_air_fac_int_prog_subpart
+      - GET /icis.xref_air_fac_int_program
+      - GET /icis.xref_comp_monitor_comp_m_type
+      - GET /icis.xref_enf_type
+      - GET /icis.xref_facility_interest_naics
+      - GET /icis.xref_facility_interest_sic
+      - GET /icis.xref_perm_component_type
+      - GET /icis.xref_rpt_pre_local_limit_pollu
+    names:
+      GET /icis.air_facility_interest: envirofacts_icis_air_facility_interest
+      GET /icis.air_stack_test: envirofacts_icis_air_stack_test
+      GET /icis.air_tvacc: envirofacts_icis_air_tvacc
+      GET /icis.air_tvacc_review: envirofacts_icis_air_tvacc_review
+      GET /icis.icis_activity: envirofacts_icis_icis_activity
+      GET /icis.icis_activity_report: envirofacts_icis_icis_activity_report
+      GET /icis.icis_comp_monitor: envirofacts_icis_icis_comp_monitor
+      GET /icis.icis_comp_monitor_pretreatment: envirofacts_icis_icis_comp_monitor_pretreatment
+      GET /icis.icis_contact: envirofacts_icis_icis_contact
+      GET /icis.icis_contact_electronic_addr: envirofacts_icis_icis_contact_electronic_addr
+      GET /icis.icis_contact_phone: envirofacts_icis_icis_contact_phone
+      GET /icis.icis_dmr: envirofacts_icis_icis_dmr
+      GET /icis.icis_dmr_event: envirofacts_icis_icis_dmr_event
+      GET /icis.icis_dmr_form_parameter: envirofacts_icis_icis_dmr_form_parameter
+      GET /icis.icis_dmr_form_value: envirofacts_icis_icis_dmr_form_value
+      GET /icis.icis_dmr_parameter: envirofacts_icis_icis_dmr_parameter
+      GET /icis.icis_dmr_value: envirofacts_icis_icis_dmr_value
+      GET /icis.icis_enf_conclusion: envirofacts_icis_icis_enf_conclusion
+      GET /icis.icis_enf_regional_docket: envirofacts_icis_icis_enf_regional_docket
+      GET /icis.icis_enforcement: envirofacts_icis_icis_enforcement
+      GET /icis.icis_facility_interest: envirofacts_icis_icis_facility_interest
+      GET /icis.icis_limit: envirofacts_icis_icis_limit
+      GET /icis.icis_limit_set: envirofacts_icis_icis_limit_set
+      GET /icis.icis_limit_set_schedule: envirofacts_icis_icis_limit_set_schedule
+      GET /icis.icis_limit_set_status: envirofacts_icis_icis_limit_set_status
+      GET /icis.icis_limit_value: envirofacts_icis_icis_limit_value
+      GET /icis.icis_npdes_violation: envirofacts_icis_icis_npdes_violation
+      GET /icis.icis_perm_association: envirofacts_icis_icis_perm_association
+      GET /icis.icis_perm_biosolid: envirofacts_icis_icis_perm_biosolid
+      GET /icis.icis_perm_comp_status: envirofacts_icis_icis_perm_comp_status
+      GET /icis.icis_perm_feature: envirofacts_icis_icis_perm_feature
+      GET /icis.icis_perm_feature_coord: envirofacts_icis_icis_perm_feature_coord
+      GET /icis.icis_perm_narrative_condition: envirofacts_icis_icis_perm_narrative_condition
+      GET /icis.icis_perm_pretreatment: envirofacts_icis_icis_perm_pretreatment
+      GET /icis.icis_perm_schedule_event: envirofacts_icis_icis_perm_schedule_event
+      GET /icis.icis_perm_track_event: envirofacts_icis_icis_perm_track_event
+      GET /icis.icis_permit: envirofacts_icis_icis_permit
+      GET /icis.icis_prog_rpt: envirofacts_icis_icis_prog_rpt
+      GET /icis.icis_prog_rpt_pretreatment: envirofacts_icis_icis_prog_rpt_pretreatment
+      GET /icis.icis_rpt_pre_removal_credit: envirofacts_icis_icis_rpt_pre_removal_credit
+      GET /icis.ref_activity_status: envirofacts_icis_ref_activity_status
+      GET /icis.ref_activity_type: envirofacts_icis_ref_activity_type
+      GET /icis.ref_affiliation_type: envirofacts_icis_ref_affiliation_type
+      GET /icis.ref_agency_type: envirofacts_icis_ref_agency_type
+      GET /icis.ref_air_lcon: envirofacts_icis_ref_air_lcon
+      GET /icis.ref_air_operating_status: envirofacts_icis_ref_air_operating_status
+      GET /icis.ref_air_pollutant_class: envirofacts_icis_ref_air_pollutant_class
+      GET /icis.ref_air_program_subpart: envirofacts_icis_ref_air_program_subpart
+      GET /icis.ref_air_stack_test_status: envirofacts_icis_ref_air_stack_test_status
+      GET /icis.ref_change_limit_status: envirofacts_icis_ref_change_limit_status
+      GET /icis.ref_city: envirofacts_icis_ref_city
+      GET /icis.ref_comp_monitor_type: envirofacts_icis_ref_comp_monitor_type
+      GET /icis.ref_component_type: envirofacts_icis_ref_component_type
+      GET /icis.ref_county: envirofacts_icis_ref_county
+      GET /icis.ref_enf_type: envirofacts_icis_ref_enf_type
+      GET /icis.ref_facility_type: envirofacts_icis_ref_facility_type
+      GET /icis.ref_horizontal_collect_method: envirofacts_icis_ref_horizontal_collect_method
+      GET /icis.ref_horizontal_ref_datum: envirofacts_icis_ref_horizontal_ref_datum
+      GET /icis.ref_limit_set_type: envirofacts_icis_ref_limit_set_type
+      GET /icis.ref_limit_type: envirofacts_icis_ref_limit_type
+      GET /icis.ref_monitoring_location: envirofacts_icis_ref_monitoring_location
+      GET /icis.ref_naics: envirofacts_icis_ref_naics
+      GET /icis.ref_parameter: envirofacts_icis_ref_parameter
+      GET /icis.ref_perm_feature_type: envirofacts_icis_ref_perm_feature_type
+      GET /icis.ref_perm_track_event: envirofacts_icis_ref_perm_track_event
+      GET /icis.ref_permit_status: envirofacts_icis_ref_permit_status
+      GET /icis.ref_permit_type: envirofacts_icis_ref_permit_type
+      GET /icis.ref_phone_type: envirofacts_icis_ref_phone_type
+      GET /icis.ref_pollutant: envirofacts_icis_ref_pollutant
+      GET /icis.ref_pretreatment_indicator: envirofacts_icis_ref_pretreatment_indicator
+      GET /icis.ref_program: envirofacts_icis_ref_program
+      GET /icis.ref_region: envirofacts_icis_ref_region
+      GET /icis.ref_report_frequency: envirofacts_icis_ref_report_frequency
+      GET /icis.ref_rnc_detection: envirofacts_icis_ref_rnc_detection
+      GET /icis.ref_rnc_resolution: envirofacts_icis_ref_rnc_resolution
+      GET /icis.ref_schedule_event: envirofacts_icis_ref_schedule_event
+      GET /icis.ref_sic: envirofacts_icis_ref_sic
+      GET /icis.ref_statistical_base: envirofacts_icis_ref_statistical_base
+      GET /icis.ref_stay_type: envirofacts_icis_ref_stay_type
+      GET /icis.ref_unit: envirofacts_icis_ref_unit
+      GET /icis.ref_violation: envirofacts_icis_ref_violation
+      GET /icis.xref_activity_contact: envirofacts_icis_xref_activity_contact
+      GET /icis.xref_activity_facility_int: envirofacts_icis_xref_activity_facility_int
+      GET /icis.xref_activity_program: envirofacts_icis_xref_activity_program
+      GET /icis.xref_air_fac_int_pollut_class: envirofacts_icis_xref_air_fac_int_pollut_class
+      GET /icis.xref_air_fac_int_pollut_class_orig: envirofacts_icis_xref_air_fac_int_pollut_class_orig
+      GET /icis.xref_air_fac_int_pollutant: envirofacts_icis_xref_air_fac_int_pollutant
+      GET /icis.xref_air_fac_int_prog_status: envirofacts_icis_xref_air_fac_int_prog_status
+      GET /icis.xref_air_fac_int_prog_subpart: envirofacts_icis_xref_air_fac_int_prog_subpart
+      GET /icis.xref_air_fac_int_program: envirofacts_icis_xref_air_fac_int_program
+      GET /icis.xref_comp_monitor_comp_m_type: envirofacts_icis_xref_comp_monitor_comp_m_type
+      GET /icis.xref_enf_type: envirofacts_icis_xref_enf_type
+      GET /icis.xref_facility_interest_naics: envirofacts_icis_xref_facility_interest_naics
+      GET /icis.xref_facility_interest_sic: envirofacts_icis_xref_facility_interest_sic
+      GET /icis.xref_perm_component_type: envirofacts_icis_xref_perm_component_type
+      GET /icis.xref_rpt_pre_local_limit_pollu: envirofacts_icis_xref_rpt_pre_local_limit_pollu
+    defaults:
+      file: R/envirofacts_icis.R
+      docs:
+        tags:
+          family: icis endpoints
+    operations: {}
+  envirofacts_nei:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /nei.county_areas
+      - GET /nei.county_scc_summary
+      - GET /nei.county_sector_summary
+      - GET /nei.emissions_tier
+      - GET /nei.emissions_tier2
+      - GET /nei.emissions_tier3
+      - GET /nei.facility
+      - GET /nei.facility_pollutants
+      - GET /nei.facility_summary
+      - GET /nei.pollutant
+      - GET /nei.sector_pollutants
+      - GET /nei.sectors
+      - GET /nei.source_classification_code
+      - GET /nei.state_scc_summary
+      - GET /nei.tier_pollutants
+      - GET /nei.tiers
+      - GET /nei.tribal_code
+      - GET /nei.with_names
+    names:
+      GET /nei.county_areas: envirofacts_nei_county_areas
+      GET /nei.county_scc_summary: envirofacts_nei_county_scc_summary
+      GET /nei.county_sector_summary: envirofacts_nei_county_sector_summary
+      GET /nei.emissions_tier: envirofacts_nei_emissions_tier
+      GET /nei.emissions_tier2: envirofacts_nei_emissions_tier2
+      GET /nei.emissions_tier3: envirofacts_nei_emissions_tier3
+      GET /nei.facility: envirofacts_nei_facility
+      GET /nei.facility_pollutants: envirofacts_nei_facility_pollutants
+      GET /nei.facility_summary: envirofacts_nei_facility_summary
+      GET /nei.pollutant: envirofacts_nei_pollutant
+      GET /nei.sector_pollutants: envirofacts_nei_sector_pollutants
+      GET /nei.sectors: envirofacts_nei_sectors
+      GET /nei.source_classification_code: envirofacts_nei_source_classification_code
+      GET /nei.state_scc_summary: envirofacts_nei_state_scc_summary
+      GET /nei.tier_pollutants: envirofacts_nei_tier_pollutants
+      GET /nei.tiers: envirofacts_nei_tiers
+      GET /nei.tribal_code: envirofacts_nei_tribal_code
+      GET /nei.with_names: envirofacts_nei_with_names
+    defaults:
+      file: R/envirofacts_nei.R
+      docs:
+        tags:
+          family: nei endpoints
+    operations: {}
+  envirofacts_nggs:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /nggs.applicant_type_lk
+      - GET /nggs.grant_prg_name_lk
+      - GET /nggs.ogd_vw_ef_base
+      - GET /nggs.ogd_vw_ef_base_with_pop
+      - GET /nggs.ogd_vw_ef_cfda
+      - GET /nggs.ogd_vw_ef_grant_cfda
+      - GET /nggs.ogd_vw_ef_grant_sa
+      - GET /nggs.ogd_vw_ef_sa
+    names:
+      GET /nggs.applicant_type_lk: envirofacts_nggs_applicant_type_lk
+      GET /nggs.grant_prg_name_lk: envirofacts_nggs_grant_prg_name_lk
+      GET /nggs.ogd_vw_ef_base: envirofacts_nggs_ogd_vw_ef_base
+      GET /nggs.ogd_vw_ef_base_with_pop: envirofacts_nggs_ogd_vw_ef_base_with_pop
+      GET /nggs.ogd_vw_ef_cfda: envirofacts_nggs_ogd_vw_ef_cfda
+      GET /nggs.ogd_vw_ef_grant_cfda: envirofacts_nggs_ogd_vw_ef_grant_cfda
+      GET /nggs.ogd_vw_ef_grant_sa: envirofacts_nggs_ogd_vw_ef_grant_sa
+      GET /nggs.ogd_vw_ef_sa: envirofacts_nggs_ogd_vw_ef_sa
+    defaults:
+      file: R/envirofacts_nggs.R
+      docs:
+        tags:
+          family: nggs endpoints
+    operations: {}
+  envirofacts_radnet:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /radnet.erm_air_benchmark
+      - GET /radnet.erm_ana_proc
+      - GET /radnet.erm_analysis
+      - GET /radnet.erm_analyte
+      - GET /radnet.erm_count
+      - GET /radnet.erm_det_type
+      - GET /radnet.erm_location
+      - GET /radnet.erm_location_ll
+      - GET /radnet.erm_matrix
+      - GET /radnet.erm_milk_benchmark
+      - GET /radnet.erm_precip_benchmark
+      - GET /radnet.erm_project
+      - GET /radnet.erm_result
+      - GET /radnet.erm_sample
+      - GET /radnet.erm_study
+      - GET /radnet.erm_water_benchmark
+      - GET /radnet.erm_years
+    names:
+      GET /radnet.erm_air_benchmark: envirofacts_radnet_erm_air_benchmark
+      GET /radnet.erm_ana_proc: envirofacts_radnet_erm_ana_proc
+      GET /radnet.erm_analysis: envirofacts_radnet_erm_analysis
+      GET /radnet.erm_analyte: envirofacts_radnet_erm_analyte
+      GET /radnet.erm_count: envirofacts_radnet_erm_count
+      GET /radnet.erm_det_type: envirofacts_radnet_erm_det_type
+      GET /radnet.erm_location: envirofacts_radnet_erm_location
+      GET /radnet.erm_location_ll: envirofacts_radnet_erm_location_ll
+      GET /radnet.erm_matrix: envirofacts_radnet_erm_matrix
+      GET /radnet.erm_milk_benchmark: envirofacts_radnet_erm_milk_benchmark
+      GET /radnet.erm_precip_benchmark: envirofacts_radnet_erm_precip_benchmark
+      GET /radnet.erm_project: envirofacts_radnet_erm_project
+      GET /radnet.erm_result: envirofacts_radnet_erm_result
+      GET /radnet.erm_sample: envirofacts_radnet_erm_sample
+      GET /radnet.erm_study: envirofacts_radnet_erm_study
+      GET /radnet.erm_water_benchmark: envirofacts_radnet_erm_water_benchmark
+      GET /radnet.erm_years: envirofacts_radnet_erm_years
+    defaults:
+      file: R/envirofacts_radnet.R
+      docs:
+        tags:
+          family: radnet endpoints
+    operations: {}
+  envirofacts_rcra:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /rcra.br_gm_waste_code
+      - GET /rcra.br_reporting
+      - GET /rcra.br_reporting_year
+      - GET /rcra.br_wr_waste_code
+      - GET /rcra.rcr_br_lu_form_code
+      - GET /rcra.rcr_br_lu_form_code_1
+      - GET /rcra.rcr_br_lu_management_method
+      - GET /rcra.rcr_br_lu_source_code
+      - GET /rcra.rcr_br_lu_waste_minimization
+      - GET /rcra.rcr_ca_area
+      - GET /rcra.rcr_ca_area_event
+      - GET /rcra.rcr_ca_area_unit
+      - GET /rcra.rcr_ca_authority
+      - GET /rcra.rcr_ca_authority_citation
+      - GET /rcra.rcr_ca_event
+      - GET /rcra.rcr_ca_event_authority
+      - GET /rcra.rcr_ca_lu_authority
+      - GET /rcra.rcr_ca_lu_event_code
+      - GET /rcra.rcr_ca_lu_statutory_citation
+      - GET /rcra.rcr_ce_citation
+      - GET /rcra.rcr_ce_lu_citation
+      - GET /rcra.rcr_cmecomp3
+      - GET /rcra.rcr_em_federal_waste_code
+      - GET /rcra.rcr_em_import
+      - GET /rcra.rcr_em_import_1
+      - GET /rcra.rcr_em_manifest
+      - GET /rcra.rcr_em_pcb_info
+      - GET /rcra.rcr_em_rejection
+      - GET /rcra.rcr_em_state_waste_code
+      - GET /rcra.rcr_em_transporter
+      - GET /rcra.rcr_em_waste_line
+      - GET /rcra.rcr_fa_cost_estimate
+      - GET /rcra.rcr_fa_cost_mechanism_detail
+      - GET /rcra.rcr_fa_lu_cost_estimate_reason
+      - GET /rcra.rcr_fa_lu_fa_type
+      - GET /rcra.rcr_fa_lu_mechanism_type
+      - GET /rcra.rcr_fa_mechanism
+      - GET /rcra.rcr_fa_mechanism_detail
+      - GET /rcra.rcr_hd_basic
+      - GET /rcra.rcr_hd_certification
+      - GET /rcra.rcr_hd_episodic_event
+      - GET /rcra.rcr_hd_episodic_project
+      - GET /rcra.rcr_hd_episodic_waste
+      - GET /rcra.rcr_hd_episodic_waste_code
+      - GET /rcra.rcr_hd_handler
+      - GET /rcra.rcr_hd_hsm_activity
+      - GET /rcra.rcr_hd_hsm_basic
+      - GET /rcra.rcr_hd_hsm_recycler
+      - GET /rcra.rcr_hd_hsm_waste_code
+      - GET /rcra.rcr_hd_lqg_closure
+      - GET /rcra.rcr_hd_lqg_consolidation
+      - GET /rcra.rcr_hd_lu_country
+      - GET /rcra.rcr_hd_lu_county
+      - GET /rcra.rcr_hd_lu_episodic_project
+      - GET /rcra.rcr_hd_lu_foreign_state
+      - GET /rcra.rcr_hd_lu_generator_status
+      - GET /rcra.rcr_hd_lu_hsm_facility_code
+      - GET /rcra.rcr_hd_lu_naics
+      - GET /rcra.rcr_hd_lu_other_permit
+      - GET /rcra.rcr_hd_lu_relationship
+      - GET /rcra.rcr_hd_lu_relationship_1
+      - GET /rcra.rcr_hd_lu_state
+      - GET /rcra.rcr_hd_lu_state_activity
+      - GET /rcra.rcr_hd_lu_state_activity_1
+      - GET /rcra.rcr_hd_lu_state_district
+      - GET /rcra.rcr_hd_lu_universal_waste
+      - GET /rcra.rcr_hd_lu_waste_code
+      - GET /rcra.rcr_hd_naics
+      - GET /rcra.rcr_hd_other_permit
+      - GET /rcra.rcr_hd_owner_operator
+      - GET /rcra.rcr_hd_part_a
+      - GET /rcra.rcr_hd_reporting
+      - GET /rcra.rcr_hd_state_activity
+      - GET /rcra.rcr_hd_universal_waste
+      - GET /rcra.rcr_hd_waste_code
+      - GET /rcra.rcr_pm_event
+      - GET /rcra.rcr_pm_event_unit_detail
+      - GET /rcra.rcr_pm_lu_legal_operating_status
+      - GET /rcra.rcr_pm_lu_permit_event_code
+      - GET /rcra.rcr_pm_lu_process_code
+      - GET /rcra.rcr_pm_lu_unit_of_measure
+      - GET /rcra.rcr_pm_mod_event
+      - GET /rcra.rcr_pm_series
+      - GET /rcra.rcr_pm_unit
+      - GET /rcra.rcr_pm_unit_detail
+      - GET /rcra.rcr_pm_unit_detail_waste
+      - GET /rcra.wt_ar_2024
+      - GET /rcra.wt_notices_exports
+      - GET /rcra.wt_notices_imports
+    names:
+      GET /rcra.br_gm_waste_code: envirofacts_rcra_br_gm_waste_code
+      GET /rcra.br_reporting: envirofacts_rcra_br_reporting
+      GET /rcra.br_reporting_year: envirofacts_rcra_br_reporting_year
+      GET /rcra.br_wr_waste_code: envirofacts_rcra_br_wr_waste_code
+      GET /rcra.rcr_br_lu_form_code: envirofacts_rcra_rcr_br_lu_form_code
+      GET /rcra.rcr_br_lu_form_code_1: envirofacts_rcra_rcr_br_lu_form_code_1
+      GET /rcra.rcr_br_lu_management_method: envirofacts_rcra_rcr_br_lu_management_method
+      GET /rcra.rcr_br_lu_source_code: envirofacts_rcra_rcr_br_lu_source_code
+      GET /rcra.rcr_br_lu_waste_minimization: envirofacts_rcra_rcr_br_lu_waste_minimization
+      GET /rcra.rcr_ca_area: envirofacts_rcra_rcr_ca_area
+      GET /rcra.rcr_ca_area_event: envirofacts_rcra_rcr_ca_area_event
+      GET /rcra.rcr_ca_area_unit: envirofacts_rcra_rcr_ca_area_unit
+      GET /rcra.rcr_ca_authority: envirofacts_rcra_rcr_ca_authority
+      GET /rcra.rcr_ca_authority_citation: envirofacts_rcra_rcr_ca_authority_citation
+      GET /rcra.rcr_ca_event: envirofacts_rcra_rcr_ca_event
+      GET /rcra.rcr_ca_event_authority: envirofacts_rcra_rcr_ca_event_authority
+      GET /rcra.rcr_ca_lu_authority: envirofacts_rcra_rcr_ca_lu_authority
+      GET /rcra.rcr_ca_lu_event_code: envirofacts_rcra_rcr_ca_lu_event_code
+      GET /rcra.rcr_ca_lu_statutory_citation: envirofacts_rcra_rcr_ca_lu_statutory_citation
+      GET /rcra.rcr_ce_citation: envirofacts_rcra_rcr_ce_citation
+      GET /rcra.rcr_ce_lu_citation: envirofacts_rcra_rcr_ce_lu_citation
+      GET /rcra.rcr_cmecomp3: envirofacts_rcra_rcr_cmecomp3
+      GET /rcra.rcr_em_federal_waste_code: envirofacts_rcra_rcr_em_federal_waste_code
+      GET /rcra.rcr_em_import: envirofacts_rcra_rcr_em_import
+      GET /rcra.rcr_em_import_1: envirofacts_rcra_rcr_em_import_1
+      GET /rcra.rcr_em_manifest: envirofacts_rcra_rcr_em_manifest
+      GET /rcra.rcr_em_pcb_info: envirofacts_rcra_rcr_em_pcb_info
+      GET /rcra.rcr_em_rejection: envirofacts_rcra_rcr_em_rejection
+      GET /rcra.rcr_em_state_waste_code: envirofacts_rcra_rcr_em_state_waste_code
+      GET /rcra.rcr_em_transporter: envirofacts_rcra_rcr_em_transporter
+      GET /rcra.rcr_em_waste_line: envirofacts_rcra_rcr_em_waste_line
+      GET /rcra.rcr_fa_cost_estimate: envirofacts_rcra_rcr_fa_cost_estimate
+      GET /rcra.rcr_fa_cost_mechanism_detail: envirofacts_rcra_rcr_fa_cost_mechanism_detail
+      GET /rcra.rcr_fa_lu_cost_estimate_reason: envirofacts_rcra_rcr_fa_lu_cost_estimate_reason
+      GET /rcra.rcr_fa_lu_fa_type: envirofacts_rcra_rcr_fa_lu_fa_type
+      GET /rcra.rcr_fa_lu_mechanism_type: envirofacts_rcra_rcr_fa_lu_mechanism_type
+      GET /rcra.rcr_fa_mechanism: envirofacts_rcra_rcr_fa_mechanism
+      GET /rcra.rcr_fa_mechanism_detail: envirofacts_rcra_rcr_fa_mechanism_detail
+      GET /rcra.rcr_hd_basic: envirofacts_rcra_rcr_hd_basic
+      GET /rcra.rcr_hd_certification: envirofacts_rcra_rcr_hd_certification
+      GET /rcra.rcr_hd_episodic_event: envirofacts_rcra_rcr_hd_episodic_event
+      GET /rcra.rcr_hd_episodic_project: envirofacts_rcra_rcr_hd_episodic_project
+      GET /rcra.rcr_hd_episodic_waste: envirofacts_rcra_rcr_hd_episodic_waste
+      GET /rcra.rcr_hd_episodic_waste_code: envirofacts_rcra_rcr_hd_episodic_waste_code
+      GET /rcra.rcr_hd_handler: envirofacts_rcra_rcr_hd_handler
+      GET /rcra.rcr_hd_hsm_activity: envirofacts_rcra_rcr_hd_hsm_activity
+      GET /rcra.rcr_hd_hsm_basic: envirofacts_rcra_rcr_hd_hsm_basic
+      GET /rcra.rcr_hd_hsm_recycler: envirofacts_rcra_rcr_hd_hsm_recycler
+      GET /rcra.rcr_hd_hsm_waste_code: envirofacts_rcra_rcr_hd_hsm_waste_code
+      GET /rcra.rcr_hd_lqg_closure: envirofacts_rcra_rcr_hd_lqg_closure
+      GET /rcra.rcr_hd_lqg_consolidation: envirofacts_rcra_rcr_hd_lqg_consolidation
+      GET /rcra.rcr_hd_lu_country: envirofacts_rcra_rcr_hd_lu_country
+      GET /rcra.rcr_hd_lu_county: envirofacts_rcra_rcr_hd_lu_county
+      GET /rcra.rcr_hd_lu_episodic_project: envirofacts_rcra_rcr_hd_lu_episodic_project
+      GET /rcra.rcr_hd_lu_foreign_state: envirofacts_rcra_rcr_hd_lu_foreign_state
+      GET /rcra.rcr_hd_lu_generator_status: envirofacts_rcra_rcr_hd_lu_generator_status
+      GET /rcra.rcr_hd_lu_hsm_facility_code: envirofacts_rcra_rcr_hd_lu_hsm_facility_code
+      GET /rcra.rcr_hd_lu_naics: envirofacts_rcra_rcr_hd_lu_naics
+      GET /rcra.rcr_hd_lu_other_permit: envirofacts_rcra_rcr_hd_lu_other_permit
+      GET /rcra.rcr_hd_lu_relationship: envirofacts_rcra_rcr_hd_lu_relationship
+      GET /rcra.rcr_hd_lu_relationship_1: envirofacts_rcra_rcr_hd_lu_relationship_1
+      GET /rcra.rcr_hd_lu_state: envirofacts_rcra_rcr_hd_lu_state
+      GET /rcra.rcr_hd_lu_state_activity: envirofacts_rcra_rcr_hd_lu_state_activity
+      GET /rcra.rcr_hd_lu_state_activity_1: envirofacts_rcra_rcr_hd_lu_state_activity_1
+      GET /rcra.rcr_hd_lu_state_district: envirofacts_rcra_rcr_hd_lu_state_district
+      GET /rcra.rcr_hd_lu_universal_waste: envirofacts_rcra_rcr_hd_lu_universal_waste
+      GET /rcra.rcr_hd_lu_waste_code: envirofacts_rcra_rcr_hd_lu_waste_code
+      GET /rcra.rcr_hd_naics: envirofacts_rcra_rcr_hd_naics
+      GET /rcra.rcr_hd_other_permit: envirofacts_rcra_rcr_hd_other_permit
+      GET /rcra.rcr_hd_owner_operator: envirofacts_rcra_rcr_hd_owner_operator
+      GET /rcra.rcr_hd_part_a: envirofacts_rcra_rcr_hd_part_a
+      GET /rcra.rcr_hd_reporting: envirofacts_rcra_rcr_hd_reporting
+      GET /rcra.rcr_hd_state_activity: envirofacts_rcra_rcr_hd_state_activity
+      GET /rcra.rcr_hd_universal_waste: envirofacts_rcra_rcr_hd_universal_waste
+      GET /rcra.rcr_hd_waste_code: envirofacts_rcra_rcr_hd_waste_code
+      GET /rcra.rcr_pm_event: envirofacts_rcra_rcr_pm_event
+      GET /rcra.rcr_pm_event_unit_detail: envirofacts_rcra_rcr_pm_event_unit_detail
+      GET /rcra.rcr_pm_lu_legal_operating_status: envirofacts_rcra_rcr_pm_lu_legal_operating_status
+      GET /rcra.rcr_pm_lu_permit_event_code: envirofacts_rcra_rcr_pm_lu_permit_event_code
+      GET /rcra.rcr_pm_lu_process_code: envirofacts_rcra_rcr_pm_lu_process_code
+      GET /rcra.rcr_pm_lu_unit_of_measure: envirofacts_rcra_rcr_pm_lu_unit_of_measure
+      GET /rcra.rcr_pm_mod_event: envirofacts_rcra_rcr_pm_mod_event
+      GET /rcra.rcr_pm_series: envirofacts_rcra_rcr_pm_series
+      GET /rcra.rcr_pm_unit: envirofacts_rcra_rcr_pm_unit
+      GET /rcra.rcr_pm_unit_detail: envirofacts_rcra_rcr_pm_unit_detail
+      GET /rcra.rcr_pm_unit_detail_waste: envirofacts_rcra_rcr_pm_unit_detail_waste
+      GET /rcra.wt_ar_2024: envirofacts_rcra_wt_ar_2024
+      GET /rcra.wt_notices_exports: envirofacts_rcra_wt_notices_exports
+      GET /rcra.wt_notices_imports: envirofacts_rcra_wt_notices_imports
+    defaults:
+      file: R/envirofacts_rcra.R
+      docs:
+        tags:
+          family: rcra endpoints
+    operations: {}
+  envirofacts_sdwis:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /sdwis.enforcement
+      - GET /sdwis.enforcement_action
+      - GET /sdwis.geographic_area
+      - GET /sdwis.lcr_sample
+      - GET /sdwis.lcr_sample_result
+      - GET /sdwis.pws
+      - GET /sdwis.pws_county
+      - GET /sdwis.ref_code_value
+      - GET /sdwis.ref_primacy_agency
+      - GET /sdwis.ref_rule_application
+      - GET /sdwis.ref_rule_family
+      - GET /sdwis.ref_violation
+      - GET /sdwis.sdw_contaminants
+      - GET /sdwis.sdw_county_served
+      - GET /sdwis.sdw_viol_enforcement
+      - GET /sdwis.service_area
+      - GET /sdwis.treatment
+      - GET /sdwis.violation
+      - GET /sdwis.violation_enf_assoc
+      - GET /sdwis.water_system
+      - GET /sdwis.water_system_facility
+    names:
+      GET /sdwis.enforcement: envirofacts_sdwis_enforcement
+      GET /sdwis.enforcement_action: envirofacts_sdwis_enforcement_action
+      GET /sdwis.geographic_area: envirofacts_sdwis_geographic_area
+      GET /sdwis.lcr_sample: envirofacts_sdwis_lcr_sample
+      GET /sdwis.lcr_sample_result: envirofacts_sdwis_lcr_sample_result
+      GET /sdwis.pws: envirofacts_sdwis_pws
+      GET /sdwis.pws_county: envirofacts_sdwis_pws_county
+      GET /sdwis.ref_code_value: envirofacts_sdwis_ref_code_value
+      GET /sdwis.ref_primacy_agency: envirofacts_sdwis_ref_primacy_agency
+      GET /sdwis.ref_rule_application: envirofacts_sdwis_ref_rule_application
+      GET /sdwis.ref_rule_family: envirofacts_sdwis_ref_rule_family
+      GET /sdwis.ref_violation: envirofacts_sdwis_ref_violation
+      GET /sdwis.sdw_contaminants: envirofacts_sdwis_sdw_contaminants
+      GET /sdwis.sdw_county_served: envirofacts_sdwis_sdw_county_served
+      GET /sdwis.sdw_viol_enforcement: envirofacts_sdwis_sdw_viol_enforcement
+      GET /sdwis.service_area: envirofacts_sdwis_service_area
+      GET /sdwis.treatment: envirofacts_sdwis_treatment
+      GET /sdwis.violation: envirofacts_sdwis_violation
+      GET /sdwis.violation_enf_assoc: envirofacts_sdwis_violation_enf_assoc
+      GET /sdwis.water_system: envirofacts_sdwis_water_system
+      GET /sdwis.water_system_facility: envirofacts_sdwis_water_system_facility
+    defaults:
+      file: R/envirofacts_sdwis.R
+      docs:
+        tags:
+          family: sdwis endpoints
+    operations: {}
+  envirofacts_sems:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /sems.envirofacts_contaminants
+      - GET /sems.envirofacts_site
+    names:
+      GET /sems.envirofacts_contaminants: envirofacts_sems_envirofacts_contaminants
+      GET /sems.envirofacts_site: envirofacts_sems_envirofacts_site
+    defaults:
+      file: R/envirofacts_sems.R
+      docs:
+        tags:
+          family: sems endpoints
+    operations: {}
+  envirofacts_tri:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /tri.tri_additional_info
+      - GET /tri.tri_chem_activity
+      - GET /tri.tri_chem_info
+      - GET /tri.tri_code_desc
+      - GET /tri.tri_county
+      - GET /tri.tri_energy_recovery
+      - GET /tri.tri_facility
+      - GET /tri.tri_facility_db
+      - GET /tri.tri_facility_db_history
+      - GET /tri.tri_facility_history
+      - GET /tri.tri_facility_npdes
+      - GET /tri.tri_facility_npdes_history
+      - GET /tri.tri_facility_rcra
+      - GET /tri.tri_facility_rcra_history
+      - GET /tri.tri_facility_uic
+      - GET /tri.tri_facility_uic_history
+      - GET /tri.tri_form_activity_subuse
+      - GET /tri.tri_form_r_schedule_one
+      - GET /tri.tri_form_totals
+      - GET /tri.tri_off_site_transfer_location
+      - GET /tri.tri_onsite_waste_treatment_met
+      - GET /tri.tri_onsite_wastestream
+      - GET /tri.tri_potw_location
+      - GET /tri.tri_recycling_process
+      - GET /tri.tri_release_qty
+      - GET /tri.tri_reporting_form
+      - GET /tri.tri_source_reduct_method
+      - GET /tri.tri_source_reduct_qty
+      - GET /tri.tri_submission_naics
+      - GET /tri.tri_submission_sic
+      - GET /tri.tri_transfer_qty
+      - GET /tri.tri_tribe_desc
+      - GET /tri.tri_trips_comment
+      - GET /tri.tri_water_stream
+      - GET /tri.tri_zip_code
+    names:
+      GET /tri.tri_additional_info: envirofacts_tri_tri_additional_info
+      GET /tri.tri_chem_activity: envirofacts_tri_tri_chem_activity
+      GET /tri.tri_chem_info: envirofacts_tri_tri_chem_info
+      GET /tri.tri_code_desc: envirofacts_tri_tri_code_desc
+      GET /tri.tri_county: envirofacts_tri_tri_county
+      GET /tri.tri_energy_recovery: envirofacts_tri_tri_energy_recovery
+      GET /tri.tri_facility: envirofacts_tri_tri_facility
+      GET /tri.tri_facility_db: envirofacts_tri_tri_facility_db
+      GET /tri.tri_facility_db_history: envirofacts_tri_tri_facility_db_history
+      GET /tri.tri_facility_history: envirofacts_tri_tri_facility_history
+      GET /tri.tri_facility_npdes: envirofacts_tri_tri_facility_npdes
+      GET /tri.tri_facility_npdes_history: envirofacts_tri_tri_facility_npdes_history
+      GET /tri.tri_facility_rcra: envirofacts_tri_tri_facility_rcra
+      GET /tri.tri_facility_rcra_history: envirofacts_tri_tri_facility_rcra_history
+      GET /tri.tri_facility_uic: envirofacts_tri_tri_facility_uic
+      GET /tri.tri_facility_uic_history: envirofacts_tri_tri_facility_uic_history
+      GET /tri.tri_form_activity_subuse: envirofacts_tri_tri_form_activity_subuse
+      GET /tri.tri_form_r_schedule_one: envirofacts_tri_tri_form_r_schedule_one
+      GET /tri.tri_form_totals: envirofacts_tri_tri_form_totals
+      GET /tri.tri_off_site_transfer_location: envirofacts_tri_tri_off_site_transfer_location
+      GET /tri.tri_onsite_waste_treatment_met: envirofacts_tri_tri_onsite_waste_treatment_met
+      GET /tri.tri_onsite_wastestream: envirofacts_tri_tri_onsite_wastestream
+      GET /tri.tri_potw_location: envirofacts_tri_tri_potw_location
+      GET /tri.tri_recycling_process: envirofacts_tri_tri_recycling_process
+      GET /tri.tri_release_qty: envirofacts_tri_tri_release_qty
+      GET /tri.tri_reporting_form: envirofacts_tri_tri_reporting_form
+      GET /tri.tri_source_reduct_method: envirofacts_tri_tri_source_reduct_method
+      GET /tri.tri_source_reduct_qty: envirofacts_tri_tri_source_reduct_qty
+      GET /tri.tri_submission_naics: envirofacts_tri_tri_submission_naics
+      GET /tri.tri_submission_sic: envirofacts_tri_tri_submission_sic
+      GET /tri.tri_transfer_qty: envirofacts_tri_tri_transfer_qty
+      GET /tri.tri_tribe_desc: envirofacts_tri_tri_tribe_desc
+      GET /tri.tri_trips_comment: envirofacts_tri_tri_trips_comment
+      GET /tri.tri_water_stream: envirofacts_tri_tri_water_stream
+      GET /tri.tri_zip_code: envirofacts_tri_tri_zip_code
+    defaults:
+      file: R/envirofacts_tri.R
+      docs:
+        tags:
+          family: tri endpoints
+    operations: {}

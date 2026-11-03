@@ -1,10 +1,12 @@
 # epaechoverse
 
 An R client for the web services of the U.S. EPA's
-[Enforcement and Compliance History Online (ECHO)](https://echo.epa.gov/tools/web-services).
-It has 579 functions covering every route in ECHO's published Swagger schemas
-(duplicate lookup routes are folded together) plus a few routes ECHO uses but
-does not document. The wrappers are generated
+[Enforcement and Compliance History Online (ECHO)](https://echo.epa.gov/tools/web-services)
+and, in progress, for [Envirofacts](https://enviro.epa.gov/). It has 579 ECHO
+functions covering every route in ECHO's published Swagger schemas (duplicate
+lookup routes are folded together) plus a few routes ECHO uses but does not
+document, and 21 `envirofacts_sdwis_*` table functions (the other Envirofacts
+programs will follow). The wrappers are generated
 with [specmill](https://github.com/seanthimons/specmill) and need no API key.
 
 This is an unofficial client, not affiliated with or endorsed by the EPA. It is
@@ -54,6 +56,38 @@ epaechoverse_dry_run(FALSE)
 
 `epaechoverse_run_verbose(TRUE)` prints each method and response status.
 
+## Envirofacts tables
+
+Envirofacts serves one function per table through EPA's DMAP service, named
+`envirofacts_<program>_<table>`. So far these are the drinking-water (SDWIS)
+tables, for example `envirofacts_sdwis_water_system`.
+
+```r
+# Community water systems in Rhode Island: the first 5 rows
+rows <- envirofacts_sdwis_water_system(
+  c('state_code/equals/RI', 'pws_type_code/equals/CWS'),
+  first = 1, last = 5
+)
+
+csv <- envirofacts_sdwis_violation('pwsid/equals/RI1000010', last = 50, format = 'csv')
+```
+
+- `filter` is a character vector of `column/operator/value` conditions that must
+  all hold. Operators include `equals`, `beginsWith` and `contains`; the service
+  names a bad column or operator in its error. Values may not contain
+  `/`, `\` or `%`, and the service rejected a value containing a dot when
+  tested.
+- `first` and `last` are 1-based row numbers (default `1` and `100`). The service
+  returns a whole table when no range is given, so the range is always sent and
+  one call is limited to 10,000 rows. Raise the limit with
+  `options(epaechoverse.max_rows = 50000)`. For more rows, page with
+  consecutive ranges.
+- `format` is `'json'` (a list of records), `'csv'` (a string) or `'xml'` (a raw
+  vector; use `rawToChar()`).
+- Tables and columns are listed in EPA's
+  [DMAP OpenAPI document](https://data.epa.gov/api-cache/metadata/openapi_swagger.json),
+  kept unchanged in `apis/`; see `?envirofacts_sdwis_water_system`.
+
 ## Function names
 
 Names are `<api>_<route>`, for example `sdw_get_systems`, `dfr_get_dfr` or
@@ -77,6 +111,7 @@ Names are `<api>_<route>`, for example `sdw_get_systems`, `dfr_get_dfr` or
 | `micro`, `pipeline` | Microservices (FRS ID lookup, monitoring sites) and enforcement pipeline | 4, 4 |
 | `caa_csv` | Air pollutant report as CSV | 2 |
 | `air_viotrack`, `ecatt_nif` | Government-only services (see below) | 8, 4 |
+| `envirofacts` | Envirofacts tables, `envirofacts_<program>_<table>` (SDWIS so far) | 21 |
 
 Lookups that only one service describes keep that service's prefix (for example
 `wplt_lookups_dmr_watersheds`). Lookups that the `lookup` API also covers exist
@@ -89,7 +124,10 @@ turns those into R errors of class `echo_error`, so `tryCatch()` sees them.
 HTTP failures keep their usual classes and, when ECHO sent a message, also gain
 the `echo_error` class and that message.
 
-Requests time out after 60 seconds and retry up to twice on 408, 429, 502, 503
+Envirofacts reports errors as `{"error": ...}` with HTTP 404 or 500; those become
+`echo_error` conditions carrying the service's message too.
+
+ECHO requests time out after 60 seconds (Envirofacts: 120) and retry up to twice on 408, 429, 502, 503
 and 504. HTTP 500 is not retried: ECHO answers a query it cannot process with a
 500 every time. Override per session with
 `options(epaechoverse.request = list(timeout = 120, max_retries = 0))`.
@@ -115,10 +153,13 @@ and 504. HTTP 500 is not retried: ECHO answers a query it cannot process with a
 
 ## Development
 
-The schemas in `apis/` are downloaded unchanged from ECHO
+The schemas in `apis/` are downloaded unchanged from ECHO and EPA
 (`dev/harvest_schemas.R`, with source URLs and SHA-256 in
 `dev/echo-schema-manifest.json`) or written by hand. `dev/build_client.R`
-bootstraps the package from them. specmill is pinned to a GitHub release in
+bootstraps the package from them; afterwards `dev/regenerate.R` plans, applies or
+checks the generated code. The Envirofacts wrappers need a generation-time
+callback (`dev/callbacks.R`) that builds each table's request path with
+`envirofacts_path()`, because DMAP declares no parameters. specmill is pinned to a GitHub release in
 `renv.lock` so a local development install cannot change the build; run
 `renv::restore()` first. See the headers of both scripts for the details.
 

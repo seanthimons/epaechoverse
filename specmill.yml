@@ -30,6 +30,7 @@ services:
 - apis/micro.yml
 - apis/pipeline.yml
 - apis/caa_csv.yml
+- apis/envirofacts.yml
 selection:
   methods:
   - GET
@@ -56,5 +57,6 @@ defaults:
   batch:
     max_items: ~
     max_bytes: ~
-callback_files: []
+callback_files:
+- dev/callbacks.R
 authentication: {}

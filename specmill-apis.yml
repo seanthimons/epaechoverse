@@ -150,3 +150,9 @@ apis:
   base_url: https://echodata.epa.gov/echo
   include: yes
   origin: ''
+- schema: apis/envirofacts-dmap.openapi.json
+  hash: 2d1c786e5788778c995436912828d14c8c83be38ac9727baeea00b0f2f973a4b
+  api: envirofacts
+  base_url: https://data.epa.gov/dmapservice
+  include: yes
+  origin: ''
