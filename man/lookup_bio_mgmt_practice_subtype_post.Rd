@@ -4,13 +4,15 @@
 \alias{lookup_bio_mgmt_practice_subtype_post}
 \title{Placeholder}
 \usage{
-lookup_bio_mgmt_practice_subtype_post(body = NULL)
+lookup_bio_mgmt_practice_subtype_post(tidy = TRUE, body = NULL)
 }
 \arguments{
+\item{tidy}{Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
+
 \item{body}{Request body.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 Placeholder

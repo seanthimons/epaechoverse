@@ -5,9 +5,9 @@ Authors@R: person("Sean", "Thimons", email = "thimons.sean@gmail.com",
         role = c('aut', 'cre'))
 Description: Generated client for the U.S. EPA Enforcement and Compliance
     History Online (ECHO) web service APIs and the Envirofacts (DMAP) data
-    tables (26 APIs, 600 operations),
+    tables (26 APIs, 995 operations),
     built with specmill from local Swagger and OpenAPI schemas.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Imports: httr2, jsonlite, curl
+Imports: httr2, jsonlite, curl, tibble
 Suggests: testthat

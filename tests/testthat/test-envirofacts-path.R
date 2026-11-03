@@ -37,6 +37,7 @@ test_that('ranges are validated and capped', {
 
 test_that('format and table are validated', {
   expect_error(envirofacts_path('/a.b', format = 'yaml'), 'format')
+  expect_error(envirofacts_path('/a.b', format = 'xml'), 'format')
   expect_error(envirofacts_path('/a.b', format = c('json', 'csv')), 'format')
   expect_error(envirofacts_path('a.b'), 'table_path')
   expect_error(envirofacts_path('/a.b/1:2'), 'table_path')

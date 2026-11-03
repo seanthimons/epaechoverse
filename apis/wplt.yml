@@ -201,7 +201,62 @@ groups:
       docs:
         tags:
           family: Lookups endpoints
-    operations: {}
+        return: "A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+      extra_parameters:
+        tidy: {type: logical, default: true, description: "Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+    operations:
+      GET /rest_lookups.dmr_cas_numbers:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_naics2_codes:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_parameters:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_point_source_cats:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_poll_cats:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_pollutants:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_reporting_year:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_sic2_codes:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_treatment_technologies:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_tri_chemicals:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_tri_reporting_year:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_watershed_groups:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_watersheds:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_cas_numbers:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_naics2_codes:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_parameters:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_point_source_cats:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_poll_cats:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_pollutants:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_reporting_year:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_sic2_codes:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_treatment_technologies:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_tri_chemicals:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_tri_reporting_year:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_watershed_groups:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_watersheds:
+        result_formatter: echo_tidy_lookup
   wplt_water_pollution_search_facility_reports_and_loading_calculations:
     selection:
       methods:

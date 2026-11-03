@@ -8,7 +8,8 @@ envirofacts_sdwis_ref_rule_family(
   filter = NULL,
   first = 1L,
   last = 100L,
-  format = "json"
+  format = "json",
+  tidy = TRUE
 )
 }
 \arguments{
@@ -18,7 +19,9 @@ envirofacts_sdwis_ref_rule_family(
 
 \item{last}{Last row to return; at most options(epaechoverse.max_rows) = 10000 rows per call.}
 
-\item{format}{Output format: json, csv or xml.}
+\item{format}{Output format: json or csv.}
+
+\item{tidy}{Return a tibble with typed columns (the same for json and csv). FALSE returns the service response as sent: a list of records for json, a string for csv.}
 }
 \value{
 Decoded response returned by the client request helper.

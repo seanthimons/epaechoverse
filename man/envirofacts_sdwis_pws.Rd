@@ -4,7 +4,13 @@
 \alias{envirofacts_sdwis_pws}
 \title{Retrieve sdwis.pws records}
 \usage{
-envirofacts_sdwis_pws(filter = NULL, first = 1L, last = 100L, format = "json")
+envirofacts_sdwis_pws(
+  filter = NULL,
+  first = 1L,
+  last = 100L,
+  format = "json",
+  tidy = TRUE
+)
 }
 \arguments{
 \item{filter}{Conditions as column/operator/value, for example pwsid/beginsWith/RI; several are combined with and. Values may not contain a slash, backslash or percent sign, and the service rejected a value containing a dot when tested. NULL for none.}
@@ -13,7 +19,9 @@ envirofacts_sdwis_pws(filter = NULL, first = 1L, last = 100L, format = "json")
 
 \item{last}{Last row to return; at most options(epaechoverse.max_rows) = 10000 rows per call.}
 
-\item{format}{Output format: json, csv or xml.}
+\item{format}{Output format: json or csv.}
+
+\item{tidy}{Return a tibble with typed columns (the same for json and csv). FALSE returns the service response as sent: a list of records for json, a string for csv.}
 }
 \value{
 Decoded response returned by the client request helper.

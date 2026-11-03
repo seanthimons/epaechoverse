@@ -4,7 +4,12 @@
 \alias{lookup_tri_years}
 \title{ECHO Tri Years Lookup Service}
 \usage{
-lookup_tri_years(output = NULL, callback = NULL, descending = NULL)
+lookup_tri_years(
+  output = NULL,
+  callback = NULL,
+  descending = NULL,
+  tidy = TRUE
+)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -15,9 +20,11 @@ lookup_tri_years(output = NULL, callback = NULL, descending = NULL)
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
 
 \item{descending}{Output Sort Column Descending Flag.  Enter Y to sort results in descending order.}
+
+\item{tidy}{Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO Tri Years Lookup Service

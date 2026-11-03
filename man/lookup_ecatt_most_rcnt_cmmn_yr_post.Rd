@@ -4,13 +4,15 @@
 \alias{lookup_ecatt_most_rcnt_cmmn_yr_post}
 \title{ECHO Clean Air Targeting Tool Most Recent Common Year Lookup Service}
 \usage{
-lookup_ecatt_most_rcnt_cmmn_yr_post(body = NULL)
+lookup_ecatt_most_rcnt_cmmn_yr_post(tidy = TRUE, body = NULL)
 }
 \arguments{
+\item{tidy}{Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
+
 \item{body}{Request body.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO Clean Air Targeting Tool Most Recent Common Year Lookup Service

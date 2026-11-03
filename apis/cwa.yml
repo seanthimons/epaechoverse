@@ -141,7 +141,14 @@ groups:
       docs:
         tags:
           family: Lookups endpoints
-    operations: {}
+        return: "A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+      extra_parameters:
+        tidy: {type: logical, default: true, description: "Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+    operations:
+      GET /rest_lookups.msgp_years:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.msgp_years:
+        result_formatter: echo_tidy_lookup
   cwa_metadata:
     selection:
       methods:

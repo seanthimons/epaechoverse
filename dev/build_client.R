@@ -8,9 +8,9 @@
 #
 # This is a one-time bootstrap: it initializes the package and refuses to run
 # when DESCRIPTION exists. To regenerate from scratch, move the generated files
-# (DESCRIPTION, NAMESPACE, LICENSE, R/ except echo_response_policy.R and envirofacts_path.R, man/, schema/,
-# apis/*.yml, specmill*.yml, .specmill/, .Rbuildignore) aside first; tests/ and the
-# client-owned R/echo_response_policy.R and R/envirofacts_path.R stay. To change the
+# (DESCRIPTION, NAMESPACE, LICENSE, R/ except the client-owned echo_response_policy.R,
+# envirofacts_path.R, envirofacts_tidy.R and echo_tidy.R, man/, schema/, apis/*.yml, specmill*.yml,
+# .specmill/, .Rbuildignore) aside first; tests/ and inst/ stay. To change the
 # client afterwards, edit apis/*.yml and run dev/regenerate.R (plan -> apply -> check);
 # generation needs the callbacks in dev/callbacks.R.
 #
@@ -18,8 +18,8 @@
 # (seanthimons/specmill, pinned in renv.lock) and compiles V8 and yaml12 from
 # source, which needs a system libv8 and a Rust toolchain.
 #
-# The envirofacts API (EPA's DMAP OpenAPI document, 416 tables) is generated only for
-# the programs not matched by the selection.exclude set below (SDWIS for now).
+# The envirofacts API (EPA's DMAP OpenAPI document, 416 tables across 10 programs) is
+# generated in full unless envirofacts_programs below names a subset.
 #
 # Downloaded schemas stay in apis/ exactly as served, next to the hand-written
 # ones (rows with source 'hand' in echo_services.csv). Specmill copies them to
@@ -35,11 +35,17 @@ services <- utils::read.csv(file.path(script_dir, 'echo_services.csv'), stringsA
 schemas <- file.path(root, 'apis', services$file)
 stopifnot(all(file.exists(schemas)))
 source(file.path(script_dir, 'callbacks.R'))
+# Column types for the tidy Envirofacts output, written to inst/extdata (reads the
+# project root from the first command-line argument, like this script).
+source(file.path(script_dir, 'build_column_types.R'), local = new.env())
 
-# Envirofacts programs generated so far; every other schema.table path is excluded
-# with one API-level regex. Widening the client means deleting the exclusion.
-envirofacts_programs <- 'sdwis'
-envirofacts_exclude <- sprintf('^/(?!(%s)[.])', paste(envirofacts_programs, collapse = '|'))
+# Envirofacts programs to generate: NULL for every table, or a character vector such
+# as 'sdwis' to generate only those, excluding every other schema.table path with one
+# API-level regex.
+envirofacts_programs <- NULL
+envirofacts_exclude <- if (!is.null(envirofacts_programs)) {
+  sprintf('^/(?!(%s)[.])', paste(envirofacts_programs, collapse = '|'))
+}
 
 # Route namespace (the first path segment, e.g. sdw_rest_services in
 # /sdw_rest_services.get_systems, after sanitizing) -> replacement. '' drops it;
@@ -106,7 +112,11 @@ specmill::initialize_client(
 # Retry and error-handling defaults. echo_retry_policy and echo_response_policy live
 # in R/echo_response_policy.R, which is client-owned: leave it (and tests/) in place
 # when moving generated files aside, because specmill resolves the names from it.
-stopifnot(file.exists(file.path(root, 'R', 'echo_response_policy.R')), file.exists(file.path(root, 'R', 'envirofacts_path.R')))
+stopifnot(
+  file.exists(file.path(root, 'R', 'echo_response_policy.R')),
+  file.exists(file.path(root, 'R', 'envirofacts_path.R')),
+  file.exists(file.path(root, 'R', 'envirofacts_tidy.R'))
+)
 config <- file.path(root, 'specmill.yml')
 text <- paste(readLines(config, encoding = 'UTF-8'), collapse = '\n')
 old_controls <- '  request_controls:\n    timeout: 30\n    max_retries: 0\n    retry_writes: no\n'
@@ -199,7 +209,7 @@ envirofacts_ops <- jsonlite::fromJSON(
   simplifyVector = FALSE
 )$paths
 envirofacts_selected <- sum(vapply(
-  envirofacts_ops[grepl(envirofacts_exclude, names(envirofacts_ops), perl = TRUE) == FALSE],
+  envirofacts_ops[if (is.null(envirofacts_exclude)) TRUE else !grepl(envirofacts_exclude, names(envirofacts_ops), perl = TRUE)],
   count_ops, numeric(1)
 ))
 stopifnot(envirofacts_selected > 0)
@@ -213,7 +223,8 @@ lines <- append(lines[-at], c(
   '    filter: {type: character, default: ~, description: "Conditions as column/operator/value, for example pwsid/beginsWith/RI; several are combined with and. Values may not contain a slash, backslash or percent sign, and the service rejected a value containing a dot when tested. NULL for none."}',
   '    first: {type: integer, default: 1, minimum: 1, description: First row to return (1-based).}',
   '    last: {type: integer, default: 100, minimum: 1, description: "Last row to return; at most options(epaechoverse.max_rows) = 10000 rows per call."}',
-  '    format: {type: character, default: json, description: "Output format: json, csv or xml."}',
+  '    format: {type: character, default: json, description: "Output format: json or csv."}',
+  '    tidy: {type: logical, default: true, description: "Return a tibble with typed columns (the same for json and csv). FALSE returns the service response as sent: a list of records for json, a string for csv."}',
   '  request:',
   '    arguments:',
   '      method: {value: GET}',
@@ -222,14 +233,55 @@ lines <- append(lines[-at], c(
   '      query: {object: {}}',
   '      body: {value: ~}',
   '      request_controls: {value: {timeout: 120, max_retries: 2, retry_writes: true, retry_policy: echo_retry_policy}}',
-  '      response_policy: {value: echo_response_policy}'
+  '      response_policy: {callback: dmap_policy}'
 ), after = at - 1L)
 start <- which(lines == 'selection:')
 stopifnot(length(start) == 1L)
 target <- start + which(lines[-seq_len(start)] == '  exclude: []')[[1L]]
-lines[target] <- paste0("  exclude: ['", envirofacts_exclude, "']")
+if (!is.null(envirofacts_exclude)) {
+  lines[target] <- paste0("  exclude: ['", envirofacts_exclude, "']")
+}
 writeLines(lines, path, useBytes = TRUE)
 selected <- selected - (expected_envirofacts - envirofacts_selected)
+
+# ECHO tidy output (R/echo_tidy.R). Every /rest_lookups.* operation returns
+# Results$LuValues, so its group gets a `tidy` input, return documentation and the
+# echo_tidy_lookup result_formatter, which specmill only accepts on individual
+# operations. The operations come from a plan, because the `names:` maps still list
+# routes that API-level selection.exclude removes.
+stopifnot(file.exists(file.path(root, 'R', 'echo_tidy.R')))
+planned <- specmill::generate_client(root, config = 'specmill.yml', mode = 'plan', callbacks = callbacks)
+lookup_ops <- Filter(function(op) startsWith(op$path, '/rest_lookups.'), planned$operations)
+stopifnot(length(lookup_ops) > 0L)
+lookup_groups <- split(lookup_ops, vapply(lookup_ops, function(op) op$service, character(1)))
+for (group in names(lookup_groups)) {
+  stopifnot(endsWith(group, '_lookups'))
+  # A tidied group must hold nothing but lookup routes.
+  stopifnot(sum(vapply(planned$operations, function(op) identical(op$service, group), logical(1))) == length(lookup_groups[[group]]))
+  path <- file.path(root, 'apis', paste0(sub('_lookups$', '', group), '.yml'))
+  lines <- readLines(path, encoding = 'UTF-8')
+  start <- which(lines == paste0('  ', group, ':'))
+  stopifnot(length(start) == 1L)
+  later <- which(grepl('^  [A-Za-z0-9_]+:$', lines) & seq_along(lines) > start)
+  end <- if (length(later)) later[[1L]] - 1L else length(lines)
+  block <- lines[start:end]
+  family <- which(grepl('^          family: ', block))
+  empty <- which(block == '    operations: {}')
+  # The new keys go straight after the one-line family tag, before `operations`.
+  stopifnot(length(family) == 1L, length(empty) == 1L, empty == family + 1L)
+  keys <- vapply(lookup_groups[[group]], function(op) op$key, character(1))
+  block <- c(
+    block[seq_len(family)],
+    '        return: "A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."',
+    '      extra_parameters:',
+    '        tidy: {type: logical, default: true, description: "Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}',
+    block[seq_len(max(0L, empty - family - 1L)) + family],
+    '    operations:',
+    as.vector(rbind(paste0('      ', sort(keys), ':'), '        result_formatter: echo_tidy_lookup')),
+    block[-seq_len(empty)]
+  )
+  writeLines(c(lines[seq_len(start - 1L)], block, lines[-seq_len(end)]), path, useBytes = TRUE)
+}
 
 # Package description and build ignores (apis/ and the root YAML/JSON are already
 # ignored by the scaffold; keep dev/ out of builds too).
@@ -245,14 +297,18 @@ text <- sub(
   ),
   text
 )
+stopifnot(grepl('Imports: httr2, jsonlite, curl\n', text, fixed = TRUE))
+text <- sub('Imports: httr2, jsonlite, curl\n', 'Imports: httr2, jsonlite, curl, tibble\n', text, fixed = TRUE)
 writeLines(text, description)
 ignore <- file.path(root, '.Rbuildignore')
 rules <- readLines(ignore)
 stopifnot('^apis$' %in% rules)
+extra <- c('^dev$', '^\\.github$', '^\\.gitleaks\\.toml$', '^\\.gitattributes$')
 if (file.exists(file.path(root, 'renv.lock'))) {
-  rules <- c(rules, '^renv$', '^renv\\.lock$', '^\\.Rprofile$')
+  extra <- c('^renv$', '^renv\\.lock$', '^\\.Rprofile$', extra)
 }
-writeLines(c(rules, '^dev$', '^\\.github$', '^\\.gitleaks\\.toml$', '^\\.gitattributes$'), ignore)
+# specmill adds the renv rules itself when renv.lock exists; add only what is missing.
+writeLines(c(rules, setdiff(extra, rules)), ignore)
 
 plan <- specmill::generate_client(root, config = 'specmill.yml', mode = 'plan', callbacks = callbacks)
 stopifnot(length(plan$operations) == selected, !length(plan$diagnostics))

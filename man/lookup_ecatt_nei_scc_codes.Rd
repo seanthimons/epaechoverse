@@ -9,7 +9,8 @@ lookup_ecatt_nei_scc_codes(
   callback = NULL,
   search_term = NULL,
   search_code = NULL,
-  scc_level = NULL
+  scc_level = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -25,9 +26,11 @@ lookup_ecatt_nei_scc_codes(
 \item{search_code}{Enter a partial or complete code value.}
 
 \item{scc_level}{scc_level}
+
+\item{tidy}{Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO Clean Air Targeting Tool NEI SCC Code Lookup Service

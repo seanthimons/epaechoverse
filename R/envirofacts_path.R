@@ -42,8 +42,8 @@ envirofacts_path <- function(table_path, filter = NULL, first = 1L, last = 100L,
       format(rows, scientific = FALSE, big.mark = ','), format(cap, scientific = FALSE, big.mark = ',')
     ), call. = FALSE)
   }
-  if (!is.character(format) || length(format) != 1L || !format %in% c('json', 'csv', 'xml')) {
-    stop('`format` must be one of "json", "csv" or "xml".', call. = FALSE)
+  if (!is.character(format) || length(format) != 1L || !format %in% c('json', 'csv')) {
+    stop('`format` must be "json" or "csv".', call. = FALSE)
   }
   paste0(table_path, envirofacts_filter_path(filter), '/', from, ':', to, '/', format)
 }

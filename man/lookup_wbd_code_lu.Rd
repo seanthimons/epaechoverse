@@ -8,7 +8,8 @@ lookup_wbd_code_lu(
   output = NULL,
   callback = NULL,
   wbd_code = NULL,
-  wbd_level = NULL
+  wbd_level = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -22,9 +23,11 @@ lookup_wbd_code_lu(
 \item{wbd_code}{Two-digit watershed code [Hydrologic Unit Code (HUC)].}
 
 \item{wbd_level}{The number of digits of the watershed code [Hydrologic Unit Code (HUC)] returned in the ValueCode. Must be an even number between 4 and 12.}
+
+\item{tidy}{Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO WBD Code Lookup Service
