@@ -1,0 +1,51 @@
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left: [intro, reference, articles]
+    right: [search, github]
+  components:
+    intro:
+      text: Get started
+      href: articles/query-and-explore.html
+    articles:
+      text: Guides
+      menu:
+      - text: Query and explore EPA data
+        href: articles/query-and-explore.html
+      - text: Developer and maintainer support
+        href: articles/developer-maintainer.html
+
+articles:
+- title: Guides
+  navbar: ~
+  contents:
+  - query-and-explore
+  - developer-maintainer
+
+reference:
+- title: Session controls
+  contents:
+  - epaechoverse_dry_run
+  - epaechoverse_run_verbose
+  - api_token
+  - set_api_token
+- title: Facility search and drinking water
+  contents:
+  - matches("^(air|cwa|rcra|sdw|echo)_")
+- title: Facility reports, enforcement and demographics
+  contents:
+  - matches("^(dfr|case|compscreen|pipeline|micro)_")
+- title: Water pollution and reporting
+  contents:
+  - matches("^(wplt|eff|nncr|biosolids)_")
+- title: Air monitoring and emissions
+  contents:
+  - matches("^(caa|ecattaqs|ecattams|ecattems|ecatt_nif)_")
+- title: Code lookups
+  contents:
+  - starts_with("lookup_")
+- title: Envirofacts tables
+  contents:
+  - starts_with("envirofacts_")

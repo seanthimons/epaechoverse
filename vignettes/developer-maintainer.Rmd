@@ -1,0 +1,176 @@
+---
+title: "Developer and maintainer support"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Developer and maintainer support}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE, collapse = TRUE, comment = "#>")
+```
+
+This guide is for work on the client, its generated wrappers and its documentation.
+Run development commands from the repository root. A source-package installation
+omits `dev/`, `apis/` and the generation configuration, so clone the repository
+when you need to change generated code.
+
+## Set up a checkout
+
+The root `.Rprofile` activates renv. Restore the checked-in lockfile before
+regenerating the client so that the build uses the pinned specmill release.
+
+```{r restore}
+renv::restore()
+```
+
+The generation toolchain includes compiled dependencies. The bootstrap script
+notes that V8 and yaml12 need a system libv8 and a Rust toolchain when built from
+source. Check the installation error for the missing prerequisite before
+changing package versions. Ordinary users of epaechoverse do not need specmill.
+
+Documentation work also needs knitr, rmarkdown, pkgdown and a working Pandoc.
+Install missing documentation tools in the development library, then review any
+lockfile changes separately from changes to the client.
+
+```{r documentation-tools}
+install.packages(c("knitr", "rmarkdown", "pkgdown"))
+rmarkdown::pandoc_available()
+```
+
+## Put changes in the right place
+
+| Change | Source to edit | Follow-up |
+|---|---|---|
+| Endpoint names, inputs or selection | `apis/*.yml` | Plan, apply and check generation |
+| Published service definition | Downloaded schema in `apis/` | Review the schema diff and generation plan |
+| Routes without a published schema | `apis/*.handwritten.swagger.json` | Keep `dev/undocumented-routes.md` consistent |
+| Shared Envirofacts request construction | `dev/callbacks.R` and `R/envirofacts_path.R` | Regenerate and run path tests |
+| Service errors and retries | `R/echo_response_policy.R` | Regenerate and run response-policy tests |
+| Output conversion | `R/envirofacts_tidy.R` or `R/echo_tidy.R` | Regenerate and run the corresponding tidy tests |
+| Envirofacts column types | EPA schema and `dev/build_column_types.R` | Rebuild `inst/extdata/envirofacts-columns.csv` |
+| Articles and website navigation | `vignettes/*.Rmd` and `_pkgdown.yml` | Build vignettes and the website |
+
+Wrappers marked `Generated with specmill; do not edit by hand` and their generated
+help pages should change through the generation inputs. The four client-owned
+files named above are fingerprinted by specmill. Applying generation after editing
+them updates the recorded state even when wrapper text does not change.
+
+`dev/build_client.R` is a one-time bootstrap and refuses to run while
+`DESCRIPTION` exists. Use `dev/regenerate.R` for normal maintenance.
+
+## Regenerate deliberately
+
+Review the plan first. Applying the plan writes generated files; checking it
+verifies that the committed output agrees with the inputs.
+
+```{bash regenerate, eval=FALSE}
+Rscript dev/regenerate.R plan
+Rscript dev/regenerate.R apply
+Rscript dev/regenerate.R check
+```
+
+When refreshing a published schema, limit the download to the intended API.
+The second argument accepts comma-separated API IDs from
+`dev/echo_services.csv`. The manifest records source URLs and SHA-256 hashes;
+review it with the schema diff.
+
+```{bash refresh-schema, eval=FALSE}
+Rscript dev/harvest_schemas.R apis envirofacts
+Rscript dev/build_column_types.R .
+Rscript dev/regenerate.R plan
+```
+
+Downloading a schema does not by itself decide how new routes should be named
+or selected. Inspect the corresponding API configuration before applying.
+Handwritten schemas are not overwritten by the harvesting script.
+
+## Validate the change
+
+The existing tests exercise response errors, malformed JSON repairs, request
+paths and tidy conversion with local data or mocked responses. They do not need
+EPA availability. Run the relevant file during development, then the suite.
+These examples use testthat's source-directory runner, so no additional test
+runner package is needed.
+
+```{r tests}
+testthat::test_local(filter = "envirofacts-path")
+testthat::test_local()
+```
+
+Build the package and check the resulting archive before a release. Substitute
+the archive name printed by `R CMD build` if the version has changed.
+
+```{bash package-check, eval=FALSE}
+R CMD build .
+R CMD check epaechoverse_0.0.0.9000.tar.gz
+```
+
+For documentation changes, build both the installed-package vignettes and the
+pkgdown site. Keep live queries in chunks with `eval = FALSE`; package and website
+builds should not depend on EPA services or download large datasets.
+
+```{r build-documentation}
+rmarkdown::render("vignettes/developer-maintainer.Rmd")
+pkgdown::build_site()
+```
+
+The repository's R CMD check, commit lint, secret scanning and workflow lint
+jobs use pinned reusable workflows from `seanthimons/baseline`. Review the
+checks on a pull request as well as local output.
+
+## Diagnose a request or report a problem
+
+Start with the function's help page and a dry run. A dry run constructs an httr2
+request without sending it and still validates inputs.
+
+```{r inspect-request}
+local({
+  old <- options(epaechoverse.dry_run = TRUE)
+  on.exit(options(old))
+  request <- epaechoverse::cwa_get_facilities(p_st = "RI", p_maj = "Y")
+  request
+})
+```
+
+For a live reproduction, reduce the geography and row range first. Session
+verbosity reports methods and response statuses. ECHO and Envirofacts service
+errors use the `echo_error` class, including error messages returned inside a
+successful HTTP response.
+
+```{r diagnose-live}
+epaechoverse::epaechoverse_run_verbose(TRUE)
+tryCatch(
+  epaechoverse::envirofacts_sdwis_water_system(
+    "state_code/equals/RI", first = 1, last = 5
+  ),
+  echo_error = function(error) conditionMessage(error)
+)
+epaechoverse::epaechoverse_run_verbose(FALSE)
+```
+
+Open a report in the [GitHub issue tracker](https://github.com/seanthimons/epaechoverse/issues)
+with the package version,
+`sessionInfo()`, the smallest failing call, the time of the request, the full
+error message and the expected result. Include a short response sample when it
+helps explain the shape of the data. Review requests and response samples before
+sharing them, especially if they include identifiers or credentials added in a
+custom session.
+
+Consult the README's known quirks before reporting a missing route. Government-only
+`air_viotrack_*` and `ecatt_nif_*` routes cannot be used through EPA's public
+service. Some published Envirofacts tables are unavailable, and handwritten
+routes can drift from their service implementations.
+
+## Prepare a release
+
+Review generated changes with their input changes, run the generation check and
+the offline tests, and build the vignettes and website. Check the package archive
+rather than relying only on a source checkout. Update the package version and
+user-facing documentation together when names or response behavior change.
+
+A passing offline test suite establishes client behavior against its fixtures.
+It does not establish that every upstream route works today. Record any small
+live smoke checks separately, including their date and query parameters, so a
+service outage is distinguishable from a client regression.

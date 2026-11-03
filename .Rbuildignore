@@ -12,3 +12,4 @@
 ^\.github$
 ^\.gitleaks\.toml$
 ^\.gitattributes$
+^docs$

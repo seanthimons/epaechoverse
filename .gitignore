@@ -4,3 +4,6 @@
 .Renviron
 *.Rcheck/
 *.tar.gz
+docs/
+vignettes/*.html
+vignettes/*.R
