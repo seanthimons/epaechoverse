@@ -11,7 +11,8 @@ wplt_get_monitoring_data_csv(
   p_fname = NULL,
   p_npdes_id = NULL,
   p_start_date,
-  callback = NULL
+  callback = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -29,9 +30,11 @@ wplt_get_monitoring_data_csv(
 \item{p_start_date}{Monitoring Period Start Date. Provide a date value in MM/YYYY format to specify the first monitoring period to include in results. Parameter p_end_date must also be populated when using this parameter.}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{tidy}{Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 NPDES Monitoring Data Download Service

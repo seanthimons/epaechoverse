@@ -73,4 +73,56 @@ groups:
       docs:
         tags:
           family: Air Pollution Report endpoints
-    operations: {}
+    operations:
+      GET /caa_poll_rpt_rest_services.get_aggregate_emissions:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      GET /caa_poll_rpt_rest_services.get_air_quality:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      GET /caa_poll_rpt_rest_services.get_caapr:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      GET /caa_poll_rpt_rest_services.get_nnnPermits:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /caa_poll_rpt_rest_services.get_aggregate_emissions:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /caa_poll_rpt_rest_services.get_air_quality:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /caa_poll_rpt_rest_services.get_caapr:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /caa_poll_rpt_rest_services.get_nnnPermits:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested

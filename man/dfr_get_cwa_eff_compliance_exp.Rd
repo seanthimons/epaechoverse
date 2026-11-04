@@ -4,7 +4,12 @@
 \alias{dfr_get_cwa_eff_compliance_exp}
 \title{Detailed Facility Report CWA Effluent Exceedances}
 \usage{
-dfr_get_cwa_eff_compliance_exp(output = NULL, p_id, callback = NULL)
+dfr_get_cwa_eff_compliance_exp(
+  output = NULL,
+  p_id,
+  callback = NULL,
+  tidy = TRUE
+)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -15,9 +20,11 @@ dfr_get_cwa_eff_compliance_exp(output = NULL, p_id, callback = NULL)
 \item{p_id}{Either the EPA Facility Registry System's REGISTRY ID or the NPDES ID from ICIS-NPDES for the facility.}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{tidy}{Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE).
 }
 \description{
 Detailed Facility Report CWA Effluent Exceedances

@@ -13,7 +13,8 @@ wplt_get_watershed_facilities(
   p_watershed_group = NULL,
   p_year,
   pageno = 1,
-  callback = NULL
+  callback = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -39,9 +40,11 @@ wplt_get_watershed_facilities(
 \item{pageno}{Indicates the number of the page to display. It is used only when the results are paginated.}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{tidy}{Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 Watershed Statistics Search Facilities Service

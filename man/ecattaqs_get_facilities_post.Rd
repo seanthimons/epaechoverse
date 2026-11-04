@@ -5,13 +5,15 @@
 \alias{ecattaqs_get_facilities_post}
 \title{ECATT Air Monitoring Station (AMS) CAP Search Service}
 \usage{
-ecattaqs_get_facilities_post(body = NULL)
+ecattaqs_get_facilities_post(body = NULL, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 }
 \description{
 ECATT Air Monitoring Station (AMS) CAP Search Service

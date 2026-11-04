@@ -9,7 +9,8 @@ eff_get_summary_chart(
   output = NULL,
   callback = NULL,
   start_date = NULL,
-  end_date = NULL
+  end_date = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -25,9 +26,11 @@ eff_get_summary_chart(
 \item{start_date}{The start date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with end_date. If start_date and end_date are not specified, the service will return the last three years of data.}
 
 \item{end_date}{The end date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with start_date. If start_date and end_date are not specified, the service will return the last three years of data.}
+
+\item{tidy}{Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE).
 }
 \description{
 Summary Effluent Chart Service

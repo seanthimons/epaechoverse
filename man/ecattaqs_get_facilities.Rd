@@ -35,7 +35,8 @@ ecattaqs_get_facilities(
   qcolumns = NULL,
   queryset = NULL,
   responseset = NULL,
-  p_pretty_print = NULL
+  p_pretty_print = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -111,9 +112,11 @@ ecattaqs_get_facilities(
 \item{responseset}{Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000.}
 
 \item{p_pretty_print}{Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 }
 \description{
 ECATT Air Monitoring Station (AMS) CAP Search Service

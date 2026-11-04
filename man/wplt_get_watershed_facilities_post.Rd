@@ -5,13 +5,15 @@
 \alias{wplt_get_watershed_facilities_post}
 \title{Watershed Statistics Search Facilities Service}
 \usage{
-wplt_get_watershed_facilities_post(body)
+wplt_get_watershed_facilities_post(body, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 Watershed Statistics Search Facilities Service

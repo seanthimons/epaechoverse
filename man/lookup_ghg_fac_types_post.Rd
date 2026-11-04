@@ -4,15 +4,15 @@
 \alias{lookup_ghg_fac_types_post}
 \title{ECHO GHG Facility Types Lookup Service}
 \usage{
-lookup_ghg_fac_types_post(tidy = TRUE, body = NULL)
+lookup_ghg_fac_types_post(body = NULL, tidy = TRUE)
 }
 \arguments{
-\item{tidy}{Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
-
 \item{body}{Request body.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO GHG Facility Types Lookup Service

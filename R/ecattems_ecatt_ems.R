@@ -108,11 +108,12 @@
 #' @param ymin Minimum latitude value in decimal degrees.
 #' @param xmax Maximum longitude value in decimal degrees.
 #' @param ymax Maximum latitude value in decimal degrees.
-#' @return Decoded response returned by the client request helper.
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
+#' @return A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 #' @family ECATT EMS endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattems_get_ems <- function(output = NULL, p_year, p_rpttype = "FAC", p_aggtype = "AGG", p_pcat = NULL, p_pname = NULL, p_cas = NULL, p_toxwt = "No", p_program = NULL, p_ct = NULL, p_fips = NULL, p_st = NULL, p_zip = NULL, p_reg = NULL, p_ncs = NULL, p_mact = NULL, p_nsps = NULL, p_nspsm = NULL, p_naa_pol = NULL, p_naa_sev = NULL, p_naa_pol_cor = NULL, p_tribedist = NULL, p_pd = NULL, p_pm = NULL, p_pctlowinc = NULL, p_tribeid = NULL, p_tribename = NULL, p_rpo = NULL, p_otr = NULL, p_scc = NULL, p_eisftype = NULL, p_ghgftype = NULL, p_ghgsub = NULL, p_desig = NULL, p_frsflg = NULL, p_ysl = NULL, p_ysly = NULL, p_ysla = NULL, p_fea = NULL, p_feay = NULL, p_feaa = NULL, p_iea = NULL, p_ieay = NULL, p_ieaa = NULL, p_ico = NULL, p_icoo = NULL, p_fn = NULL, p_fntype = NULL, p_pid = NULL, p_pidall = NULL, p_prog = NULL, p_opst = NULL, p_fa = NULL, p_agoo = NULL, p_owop = NULL, responseset = NULL, xmin = NULL, queryset = NULL, callback = NULL, qcolumns = NULL, ymin = NULL, xmax = NULL, ymax = NULL) {
+ecattems_get_ems <- function(output = NULL, p_year, p_rpttype = "FAC", p_aggtype = "AGG", p_pcat = NULL, p_pname = NULL, p_cas = NULL, p_toxwt = "No", p_program = NULL, p_ct = NULL, p_fips = NULL, p_st = NULL, p_zip = NULL, p_reg = NULL, p_ncs = NULL, p_mact = NULL, p_nsps = NULL, p_nspsm = NULL, p_naa_pol = NULL, p_naa_sev = NULL, p_naa_pol_cor = NULL, p_tribedist = NULL, p_pd = NULL, p_pm = NULL, p_pctlowinc = NULL, p_tribeid = NULL, p_tribename = NULL, p_rpo = NULL, p_otr = NULL, p_scc = NULL, p_eisftype = NULL, p_ghgftype = NULL, p_ghgsub = NULL, p_desig = NULL, p_frsflg = NULL, p_ysl = NULL, p_ysly = NULL, p_ysla = NULL, p_fea = NULL, p_feay = NULL, p_feaa = NULL, p_iea = NULL, p_ieay = NULL, p_ieaa = NULL, p_ico = NULL, p_icoo = NULL, p_fn = NULL, p_fntype = NULL, p_pid = NULL, p_pidall = NULL, p_prog = NULL, p_opst = NULL, p_fa = NULL, p_agoo = NULL, p_owop = NULL, responseset = NULL, xmin = NULL, queryset = NULL, callback = NULL, qcolumns = NULL, ymin = NULL, xmax = NULL, ymax = NULL, tidy = TRUE) {
   if (base::is.null(p_year)) base::stop("Required input: p_year")
   .api_validation$parameter_values(base::list("output" = output, "p_year" = p_year, "p_rpttype" = p_rpttype, "p_aggtype" = p_aggtype, "p_pcat" = p_pcat, "p_pname" = p_pname, "p_cas" = p_cas, "p_toxwt" = p_toxwt, "p_program" = p_program, "p_ct" = p_ct, "p_fips" = p_fips, "p_st" = p_st, "p_zip" = p_zip, "p_reg" = p_reg, "p_ncs" = p_ncs, "p_mact" = p_mact, "p_nsps" = p_nsps, "p_nspsm" = p_nspsm, "p_naa_pol" = p_naa_pol, "p_naa_sev" = p_naa_sev, "p_naa_pol_cor" = p_naa_pol_cor, "p_tribedist" = p_tribedist, "p_pd" = p_pd, "p_pm" = p_pm, "p_pctlowinc" = p_pctlowinc, "p_tribeid" = p_tribeid, "p_tribename" = p_tribename, "p_rpo" = p_rpo, "p_otr" = p_otr, "p_scc" = p_scc, "p_eisftype" = p_eisftype, "p_ghgftype" = p_ghgftype, "p_ghgsub" = p_ghgsub, "p_desig" = p_desig, "p_frsflg" = p_frsflg, "p_ysl" = p_ysl, "p_ysly" = p_ysly, "p_ysla" = p_ysla, "p_fea" = p_fea, "p_feay" = p_feay, "p_feaa" = p_feaa, "p_iea" = p_iea, "p_ieay" = p_ieay, "p_ieaa" = p_ieaa, "p_ico" = p_ico, "p_icoo" = p_icoo, "p_fn" = p_fn, "p_fntype" = p_fntype, "p_pid" = p_pid, "p_pidall" = p_pidall, "p_prog" = p_prog, "p_opst" = p_opst, "p_fa" = p_fa, "p_agoo" = p_agoo, "p_owop" = p_owop, "responseset" = responseset, "xmin" = xmin, "queryset" = queryset, "callback" = callback, "qcolumns" = qcolumns, "ymin" = ymin, "xmax" = xmax, "ymax" = ymax), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_year = list(name = "p_year", "in" = "query", description = "The calendar year for the annual pollutant loadings. The year must be 2007 or later.", 
     default = "2023", type = "string"), p_rpttype = list(name = "p_rpttype", "in" = "query", description = "The report type. The default is facility report. ", default = "FAC", type = "string"), p_aggtype = list(name = "p_aggtype", "in" = "query", description = "Search for aggregate emissions (AGG) or single pollutant emissions (POL). If POL is used, must be used in combination with p_pname or p_cas.", default = "AGG", type = "string"), p_pcat = list(name = "p_pcat", "in" = "query", description = "The pollutant category or categories for an aggregate emissions query. ", 
@@ -140,7 +141,7 @@ ecattems_get_ems <- function(output = NULL, p_year, p_rpttype = "FAC", p_aggtype
         type = "string"), ymin = list(name = "ymin", "in" = "query", description = "Minimum latitude value in decimal degrees.", type = "number"), xmax = list(name = "xmax", "in" = "query", description = "Maximum longitude value in decimal degrees.", type = "number"), ymax = list(name = "ymax", "in" = "query", description = "Maximum latitude value in decimal degrees.", type = "number")), .api_validation$body_value, c(output = "query", p_year = "query", p_rpttype = "query", p_aggtype = "query", p_pcat = "query", p_pname = "query", p_cas = "query", p_toxwt = "query", p_program = "query", p_ct = "query", p_fips = "query", p_st = "query", p_zip = "query", p_reg = "query", p_ncs = "query", p_mact = "query", p_nsps = "query", p_nspsm = "query", p_naa_pol = "query", p_naa_sev = "query", p_naa_pol_cor = "query", p_tribedist = "query", p_pd = "query", p_pm = "query", p_pctlowinc = "query", p_tribeid = "query", p_tribename = "query", 
 p_rpo = "query", p_otr = "query", p_scc = "query", p_eisftype = "query", p_ghgftype = "query", p_ghgsub = "query", p_desig = "query", p_frsflg = "query", p_ysl = "query", p_ysly = "query", p_ysla = "query", p_fea = "query", p_feay = "query", p_feaa = "query", p_iea = "query", p_ieay = "query", p_ieaa = "query", p_ico = "query", p_icoo = "query", p_fn = "query", p_fntype = "query", p_pid = "query", p_pidall = "query", p_prog = "query", p_opst = "query", p_fa = "query", p_agoo = "query", p_owop = "query", 
 responseset = "query", xmin = "query", queryset = "query", callback = "query", qcolumns = "query", ymin = "query", xmax = "query", ymax = "query"))
-  params <- base::list("output" = output, "p_year" = p_year, "p_rpttype" = p_rpttype, "p_aggtype" = p_aggtype, "p_pcat" = p_pcat, "p_pname" = p_pname, "p_cas" = p_cas, "p_toxwt" = p_toxwt, "p_program" = p_program, "p_ct" = p_ct, "p_fips" = p_fips, "p_st" = p_st, "p_zip" = p_zip, "p_reg" = p_reg, "p_ncs" = p_ncs, "p_mact" = p_mact, "p_nsps" = p_nsps, "p_nspsm" = p_nspsm, "p_naa_pol" = p_naa_pol, "p_naa_sev" = p_naa_sev, "p_naa_pol_cor" = p_naa_pol_cor, "p_tribedist" = p_tribedist, "p_pd" = p_pd, "p_pm" = p_pm, "p_pctlowinc" = p_pctlowinc, "p_tribeid" = p_tribeid, "p_tribename" = p_tribename, "p_rpo" = p_rpo, "p_otr" = p_otr, "p_scc" = p_scc, "p_eisftype" = p_eisftype, "p_ghgftype" = p_ghgftype, "p_ghgsub" = p_ghgsub, "p_desig" = p_desig, "p_frsflg" = p_frsflg, "p_ysl" = p_ysl, "p_ysly" = p_ysly, "p_ysla" = p_ysla, "p_fea" = p_fea, "p_feay" = p_feay, "p_feaa" = p_feaa, "p_iea" = p_iea, "p_ieay" = p_ieay, "p_ieaa" = p_ieaa, "p_ico" = p_ico, "p_icoo" = p_icoo, "p_fn" = p_fn, "p_fntype" = p_fntype, "p_pid" = p_pid, "p_pidall" = p_pidall, "p_prog" = p_prog, "p_opst" = p_opst, "p_fa" = p_fa, "p_agoo" = p_agoo, "p_owop" = p_owop, "responseset" = responseset, "xmin" = xmin, "queryset" = queryset, "callback" = callback, "qcolumns" = qcolumns, "ymin" = ymin, "xmax" = xmax, "ymax" = ymax)
+  params <- base::list("output" = output, "p_year" = p_year, "p_rpttype" = p_rpttype, "p_aggtype" = p_aggtype, "p_pcat" = p_pcat, "p_pname" = p_pname, "p_cas" = p_cas, "p_toxwt" = p_toxwt, "p_program" = p_program, "p_ct" = p_ct, "p_fips" = p_fips, "p_st" = p_st, "p_zip" = p_zip, "p_reg" = p_reg, "p_ncs" = p_ncs, "p_mact" = p_mact, "p_nsps" = p_nsps, "p_nspsm" = p_nspsm, "p_naa_pol" = p_naa_pol, "p_naa_sev" = p_naa_sev, "p_naa_pol_cor" = p_naa_pol_cor, "p_tribedist" = p_tribedist, "p_pd" = p_pd, "p_pm" = p_pm, "p_pctlowinc" = p_pctlowinc, "p_tribeid" = p_tribeid, "p_tribename" = p_tribename, "p_rpo" = p_rpo, "p_otr" = p_otr, "p_scc" = p_scc, "p_eisftype" = p_eisftype, "p_ghgftype" = p_ghgftype, "p_ghgsub" = p_ghgsub, "p_desig" = p_desig, "p_frsflg" = p_frsflg, "p_ysl" = p_ysl, "p_ysly" = p_ysly, "p_ysla" = p_ysla, "p_fea" = p_fea, "p_feay" = p_feay, "p_feaa" = p_feaa, "p_iea" = p_iea, "p_ieay" = p_ieay, "p_ieaa" = p_ieaa, "p_ico" = p_ico, "p_icoo" = p_icoo, "p_fn" = p_fn, "p_fntype" = p_fntype, "p_pid" = p_pid, "p_pidall" = p_pidall, "p_prog" = p_prog, "p_opst" = p_opst, "p_fa" = p_fa, "p_agoo" = p_agoo, "p_owop" = p_owop, "responseset" = responseset, "xmin" = xmin, "queryset" = queryset, "callback" = callback, "qcolumns" = qcolumns, "ymin" = ymin, "xmax" = xmax, "ymax" = ymax, "tidy" = tidy)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["p_year"]]) && base::any(!base::nzchar(params[["p_year"]]))) base::stop("Empty query parameter: p_year")
   if (base::is.character(params[["p_rpttype"]]) && base::any(!base::nzchar(params[["p_rpttype"]]))) base::stop("Empty query parameter: p_rpttype")
@@ -206,17 +207,20 @@ responseset = "query", xmin = "query", queryset = "query", callback = "query", q
   if (base::is.character(params[["ymax"]]) && base::any(!base::nzchar(params[["ymax"]]))) base::stop("Empty query parameter: ymax")
   result <- ecattems_request(method = "GET", path = "/ecatt_ems_rest_services.get_ems", path_params = base::list(), query = base::list("output" = params[["output"]], "p_year" = params[["p_year"]], "p_rpttype" = params[["p_rpttype"]], "p_aggtype" = params[["p_aggtype"]], "p_pcat" = params[["p_pcat"]], "p_pname" = params[["p_pname"]], "p_cas" = params[["p_cas"]], "p_toxwt" = params[["p_toxwt"]], "p_program" = params[["p_program"]], "p_ct" = params[["p_ct"]], "p_fips" = params[["p_fips"]], "p_st" = params[["p_st"]], "p_zip" = params[["p_zip"]], "p_reg" = params[["p_reg"]], "p_ncs" = params[["p_ncs"]], "p_mact" = params[["p_mact"]], "p_nsps" = params[["p_nsps"]], "p_nspsm" = params[["p_nspsm"]], "p_naa_pol" = params[["p_naa_pol"]], "p_naa_sev" = params[["p_naa_sev"]], "p_naa_pol_cor" = params[["p_naa_pol_cor"]], "p_tribedist" = params[["p_tribedist"]], "p_pd" = params[["p_pd"]], "p_pm" = params[["p_pm"]], "p_pctlowinc" = params[["p_pctlowinc"]], "p_tribeid" = params[["p_tribeid"]], "p_tribename" = params[["p_tribename"]], "p_rpo" = params[["p_rpo"]], "p_otr" = params[["p_otr"]], "p_scc" = params[["p_scc"]], "p_eisftype" = params[["p_eisftype"]], "p_ghgftype" = params[["p_ghgftype"]], "p_ghgsub" = params[["p_ghgsub"]], "p_desig" = params[["p_desig"]], "p_frsflg" = params[["p_frsflg"]], "p_ysl" = params[["p_ysl"]], "p_ysly" = params[["p_ysly"]], "p_ysla" = params[["p_ysla"]], "p_fea" = params[["p_fea"]], "p_feay" = params[["p_feay"]], "p_feaa" = params[["p_feaa"]], "p_iea" = params[["p_iea"]], "p_ieay" = params[["p_ieay"]], "p_ieaa" = params[["p_ieaa"]], "p_ico" = params[["p_ico"]], "p_icoo" = params[["p_icoo"]], "p_fn" = params[["p_fn"]], "p_fntype" = params[["p_fntype"]], "p_pid" = params[["p_pid"]], "p_pidall" = params[["p_pidall"]], "p_prog" = params[["p_prog"]], "p_opst" = params[["p_opst"]], "p_fa" = params[["p_fa"]], "p_agoo" = params[["p_agoo"]], "p_owop" = params[["p_owop"]], "responseset" = params[["responseset"]], "xmin" = params[["xmin"]], "queryset" = params[["queryset"]], "callback" = params[["callback"]], "qcolumns" = params[["qcolumns"]], "ymin" = params[["ymin"]], "xmax" = params[["xmax"]], "ymax" = params[["ymax"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_info_ecattems", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Emission Screener (EMS) Search Service
 #' 
 #' @noMd
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 #' @family ECATT EMS endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattems_get_ems_post <- function(body) {
+ecattems_get_ems_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_year = list(description = "The calendar year for the annual pollutant loadings. The year must be 2007 or later.", 
@@ -241,7 +245,7 @@ ecattems_get_ems_post <- function(body) {
         type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string"), ymin = list(description = "Minimum latitude value in decimal degrees.", type = "number"), xmax = list(description = "Maximum longitude value in decimal degrees.", type = "number"), ymax = list(
         description = "Maximum latitude value in decimal degrees.", type = "number")), required = list("p_year")), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
+  params <- base::list("tidy" = tidy, "body" = body)
   result <- ecattems_request(method = "POST", path = "/ecatt_ems_rest_services.get_ems", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), p_year = list(), p_rpttype = list(), p_aggtype = list(), p_pcat = list(), p_pname = list(), p_cas = list(), p_toxwt = list(), p_program = list(), p_ct = list(), p_fips = list(), p_st = list(), p_zip = list(), p_reg = list(), p_ncs = list(), p_mact = list(), p_nsps = list(), p_nspsm = list(), p_naa_pol = list(), p_naa_sev = list(), p_naa_pol_cor = list(), p_tribedist = list(), p_pd = list(), p_pm = list(), p_pctlowinc = list(), p_tribeid = list(), p_tribename = list(), p_rpo = list(), 
     p_otr = list(), p_scc = list(), p_eisftype = list(), p_ghgftype = list(), p_ghgsub = list(), p_desig = list(), p_frsflg = list(), p_ysl = list(), p_ysly = list(), p_ysla = list(), p_fea = list(), p_feay = list(), p_feaa = list(), p_iea = list(), p_ieay = list(), p_ieaa = list(), p_ico = list(), p_icoo = list(), p_fn = list(), p_fntype = list(), p_pid = list(), p_pidall = list(), p_prog = list(), p_opst = list(), p_fa = list(), p_agoo = list(), p_owop = list(), responseset = list(), xmin = list(), 
     queryset = list(), callback = list(), qcolumns = list(), ymin = list(), xmax = list(), ymax = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_year = list(description = "The calendar year for the annual pollutant loadings. The year must be 2007 or later.", 
@@ -266,6 +270,8 @@ ecattems_get_ems_post <- function(body) {
         type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string"), ymin = list(description = "Minimum latitude value in decimal degrees.", type = "number"), xmax = list(description = "Maximum longitude value in decimal degrees.", type = "number"), ymax = list(
         description = "Maximum latitude value in decimal degrees.", type = "number")), required = list("p_year")))
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_info_ecattems", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Emission Screener (EMS) Paginated Results Service
@@ -280,16 +286,17 @@ ecattems_get_ems_post <- function(body) {
 #' @param newsort Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.
 #' @param descending Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
-#' @return Decoded response returned by the client request helper.
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
+#' @return A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.
 #' @family ECATT EMS endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattems_get_qid <- function(output = NULL, qid, pageno = 1, newsort = NULL, descending = NULL, callback = NULL) {
+ecattems_get_qid <- function(output = NULL, qid, pageno = 1, newsort = NULL, descending = NULL, callback = NULL, tidy = TRUE) {
   if (base::is.null(qid)) base::stop("Required input: qid")
   .api_validation$parameter_values(base::list("output" = output, "qid" = qid, "pageno" = pageno, "newsort" = newsort, "descending" = descending, "callback" = callback), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(name = "qid", "in" = "query", description = "Query ID Selector.  Enter the QueryID number from a previously run query.", 
     type = "string"), pageno = list(name = "pageno", "in" = "query", description = "Indicates the number of the page to display. It is used only when the results are paginated.", default = 1L, type = "number"), newsort = list(name = "newsort", "in" = "query", description = "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.", type = "number"), descending = list(name = "descending", "in" = "query", description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", 
     enum = list("Y", "N"), type = "string"), callback = list(name = "callback", "in" = "query", description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string")), .api_validation$body_value, c(output = "query", qid = "query", pageno = "query", newsort = "query", descending = "query", callback = "query"))
-  params <- base::list("output" = output, "qid" = qid, "pageno" = pageno, "newsort" = newsort, "descending" = descending, "callback" = callback)
+  params <- base::list("output" = output, "qid" = qid, "pageno" = pageno, "newsort" = newsort, "descending" = descending, "callback" = callback, "tidy" = tidy)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["qid"]]) && base::any(!base::nzchar(params[["qid"]]))) base::stop("Empty query parameter: qid")
   if (base::is.character(params[["pageno"]]) && base::any(!base::nzchar(params[["pageno"]]))) base::stop("Empty query parameter: pageno")
@@ -298,28 +305,33 @@ ecattems_get_qid <- function(output = NULL, qid, pageno = 1, newsort = NULL, des
   if (base::is.character(params[["callback"]]) && base::any(!base::nzchar(params[["callback"]]))) base::stop("Empty query parameter: callback")
   result <- ecattems_request(method = "GET", path = "/ecatt_ems_rest_services.get_qid", path_params = base::list(), query = base::list("output" = params[["output"]], "qid" = params[["qid"]], "pageno" = params[["pageno"]], "newsort" = params[["newsort"]], "descending" = params[["descending"]], "callback" = params[["callback"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_qid_ecattems", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Emission Screener (EMS) Paginated Results Service
 #' 
 #' @noMd
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.
 #' @family ECATT EMS endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattems_get_qid_post <- function(body) {
+ecattems_get_qid_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), 
     pageno = list(description = "Indicates the number of the page to display. It is used only when the results are paginated.", default = 1L, type = "number"), newsort = list(description = "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.", type = "number"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", 
         enum = list("Y", "N"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string")), required = list("qid")), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
+  params <- base::list("tidy" = tidy, "body" = body)
   result <- ecattems_request(method = "POST", path = "/ecatt_ems_rest_services.get_qid", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), qid = list(), pageno = list(), newsort = list(), descending = list(), callback = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), 
     pageno = list(description = "Indicates the number of the page to display. It is used only when the results are paginated.", default = 1L, type = "number"), newsort = list(description = "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.", type = "number"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", 
         enum = list("Y", "N"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string")), required = list("qid")))
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_qid_ecattems", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Emission Screener (EMS) Search Download Data Service
@@ -327,34 +339,40 @@ ecattems_get_qid_post <- function(body) {
 #' @noMd
 #' @param qid Query ID Selector.  Enter the QueryID number from a previously run query.
 #' @param qcolumns Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
-#' @return Decoded response returned by the client request helper.
+#' @param tidy Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.
+#' @return A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 #' @family ECATT EMS endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattems_get_download <- function(qid, qcolumns = NULL) {
+ecattems_get_download <- function(qid, qcolumns = NULL, tidy = TRUE) {
   if (base::is.null(qid)) base::stop("Required input: qid")
   .api_validation$parameter_values(base::list("qid" = qid, "qcolumns" = qcolumns), list(qid = list(name = "qid", "in" = "query", description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), qcolumns = list(name = "qcolumns", "in" = "query", description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string")), .api_validation$body_value, c(qid = "query", qcolumns = "query"))
-  params <- base::list("qid" = qid, "qcolumns" = qcolumns)
+  params <- base::list("qid" = qid, "qcolumns" = qcolumns, "tidy" = tidy)
   if (base::is.character(params[["qid"]]) && base::any(!base::nzchar(params[["qid"]]))) base::stop("Empty query parameter: qid")
   if (base::is.character(params[["qcolumns"]]) && base::any(!base::nzchar(params[["qcolumns"]]))) base::stop("Empty query parameter: qcolumns")
   result <- ecattems_request(method = "GET", path = "/ecatt_ems_rest_services.get_download", path_params = base::list(), query = base::list("qid" = params[["qid"]], "qcolumns" = params[["qcolumns"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_download_ecattems", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Emission Screener (EMS) Search Download Data Service
 #' 
 #' @noMd
+#' @param tidy Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 #' @family ECATT EMS endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattems_get_download_post <- function(body) {
+ecattems_get_download_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string")), required = list("qid")), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
+  params <- base::list("tidy" = tidy, "body" = body)
   result <- ecattems_request(method = "POST", path = "/ecatt_ems_rest_services.get_download", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(qid = list(), qcolumns = list()), form_schema = list(type = "object", properties = list(qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string")), required = list("qid")))
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_download_ecattems", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }

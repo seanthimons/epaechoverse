@@ -77,7 +77,59 @@ groups:
       docs:
         tags:
           family: Facilities endpoints
-    operations: {}
+    operations:
+      GET /air_rest_services.get_download:
+        docs:
+          return: "A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent."}
+        result_formatter: echo_tidy_download_air
+      GET /air_rest_services.get_facilities:
+        docs:
+          return: "A one-row tibble of the query summary (counters as numbers, QueryID as text; with tablelist = 'Y' the first page of rows is in attr(, 'facilities')), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_summary_air
+      GET /air_rest_services.get_facility_info:
+        docs:
+          return: "A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_info_air
+      GET /air_rest_services.get_qid:
+        docs:
+          return: "A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_qid_air
+      POST /air_rest_services.get_download:
+        docs:
+          return: "A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent."}
+        result_formatter: echo_tidy_download_air
+      POST /air_rest_services.get_facilities:
+        docs:
+          return: "A one-row tibble of the query summary (counters as numbers, QueryID as text; with tablelist = 'Y' the first page of rows is in attr(, 'facilities')), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_summary_air
+      POST /air_rest_services.get_facility_info:
+        docs:
+          return: "A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_info_air
+      POST /air_rest_services.get_qid:
+        docs:
+          return: "A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_qid_air
   air_metadata:
     selection:
       methods:

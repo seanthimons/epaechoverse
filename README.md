@@ -21,28 +21,29 @@ remotes::install_github('seanthimons/epaechoverse')
 
 ## Quick start
 
-ECHO searches are two-step. A search returns a query ID and a row count; you
-then page through the results with the query ID, or download them all as CSV.
+ECHO searches are two-step. A search returns a summary with a query ID and a row
+count; you then fetch the rows with the query ID, or download them all as CSV.
 
 ```r
 library(epaechoverse)
 
 # Drinking-water systems in Rhode Island
-res <- sdw_get_systems(p_st = 'RI')
-res$Results$QueryRows
-qid <- res$Results$QueryID          # a string, as ECHO returns it
+res <- sdw_get_systems(p_st = 'RI')  # a one-row tibble: QueryRows, QueryID, counters
+res$QueryRows
+systems <- echo_qid_all(res, 'sdw')  # every row, as a tibble
 
-page1 <- sdw_get_qid(qid = qid, pageno = 1)
-csv <- sdw_get_download(qid = qid)  # CSV as a character string
-systems <- utils::read.csv(text = csv)
+downloaded <- sdw_get_download(qid = res$QueryID)  # all rows from the CSV, typed like echo_qid_all()
 
 # Code lookups
 lookup_states()
 ```
 
 Responses are plain R lists (JSON) or strings (CSV, XML), except the lookup
-functions, which return tibbles (see below). Query parameters are
-the function arguments; see `?sdw_get_systems` for the ones a route accepts.
+functions, the searches (`*_get_facilities`, `*_get_systems`, `*_get_facility_info`,
+`*_get_qid`, `*_get_download`) of twelve services, 13 `wplt_*` report routes and the
+`dfr_*`, `caa_*` and `eff_*` reports, which return tibbles or lists of tibbles (see
+below). Pass `tidy = FALSE` to any of them for the plain list or text.
+Query parameters are the function arguments; see `?sdw_get_systems` for the ones a route accepts.
 Routes that accept POST (all but the NNCR and biosolids routes) also have a
 `_post` variant that usually takes its parameters as `body = list(...)`; a few
 take named arguments or none, so check the help page.
@@ -57,6 +58,98 @@ epaechoverse_dry_run(FALSE)
 
 `epaechoverse_run_verbose(TRUE)` prints each method and response status.
 
+## Search results as tibbles
+
+For the searches of `sdw`, `cwa`, `rcra`, `air`, `echo`, `compscreen`, `case`,
+`ecattaqs`, `ecattams`, `ecattems` and the `cwa_viotrack` and `rcra_viotrack`
+violation trackers,
+up to three kinds of function return tibbles:
+
+- **The search** (`*_get_facilities`, `sdw_get_systems`, `case_get_cases`) returns
+  the query *summary* as a one-row tibble: the row counters as numbers
+  (`QueryRows`, `CVRows`, ...), `TotalPenalties` as a number (`"$157,500"` is
+  `157500`), `QueryID` as text. With `tablelist = 'Y'` the first page of facilities
+  is in `attr(, 'facilities')` (the cases, for `case_get_cases`). The air monitoring searches
+  (`ecattaqs_get_facilities`, `ecattams_get_facilities`) and the emission screener
+  (`ecattems_get_ems`) answer with the rows instead, like `get_facility_info`.
+- **`get_qid`** returns one page of rows (500 to 5,000, depending on the service),
+  and **`echo_qid_all()`** fetches every page.
+- **`*_get_facility_info`** (`case_get_case_info` for cases; not `sdw` or
+  `compscreen`) returns the matching rows as a tibble,
+  with `attr(, 'query')`, `attr(, 'summary')` (the summary tibble) and
+  `attr(, 'parameters')` (the search as ECHO read it) and, for the air monitoring
+  services, `attr(, 'columns')` (ECHO's column list). ECHO answers a large query
+  with clusters instead of facilities (110 clusters for the 22,508 facilities in
+  Rhode Island): the tibble then has no rows, the clusters are in
+  `attr(, 'cluster_output')`, and the call warns. Use `echo_qid_all()` for the rows
+  of such a query.
+
+```r
+search <- cwa_get_facilities(p_st = 'RI', p_maj = 'Y')
+search$QueryRows                    # 25
+rows <- echo_qid_all(search, 'cwa') # a tibble with all 25 rows
+attr(rows, 'query')                 # query ID, rows ECHO reports, rows returned, pages
+
+page <- cwa_get_qid(qid = search$QueryID, pageno = 2)  # one page, also a tibble
+cwa_get_qid(qid = search$QueryID, tidy = FALSE)        # the decoded list
+
+info <- cwa_get_facility_info(p_st = 'RI', p_zip = '02840')
+attr(info, 'summary')$QueryRows
+```
+
+Attributes are lost by operations such as `dplyr::bind_rows()`, so read them first.
+Other `output` formats (CSV, XML, GeoJSON) are always returned as sent.
+
+Columns are typed from ECHO's own `metadata` routes, service by service
+(`inst/extdata/echo-fields.csv`, written by `dev/build_echo_fields.R`; the services
+disagree about some fields, such as `CurrSvFlag`, a number in most and text in
+`compscreen`): numbers (counts, amounts, coordinates) are
+doubles, dates (`MM/DD/YYYY`) are `Date`s, and everything else, including IDs, zip
+codes and FIPS codes, stays text, so `"02840"` keeps its zero. Pages are typed
+together, so a column cannot change type between them. A `$` and thousands commas
+are dropped from numbers. If any value in a numeric or date column does not
+convert, the whole column stays text and the call warns, so nothing is lost. A
+field the metadata does not describe stays text (the emission screener has no
+metadata route, so its types were frozen from a reviewed live sample by the same
+script), and so does an array of plain
+values in a record, which is pasted together with `, `. `echo_qid_all()` stops when the
+rows ECHO reports are in, at an empty page, or after `max_pages` (default 20,
+which is 100,000 rows) with a warning that says how many rows were left. Arguments
+such as `qcolumns` (fewer columns) or `newsort` are passed on.
+
+## Water pollutant loading tool reports
+
+Thirteen `wplt_*` routes return one flat list of records beside a few summary
+fields (`wplt_get_all_dmr_facilities`, `wplt_get_all_tri_facilities`,
+`wplt_get_custom_data_annual`, `_facility` and `_monitor_pd`,
+`wplt_get_dashboard_chemicals`, `_facilities`, `_npdes` and `_industries`,
+`wplt_get_loading_tool_params`, `wplt_get_permit_limits`,
+`wplt_get_monitoring_data_csv` and `wplt_get_watershed_facilities`, and their
+`_post` twins). They return the records as a tibble with the summary fields in
+`attr(, 'summary')`. Every column is text, blank values are `NA`: the service
+declares every field a string and has no metadata route, so nothing is guessed.
+The other loading tool reports (facility reports, loads, multi-year detail) are nested
+objects and stay lists. `tidy = FALSE` returns the decoded list.
+
+## Nested reports (`dfr`, `caa`) and CSV downloads
+
+The detailed facility report (`dfr_*`), air pollutant report (`caa_*`) and effluent
+chart (`eff_*`) routes that return a JSON report return a **named list of tibbles**, one per table in the
+report: an array of records is a table, the plain values of an object are a one-row
+table, and names are the path through the report (`ComplianceSummary.Source`); the
+plain values at the top are `summary`. Columns are text, blank values are `NA`, and
+a record's own nested values stay list-columns, so nothing is lost. The formatter
+does not fail on an unfamiliar shape. The `eff_*` routes answer in JSONP unless you
+pass `output = 'JSON'`, and JSONP is returned as text. The CSV and ZIP file routes and the map
+and spatial-metadata routes (mapping is on hold) stay as they are.
+
+Each search service's `*_get_download(qid = )` returns the query's rows as a tibble
+typed like `get_qid` (`tidy = FALSE` returns the CSV text). The download has its own
+default column set, and the CSV can differ from the JSON in small ways (leading
+spaces, `0` versus empty), because the service renders them separately; a few
+services head their CSV with database column names, which are renamed to the field
+names.
+
 ## Tidy lookups
 
 The 81 lookup functions (`lookup_*`, `wplt_lookups_*`, `cwa_lookups_*`,
@@ -65,20 +158,15 @@ tibble by default:
 
 ```r
 lookup_states()
-lookup_ghg_years()   # ValueCode is text, ValueDescription an integer
+lookup_ghg_years()
 lookup_states(tidy = FALSE)  # the decoded list, as ECHO sent it
 ```
 
-ECHO sends every value as a string and its schemas declare no types, so column
-types are guessed from the values. A column is converted only when that loses
-nothing: whole numbers (up to 9 digits) become integers, plain decimals become
-doubles, and values in one strict date format (`YYYY-MM-DD` or `MM/DD/YYYY`)
-become `Date`s. Leading zeros, signs, trailing zeros and exponents keep a column
-as text. Columns named like identifiers (ending in `ID`, `Code`, `Zip`, `FIPS`,
-`Number`, `Num` or `Phone`, or starting with `CAS`, `NAICS` or `SIC`) are never
-converted, so a code does not change type depending on which rows came back.
-Blank strings and nulls are `NA`. With another `output` format (JSONP or XML)
-the response is returned undecoded, as a string or raw vector. The other ECHO functions still return lists.
+Every column is text: lookups are code and description labels (a year such as
+`"2023"` is a label, and codes like `"01"` must keep their zeros), and ECHO sends
+every value as a string, so nothing is converted. Blank strings and nulls are
+`NA`, and line breaks inside text are `\n`. With another `output` format (JSONP or
+XML) the response is returned undecoded, as a string or raw vector. The other ECHO functions still return lists.
 
 ## Envirofacts tables
 
@@ -197,14 +285,16 @@ The schemas in `apis/` are downloaded unchanged from ECHO and EPA
 `dev/echo-schema-manifest.json`) or written by hand. `dev/build_client.R`
 bootstraps the package from them; afterwards `dev/regenerate.R` plans, applies or
 checks the generated code; `dev/build_column_types.R` writes the Envirofacts column
-types (`inst/extdata/envirofacts-columns.csv`) that tidy output uses. The Envirofacts wrappers need a generation-time
+types (`inst/extdata/envirofacts-columns.csv`) and `dev/build_echo_fields.R` the
+ECHO field types (`inst/extdata/echo-fields.csv`, needs the network) that tidy
+output uses. The Envirofacts wrappers need a generation-time
 callback (`dev/callbacks.R`) that builds each table's request path with
 `envirofacts_path()`, because DMAP declares no parameters. specmill is pinned to a GitHub release in
 `renv.lock` so a local development install cannot change the build; run
 `renv::restore()` first. See the headers of both scripts for the details.
 
 specmill records a hash of the client-owned `R/echo_response_policy.R`,
-`R/envirofacts_path.R`, `R/envirofacts_tidy.R` and `R/echo_tidy.R`: after editing one, run
+`R/envirofacts_path.R`, `R/envirofacts_tidy.R`, `R/echo_tidy.R` and `R/echo_pages.R`: after editing one, run
 `Rscript dev/regenerate.R apply` (its `check` reports stale output until then).
 
 Shared workflows come from [seanthimons/baseline](https://github.com/seanthimons/baseline):

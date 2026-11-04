@@ -44,11 +44,12 @@
 #' @param queryset Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.
 #' @param responseset Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000.
 #' @param p_pretty_print Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.
-#' @return Decoded response returned by the client request helper.
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
+#' @return A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 #' @family Air Monitoring Station Criteria Air Pollutant Search Services endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattaqs_get_facilities <- function(output = NULL, p_site_code = NULL, p_year = "LAST10", p_reg = NULL, p_rpo = NULL, p_st = NULL, p_zip = NULL, p_fips = NULL, p_ct = NULL, p_loc = NULL, p_naa_located = NULL, p_naa_pol = NULL, p_naa_cl = NULL, p_name = NULL, p_std = NULL, p_naaq_std = NULL, p_trend = NULL, p_naaq_comp = NULL, p_naaq_exceed = NULL, p_tribedist = NULL, p_pd = NULL, p_pctlowinc = NULL, p_pm = NULL, xmax = NULL, ymax = NULL, callback = NULL, qcolumns = NULL, queryset = NULL, responseset = NULL, p_pretty_print = NULL) {
+ecattaqs_get_facilities <- function(output = NULL, p_site_code = NULL, p_year = "LAST10", p_reg = NULL, p_rpo = NULL, p_st = NULL, p_zip = NULL, p_fips = NULL, p_ct = NULL, p_loc = NULL, p_naa_located = NULL, p_naa_pol = NULL, p_naa_cl = NULL, p_name = NULL, p_std = NULL, p_naaq_std = NULL, p_trend = NULL, p_naaq_comp = NULL, p_naaq_exceed = NULL, p_tribedist = NULL, p_pd = NULL, p_pctlowinc = NULL, p_pm = NULL, xmax = NULL, ymax = NULL, callback = NULL, qcolumns = NULL, queryset = NULL, responseset = NULL, p_pretty_print = NULL, tidy = TRUE) {
   .api_validation$parameter_values(base::list("output" = output, "p_site_code" = p_site_code, "p_year" = p_year, "p_reg" = p_reg, "p_rpo" = p_rpo, "p_st" = p_st, "p_zip" = p_zip, "p_fips" = p_fips, "p_ct" = p_ct, "p_loc" = p_loc, "p_naa_located" = p_naa_located, "p_naa_pol" = p_naa_pol, "p_naa_cl" = p_naa_cl, "p_name" = p_name, "p_std" = p_std, "p_naaq_std" = p_naaq_std, "p_trend" = p_trend, "p_naaq_comp" = p_naaq_comp, "p_naaq_exceed" = p_naaq_exceed, "p_tribedist" = p_tribedist, "p_pd" = p_pd, "p_pctlowinc" = p_pctlowinc, "p_pm" = p_pm, "xmax" = xmax, "ymax" = ymax, "callback" = callback, "qcolumns" = qcolumns, "queryset" = queryset, "responseset" = responseset, "p_pretty_print" = p_pretty_print), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_site_code = list(name = "p_site_code", "in" = "query", description = "Enter the AQS Site Code(s) for the monitoring stations. Provide multiple values as a comma-delimited list.", 
     type = "string"), p_year = list(name = "p_year", "in" = "query", description = "Year. Enter LAST5 or a single calendar year to filter results. Available values: LAST10, LAST5, or a single calendar year", default = "LAST10", type = "string"), p_reg = list(name = "p_reg", "in" = "query", description = "EPA Region Filter. Provide a single value of 01 thru 10 to restrict results to a single EPA region.", enum = list("01", "02", "03", "04", "05", "06", "07", "08", "09", "10"), type = "string"), p_rpo = list(
     name = "p_rpo", "in" = "query", description = "EPA Regional Planning Organization filter. Available values: WRAP, CENRAP, MIDRPO, MAN-VU, VISTAS", type = "string"), p_st = list(name = "p_st", "in" = "query", description = "Air Monitoring Station State and State-Equivalent Filter. Provide one or more USPS postal abbreviations for states and state-equivalents to filter results. Provide multiple values as a comma-delimited list.", type = "string"), p_zip = list(name = "p_zip", "in" = "query", description = "5-Digit ZIP Code Filter. Provide one or more 5-digit postal zip codes to filter results.  May contain multiple comma-separated values.", 
@@ -63,7 +64,7 @@ ecattaqs_get_facilities <- function(output = NULL, p_site_code = NULL, p_year = 
         type = "string"), qcolumns = list(name = "qcolumns", "in" = "query", description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string"), queryset = list(name = "queryset", "in" = "query", description = "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.", 
         type = "number"), responseset = list(name = "responseset", "in" = "query", description = "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000.", type = "number"), p_pretty_print = list(name = "p_pretty_print", "in" = "query", description = "Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.", type = "number")), .api_validation$body_value, c(output = "query", p_site_code = "query", p_year = "query", p_reg = "query", p_rpo = "query", p_st = "query", p_zip = "query", p_fips = "query", p_ct = "query", p_loc = "query", p_naa_located = "query", p_naa_pol = "query", p_naa_cl = "query", p_name = "query", p_std = "query", p_naaq_std = "query", p_trend = "query", p_naaq_comp = "query", p_naaq_exceed = "query", p_tribedist = "query", p_pd = "query", p_pctlowinc = "query", p_pm = "query", xmax = "query", ymax = "query", callback = "query", qcolumns = "query", 
 queryset = "query", responseset = "query", p_pretty_print = "query"))
-  params <- base::list("output" = output, "p_site_code" = p_site_code, "p_year" = p_year, "p_reg" = p_reg, "p_rpo" = p_rpo, "p_st" = p_st, "p_zip" = p_zip, "p_fips" = p_fips, "p_ct" = p_ct, "p_loc" = p_loc, "p_naa_located" = p_naa_located, "p_naa_pol" = p_naa_pol, "p_naa_cl" = p_naa_cl, "p_name" = p_name, "p_std" = p_std, "p_naaq_std" = p_naaq_std, "p_trend" = p_trend, "p_naaq_comp" = p_naaq_comp, "p_naaq_exceed" = p_naaq_exceed, "p_tribedist" = p_tribedist, "p_pd" = p_pd, "p_pctlowinc" = p_pctlowinc, "p_pm" = p_pm, "xmax" = xmax, "ymax" = ymax, "callback" = callback, "qcolumns" = qcolumns, "queryset" = queryset, "responseset" = responseset, "p_pretty_print" = p_pretty_print)
+  params <- base::list("output" = output, "p_site_code" = p_site_code, "p_year" = p_year, "p_reg" = p_reg, "p_rpo" = p_rpo, "p_st" = p_st, "p_zip" = p_zip, "p_fips" = p_fips, "p_ct" = p_ct, "p_loc" = p_loc, "p_naa_located" = p_naa_located, "p_naa_pol" = p_naa_pol, "p_naa_cl" = p_naa_cl, "p_name" = p_name, "p_std" = p_std, "p_naaq_std" = p_naaq_std, "p_trend" = p_trend, "p_naaq_comp" = p_naaq_comp, "p_naaq_exceed" = p_naaq_exceed, "p_tribedist" = p_tribedist, "p_pd" = p_pd, "p_pctlowinc" = p_pctlowinc, "p_pm" = p_pm, "xmax" = xmax, "ymax" = ymax, "callback" = callback, "qcolumns" = qcolumns, "queryset" = queryset, "responseset" = responseset, "p_pretty_print" = p_pretty_print, "tidy" = tidy)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["p_site_code"]]) && base::any(!base::nzchar(params[["p_site_code"]]))) base::stop("Empty query parameter: p_site_code")
   if (base::is.character(params[["p_year"]]) && base::any(!base::nzchar(params[["p_year"]]))) base::stop("Empty query parameter: p_year")
@@ -96,17 +97,20 @@ queryset = "query", responseset = "query", p_pretty_print = "query"))
   if (base::is.character(params[["p_pretty_print"]]) && base::any(!base::nzchar(params[["p_pretty_print"]]))) base::stop("Empty query parameter: p_pretty_print")
   result <- ecattaqs_request(method = "GET", path = "/ecatt_aqs_rest_services.get_facilities", path_params = base::list(), query = base::list("output" = params[["output"]], "p_site_code" = params[["p_site_code"]], "p_year" = params[["p_year"]], "p_reg" = params[["p_reg"]], "p_rpo" = params[["p_rpo"]], "p_st" = params[["p_st"]], "p_zip" = params[["p_zip"]], "p_fips" = params[["p_fips"]], "p_ct" = params[["p_ct"]], "p_loc" = params[["p_loc"]], "p_naa_located" = params[["p_naa_located"]], "p_naa_pol" = params[["p_naa_pol"]], "p_naa_cl" = params[["p_naa_cl"]], "p_name" = params[["p_name"]], "p_std" = params[["p_std"]], "p_naaq_std" = params[["p_naaq_std"]], "p_trend" = params[["p_trend"]], "p_naaq_comp" = params[["p_naaq_comp"]], "p_naaq_exceed" = params[["p_naaq_exceed"]], "p_tribedist" = params[["p_tribedist"]], "p_pd" = params[["p_pd"]], "p_pctlowinc" = params[["p_pctlowinc"]], "p_pm" = params[["p_pm"]], "xmax" = params[["xmax"]], "ymax" = params[["ymax"]], "callback" = params[["callback"]], "qcolumns" = params[["qcolumns"]], "queryset" = params[["queryset"]], "responseset" = params[["responseset"]], "p_pretty_print" = params[["p_pretty_print"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_info_ecattaqs", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Air Monitoring Station (AMS) CAP Search Service
 #' 
 #' @noMd
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 #' @family Air Monitoring Station Criteria Air Pollutant Search Services endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattaqs_get_facilities_post <- function(body = NULL) {
+ecattaqs_get_facilities_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_site_code = list(description = "Enter the AQS Site Code(s) for the monitoring stations. Provide multiple values as a comma-delimited list.", 
     type = "string"), p_year = list(description = "Year. Enter LAST5 or a single calendar year to filter results. Available values: LAST10, LAST5, or a single calendar year", default = "LAST10", type = "string"), p_reg = list(description = "EPA Region Filter. Provide a single value of 01 thru 10 to restrict results to a single EPA region.", enum = list("01", "02", "03", "04", "05", "06", "07", "08", "09", "10"), type = "string"), p_rpo = list(description = "EPA Regional Planning Organization filter. Available values: WRAP, CENRAP, MIDRPO, MAN-VU, VISTAS", 
@@ -120,7 +124,7 @@ ecattaqs_get_facilities_post <- function(body = NULL) {
     type = "string"), queryset = list(description = "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.", type = "number"), responseset = list(description = "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000.", type = "number"), p_pretty_print = list(description = "Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.", 
     type = "number")), required = list()), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
+  params <- base::list("tidy" = tidy, "body" = body)
   result <- ecattaqs_request(method = "POST", path = "/ecatt_aqs_rest_services.get_facilities", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), p_site_code = list(), p_year = list(), p_reg = list(), p_rpo = list(), p_st = list(), p_zip = list(), p_fips = list(), p_ct = list(), p_loc = list(), p_naa_located = list(), p_naa_pol = list(), p_naa_cl = list(), p_name = list(), p_std = list(), p_naaq_std = list(), p_trend = list(), p_naaq_comp = list(), p_naaq_exceed = list(), p_tribedist = list(), p_pd = list(), p_pctlowinc = list(), p_pm = list(), xmax = list(), ymax = list(), callback = list(), qcolumns = list(), queryset = list(), 
     responseset = list(), p_pretty_print = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_site_code = list(description = "Enter the AQS Site Code(s) for the monitoring stations. Provide multiple values as a comma-delimited list.", 
     type = "string"), p_year = list(description = "Year. Enter LAST5 or a single calendar year to filter results. Available values: LAST10, LAST5, or a single calendar year", default = "LAST10", type = "string"), p_reg = list(description = "EPA Region Filter. Provide a single value of 01 thru 10 to restrict results to a single EPA region.", enum = list("01", "02", "03", "04", "05", "06", "07", "08", "09", "10"), type = "string"), p_rpo = list(description = "EPA Regional Planning Organization filter. Available values: WRAP, CENRAP, MIDRPO, MAN-VU, VISTAS", 
@@ -134,6 +138,8 @@ ecattaqs_get_facilities_post <- function(body = NULL) {
     type = "string"), queryset = list(description = "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.", type = "number"), responseset = list(description = "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000.", type = "number"), p_pretty_print = list(description = "Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.", 
     type = "number")), required = list()))
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_info_ecattaqs", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Air Monitoring Station (AMS) CAP Search Paginated Results Service
@@ -149,17 +155,18 @@ ecattaqs_get_facilities_post <- function(body = NULL) {
 #' @param newsort Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.
 #' @param descending Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.
 #' @param qcolumns Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
-#' @return Decoded response returned by the client request helper.
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
+#' @return A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.
 #' @family Air Monitoring Station Criteria Air Pollutant Search Services endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattaqs_get_qid <- function(output = NULL, qid, pageno = 1, callback = NULL, newsort = NULL, descending = NULL, qcolumns = NULL) {
+ecattaqs_get_qid <- function(output = NULL, qid, pageno = 1, callback = NULL, newsort = NULL, descending = NULL, qcolumns = NULL, tidy = TRUE) {
   if (base::is.null(qid)) base::stop("Required input: qid")
   .api_validation$parameter_values(base::list("output" = output, "qid" = qid, "pageno" = pageno, "callback" = callback, "newsort" = newsort, "descending" = descending, "qcolumns" = qcolumns), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(name = "qid", "in" = "query", description = "Query ID Selector.  Enter the QueryID number from a previously run query.", 
     type = "string"), pageno = list(name = "pageno", "in" = "query", description = "Indicates the number of the page to display. It is used only when the results are paginated.", default = 1L, type = "number"), callback = list(name = "callback", "in" = "query", description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string"), newsort = list(name = "newsort", "in" = "query", description = "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.", 
     type = "number"), descending = list(name = "descending", "in" = "query", description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", enum = list("Y", "N"), type = "string"), qcolumns = list(name = "qcolumns", "in" = "query", description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", 
     type = "string")), .api_validation$body_value, c(output = "query", qid = "query", pageno = "query", callback = "query", newsort = "query", descending = "query", qcolumns = "query"))
-  params <- base::list("output" = output, "qid" = qid, "pageno" = pageno, "callback" = callback, "newsort" = newsort, "descending" = descending, "qcolumns" = qcolumns)
+  params <- base::list("output" = output, "qid" = qid, "pageno" = pageno, "callback" = callback, "newsort" = newsort, "descending" = descending, "qcolumns" = qcolumns, "tidy" = tidy)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["qid"]]) && base::any(!base::nzchar(params[["qid"]]))) base::stop("Empty query parameter: qid")
   if (base::is.character(params[["pageno"]]) && base::any(!base::nzchar(params[["pageno"]]))) base::stop("Empty query parameter: pageno")
@@ -169,17 +176,20 @@ ecattaqs_get_qid <- function(output = NULL, qid, pageno = 1, callback = NULL, ne
   if (base::is.character(params[["qcolumns"]]) && base::any(!base::nzchar(params[["qcolumns"]]))) base::stop("Empty query parameter: qcolumns")
   result <- ecattaqs_request(method = "GET", path = "/ecatt_aqs_rest_services.get_qid", path_params = base::list(), query = base::list("output" = params[["output"]], "qid" = params[["qid"]], "pageno" = params[["pageno"]], "callback" = params[["callback"]], "newsort" = params[["newsort"]], "descending" = params[["descending"]], "qcolumns" = params[["qcolumns"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_qid_ecattaqs", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Air Monitoring Station (AMS) CAP Search Paginated Results Service
 #' 
 #' @noMd
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.
 #' @family Air Monitoring Station Criteria Air Pollutant Search Services endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattaqs_get_qid_post <- function(body) {
+ecattaqs_get_qid_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), 
@@ -187,12 +197,14 @@ ecattaqs_get_qid_post <- function(body) {
         type = "number"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", enum = list("Y", "N"), type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", 
         type = "string")), required = list("qid")), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
+  params <- base::list("tidy" = tidy, "body" = body)
   result <- ecattaqs_request(method = "POST", path = "/ecatt_aqs_rest_services.get_qid", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), qid = list(), pageno = list(), callback = list(), newsort = list(), descending = list(), qcolumns = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), 
     pageno = list(description = "Indicates the number of the page to display. It is used only when the results are paginated.", default = 1L, type = "number"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string"), newsort = list(description = "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.", 
         type = "number"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", enum = list("Y", "N"), type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", 
         type = "string")), required = list("qid")))
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_qid_ecattaqs", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Air Monitoring Station (AMS) CAP Report Service
@@ -257,44 +269,50 @@ ecattaqs_get_rpt_post <- function(body = NULL) {
 #' @param qid Query ID Selector.  Enter the QueryID number from a previously run query.
 #' @param qcolumns Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
 #' @param p_pretty_print Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.
-#' @return Decoded response returned by the client request helper.
+#' @param tidy Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.
+#' @return A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 #' @family Air Monitoring Station Criteria Air Pollutant Search Services endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattaqs_get_download <- function(output = NULL, qid, qcolumns = NULL, p_pretty_print = NULL) {
+ecattaqs_get_download <- function(output = NULL, qid, qcolumns = NULL, p_pretty_print = NULL, tidy = TRUE) {
   if (base::is.null(qid)) base::stop("Required input: qid")
   .api_validation$parameter_values(base::list("output" = output, "qid" = qid, "qcolumns" = qcolumns, "p_pretty_print" = p_pretty_print), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(name = "qid", "in" = "query", description = "Query ID Selector.  Enter the QueryID number from a previously run query.", 
     type = "string"), qcolumns = list(name = "qcolumns", "in" = "query", description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string"), p_pretty_print = list(name = "p_pretty_print", "in" = "query", description = "Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.", 
     type = "number")), .api_validation$body_value, c(output = "query", qid = "query", qcolumns = "query", p_pretty_print = "query"))
-  params <- base::list("output" = output, "qid" = qid, "qcolumns" = qcolumns, "p_pretty_print" = p_pretty_print)
+  params <- base::list("output" = output, "qid" = qid, "qcolumns" = qcolumns, "p_pretty_print" = p_pretty_print, "tidy" = tidy)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["qid"]]) && base::any(!base::nzchar(params[["qid"]]))) base::stop("Empty query parameter: qid")
   if (base::is.character(params[["qcolumns"]]) && base::any(!base::nzchar(params[["qcolumns"]]))) base::stop("Empty query parameter: qcolumns")
   if (base::is.character(params[["p_pretty_print"]]) && base::any(!base::nzchar(params[["p_pretty_print"]]))) base::stop("Empty query parameter: p_pretty_print")
   result <- ecattaqs_request(method = "GET", path = "/ecatt_aqs_rest_services.get_download", path_params = base::list(), query = base::list("output" = params[["output"]], "qid" = params[["qid"]], "qcolumns" = params[["qcolumns"]], "p_pretty_print" = params[["p_pretty_print"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_download_ecattaqs", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Air Monitoring Station (AMS) CAP Search Download Data Service
 #' 
 #' @noMd
+#' @param tidy Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 #' @family Air Monitoring Station Criteria Air Pollutant Search Services endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattaqs_get_download_post <- function(body) {
+ecattaqs_get_download_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), 
     qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string"), p_pretty_print = list(description = "Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.", 
         type = "number")), required = list("qid")), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
+  params <- base::list("tidy" = tidy, "body" = body)
   result <- ecattaqs_request(method = "POST", path = "/ecatt_aqs_rest_services.get_download", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), qid = list(), qcolumns = list(), p_pretty_print = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), 
     qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string"), p_pretty_print = list(description = "Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.", 
         type = "number")), required = list("qid")))
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_download_ecattaqs", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' ECATT Air Monitoring Station (AMS) CAP Search Metadata Service

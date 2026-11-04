@@ -42,7 +42,7 @@ test_that('blanks and nulls are NA and line breaks are normalized', {
 
 lookup_result <- function(...) list(Results = list(Message = 'Success', LuValues = list(...)))
 
-test_that('echo_tidy_lookup makes a tibble from Results$LuValues', {
+test_that('echo_tidy_lookup makes a text tibble from Results$LuValues', {
   result <- lookup_result(
     list(ValueCode = 'AL', ValueDescription = 'Alabama'),
     list(ValueCode = 'WA', ValueDescription = NULL)
@@ -55,8 +55,19 @@ test_that('echo_tidy_lookup makes a tibble from Results$LuValues', {
     result = lookup_result(list(ValueCode = '2023', ValueDescription = '2023'), list(ValueCode = '2022', ValueDescription = '2022')),
     params = list(tidy = TRUE)
   ))
-  expect_identical(years$ValueDescription, c(2023L, 2022L))
+  # lookups are labels: nothing is guessed, however numeric the values look
+  expect_identical(years$ValueDescription, c('2023', '2022'))
   expect_identical(years$ValueCode, c('2023', '2022'))
+  ids <- echo_tidy_lookup(list(
+    result = lookup_result(list(ValueCode = 'x', ValueDescription = '11995.50'), list(ValueCode = 'y', ValueDescription = '')),
+    params = list(tidy = TRUE)
+  ))
+  expect_identical(ids$ValueDescription, c('11995.50', NA))
+  numeric <- echo_tidy_lookup(list(result = lookup_result(list(ValueCode = 7, ValueDescription = 1e5)), params = list(tidy = TRUE)))
+  expect_identical(numeric$ValueCode, '7')
+  expect_identical(numeric$ValueDescription, '100000')
+  crlf <- echo_tidy_lookup(list(result = lookup_result(list(ValueCode = 'a', ValueDescription = 'p\r\nq')), params = list(tidy = TRUE)))
+  expect_identical(crlf$ValueDescription, 'p\nq')
 })
 
 test_that('a lone record sent as an object still tidies', {
@@ -79,6 +90,12 @@ test_that('tidy = FALSE, non-JSON output and requests pass through; bad input er
     echo_tidy_lookup(list(result = lookup_result(list(ValueCode = list(1, 2))), params = list(tidy = TRUE))),
     'nested value'
   )
+})
+
+test_that('echo_records_tibble guesses only when asked', {
+  records <- list(list(Year = '2023', Name = 'a'), list(Year = '2022', Name = 'b'))
+  expect_identical(echo_records_tibble(records)$Year, c(2023L, 2022L))
+  expect_identical(echo_records_tibble(records, guess = FALSE)$Year, c('2023', '2022'))
 })
 
 test_that('wrappers tidy by default, with no network', {

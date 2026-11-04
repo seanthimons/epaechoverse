@@ -4,15 +4,15 @@
 \alias{lookup_naics_codes_post}
 \title{ECHO NAICS Codes Lookup Service}
 \usage{
-lookup_naics_codes_post(tidy = TRUE, body = NULL)
+lookup_naics_codes_post(body = NULL, tidy = TRUE)
 }
 \arguments{
-\item{tidy}{Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
-
 \item{body}{Request body.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO NAICS Codes Lookup Service

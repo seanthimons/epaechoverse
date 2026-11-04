@@ -9,7 +9,8 @@
 # This is a one-time bootstrap: it initializes the package and refuses to run
 # when DESCRIPTION exists. To regenerate from scratch, move the generated files
 # (DESCRIPTION, NAMESPACE, LICENSE, R/ except the client-owned echo_response_policy.R,
-# envirofacts_path.R, envirofacts_tidy.R and echo_tidy.R, man/, schema/, apis/*.yml, specmill*.yml,
+# envirofacts_path.R, envirofacts_tidy.R, echo_tidy.R, echo_services.R, echo_formatters.R and
+# echo_pages.R, man/, schema/, apis/*.yml, specmill*.yml,
 # .specmill/, .Rbuildignore) aside first; tests/ and inst/ stay. To change the
 # client afterwards, edit apis/*.yml and run dev/regenerate.R (plan -> apply -> check);
 # generation needs the callbacks in dev/callbacks.R.
@@ -269,18 +270,184 @@ for (group in names(lookup_groups)) {
   empty <- which(block == '    operations: {}')
   # The new keys go straight after the one-line family tag, before `operations`.
   stopifnot(length(family) == 1L, length(empty) == 1L, empty == family + 1L)
-  keys <- vapply(lookup_groups[[group]], function(op) op$key, character(1))
+  group_ops <- lookup_groups[[group]]
+  group_ops <- group_ops[order(vapply(group_ops, function(op) op$key, character(1)))]
   block <- c(
     block[seq_len(family)],
-    '        return: "A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."',
+    '        return: "A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."',
     '      extra_parameters:',
-    '        tidy: {type: logical, default: true, description: "Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}',
-    block[seq_len(max(0L, empty - family - 1L)) + family],
+    '        tidy: {type: logical, default: true, description: "Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}',
     '    operations:',
-    as.vector(rbind(paste0('      ', sort(keys), ':'), '        result_formatter: echo_tidy_lookup')),
+    unlist(lapply(group_ops, function(op) c(
+      paste0('      ', op$key, ':'),
+      # `tidy` is an extra input; keep the request body first so positional calls still work.
+      if (!is.null(op$body)) '        parameter_order: [body]',
+      '        result_formatter: echo_tidy_lookup'
+    ))),
     block[-seq_len(empty)]
   )
   writeLines(c(lines[seq_len(start - 1L)], block, lines[-seq_len(end)]), path, useBytes = TRUE)
+}
+
+# The search services listed in R/echo_services.R (sdw, cwa, rcra, air, echo, compscreen,
+# case, ecattaqs, ecattams) share three route kinds, each with its own per-service
+# result_formatter (R/echo_formatters.R, built on R/echo_tidy.R), selected per operation
+# because a group also holds routes that stay as they are (downloads, maps, metadata):
+#   get_qid                one page of records    -> echo_tidy_qid_<service>
+#   summary route          the query summary      -> echo_tidy_summary_<service>
+#   info route             matching rows          -> echo_tidy_info_<service>
+#   get_download           the rows as CSV        -> echo_tidy_download_<service>
+# which routes a service has is in the table. Each op gets a `tidy` input, and POST twins
+# keep `body` first. echo_qid_all() in R/echo_pages.R pages through a whole search.
+stopifnot(
+  file.exists(file.path(root, 'R', 'echo_pages.R')),
+  file.exists(file.path(root, 'R', 'echo_formatters.R'))
+)
+source(file.path(root, 'R', 'echo_services.R'), local = TRUE)
+source(file.path(root, 'R', 'echo_formatters.R'), local = TRUE)
+# route -> (service, formatter kind) for every route of the table
+search_routes <- do.call(rbind, lapply(names(echo_search_services), function(service) {
+  entry <- echo_search_services[[service]]
+  kinds <- c(qid = 'get_qid', summary = entry$summary, info = entry$info, download = 'get_download')
+  kinds <- kinds[!is.na(kinds)]
+  data.frame(
+    service = service,
+    kind = names(kinds),
+    path = sprintf('/%s.%s', entry$namespace, kinds),
+    formatter = sprintf('echo_tidy_%s_%s', names(kinds), service),
+    stringsAsFactors = FALSE
+  )
+}))
+stopifnot(!anyDuplicated(search_routes$path), all(vapply(search_routes$formatter, exists, logical(1))))
+search_ops <- Filter(function(op) op$path %in% search_routes$path, planned$operations)
+# GET and POST for every route
+stopifnot(length(search_ops) == 2L * nrow(search_routes))
+search_return <- c(
+  qid = 'A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.',
+  summary = "A one-row tibble of the query summary (counters as numbers, QueryID as text; with tablelist = 'Y' the first page of rows is in attr(, 'facilities')), or the decoded response (tidy = FALSE).",
+  download = 'A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).',
+  info = 'A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).'
+)
+route_of <- function(op) search_routes[match(op$path, search_routes$path), ]
+for (group in unique(vapply(search_ops, function(op) op$service, character(1)))) {
+  group_ops <- Filter(function(op) identical(op$service, group), search_ops)
+  group_ops <- group_ops[order(vapply(group_ops, function(op) op$key, character(1)))]
+  api <- unique(vapply(group_ops, function(op) route_of(op)$service, character(1)))
+  stopifnot(length(api) == 1L)
+  path <- file.path(root, 'apis', paste0(api, '.yml'))
+  lines <- readLines(path, encoding = 'UTF-8')
+  start <- which(lines == paste0('  ', group, ':'))
+  stopifnot(length(start) == 1L)
+  later <- which(grepl('^  [A-Za-z0-9_]+:$', lines) & seq_along(lines) > start)
+  end <- if (length(later)) later[[1L]] - 1L else length(lines)
+  empty <- which(lines == '    operations: {}' & seq_along(lines) >= start & seq_along(lines) <= end)
+  stopifnot(length(empty) == 1L)
+  entry <- function(op) c(
+    paste0('      ', op$key, ':'),
+    '        docs:',
+    paste0('          return: "', search_return[[route_of(op)$kind]], '"'),
+    if (!is.null(op$body)) '        parameter_order: [body]',
+    '        extra_parameters:',
+    if (route_of(op)$kind == 'download') {
+      '          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent."}'
+    } else {
+      '          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}'
+    },
+    paste0('        result_formatter: ', route_of(op)$formatter)
+  )
+  lines <- c(lines[seq_len(empty - 1L)], '    operations:', unlist(lapply(group_ops, entry)), lines[-seq_len(empty)])
+  writeLines(lines, path, useBytes = TRUE)
+}
+
+# Report routes with one flat record list (echo_report_routes in R/echo_services.R): an
+# all-text tibble through echo_tidy_report_<key>. The record key of each route is
+# checked against the schema, which declares it as an array property of the route's
+# Results object.
+report_routes <- echo_report_routes
+report_routes$path <- sprintf('/%s.%s', report_routes$namespace, report_routes$route)
+report_routes$formatter <- vapply(report_routes$key, echo_report_formatter, character(1))
+stopifnot(all(vapply(report_routes$formatter, exists, logical(1))), !anyDuplicated(report_routes$path))
+for (api in unique(report_routes$api)) {
+  schema <- jsonlite::fromJSON(schemas[[which(services$api == api)]], simplifyVector = FALSE)
+  for (i in which(report_routes$api == api)) {
+    ref <- schema$paths[[report_routes$path[[i]]]]$get$responses[['200']]$schema$properties$Results[['$ref']]
+    results <- schema$definitions[[sub('^#/definitions/', '', ref)]]
+    stopifnot(identical(results$properties[[report_routes$key[[i]]]]$type, 'array'))
+  }
+}
+report_ops <- Filter(function(op) op$path %in% report_routes$path, planned$operations)
+stopifnot(length(report_ops) == 2L * nrow(report_routes))
+report_route_of <- function(op) report_routes[match(op$path, report_routes$path), ]
+for (group in unique(vapply(report_ops, function(op) op$service, character(1)))) {
+  group_ops <- Filter(function(op) identical(op$service, group), report_ops)
+  group_ops <- group_ops[order(vapply(group_ops, function(op) op$key, character(1)))]
+  api <- unique(vapply(group_ops, function(op) report_route_of(op)$api, character(1)))
+  stopifnot(length(api) == 1L)
+  path <- file.path(root, 'apis', paste0(api, '.yml'))
+  lines <- readLines(path, encoding = 'UTF-8')
+  start <- which(lines == paste0('  ', group, ':'))
+  stopifnot(length(start) == 1L)
+  later <- which(grepl('^  [A-Za-z0-9_]+:$', lines) & seq_along(lines) > start)
+  end <- if (length(later)) later[[1L]] - 1L else length(lines)
+  empty <- which(lines == '    operations: {}' & seq_along(lines) >= start & seq_along(lines) <= end)
+  stopifnot(length(empty) == 1L)
+  entry <- function(op) c(
+    paste0('      ', op$key, ':'),
+    '        docs:',
+    paste0('          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, \'summary\')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."'),
+    if (!is.null(op$body)) '        parameter_order: [body]',
+    '        extra_parameters:',
+    '          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}',
+    paste0('        result_formatter: ', report_route_of(op)$formatter)
+  )
+  lines <- c(lines[seq_len(empty - 1L)], '    operations:', unlist(lapply(group_ops, entry)), lines[-seq_len(empty)])
+  writeLines(lines, path, useBytes = TRUE)
+}
+
+# Nested reports (dfr, caa and the effluent charts): every route that returns a JSON
+# `Results` object goes through echo_tidy_nested, a total formatter that returns a list
+# of tibbles. The routes the schemas declare as files (CSV and ZIP downloads) stay as
+# they are, and so do the map and spatial-metadata routes (mapping is on hold).
+nested_apis <- c('dfr', 'caa', 'eff')
+nested_paths <- unlist(lapply(nested_apis, function(api) {
+  paths <- jsonlite::fromJSON(schemas[[which(services$api == api)]], simplifyVector = FALSE)$paths
+  keep <- vapply(names(paths), function(path) {
+    schema <- paths[[path]]$get$responses[['200']]$schema
+    !is.null(schema$properties$Results) && !grepl('[.](get_map|get_spatial_metadata)$', path)
+  }, logical(1))
+  stats::setNames(rep(api, sum(keep)), names(paths)[keep])
+}))
+source(file.path(root, 'R', 'echo_tidy.R'), local = TRUE)
+stopifnot(exists('echo_tidy_nested'))
+nested_ops <- Filter(function(op) {
+  basename(unlist(op$source)[[1L]]) %in% paste0(nested_apis, '.json') && op$path %in% names(nested_paths)
+}, planned$operations)
+stopifnot(length(nested_ops) > 0L, all(vapply(nested_ops, function(op) !is.null(nested_paths[[op$path]]), logical(1))))
+for (group in unique(vapply(nested_ops, function(op) op$service, character(1)))) {
+  group_ops <- Filter(function(op) identical(op$service, group), nested_ops)
+  group_ops <- group_ops[order(vapply(group_ops, function(op) op$key, character(1)))]
+  api <- unique(nested_paths[vapply(group_ops, function(op) op$path, character(1))])
+  stopifnot(length(api) == 1L)
+  path <- file.path(root, 'apis', paste0(api, '.yml'))
+  lines <- readLines(path, encoding = 'UTF-8')
+  start <- which(lines == paste0('  ', group, ':'))
+  stopifnot(length(start) == 1L)
+  later <- which(grepl('^  [A-Za-z0-9_]+:$', lines) & seq_along(lines) > start)
+  end <- if (length(later)) later[[1L]] - 1L else length(lines)
+  empty <- which(lines == '    operations: {}' & seq_along(lines) >= start & seq_along(lines) <= end)
+  stopifnot(length(empty) == 1L)
+  # A group may also hold file routes: they simply get no entry.
+  entry <- function(op) c(
+    paste0('      ', op$key, ':'),
+    '        docs:',
+    '          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."',
+    if (!is.null(op$body)) '        parameter_order: [body]',
+    '        extra_parameters:',
+    '          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}',
+    '        result_formatter: echo_tidy_nested'
+  )
+  lines <- c(lines[seq_len(empty - 1L)], '    operations:', unlist(lapply(group_ops, entry)), lines[-seq_len(empty)])
+  writeLines(lines, path, useBytes = TRUE)
 }
 
 # Package description and build ignores (apis/ and the root YAML/JSON are already
