@@ -341,7 +341,7 @@ pkgdown::build_site()
 ```
 
 The site is written to `docs/`. Building it locally does not publish it.
-The pinned baseline pkgdown workflow builds pull requests and deploys pushes
+A local copy of the pinned baseline pkgdown workflow builds pull requests and deploys pushes
 to `main`, published releases, and manual runs to
 [GitHub Pages](https://seanthimons.github.io/epaechoverse/).
 
