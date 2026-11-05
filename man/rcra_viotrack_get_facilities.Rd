@@ -8,7 +8,8 @@ rcra_viotrack_get_facilities(
   output = NULL,
   callback = NULL,
   p_st = NULL,
-  p_ico = NULL
+  p_ico = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -19,9 +20,11 @@ rcra_viotrack_get_facilities(
 \item{p_st}{Facility state or state-equivalent (USPS abbreviation, e.g. RI). Without a narrowing filter such as this, searches usually exceed the row limit.}
 
 \item{p_ico}{Indian Country flag. Y or N.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A one-row tibble of the query summary (counters as numbers, QueryID as text; with tablelist = 'Y' the first page of rows is in attr(, 'facilities')), or the decoded response (tidy = FALSE).
 }
 \description{
 RCRA Violation Tracker search

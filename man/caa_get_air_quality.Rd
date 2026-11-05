@@ -4,7 +4,7 @@
 \alias{caa_get_air_quality}
 \title{Air Pollutant Report Air Quality Service}
 \usage{
-caa_get_air_quality(output = NULL, p_id, callback = NULL)
+caa_get_air_quality(output = NULL, p_id, callback = NULL, tidy = TRUE)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -15,9 +15,11 @@ caa_get_air_quality(output = NULL, p_id, callback = NULL)
 \item{p_id}{EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases.}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{tidy}{Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE).
 }
 \description{
 Air Pollutant Report Air Quality Service

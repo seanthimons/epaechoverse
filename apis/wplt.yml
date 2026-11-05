@@ -61,7 +61,46 @@ groups:
       docs:
         tags:
           family: Custom Search endpoints
-    operations: {}
+    operations:
+      GET /dmr_rest_services.get_custom_data_annual:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_results
+      GET /dmr_rest_services.get_custom_data_facility:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_results
+      GET /dmr_rest_services.get_custom_data_monitor_pd:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_results
+      POST /dmr_rest_services.get_custom_data_annual:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_results
+      POST /dmr_rest_services.get_custom_data_facility:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_results
+      POST /dmr_rest_services.get_custom_data_monitor_pd:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_results
   wplt_everyday_searches_and_other_data_downloads:
     selection:
       methods:
@@ -129,7 +168,85 @@ groups:
       docs:
         tags:
           family: Everyday Searches and Other Data Downloads endpoints
-    operations: {}
+    operations:
+      GET /dmr_rest_services.get_dashboard_chemicals:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_chemicals
+      GET /dmr_rest_services.get_dashboard_facilities:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_facilities
+      GET /dmr_rest_services.get_dashboard_industries:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_industries
+      GET /dmr_rest_services.get_dashboard_npdes:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_chemicals
+      GET /dmr_rest_services.get_monitoring_data_csv:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_monitoring_data
+      GET /dmr_rest_services.get_watershed_facilities:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_facilities
+      POST /dmr_rest_services.get_dashboard_chemicals:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_chemicals
+      POST /dmr_rest_services.get_dashboard_facilities:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_facilities
+      POST /dmr_rest_services.get_dashboard_industries:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_industries
+      POST /dmr_rest_services.get_dashboard_npdes:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_chemicals
+      POST /dmr_rest_services.get_monitoring_data_csv:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_monitoring_data
+      POST /dmr_rest_services.get_watershed_facilities:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_facilities
   wplt_lookups:
     selection:
       methods:
@@ -201,7 +318,75 @@ groups:
       docs:
         tags:
           family: Lookups endpoints
-    operations: {}
+        return: "A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+      extra_parameters:
+        tidy: {type: logical, default: true, description: "Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+    operations:
+      GET /rest_lookups.dmr_cas_numbers:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_naics2_codes:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_parameters:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_point_source_cats:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_poll_cats:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_pollutants:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_reporting_year:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_sic2_codes:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_treatment_technologies:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_tri_chemicals:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_tri_reporting_year:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_watershed_groups:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.dmr_watersheds:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_cas_numbers:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_naics2_codes:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_parameters:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_point_source_cats:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_poll_cats:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_pollutants:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_reporting_year:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_sic2_codes:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_treatment_technologies:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_tri_chemicals:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_tri_reporting_year:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_watershed_groups:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.dmr_watersheds:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
   wplt_water_pollution_search_facility_reports_and_loading_calculations:
     selection:
       methods:
@@ -270,4 +455,56 @@ groups:
         tags:
           family: Water Pollution Search, Facility Reports, and Loading Calculations
             endpoints
-    operations: {}
+    operations:
+      GET /dmr_rest_services.get_all_dmr_facilities:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_facilities
+      GET /dmr_rest_services.get_all_tri_facilities:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_facilities
+      GET /dmr_rest_services.get_loading_tool_params:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_parameters
+      GET /dmr_rest_services.get_permit_limits:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_permit_limits
+      POST /dmr_rest_services.get_all_dmr_facilities:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_facilities
+      POST /dmr_rest_services.get_all_tri_facilities:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_facilities
+      POST /dmr_rest_services.get_loading_tool_params:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_parameters
+      POST /dmr_rest_services.get_permit_limits:
+        docs:
+          return: "A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_report_permit_limits

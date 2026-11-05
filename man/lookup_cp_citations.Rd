@@ -4,7 +4,12 @@
 \alias{lookup_cp_citations}
 \title{ECHO CP Citations Lookup Service}
 \usage{
-lookup_cp_citations(output = NULL, callback = NULL, search_term = NULL)
+lookup_cp_citations(
+  output = NULL,
+  callback = NULL,
+  search_term = NULL,
+  tidy = TRUE
+)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -15,9 +20,11 @@ lookup_cp_citations(output = NULL, callback = NULL, search_term = NULL)
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
 
 \item{search_term}{Enter a partial or complete search phrase or word.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO CP Citations Lookup Service

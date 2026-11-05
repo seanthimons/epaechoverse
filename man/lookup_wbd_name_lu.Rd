@@ -4,7 +4,13 @@
 \alias{lookup_wbd_name_lu}
 \title{ECHO WBD Name Lookup Service}
 \usage{
-lookup_wbd_name_lu(output = NULL, callback = NULL, wbd_name, wbd_level = NULL)
+lookup_wbd_name_lu(
+  output = NULL,
+  callback = NULL,
+  wbd_name,
+  wbd_level = NULL,
+  tidy = TRUE
+)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -17,9 +23,11 @@ lookup_wbd_name_lu(output = NULL, callback = NULL, wbd_name, wbd_level = NULL)
 \item{wbd_name}{Watershed Name Filter.}
 
 \item{wbd_level}{The number of digits of the watershed code [Hydrologic Unit Code (HUC)] returned in the ValueCode. Must be an even number between 4 and 12.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO WBD Name Lookup Service

@@ -73,4 +73,208 @@ groups:
       docs:
         tags:
           family: Air Pollution Report endpoints
-    operations: {}
+    operations:
+      GET /caa_poll_rpt_rest_services.get_aggregate_emissions:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      GET /caa_poll_rpt_rest_services.get_air_quality:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      GET /caa_poll_rpt_rest_services.get_caapr:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      GET /caa_poll_rpt_rest_services.get_nnnPermits:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /caa_poll_rpt_rest_services.get_aggregate_emissions:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /caa_poll_rpt_rest_services.get_air_quality:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /caa_poll_rpt_rest_services.get_caapr:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /caa_poll_rpt_rest_services.get_nnnPermits:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      GET /caa_poll_rpt_rest_services.get_map:
+        docs:
+          return: A map tibble, sf points, GeoJSON FeatureCollection string, or decoded
+            response, selected by format. Map coordinates use EPSG:4326; clusters are representative
+            points.
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result format: tidy (default), sf (optional sf package),
+              geojson (string), or raw. Formatted output requires JSON. Metadata is retained
+              in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays.
+              Missing coordinates yield empty geometries.'
+        request:
+          arguments:
+            method:
+              value: GET
+            path:
+              value: /caa_poll_rpt_rest_services.get_map
+            path_params:
+              callback: map_empty
+            query:
+              callback: map_query
+            body:
+              callback: map_body
+            form_schema:
+              callback: map_form_schema
+            body_encoding:
+              callback: map_body_encoding
+            body_media:
+              value: application/json
+            request_controls:
+              value:
+                timeout: 60
+                max_retries: 2
+                retry_writes: yes
+                retry_policy: echo_retry_policy
+            response_policy:
+              callback: map_policy
+      POST /caa_poll_rpt_rest_services.get_map:
+        docs:
+          return: A map tibble, sf points, GeoJSON FeatureCollection string, or decoded
+            response, selected by format. Map coordinates use EPSG:4326; clusters are representative
+            points.
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result format: tidy (default), sf (optional sf package),
+              geojson (string), or raw. Formatted output requires JSON. Metadata is retained
+              in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays.
+              Missing coordinates yield empty geometries.'
+        request:
+          arguments:
+            method:
+              value: POST
+            path:
+              value: /caa_poll_rpt_rest_services.get_map
+            path_params:
+              callback: map_empty
+            query:
+              callback: map_query
+            body:
+              callback: map_body
+            form_schema:
+              callback: map_form_schema
+            body_encoding:
+              callback: map_body_encoding
+            body_media:
+              value: application/x-www-form-urlencoded
+            request_controls:
+              value:
+                timeout: 60
+                max_retries: 2
+                retry_writes: yes
+                retry_policy: echo_retry_policy
+            response_policy:
+              callback: map_policy
+        parameter_order:
+          - body
+      GET /caa_poll_rpt_rest_services.get_spatial_metadata:
+        docs:
+          return: A provenance tibble (format = "tidy") or decoded response (format = "raw").
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result format: tidy or raw. Coordinate provenance is not
+              converted to geometry.'
+        request:
+          arguments:
+            method:
+              value: GET
+            path:
+              value: /caa_poll_rpt_rest_services.get_spatial_metadata
+            path_params:
+              callback: map_empty
+            query:
+              callback: map_query
+            body:
+              callback: map_body
+            form_schema:
+              callback: map_form_schema
+            body_encoding:
+              callback: map_body_encoding
+            body_media:
+              value: application/json
+            request_controls:
+              value:
+                timeout: 60
+                max_retries: 2
+                retry_writes: yes
+                retry_policy: echo_retry_policy
+            response_policy:
+              callback: map_policy
+      POST /caa_poll_rpt_rest_services.get_spatial_metadata:
+        docs:
+          return: A provenance tibble (format = "tidy") or decoded response (format = "raw").
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result format: tidy or raw. Coordinate provenance is not
+              converted to geometry.'
+        request:
+          arguments:
+            method:
+              value: POST
+            path:
+              value: /caa_poll_rpt_rest_services.get_spatial_metadata
+            path_params:
+              callback: map_empty
+            query:
+              callback: map_query
+            body:
+              callback: map_body
+            form_schema:
+              callback: map_form_schema
+            body_encoding:
+              callback: map_body_encoding
+            body_media:
+              value: application/x-www-form-urlencoded
+            request_controls:
+              value:
+                timeout: 60
+                max_retries: 2
+                retry_writes: yes
+                retry_policy: echo_retry_policy
+            response_policy:
+              callback: map_policy
+        parameter_order:
+          - body

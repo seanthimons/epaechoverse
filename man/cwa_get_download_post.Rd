@@ -4,13 +4,15 @@
 \alias{cwa_get_download_post}
 \title{Clean Water Act (CWA) Download Data Service}
 \usage{
-cwa_get_download_post(body)
+cwa_get_download_post(body, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 }
 \description{
 Clean Water Act (CWA) Download Data Service

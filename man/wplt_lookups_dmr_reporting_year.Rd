@@ -9,7 +9,8 @@ wplt_lookups_dmr_reporting_year(
   callback = NULL,
   search_term = NULL,
   search_code = NULL,
-  descending = NULL
+  descending = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -25,9 +26,11 @@ wplt_lookups_dmr_reporting_year(
 \item{search_code}{Enter a partial or complete code value.}
 
 \item{descending}{Output Sort Column Descending Flag.  Enter Y to sort results in descending order.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO DMR Reporting Year Lookup Service

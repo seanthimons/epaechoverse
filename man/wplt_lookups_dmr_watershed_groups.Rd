@@ -8,7 +8,8 @@ wplt_lookups_dmr_watershed_groups(
   output = NULL,
   callback = NULL,
   search_term = NULL,
-  search_code = NULL
+  search_code = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -22,9 +23,11 @@ wplt_lookups_dmr_watershed_groups(
 \item{search_term}{Enter a partial or complete search phrase or word.}
 
 \item{search_code}{Enter a partial or complete code value.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO DMR Watershed Group Lookup Service

@@ -9,7 +9,8 @@ lookup_naics_codes(
   callback = NULL,
   search_term = NULL,
   search_code = NULL,
-  n_year = 2022
+  n_year = 2022,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -25,9 +26,11 @@ lookup_naics_codes(
 \item{search_code}{Enter a partial or complete code value.}
 
 \item{n_year}{Year parameter in the YYYY format, defaults to 2022.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO NAICS Codes Lookup Service

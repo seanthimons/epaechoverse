@@ -7,9 +7,9 @@
 #'   query values, or bodies. Uses the package-scoped run_verbose R option.
 #'   Does not read or write environment or profile files.
 #' @export
-epaechoverse_run_verbose <- function(verbose = FALSE) {
+echoverse_run_verbose <- function(verbose = FALSE) {
   if (!base::is.logical(verbose) || base::length(verbose) != 1L || base::is.na(verbose)) base::stop('verbose must be TRUE or FALSE', call. = FALSE)
-  base::options(base::structure(base::list(verbose), names = base::paste0("epaechoverse", '.run_verbose')))
+  base::options(base::structure(base::list(verbose), names = base::paste0("echoverse", '.run_verbose')))
   base::invisible(NULL)
 }
 
@@ -23,8 +23,8 @@ epaechoverse_run_verbose <- function(verbose = FALSE) {
 #'   environment flag even when FALSE. Remove the option to restore that fallback.
 #'   Does not read or write environment or profile files.
 #' @export
-epaechoverse_dry_run <- function(enabled = FALSE) {
+echoverse_dry_run <- function(enabled = FALSE) {
   if (!base::is.logical(enabled) || base::length(enabled) != 1L || base::is.na(enabled)) base::stop('enabled must be TRUE or FALSE', call. = FALSE)
-  base::options(base::structure(base::list(enabled), names = base::paste0("epaechoverse", '.dry_run')))
+  base::options(base::structure(base::list(enabled), names = base::paste0("echoverse", '.dry_run')))
   base::invisible(NULL)
 }

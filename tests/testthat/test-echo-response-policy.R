@@ -87,3 +87,15 @@ test_that('only transient statuses are retried', {
   expect_true(all(vapply(c(408L, 429L, 502L, 503L, 504L), retry, logical(1))))
   expect_false(any(vapply(c(200L, 400L, 404L, 500L), retry, logical(1))))
 })
+
+test_that("an Envirofacts error carries the service's message", {
+  missing <- response_of('{"error": "The table, sdwis.no_such_table was not found."}', status = 404L)
+  expect_error(run_policy(missing), 'HTTP 404.*no_such_table was not found', class = 'echo_error')
+  query <- response_of('{"error": "The column, sdwis.water_system.nosuchcol does not exist"}', status = 500L)
+  expect_error(run_policy(query), 'nosuchcol does not exist', class = 'echo_error')
+  # a table's rows are never mistaken for an error, and a lone error field with
+  # other content is not either
+  expect_equal(run_policy(response_of('[]')), list())
+  expect_equal(run_policy(response_of('[{"error": "x"}]'))[[1L]]$error, 'x')
+  expect_equal(run_policy(response_of('{"error": "x", "rows": 1}'))$rows, 1L)
+})

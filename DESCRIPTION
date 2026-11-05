@@ -1,12 +1,13 @@
-Package: epaechoverse
-Title: Client for the EPA ECHO Web Services
-Version: 0.0.0.9000
+Package: echoverse
+Title: Client for the EPA ECHO and Envirofacts Web Services
+Version: 0.1.0
 Authors@R: person("Sean", "Thimons", email = "thimons.sean@gmail.com",
         role = c('aut', 'cre'))
 Description: Generated client for the U.S. EPA Enforcement and Compliance
-    History Online (ECHO) web service APIs (25 APIs, 579 operations),
-    built with specmill from local Swagger schemas.
+    History Online (ECHO) web service APIs and the Envirofacts (DMAP) data
+    tables (26 APIs, 995 operations),
+    built with specmill from local Swagger and OpenAPI schemas.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Imports: httr2, jsonlite, curl
-Suggests: testthat
+Imports: httr2, jsonlite, curl, tibble
+Suggests: testthat, sf

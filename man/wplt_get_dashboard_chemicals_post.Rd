@@ -5,13 +5,15 @@
 \alias{wplt_get_dashboard_chemicals_post}
 \title{Toxics Release Inventory (TRI) and Discharge Monitoring Report (DMR) Comparison Dashboard Chemicals Download Service}
 \usage{
-wplt_get_dashboard_chemicals_post(body)
+wplt_get_dashboard_chemicals_post(body, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 Toxics Release Inventory (TRI) and Discharge Monitoring Report (DMR) Comparison Dashboard Chemicals Download Service

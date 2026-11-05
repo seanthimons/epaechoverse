@@ -4,13 +4,15 @@
 \alias{caa_get_aggregate_emissions_post}
 \title{Air Pollutant Report Aggregated Emissions Service}
 \usage{
-caa_get_aggregate_emissions_post(body)
+caa_get_aggregate_emissions_post(body, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE).
 }
 \description{
 Air Pollutant Report Aggregated Emissions Service

@@ -135,7 +135,8 @@ cwa_get_facility_info(
   p_e90_count = NULL,
   p_e90_years = NULL,
   p_pctlowinc = NULL,
-  p_psc = NULL
+  p_psc = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -574,9 +575,11 @@ May contain multiple comma-separated values.}
 \item{p_pctlowinc}{Percent Low Income filter. Enter a value to restrict results to facilities with a given percentage of low income population within a 3-mile radius.}
 
 \item{p_psc}{EPA Effluent Guidelines Point Source Category.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 }
 \description{
 Clean Water Act (CWA) Facility Enhanced Search Service

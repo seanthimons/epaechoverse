@@ -40,7 +40,8 @@ wplt_get_all_dmr_facilities(
   pageno = 1,
   newsort = NULL,
   descending = NULL,
-  responseset = NULL
+  responseset = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -136,9 +137,11 @@ wplt_get_all_dmr_facilities(
 \item{descending}{Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.}
 
 \item{responseset}{Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000.}
+
+\item{tidy}{Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 Water Pollution Search Discharge Monitoring Report Facilities Service

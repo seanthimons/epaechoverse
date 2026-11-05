@@ -80,11 +80,15 @@ echo_field <- function(x, ...) {
   x
 }
 
-# Error envelopes seen so far: Results$Error$ErrorMessage (most services) and
-# status = 'error' / 'fail' with message or data (download and biosolids routes).
+# Error envelopes seen so far: Results$Error$ErrorMessage (most services),
+# status = 'error' / 'fail' with message or data (download and biosolids routes)
+# and a lone `error` string (Envirofacts/DMAP, sent with HTTP 404 or 500).
 # Returns the message, or NULL when the result is not an error.
 echo_error_message <- function(result) {
   message <- echo_field(result, 'Results', 'Error', 'ErrorMessage')
+  if (is.null(message) && identical(names(result), 'error') && is.list(result)) {
+    message <- result[['error']]
+  }
   if (is.null(message)) {
     status <- echo_field(result, 'status')
     if (is.character(status) && length(status) == 1L && status %in% c('error', 'fail')) {

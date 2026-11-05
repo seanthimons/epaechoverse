@@ -61,7 +61,8 @@ ecattams_get_facilities(
   maplist = NULL,
   callback = NULL,
   qcolumns = NULL,
-  p_program_list = NULL
+  p_program_list = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -190,9 +191,11 @@ GTEx = greater than or equal to x\%}
 \item{qcolumns}{Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.}
 
 \item{p_program_list}{AMS Program Code Filter.  Enter one or more AMS program codes to filter results.  Provide multiple values as a comma-delimited list.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 }
 \description{
 ECATT Air Monitoring Station (AMS) HAP Search Service

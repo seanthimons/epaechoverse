@@ -89,7 +89,87 @@ groups:
       docs:
         tags:
           family: Air Monitoring Station Hazardous Air Pollutant Report Services endpoints
-    operations: {}
+    operations:
+      GET /ecatt_ams_rest_services.get_rpt_map:
+        docs:
+          return: A map tibble, sf points, GeoJSON FeatureCollection string, or decoded
+            response, selected by format. Map coordinates use EPSG:4326; clusters are representative
+            points.
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result format: tidy (default), sf (optional sf package),
+              geojson (string), or raw. Formatted output requires JSON. Metadata is retained
+              in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays.
+              Missing coordinates yield empty geometries.'
+        request:
+          arguments:
+            method:
+              value: GET
+            path:
+              value: /ecatt_ams_rest_services.get_rpt_map
+            path_params:
+              callback: map_empty
+            query:
+              callback: map_query
+            body:
+              callback: map_body
+            form_schema:
+              callback: map_form_schema
+            body_encoding:
+              callback: map_body_encoding
+            body_media:
+              value: application/json
+            request_controls:
+              value:
+                timeout: 60
+                max_retries: 2
+                retry_writes: yes
+                retry_policy: echo_retry_policy
+            response_policy:
+              callback: map_policy
+      POST /ecatt_ams_rest_services.get_rpt_map:
+        docs:
+          return: A map tibble, sf points, GeoJSON FeatureCollection string, or decoded
+            response, selected by format. Map coordinates use EPSG:4326; clusters are representative
+            points.
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result format: tidy (default), sf (optional sf package),
+              geojson (string), or raw. Formatted output requires JSON. Metadata is retained
+              in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays.
+              Missing coordinates yield empty geometries.'
+        request:
+          arguments:
+            method:
+              value: POST
+            path:
+              value: /ecatt_ams_rest_services.get_rpt_map
+            path_params:
+              callback: map_empty
+            query:
+              callback: map_query
+            body:
+              callback: map_body
+            form_schema:
+              callback: map_form_schema
+            body_encoding:
+              callback: map_body_encoding
+            body_media:
+              value: application/x-www-form-urlencoded
+            request_controls:
+              value:
+                timeout: 60
+                max_retries: 2
+                retry_writes: yes
+                retry_policy: echo_retry_policy
+            response_policy:
+              callback: map_policy
+        parameter_order:
+          - body
   ecattams_air_monitoring_station_hazardous_air_pollutant_search_services:
     selection:
       methods:
@@ -129,7 +209,126 @@ groups:
       docs:
         tags:
           family: Air Monitoring Station Hazardous Air Pollutant Search Services endpoints
-    operations: {}
+    operations:
+      GET /ecatt_ams_rest_services.get_download:
+        docs:
+          return: "A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent."}
+        result_formatter: echo_tidy_download_ecattams
+      GET /ecatt_ams_rest_services.get_facilities:
+        docs:
+          return: "A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_info_ecattams
+      GET /ecatt_ams_rest_services.get_qid:
+        docs:
+          return: "A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_qid_ecattams
+      POST /ecatt_ams_rest_services.get_download:
+        docs:
+          return: "A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent."}
+        result_formatter: echo_tidy_download_ecattams
+      POST /ecatt_ams_rest_services.get_facilities:
+        docs:
+          return: "A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_info_ecattams
+      POST /ecatt_ams_rest_services.get_qid:
+        docs:
+          return: "A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent."}
+        result_formatter: echo_tidy_qid_ecattams
+      GET /ecatt_ams_rest_services.get_map:
+        docs:
+          return: A map tibble, sf points, GeoJSON FeatureCollection string, or decoded
+            response, selected by format. Map coordinates use EPSG:4326; clusters are representative
+            points.
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result format: tidy (default), sf (optional sf package),
+              geojson (string), or raw. Formatted output requires JSON. Metadata is retained
+              in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays.
+              Missing coordinates yield empty geometries.'
+        request:
+          arguments:
+            method:
+              value: GET
+            path:
+              value: /ecatt_ams_rest_services.get_map
+            path_params:
+              callback: map_empty
+            query:
+              callback: map_query
+            body:
+              callback: map_body
+            form_schema:
+              callback: map_form_schema
+            body_encoding:
+              callback: map_body_encoding
+            body_media:
+              value: application/json
+            request_controls:
+              value:
+                timeout: 60
+                max_retries: 2
+                retry_writes: yes
+                retry_policy: echo_retry_policy
+            response_policy:
+              callback: map_policy
+      POST /ecatt_ams_rest_services.get_map:
+        docs:
+          return: A map tibble, sf points, GeoJSON FeatureCollection string, or decoded
+            response, selected by format. Map coordinates use EPSG:4326; clusters are representative
+            points.
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result format: tidy (default), sf (optional sf package),
+              geojson (string), or raw. Formatted output requires JSON. Metadata is retained
+              in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays.
+              Missing coordinates yield empty geometries.'
+        request:
+          arguments:
+            method:
+              value: POST
+            path:
+              value: /ecatt_ams_rest_services.get_map
+            path_params:
+              callback: map_empty
+            query:
+              callback: map_query
+            body:
+              callback: map_body
+            form_schema:
+              callback: map_form_schema
+            body_encoding:
+              callback: map_body_encoding
+            body_media:
+              value: application/x-www-form-urlencoded
+            request_controls:
+              value:
+                timeout: 60
+                max_retries: 2
+                retry_writes: yes
+                retry_policy: echo_retry_policy
+            response_policy:
+              callback: map_policy
+        parameter_order:
+          - body
   ecattams_lookups:
     selection:
       methods:
@@ -181,4 +380,47 @@ groups:
       docs:
         tags:
           family: Lookups endpoints
-    operations: {}
+        return: "A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE)."
+      extra_parameters:
+        tidy: {type: logical, default: true, description: "Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+    operations:
+      GET /rest_lookups.ecatt_ams_cas:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.ecatt_ams_polls:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.ecatt_ams_systems:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.ecatt_ams_years:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.ecatt_nata_polls:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.ecatt_nata_sources:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.ecatt_nata_systems:
+        result_formatter: echo_tidy_lookup
+      GET /rest_lookups.ecatt_target_systems:
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.ecatt_ams_cas:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.ecatt_ams_polls:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.ecatt_ams_systems:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.ecatt_ams_years:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.ecatt_nata_polls:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.ecatt_nata_sources:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.ecatt_nata_systems:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup
+      POST /rest_lookups.ecatt_target_systems:
+        parameter_order: [body]
+        result_formatter: echo_tidy_lookup

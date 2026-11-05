@@ -4,13 +4,15 @@
 \alias{ecattaqs_lookups_ecatt_aqs_years_post}
 \title{ECHO Clean Air Targeting Tool AQS Available Reporting Years Lookup Service}
 \usage{
-ecattaqs_lookups_ecatt_aqs_years_post(body = NULL)
+ecattaqs_lookups_ecatt_aqs_years_post(body = NULL, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO Clean Air Targeting Tool AQS Available Reporting Years Lookup Service

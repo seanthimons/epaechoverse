@@ -9,7 +9,8 @@ lookup_bio_pathogen_reduction(
   callback = NULL,
   search_term = NULL,
   search_code = NULL,
-  search_subcode = NULL
+  search_subcode = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -25,9 +26,11 @@ lookup_bio_pathogen_reduction(
 \item{search_code}{Enter a partial or complete code value.}
 
 \item{search_subcode}{Enter a partial or complete code value.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 Placeholder

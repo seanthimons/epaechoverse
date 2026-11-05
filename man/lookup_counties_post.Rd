@@ -4,13 +4,15 @@
 \alias{lookup_counties_post}
 \title{ECHO Counties Lookup Service}
 \usage{
-lookup_counties_post(body = NULL)
+lookup_counties_post(body = NULL, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO Counties Lookup Service

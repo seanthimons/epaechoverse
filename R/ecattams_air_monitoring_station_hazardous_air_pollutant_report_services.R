@@ -416,37 +416,39 @@ ecattams_get_rpt_pollrose_post <- function(body) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param p_site_code The AMA site code of the station
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
-#' @return Decoded response returned by the client request helper.
+#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Monitoring Station Hazardous Air Pollutant Report Services endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattams_get_rpt_map <- function(output = NULL, p_site_code = NULL, callback = NULL) {
+ecattams_get_rpt_map <- function(output = NULL, p_site_code = NULL, callback = NULL, format = "tidy") {
   .api_validation$parameter_values(base::list("output" = output, "p_site_code" = p_site_code, "callback" = callback), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_site_code = list(name = "p_site_code", "in" = "query", description = "The AMA site code of the station", type = "string"), 
     callback = list(name = "callback", "in" = "query", description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string")), .api_validation$body_value, c(output = "query", p_site_code = "query", callback = "query"))
-  params <- base::list("output" = output, "p_site_code" = p_site_code, "callback" = callback)
+  params <- base::list("output" = output, "p_site_code" = p_site_code, "callback" = callback, "format" = format)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["p_site_code"]]) && base::any(!base::nzchar(params[["p_site_code"]]))) base::stop("Empty query parameter: p_site_code")
   if (base::is.character(params[["callback"]]) && base::any(!base::nzchar(params[["callback"]]))) base::stop("Empty query parameter: callback")
-  result <- ecattams_request(method = "GET", path = "/ecatt_ams_rest_services.get_rpt_map", path_params = base::list(), query = base::list("output" = params[["output"]], "p_site_code" = params[["p_site_code"]], "callback" = params[["callback"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
+  result <- ecattams_request("method" = "GET", "path" = "/ecatt_ams_rest_services.get_rpt_map", "path_params" = base::list(), "query" = params[base::setdiff(base::names(params), "format")], "body" = NULL, "form_schema" = NULL, "body_encoding" = list(), "body_media" = "application/json", "request_controls" = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), "response_policy" = echo_map_policy("/ecatt_ams_rest_services.get_rpt_map", params$format, params$output))
   result
 }
 
 #' ECATT Air Monitoring Station (AMS) HAP Report Service
 #' 
 #' @noMd
+#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Monitoring Station Hazardous Air Pollutant Report Services endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-ecattams_get_rpt_map_post <- function(body = NULL) {
+ecattams_get_rpt_map_post <- function(body = NULL, format = "tidy") {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_site_code = list(description = "The AMA site code of the station", type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string")), required = list()), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
-  result <- ecattams_request(method = "POST", path = "/ecatt_ams_rest_services.get_rpt_map", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), p_site_code = list(), callback = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_site_code = list(description = "The AMA site code of the station", type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
-    type = "string")), required = list()))
+  params <- base::list("format" = format, "body" = body)
+  result <- ecattams_request("method" = "POST", "path" = "/ecatt_ams_rest_services.get_rpt_map", "path_params" = base::list(), "query" = base::list(), "body" = params$body, "form_schema" = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_site_code = list(description = "The AMA site code of the station", type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
+    type = "string")), required = list()), "body_encoding" = list(output = list(), p_site_code = list(), callback = list()), "body_media" = "application/x-www-form-urlencoded", "request_controls" = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), "response_policy" = echo_map_policy("/ecatt_ams_rest_services.get_rpt_map", params$format, params$body$output))
   result
 }
 

@@ -4,7 +4,7 @@
 \alias{case_get_download}
 \title{Enforcement Case Download Data Service}
 \usage{
-case_get_download(output = NULL, qid, qcolumns = NULL)
+case_get_download(output = NULL, qid, qcolumns = NULL, tidy = TRUE)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -13,9 +13,11 @@ case_get_download(output = NULL, qid, qcolumns = NULL)
 \item{qid}{Query ID Selector.  Enter the QueryID number from a previously run query.}
 
 \item{qcolumns}{Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 }
 \description{
 Enforcement Case Download Data Service

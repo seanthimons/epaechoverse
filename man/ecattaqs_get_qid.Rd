@@ -12,7 +12,8 @@ ecattaqs_get_qid(
   callback = NULL,
   newsort = NULL,
   descending = NULL,
-  qcolumns = NULL
+  qcolumns = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -32,9 +33,11 @@ ecattaqs_get_qid(
 \item{descending}{Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.}
 
 \item{qcolumns}{Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.
 }
 \description{
 ECATT Air Monitoring Station (AMS) CAP Search Paginated Results Service

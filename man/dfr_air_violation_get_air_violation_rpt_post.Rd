@@ -4,13 +4,18 @@
 \alias{dfr_air_violation_get_air_violation_rpt_post}
 \title{Clean Air Act (CAA) Get Air Violation Report}
 \usage{
-dfr_air_violation_get_air_violation_rpt_post(p_viol_activity_id = NULL)
+dfr_air_violation_get_air_violation_rpt_post(
+  p_viol_activity_id = NULL,
+  tidy = TRUE
+)
 }
 \arguments{
 \item{p_viol_activity_id}{p_viol_activity_id}
+
+\item{tidy}{Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE).
 }
 \description{
 Clean Air Act (CAA) Get Air Violation Report
