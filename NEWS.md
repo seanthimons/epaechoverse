@@ -1,4 +1,4 @@
-# echoverse 0.0.0.9000
+# echoverse 0.1.0
 
 * Renamed the package from `epaechoverse` to `echoverse`. Load it with
   `library(echoverse)`; package-prefixed helpers and options now use
