@@ -1,0 +1,27 @@
+# Builds PRs and deploys main/release/manual builds via Pages artifacts.
+# Repository Pages source must be GitHub Actions (already configured).
+name: pkgdown
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  pkgdown:
+    name: pkgdown
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: seanthimons/baseline/.github/workflows/pkgdown.yaml@e53831a23ef8f543c3fee58edd390089b0f13a27 # v1.4.0

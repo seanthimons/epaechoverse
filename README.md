@@ -340,7 +340,10 @@ To build the pkgdown site locally after installing the documentation tools:
 pkgdown::build_site()
 ```
 
-The site is written to `docs/`. Building it does not publish it.
+The site is written to `docs/`. Building it locally does not publish it.
+The pinned baseline pkgdown workflow builds pull requests and deploys pushes
+to `main`, published releases, and manual runs to
+[GitHub Pages](https://seanthimons.github.io/epaechoverse/).
 
 ## Package development
 
