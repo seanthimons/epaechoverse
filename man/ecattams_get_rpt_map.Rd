@@ -5,7 +5,12 @@
 \alias{ecattams_get_rpt_map}
 \title{ECATT Air Monitoring Station (AMS) HAP Report Service}
 \usage{
-ecattams_get_rpt_map(output = NULL, p_site_code = NULL, callback = NULL)
+ecattams_get_rpt_map(
+  output = NULL,
+  p_site_code = NULL,
+  callback = NULL,
+  format = "tidy"
+)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -16,9 +21,11 @@ ecattams_get_rpt_map(output = NULL, p_site_code = NULL, callback = NULL)
 \item{p_site_code}{The AMA site code of the station}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{format}{Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.}
 }
 \value{
-Decoded response returned by the client request helper.
+A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 }
 \description{
 ECATT Air Monitoring Station (AMS) HAP Report Service

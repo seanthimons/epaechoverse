@@ -4,7 +4,12 @@
 \alias{dfr_get_acs2023x_demographics}
 \title{ACS Demographics Data}
 \usage{
-dfr_get_acs2023x_demographics(p_lat = NULL, p_long = NULL, p_radius = NULL)
+dfr_get_acs2023x_demographics(
+  p_lat = NULL,
+  p_long = NULL,
+  p_radius = NULL,
+  tidy = TRUE
+)
 }
 \arguments{
 \item{p_lat}{Latitude location in decimal degrees.}
@@ -12,9 +17,11 @@ dfr_get_acs2023x_demographics(p_lat = NULL, p_long = NULL, p_radius = NULL)
 \item{p_long}{Longitude location in decimal degrees.}
 
 \item{p_radius}{Spatial Search Radius.  Enter a radius up to 100 miles in which to spatially search for facilities.}
+
+\item{tidy}{Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE).
 }
 \description{
 ACS Demographics Data

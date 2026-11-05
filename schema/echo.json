@@ -2870,7 +2870,7 @@
                 "$ref": "#\/parameters\/q.c2_long"
             }
             ,{
-                "$ref": "#\/parameters\/q.p_id"
+                "name":"p_id","in":"query","description":"Identifier for the service.","type":"string","required":false
             }
          ]
          ,"tags": [
@@ -2935,7 +2935,7 @@
                 "$ref": "#\/parameters\/f.c2_long"
             }
             ,{
-                "$ref": "#\/parameters\/f.p_id"
+                "name":"p_id","in":"formData","description":"Identifier for the service.","type":"string","required":false
             }
          ]
          ,"tags": [

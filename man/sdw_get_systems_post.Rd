@@ -4,13 +4,15 @@
 \alias{sdw_get_systems_post}
 \title{Safe Drinking Water Act (SDWA) Systems Search Service}
 \usage{
-sdw_get_systems_post(body = NULL)
+sdw_get_systems_post(body = NULL, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A one-row tibble of the query summary (counters as numbers, QueryID as text; with tablelist = 'Y' the first page of rows is in attr(, 'facilities')), or the decoded response (tidy = FALSE).
 }
 \description{
 Safe Drinking Water Act (SDWA) Systems Search Service

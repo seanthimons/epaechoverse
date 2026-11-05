@@ -10,7 +10,8 @@ lookup_wbd_lu(
   wbd_code = NULL,
   wbd_name,
   wbd_level = NULL,
-  exact_match = NULL
+  exact_match = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -28,9 +29,11 @@ lookup_wbd_lu(
 \item{wbd_level}{The number of digits of the watershed code [Hydrologic Unit Code (HUC)] returned in the ValueCode. Must be an even number between 4 and 12.}
 
 \item{exact_match}{exact_match}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 Placeholder

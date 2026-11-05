@@ -95,7 +95,8 @@ rcra_get_facility_info(
   summarylist = NULL,
   callback = NULL,
   qcolumns = NULL,
-  p_pretty_print = NULL
+  p_pretty_print = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -359,9 +360,11 @@ S = State}
 \item{qcolumns}{Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.}
 
 \item{p_pretty_print}{Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 }
 \description{
 Resource Conservation and Recovery Act (RCRA) Facility Enhanced Search Service

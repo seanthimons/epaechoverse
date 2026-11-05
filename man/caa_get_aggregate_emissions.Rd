@@ -8,7 +8,8 @@ caa_get_aggregate_emissions(
   output = NULL,
   p_id,
   p_units = NULL,
-  callback = NULL
+  callback = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -22,9 +23,11 @@ caa_get_aggregate_emissions(
 \item{p_units}{Units of Measurement.  For the Air Pollutant Report, the default value is 'lbs'.  Enter "TWPE" for Toxic Weighted Pounds Equivalents (TWPE).}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{tidy}{Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE).
 }
 \description{
 Air Pollutant Report Aggregated Emissions Service

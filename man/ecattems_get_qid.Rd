@@ -10,7 +10,8 @@ ecattems_get_qid(
   pageno = 1,
   newsort = NULL,
   descending = NULL,
-  callback = NULL
+  callback = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -28,9 +29,11 @@ ecattems_get_qid(
 \item{descending}{Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.
 }
 \description{
 ECATT Emission Screener (EMS) Paginated Results Service

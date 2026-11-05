@@ -1,5 +1,5 @@
 {
-  "description": "ECHO Swagger 2.0 schemas downloaded unchanged by dev/harvest_schemas.R.",
+  "description": "ECHO and Envirofacts schemas (Swagger 2.0 / OpenAPI 3) downloaded unchanged by dev/harvest_schemas.R.",
   "files": [
     {
       "file": "echo-air-monitoring-criteria-pollutants.swagger.json",
@@ -187,6 +187,17 @@
       "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Code Lookups",
       "paths": 56,
       "definitions": 62
+    },
+    {
+      "file": "envirofacts-dmap.openapi.json",
+      "prefix": "DMAP",
+      "source_url": "https://data.epa.gov/api-cache/metadata/openapi_swagger.json",
+      "retrieved_utc": "2026-11-03T15:36:42Z",
+      "sha256": "e4a99bf03340a70ab307744bfced75a3f3584207d7ec12dc7db09d3bf7b24bdd",
+      "bytes": 1469190,
+      "title": "DMAP API",
+      "paths": 416,
+      "definitions": 416
     }
   ]
 }

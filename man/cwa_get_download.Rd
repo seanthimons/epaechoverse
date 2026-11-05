@@ -4,7 +4,13 @@
 \alias{cwa_get_download}
 \title{Clean Water Act (CWA) Download Data Service}
 \usage{
-cwa_get_download(output = NULL, qid, qcolumns = NULL, p_pretty_print = NULL)
+cwa_get_download(
+  output = NULL,
+  qid,
+  qcolumns = NULL,
+  p_pretty_print = NULL,
+  tidy = TRUE
+)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -15,9 +21,11 @@ cwa_get_download(output = NULL, qid, qcolumns = NULL, p_pretty_print = NULL)
 \item{qcolumns}{Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.}
 
 \item{p_pretty_print}{Optional flag to request GeoJSON formatted results to be pretty printed.  Only provide a numeric value when the output needs to be human readable as pretty printing has a performance cost.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 }
 \description{
 Clean Water Act (CWA) Download Data Service

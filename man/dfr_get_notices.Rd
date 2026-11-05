@@ -4,7 +4,13 @@
 \alias{dfr_get_notices}
 \title{Detailed Facility Report Notices Service}
 \usage{
-dfr_get_notices(output = NULL, p_id, callback = NULL, p_gt5yr = "N")
+dfr_get_notices(
+  output = NULL,
+  p_id,
+  callback = NULL,
+  p_gt5yr = "N",
+  tidy = TRUE
+)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -17,9 +23,11 @@ dfr_get_notices(output = NULL, p_id, callback = NULL, p_gt5yr = "N")
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
 
 \item{p_gt5yr}{Enter Y to include more than 5 years of data.}
+
+\item{tidy}{Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE).
 }
 \description{
 Detailed Facility Report Notices Service

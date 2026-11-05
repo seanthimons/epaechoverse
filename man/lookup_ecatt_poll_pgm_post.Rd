@@ -4,13 +4,15 @@
 \alias{lookup_ecatt_poll_pgm_post}
 \title{ECHO Clean Air Targeting Tool Pollutant Programs Lookup Service}
 \usage{
-lookup_ecatt_poll_pgm_post(body = NULL)
+lookup_ecatt_poll_pgm_post(body = NULL, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO Clean Air Targeting Tool Pollutant Programs Lookup Service

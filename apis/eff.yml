@@ -61,7 +61,33 @@ groups:
       docs:
         tags:
           family: Effluent Charts endpoints
-    operations: {}
+    operations:
+      GET /eff_rest_services.get_effluent_chart:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      GET /eff_rest_services.get_summary_chart:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /eff_rest_services.get_effluent_chart:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
+      POST /eff_rest_services.get_summary_chart:
+        docs:
+          return: "A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE)."
+        parameter_order: [body]
+        extra_parameters:
+          tidy: {type: logical, default: true, description: "Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent."}
+        result_formatter: echo_tidy_nested
   eff_lookups:
     selection:
       methods:

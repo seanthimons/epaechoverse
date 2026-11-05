@@ -13,7 +13,8 @@ case_get_map(
   c1_long = NULL,
   c2_lat = NULL,
   c2_long = NULL,
-  mapset = "1400"
+  mapset = "1400",
+  format = "tidy"
 )
 }
 \arguments{
@@ -37,9 +38,11 @@ case_get_map(
 \item{c2_long}{Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.}
 
 \item{mapset}{Identifies the maxium number of case facilities to return from the case_rest_services.get_case_info query.}
+
+\item{format}{Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.}
 }
 \value{
-Decoded response returned by the client request helper.
+A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 }
 \description{
 Enforcement Case Map Service

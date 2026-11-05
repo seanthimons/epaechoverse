@@ -11,7 +11,8 @@ eff_get_effluent_chart(
   start_date = NULL,
   end_date = NULL,
   output = NULL,
-  callback = NULL
+  callback = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -31,9 +32,11 @@ eff_get_effluent_chart(
 - XML = Data model formatted as Extensible Markup Language.}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{tidy}{Return the report as a named list of tibbles. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A named list of tibbles, one per table in the report (text columns; nested values stay list-columns), or the decoded response (tidy = FALSE).
 }
 \description{
 Detailed Effluent Chart Service

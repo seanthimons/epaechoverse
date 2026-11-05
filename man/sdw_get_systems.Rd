@@ -62,7 +62,8 @@ sdw_get_systems(
   queryset = NULL,
   responseset = NULL,
   callback = NULL,
-  qcolumns = NULL
+  qcolumns = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -255,9 +256,11 @@ Enter a number to search for facilities with a quantity greater than or equal to
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
 
 \item{qcolumns}{Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A one-row tibble of the query summary (counters as numbers, QueryID as text; with tablelist = 'Y' the first page of rows is in attr(, 'facilities')), or the decoded response (tidy = FALSE).
 }
 \description{
 Safe Drinking Water Act (SDWA) Systems Search Service

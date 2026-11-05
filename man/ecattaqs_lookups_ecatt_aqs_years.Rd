@@ -4,7 +4,7 @@
 \alias{ecattaqs_lookups_ecatt_aqs_years}
 \title{ECHO Clean Air Targeting Tool AQS Available Reporting Years Lookup Service}
 \usage{
-ecattaqs_lookups_ecatt_aqs_years(output = NULL, callback = NULL)
+ecattaqs_lookups_ecatt_aqs_years(output = NULL, callback = NULL, tidy = TRUE)
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -13,9 +13,11 @@ ecattaqs_lookups_ecatt_aqs_years(output = NULL, callback = NULL)
 - XML = Data model formatted as Extensible Markup Language.}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO Clean Air Targeting Tool AQS Available Reporting Years Lookup Service
