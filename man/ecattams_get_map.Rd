@@ -17,7 +17,8 @@ ecattams_get_map(
   xmin = NULL,
   ymin = NULL,
   xmax = NULL,
-  ymax = NULL
+  ymax = NULL,
+  format = "tidy"
 )
 }
 \arguments{
@@ -47,9 +48,11 @@ ecattams_get_map(
 \item{xmax}{Maximum longitude value in decimal degrees.}
 
 \item{ymax}{Maximum latitude value in decimal degrees.}
+
+\item{format}{Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.}
 }
 \value{
-Decoded response returned by the client request helper.
+A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 }
 \description{
 ECATT Air Monitoring Station (AMS) HAP SearchMap Service

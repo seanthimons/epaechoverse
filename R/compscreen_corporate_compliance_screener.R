@@ -30,11 +30,12 @@
 #' @param summarylist Summary List Flag.  Enter a Y to return a list of summary statistics based on the parameters submitted to the query service.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param qcolumns Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
-#' @return Decoded response returned by the client request helper.
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
+#' @return A one-row tibble of the query summary (counters as numbers, QueryID as text; with tablelist = 'Y' the first page of rows is in attr(, 'facilities')), or the decoded response (tidy = FALSE).
 #' @family Corporate Compliance Screener endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-compscreen_get_facilities <- function(output = NULL, p_fn = NULL, p_fn_excl = NULL, p_fntype = NULL, p_pid = NULL, p_st = NULL, p_frs = NULL, p_reg = NULL, p_active = NULL, p_yrs = NULL, p_caa = NULL, p_cwa = NULL, p_rcra = NULL, p_sdwa = NULL, p_tsca = NULL, p_cercla = NULL, queryset = NULL, responseset = NULL, tablelist = NULL, summarylist = NULL, callback = NULL, qcolumns = NULL) {
+compscreen_get_facilities <- function(output = NULL, p_fn = NULL, p_fn_excl = NULL, p_fntype = NULL, p_pid = NULL, p_st = NULL, p_frs = NULL, p_reg = NULL, p_active = NULL, p_yrs = NULL, p_caa = NULL, p_cwa = NULL, p_rcra = NULL, p_sdwa = NULL, p_tsca = NULL, p_cercla = NULL, queryset = NULL, responseset = NULL, tablelist = NULL, summarylist = NULL, callback = NULL, qcolumns = NULL, tidy = TRUE) {
   .api_validation$parameter_values(base::list("output" = output, "p_fn" = p_fn, "p_fn_excl" = p_fn_excl, "p_fntype" = p_fntype, "p_pid" = p_pid, "p_st" = p_st, "p_frs" = p_frs, "p_reg" = p_reg, "p_active" = p_active, "p_yrs" = p_yrs, "p_caa" = p_caa, "p_cwa" = p_cwa, "p_rcra" = p_rcra, "p_sdwa" = p_sdwa, "p_tsca" = p_tsca, "p_cercla" = p_cercla, "queryset" = queryset, "responseset" = responseset, "tablelist" = tablelist, "summarylist" = summarylist, "callback" = callback, "qcolumns" = qcolumns), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_fn = list(name = "p_fn", "in" = "query", description = "Facility Name Filter. Enter one or more case-insensitive facility names to filter results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers.", 
     type = "string"), p_fn_excl = list(name = "p_fn_excl", "in" = "query", description = "Facility Name to Exclude Filter. Enter one or more case-insensitive facility names to exclude from results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers.", type = "string"), p_fntype = list(name = "p_fntype", "in" = "query", description = "Controls type of text search performed on facility name with parameter p_fn.\n- EXACT = Find facilities having the exact provided name(s).\n- BEGINS = Find facilities with names starting with the provided term(s).\n- ALL = Find facilities using Oracle text search terms.\n- CONTAINS = ", 
     enum = list("ALL", "CONTAINS", "EXACT", "BEGINS"), type = "string"), p_pid = list(name = "p_pid", "in" = "query", description = "Nine-digit permit IDs. May contain up to 2000 comma-separated values.", type = "string"), p_st = list(name = "p_st", "in" = "query", description = "Facility State and State-Equivalent Filter.  Provide one or more USPS postal abbreviations for states and state-equivalents to filter results.  Provide multiple values as a comma-delimited list.", type = "string"), p_frs = list(
@@ -43,7 +44,7 @@ compscreen_get_facilities <- function(output = NULL, p_fn = NULL, p_fn_excl = NU
     p_cercla = list(name = "p_cercla", "in" = "query", type = "string"), queryset = list(name = "queryset", "in" = "query", description = "Query Limiter.  Enter a value to limit the number of records returned for each query. Value cannot exceed 70,000.", type = "number"), responseset = list(name = "responseset", "in" = "query", description = "Response Set Limiter. Enter a value to limit the number of records per page. Value cannot exceed 1,000.", type = "number"), tablelist = list(name = "tablelist", 
         "in" = "query", description = "Table List Flag. Enter a Y to display the first page of facility results.", enum = list("Y", "N"), type = "string"), summarylist = list(name = "summarylist", "in" = "query", description = "Summary List Flag.  Enter a Y to return a list of summary statistics based on the parameters submitted to the query service.", enum = list("Y", "N"), type = "string"), callback = list(name = "callback", "in" = "query", description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
         type = "string"), qcolumns = list(name = "qcolumns", "in" = "query", description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string")), .api_validation$body_value, c(output = "query", p_fn = "query", p_fn_excl = "query", p_fntype = "query", p_pid = "query", p_st = "query", p_frs = "query", p_reg = "query", p_active = "query", p_yrs = "query", p_caa = "query", p_cwa = "query", p_rcra = "query", p_sdwa = "query", p_tsca = "query", p_cercla = "query", queryset = "query", responseset = "query", tablelist = "query", summarylist = "query", callback = "query", qcolumns = "query"))
-  params <- base::list("output" = output, "p_fn" = p_fn, "p_fn_excl" = p_fn_excl, "p_fntype" = p_fntype, "p_pid" = p_pid, "p_st" = p_st, "p_frs" = p_frs, "p_reg" = p_reg, "p_active" = p_active, "p_yrs" = p_yrs, "p_caa" = p_caa, "p_cwa" = p_cwa, "p_rcra" = p_rcra, "p_sdwa" = p_sdwa, "p_tsca" = p_tsca, "p_cercla" = p_cercla, "queryset" = queryset, "responseset" = responseset, "tablelist" = tablelist, "summarylist" = summarylist, "callback" = callback, "qcolumns" = qcolumns)
+  params <- base::list("output" = output, "p_fn" = p_fn, "p_fn_excl" = p_fn_excl, "p_fntype" = p_fntype, "p_pid" = p_pid, "p_st" = p_st, "p_frs" = p_frs, "p_reg" = p_reg, "p_active" = p_active, "p_yrs" = p_yrs, "p_caa" = p_caa, "p_cwa" = p_cwa, "p_rcra" = p_rcra, "p_sdwa" = p_sdwa, "p_tsca" = p_tsca, "p_cercla" = p_cercla, "queryset" = queryset, "responseset" = responseset, "tablelist" = tablelist, "summarylist" = summarylist, "callback" = callback, "qcolumns" = qcolumns, "tidy" = tidy)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["p_fn"]]) && base::any(!base::nzchar(params[["p_fn"]]))) base::stop("Empty query parameter: p_fn")
   if (base::is.character(params[["p_fn_excl"]]) && base::any(!base::nzchar(params[["p_fn_excl"]]))) base::stop("Empty query parameter: p_fn_excl")
@@ -68,17 +69,20 @@ compscreen_get_facilities <- function(output = NULL, p_fn = NULL, p_fn_excl = NU
   if (base::is.character(params[["qcolumns"]]) && base::any(!base::nzchar(params[["qcolumns"]]))) base::stop("Empty query parameter: qcolumns")
   result <- compscreen_request(method = "GET", path = "/comp_screen_services.get_facilities", path_params = base::list(), query = base::list("output" = params[["output"]], "p_fn" = params[["p_fn"]], "p_fn_excl" = params[["p_fn_excl"]], "p_fntype" = params[["p_fntype"]], "p_pid" = params[["p_pid"]], "p_st" = params[["p_st"]], "p_frs" = params[["p_frs"]], "p_reg" = params[["p_reg"]], "p_active" = params[["p_active"]], "p_yrs" = params[["p_yrs"]], "p_caa" = params[["p_caa"]], "p_cwa" = params[["p_cwa"]], "p_rcra" = params[["p_rcra"]], "p_sdwa" = params[["p_sdwa"]], "p_tsca" = params[["p_tsca"]], "p_cercla" = params[["p_cercla"]], "queryset" = params[["queryset"]], "responseset" = params[["responseset"]], "tablelist" = params[["tablelist"]], "summarylist" = params[["summarylist"]], "callback" = params[["callback"]], "qcolumns" = params[["qcolumns"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_summary_compscreen", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' Corporate Compliance Screener Search
 #' 
 #' @noMd
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A one-row tibble of the query summary (counters as numbers, QueryID as text; with tablelist = 'Y' the first page of rows is in attr(, 'facilities')), or the decoded response (tidy = FALSE).
 #' @family Corporate Compliance Screener endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-compscreen_get_facilities_post <- function(body = NULL) {
+compscreen_get_facilities_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_fn = list(description = "Facility Name Filter. Enter one or more case-insensitive facility names to filter results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers.", 
     type = "string"), p_fn_excl = list(description = "Facility Name to Exclude Filter. Enter one or more case-insensitive facility names to exclude from results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers.", type = "string"), p_fntype = list(description = "Controls type of text search performed on facility name with parameter p_fn.\n- EXACT = Find facilities having the exact provided name(s).\n- BEGINS = Find facilities with names starting with the provided term(s).\n- ALL = Find facilities using Oracle text search terms.\n- CONTAINS = ", 
@@ -88,7 +92,7 @@ compscreen_get_facilities_post <- function(body = NULL) {
         type = "number"), tablelist = list(description = "Table List Flag. Enter a Y to display the first page of facility results.", enum = list("Y", "N"), type = "string"), summarylist = list(description = "Summary List Flag.  Enter a Y to return a list of summary statistics based on the parameters submitted to the query service.", enum = list("Y", "N"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
         type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string")), required = list()), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
+  params <- base::list("tidy" = tidy, "body" = body)
   result <- compscreen_request(method = "POST", path = "/comp_screen_services.get_facilities", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), p_fn = list(), p_fn_excl = list(), p_fntype = list(), p_pid = list(), p_st = list(), p_frs = list(), p_reg = list(), p_active = list(), p_yrs = list(), p_caa = list(), p_cwa = list(), p_rcra = list(), p_sdwa = list(), p_tsca = list(), p_cercla = list(), queryset = list(), responseset = list(), tablelist = list(), summarylist = list(), callback = list(), qcolumns = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_fn = list(description = "Facility Name Filter. Enter one or more case-insensitive facility names to filter results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers.", 
     type = "string"), p_fn_excl = list(description = "Facility Name to Exclude Filter. Enter one or more case-insensitive facility names to exclude from results.  Provide multiple values as a comma-delimited list.  See p_fntype for additional modifiers.", type = "string"), p_fntype = list(description = "Controls type of text search performed on facility name with parameter p_fn.\n- EXACT = Find facilities having the exact provided name(s).\n- BEGINS = Find facilities with names starting with the provided term(s).\n- ALL = Find facilities using Oracle text search terms.\n- CONTAINS = ", 
     enum = list("ALL", "CONTAINS", "EXACT", "BEGINS"), type = "string"), p_pid = list(description = "Nine-digit permit IDs. May contain up to 2000 comma-separated values.", type = "string"), p_st = list(description = "Facility State and State-Equivalent Filter.  Provide one or more USPS postal abbreviations for states and state-equivalents to filter results.  Provide multiple values as a comma-delimited list.", type = "string"), p_frs = list(description = "Facility Registry Service ID Filter. Enter a single 12-digit FRS identifier to filter results.", 
@@ -97,6 +101,8 @@ compscreen_get_facilities_post <- function(body = NULL) {
         type = "number"), tablelist = list(description = "Table List Flag. Enter a Y to display the first page of facility results.", enum = list("Y", "N"), type = "string"), summarylist = list(description = "Summary List Flag.  Enter a Y to return a list of summary statistics based on the parameters submitted to the query service.", enum = list("Y", "N"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
         type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string")), required = list()))
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_summary_compscreen", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' Corporate Compliance Screener Search by Query ID
@@ -112,17 +118,18 @@ compscreen_get_facilities_post <- function(body = NULL) {
 #' @param newsort Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.
 #' @param descending Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.
 #' @param qcolumns Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
-#' @return Decoded response returned by the client request helper.
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
+#' @return A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.
 #' @family Corporate Compliance Screener endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-compscreen_get_qid <- function(output = NULL, qid, pageno = 1, callback = NULL, newsort = NULL, descending = NULL, qcolumns = NULL) {
+compscreen_get_qid <- function(output = NULL, qid, pageno = 1, callback = NULL, newsort = NULL, descending = NULL, qcolumns = NULL, tidy = TRUE) {
   if (base::is.null(qid)) base::stop("Required input: qid")
   .api_validation$parameter_values(base::list("output" = output, "qid" = qid, "pageno" = pageno, "callback" = callback, "newsort" = newsort, "descending" = descending, "qcolumns" = qcolumns), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(name = "qid", "in" = "query", description = "Query ID Selector.  Enter the QueryID number from a previously run query.", 
     type = "string"), pageno = list(name = "pageno", "in" = "query", description = "Indicates the number of the page to display. It is used only when the results are paginated.", default = 1L, type = "number"), callback = list(name = "callback", "in" = "query", description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string"), newsort = list(name = "newsort", "in" = "query", description = "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.", 
     type = "number"), descending = list(name = "descending", "in" = "query", description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", enum = list("Y", "N"), type = "string"), qcolumns = list(name = "qcolumns", "in" = "query", description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", 
     type = "string")), .api_validation$body_value, c(output = "query", qid = "query", pageno = "query", callback = "query", newsort = "query", descending = "query", qcolumns = "query"))
-  params <- base::list("output" = output, "qid" = qid, "pageno" = pageno, "callback" = callback, "newsort" = newsort, "descending" = descending, "qcolumns" = qcolumns)
+  params <- base::list("output" = output, "qid" = qid, "pageno" = pageno, "callback" = callback, "newsort" = newsort, "descending" = descending, "qcolumns" = qcolumns, "tidy" = tidy)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["qid"]]) && base::any(!base::nzchar(params[["qid"]]))) base::stop("Empty query parameter: qid")
   if (base::is.character(params[["pageno"]]) && base::any(!base::nzchar(params[["pageno"]]))) base::stop("Empty query parameter: pageno")
@@ -132,17 +139,20 @@ compscreen_get_qid <- function(output = NULL, qid, pageno = 1, callback = NULL, 
   if (base::is.character(params[["qcolumns"]]) && base::any(!base::nzchar(params[["qcolumns"]]))) base::stop("Empty query parameter: qcolumns")
   result <- compscreen_request(method = "GET", path = "/comp_screen_services.get_qid", path_params = base::list(), query = base::list("output" = params[["output"]], "qid" = params[["qid"]], "pageno" = params[["pageno"]], "callback" = params[["callback"]], "newsort" = params[["newsort"]], "descending" = params[["descending"]], "qcolumns" = params[["qcolumns"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_qid_compscreen", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' Corporate Compliance Screener Search by Query ID
 #' 
 #' @noMd
+#' @param tidy Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.
 #' @family Corporate Compliance Screener endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-compscreen_get_qid_post <- function(body) {
+compscreen_get_qid_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), 
@@ -150,12 +160,14 @@ compscreen_get_qid_post <- function(body) {
         type = "number"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", enum = list("Y", "N"), type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", 
         type = "string")), required = list("qid")), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
+  params <- base::list("tidy" = tidy, "body" = body)
   result <- compscreen_request(method = "POST", path = "/comp_screen_services.get_qid", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), qid = list(), pageno = list(), callback = list(), newsort = list(), descending = list(), qcolumns = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), 
     pageno = list(description = "Indicates the number of the page to display. It is used only when the results are paginated.", default = 1L, type = "number"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string"), newsort = list(description = "Output Sort Column.  Enter the number of the column on which the data will be sorted. If unpopulated results will sort on the first column.", 
         type = "number"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", enum = list("Y", "N"), type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", 
         type = "string")), required = list("qid")))
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_qid_compscreen", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' Corporate Compliance Screener Report Service
@@ -503,36 +515,42 @@ compscreen_get_superfund_post <- function(body) {
 #' @noMd
 #' @param qid Query ID Selector.  Enter the QueryID number from a previously run query.
 #' @param qcolumns Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
-#' @return Decoded response returned by the client request helper.
+#' @param tidy Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.
+#' @return A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 #' @family Corporate Compliance Screener endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-compscreen_get_download <- function(qid, qcolumns = NULL) {
+compscreen_get_download <- function(qid, qcolumns = NULL, tidy = TRUE) {
   if (base::is.null(qid)) base::stop("Required input: qid")
   .api_validation$parameter_values(base::list("qid" = qid, "qcolumns" = qcolumns), list(qid = list(name = "qid", "in" = "query", description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), qcolumns = list(name = "qcolumns", "in" = "query", description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string")), .api_validation$body_value, c(qid = "query", qcolumns = "query"))
-  params <- base::list("qid" = qid, "qcolumns" = qcolumns)
+  params <- base::list("qid" = qid, "qcolumns" = qcolumns, "tidy" = tidy)
   if (base::is.character(params[["qid"]]) && base::any(!base::nzchar(params[["qid"]]))) base::stop("Empty query parameter: qid")
   if (base::is.character(params[["qcolumns"]]) && base::any(!base::nzchar(params[["qcolumns"]]))) base::stop("Empty query parameter: qcolumns")
   result <- compscreen_request(method = "GET", path = "/comp_screen_services.get_download", path_params = base::list(), query = base::list("qid" = params[["qid"]], "qcolumns" = params[["qcolumns"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_download_compscreen", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' Corporate Compliance Screener Download Data Service
 #' 
 #' @noMd
+#' @param tidy Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 #' @family Corporate Compliance Screener endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-compscreen_get_download_post <- function(body) {
+compscreen_get_download_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string")), required = list("qid")), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
+  params <- base::list("tidy" = tidy, "body" = body)
   result <- compscreen_request(method = "POST", path = "/comp_screen_services.get_download", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(qid = list(), qcolumns = list()), form_schema = list(type = "object", properties = list(qid = list(description = "Query ID Selector.  Enter the QueryID number from a previously run query.", type = "string"), qcolumns = list(description = "Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.", type = "string")), required = list("qid")))
   result
+  if (base::inherits(result, "httr2_request")) base::return(result)
+  base::get("echo_tidy_download_compscreen", envir = base::parent.env(base::environment()), mode = "function", inherits = FALSE)(base::list(result = result, params = params))
 }
 
 #' Corporate Compliance Screener Metadata Service

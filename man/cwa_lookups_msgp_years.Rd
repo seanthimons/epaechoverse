@@ -9,10 +9,10 @@ cwa_lookups_msgp_years(ascending = NULL, tidy = TRUE)
 \arguments{
 \item{ascending}{Output Sort Column Ascending Flag.  Enter Y to sort results in ascending order.}
 
-\item{tidy}{Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
+\item{tidy}{Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 ECHO MSGP Annual Report Years Lookup Servicve

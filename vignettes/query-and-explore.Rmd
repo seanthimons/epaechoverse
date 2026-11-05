@@ -9,7 +9,7 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
-library(epaechoverse)
+library(echoverse)
 ```
 
 Start with a question and a small geographic area. For example, which drinking
@@ -45,7 +45,7 @@ Use the installed package's exports to discover a service without scrolling
 through the entire reference index.
 
 ```{r discover}
-functions <- getNamespaceExports("epaechoverse")
+functions <- getNamespaceExports("echoverse")
 sort(grep("^sdw_", functions, value = TRUE))
 ```
 
@@ -63,7 +63,7 @@ choosing a filter or planning a join.
 
 ```{r dictionary}
 columns <- utils::read.csv(
-  system.file("extdata", "envirofacts-columns.csv", package = "epaechoverse"),
+  system.file("extdata", "envirofacts-columns.csv", package = "echoverse"),
   stringsAsFactors = FALSE
 )
 head(subset(columns, table == "sdwis.water_system"), 12)
@@ -86,7 +86,7 @@ option on exit so the example does not change later calls in your session.
 
 ```{r dry-run}
 local({
-  previous <- options(epaechoverse.dry_run = TRUE)
+  previous <- options(echoverse.dry_run = TRUE)
   on.exit(options(previous))
   request <- cwa_get_facilities(p_st = "RI", p_maj = "Y")
   request
@@ -99,31 +99,35 @@ works.
 
 ## Search ECHO, then retrieve the rows
 
-An ECHO search returns a query ID. Use the matching service's `get_qid` function
-for a page, or its download function for CSV. Keep the query ID as text.
+An ECHO search returns a typed one-row summary with a query ID. Use the
+matching service's `get_qid` function for a page or `echo_qid_all()` for
+successive pages. Keep the query ID as text and specify its service.
 
 ```{r drinking-water, eval=FALSE}
 search <- sdw_get_systems(p_st = "RI")
-str(search$Results, max.level = 1)
-search$Results$QueryRows
-qid <- search$Results$QueryID
+search$QueryRows
+qid <- search$QueryID
 
-if (!is.null(qid) && as.numeric(search$Results$QueryRows) > 0) {
+if (length(qid) == 1L && search$QueryRows > 0) {
   page <- sdw_get_qid(qid = qid, pageno = 1)
-  str(page, max.level = 2)
-
-  csv <- sdw_get_download(qid = qid)
-  systems <- utils::read.csv(text = csv, colClasses = "character")
-  dim(systems)
-  names(systems)
+  systems <- echo_qid_all(search, service = "sdw")
+  downloaded <- sdw_get_download(qid = qid) # typed tibble, not CSV text
   head(systems)
 }
+
+# Escape hatches for the original decoded list or CSV text:
+raw_search <- sdw_get_systems(p_st = "RI", tidy = FALSE)
+raw_csv <- sdw_get_download(qid = qid, tidy = FALSE)
 ```
 
-Reading CSV as character protects identifiers with leading zeros. Convert only
-the columns needed for analysis after checking their definitions. ECHO JSON
-search and report responses are lists; inspect their structure before extracting
-rows. Lookup functions return tibbles by default.
+Search summaries, pages, and supported CSV downloads are tibbles by default;
+identifiers remain text. `echo_qid_all()` stops at the reported total, an empty
+page, or `max_pages` (default 20), warning when the cap leaves rows behind.
+Air-monitoring search rows carry their query ID in `attr(x, "query")` rather
+than a one-row summary. Supported nested DFR/CAA/effluent JSON reports return
+named lists of tibbles; inspect each report's help and returned table names.
+Use `tidy = FALSE` to inspect an original search/report response. Effluent
+reports require `output = "JSON"` for table conversion.
 
 To begin the same search in other compliance domains:
 
@@ -138,6 +142,51 @@ Use `air_get_qid()`, `cwa_get_qid()`, `rcra_get_qid()` or
 `echo_get_qid()` with the ID from its own search. A query ID belongs to that
 search service. Inspect returned identifiers and the report function's help
 before passing an ID to `dfr_get_dfr()` or a case report.
+
+## Map search results and report locations
+
+Non-Esri map endpoints use `format` for the R result, independently of the
+API's `output` flag. The default is a tibble with numeric LAT/LON, text
+identifiers, and `.layer` indicating the source record array. `sf` is optional.
+
+```{r mapping, eval=FALSE}
+search <- cwa_get_facilities(p_st = "RI")
+points <- cwa_get_map(qid = search$QueryID)
+spatial <- cwa_get_map(qid = search$QueryID, format = "sf")
+geojson <- cwa_get_map(qid = search$QueryID, format = "geojson")
+raw <- cwa_get_map(qid = search$QueryID, format = "raw")
+attr(points, "map") # query ID, map center, popup/icon URLs and other metadata
+
+provenance <- dfr_get_spatial_metadata(p_id = "110000381989")
+```
+
+Map records may represent facilities or county/ZIP clusters; clusters are
+representative points, not polygons or complete facility extracts. DFR/CAA
+report maps can include neighboring facilities. AQS station and facility
+arrays retain their separate `.layer` values. Missing coordinates yield
+empty sf points or GeoJSON null geometries without dropping records. Invalid
+coordinates warn; their source values remain in coordinate diagnostics.
+Map LAT/LON uses the search schemas' WGS84 convention (also used for report
+maps); broader report-datum confirmation remains tracked in issue #5.
+Spatial-metadata endpoints support `tidy` and `raw` only, preserving provenance
+without guessing a datum from Latitude83/Longitude83. XML/JSONP requires
+`format = "raw"`. Esri ArcGIS services are planned for a later release.
+
+## Chemical occurrence example scripts
+
+The installed package includes `inst/examples/occurrence_chemicals.R`, which
+combines drinking-water and ambient-air discovery. It accepts selected chemical
+names or CASRNs, delegates AQS requests to aqsually, and uses ComptoxR for
+identity discovery. These examples need their own credentials and may install
+missing packages and download large datasets. Review the script header and
+choose a bounded geography/year before sourcing it; site builds never run it.
+
+```{r chemical-examples, eval=FALSE}
+options(occurrence.chemicals = c("atrazine", "117-81-7"))
+options(occurrence.aqs_scope = data.frame(state = "26", year = 2002))
+options(occurrence.mapping_only = TRUE) # discover identifiers first
+source(system.file("examples", "occurrence_chemicals.R", package = "echoverse"))
+```
 
 ## Query Envirofacts tables
 
@@ -206,7 +255,7 @@ checked. Keep analysis of a small page separate from claims about a population.
 ## Diagnose a failed query
 
 Narrow the geographic area or row range first. Check help and lookup codes, then
-inspect the request in dry-run mode. `epaechoverse_run_verbose(TRUE)` reports
+inspect the request in dry-run mode. `echoverse_run_verbose(TRUE)` reports
 request methods and response statuses; set it back to `FALSE` afterwards.
 
 Service error messages become `echo_error` conditions. A failed call does not

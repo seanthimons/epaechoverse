@@ -28,11 +28,11 @@ test_that('ranges are validated and capped', {
   expect_error(envirofacts_path('/a.b', last = 10001), 'at most 10,000')
   expect_error(envirofacts_path('/a.b', last = 10001, format = 'csv'), 'at most')
   expect_equal(envirofacts_path('/a.b', last = 10000), '/a.b/1:10000/json')
-  withr_option <- options(epaechoverse.max_rows = 20000)
+  withr_option <- options(echoverse.max_rows = 20000)
   on.exit(options(withr_option))
   expect_equal(envirofacts_path('/a.b', last = 20000), '/a.b/1:20000/json')
-  options(epaechoverse.max_rows = 'lots')
-  expect_error(envirofacts_path('/a.b'), 'epaechoverse.max_rows')
+  options(echoverse.max_rows = 'lots')
+  expect_error(envirofacts_path('/a.b'), 'echoverse.max_rows')
 })
 
 test_that('format and table are validated', {

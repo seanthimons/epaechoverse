@@ -9,7 +9,8 @@ cwa_viotrack_get_qid(
   callback = NULL,
   qid,
   pageno = 1,
-  qcolumns = NULL
+  qcolumns = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -22,9 +23,11 @@ cwa_viotrack_get_qid(
 \item{pageno}{Page number of results to return.}
 
 \item{qcolumns}{Comma-separated column IDs to return; see the metadata route for the IDs.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of one page of records, typed from ECHO metadata (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE). Use echo_qid_all() for every page.
 }
 \description{
 CWA Violation Tracker paginated results

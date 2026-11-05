@@ -8,8 +8,8 @@
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -30,13 +30,13 @@ lookup_air_pollutants <- function(output = NULL, callback = NULL, search_term = 
 #' ECHO Air Pollutants Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_air_pollutants_post <- function(tidy = TRUE, body = NULL) {
+lookup_air_pollutants_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -59,8 +59,8 @@ lookup_air_pollutants_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -81,13 +81,13 @@ lookup_bio_analy_method_category <- function(output = NULL, callback = NULL, sea
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_analy_method_category_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_analy_method_category_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -110,8 +110,8 @@ lookup_bio_analy_method_category_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -132,13 +132,13 @@ lookup_bio_analytical_method <- function(output = NULL, callback = NULL, search_
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_analytical_method_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_analytical_method_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -161,8 +161,8 @@ lookup_bio_analytical_method_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -183,13 +183,13 @@ lookup_bio_container_type <- function(output = NULL, callback = NULL, search_ter
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_container_type_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_container_type_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -212,8 +212,8 @@ lookup_bio_container_type_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -234,13 +234,13 @@ lookup_bio_mgmt_practice_handler <- function(output = NULL, callback = NULL, sea
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_mgmt_practice_handler_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_mgmt_practice_handler_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -264,8 +264,8 @@ lookup_bio_mgmt_practice_handler_post <- function(tidy = TRUE, body = NULL) {
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
 #' @param search_subcode Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -287,13 +287,13 @@ lookup_bio_mgmt_practice_subtype <- function(output = NULL, callback = NULL, sea
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_mgmt_practice_subtype_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_mgmt_practice_subtype_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string"), search_subcode = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -316,8 +316,8 @@ lookup_bio_mgmt_practice_subtype_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -338,13 +338,13 @@ lookup_bio_mgmt_practice_type <- function(output = NULL, callback = NULL, search
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_mgmt_practice_type_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_mgmt_practice_type_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -367,8 +367,8 @@ lookup_bio_mgmt_practice_type_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -389,13 +389,13 @@ lookup_bio_mgmt_practice_typesubtype <- function(output = NULL, callback = NULL,
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_mgmt_practice_typesubtype_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_mgmt_practice_typesubtype_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -418,8 +418,8 @@ lookup_bio_mgmt_practice_typesubtype_post <- function(tidy = TRUE, body = NULL) 
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -440,13 +440,13 @@ lookup_bio_pathogen_class <- function(output = NULL, callback = NULL, search_ter
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_pathogen_class_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_pathogen_class_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -470,8 +470,8 @@ lookup_bio_pathogen_class_post <- function(tidy = TRUE, body = NULL) {
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
 #' @param search_subcode Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -493,13 +493,13 @@ lookup_bio_pathogen_reduction <- function(output = NULL, callback = NULL, search
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_pathogen_reduction_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_pathogen_reduction_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string"), search_subcode = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -522,8 +522,8 @@ lookup_bio_pathogen_reduction_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -544,13 +544,13 @@ lookup_bio_treatment_process <- function(output = NULL, callback = NULL, search_
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_treatment_process_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_treatment_process_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -573,8 +573,8 @@ lookup_bio_treatment_process_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -595,13 +595,13 @@ lookup_bio_vector_reduction <- function(output = NULL, callback = NULL, search_t
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_vector_reduction_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_vector_reduction_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -623,8 +623,8 @@ lookup_bio_vector_reduction_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param registry_id registry_id
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -644,13 +644,13 @@ lookup_biosolids_by_registry_id <- function(output = NULL, callback = NULL, regi
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_biosolids_by_registry_id_post <- function(tidy = TRUE, body = NULL) {
+lookup_biosolids_by_registry_id_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), registry_id = list(type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -673,8 +673,8 @@ lookup_biosolids_by_registry_id_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -695,13 +695,13 @@ lookup_bio_vio_code <- function(output = NULL, callback = NULL, search_term = NU
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bio_vio_code_post <- function(tidy = TRUE, body = NULL) {
+lookup_bio_vio_code_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -724,8 +724,8 @@ lookup_bio_vio_code_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -746,13 +746,13 @@ lookup_bp_tribes <- function(output = NULL, callback = NULL, search_term = NULL,
 #' ECHO BP Tribes Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_bp_tribes_post <- function(tidy = TRUE, body = NULL) {
+lookup_bp_tribes_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -775,8 +775,8 @@ lookup_bp_tribes_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -797,13 +797,13 @@ lookup_counties <- function(output = NULL, callback = NULL, search_term = NULL, 
 #' ECHO Counties Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_counties_post <- function(tidy = TRUE, body = NULL) {
+lookup_counties_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -825,8 +825,8 @@ lookup_counties_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -846,13 +846,13 @@ lookup_cp_citations <- function(output = NULL, callback = NULL, search_term = NU
 #' ECHO CP Citations Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_cp_citations_post <- function(tidy = TRUE, body = NULL) {
+lookup_cp_citations_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -874,8 +874,8 @@ lookup_cp_citations_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param agency_desc agency_desc
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -895,13 +895,13 @@ lookup_cwa_pagency_lu <- function(output = NULL, callback = NULL, agency_desc = 
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_cwa_pagency_lu_post <- function(tidy = TRUE, body = NULL) {
+lookup_cwa_pagency_lu_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), agency_desc = list(type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -923,8 +923,8 @@ lookup_cwa_pagency_lu_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param state_code Two-letter state code
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -945,13 +945,13 @@ lookup_cwa_state_regions <- function(output = NULL, callback = NULL, state_code,
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_cwa_state_regions_post <- function(tidy = TRUE, body) {
+lookup_cwa_state_regions_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
@@ -975,8 +975,8 @@ lookup_cwa_state_regions_post <- function(tidy = TRUE, body) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -997,13 +997,13 @@ lookup_cwa_parameters <- function(output = NULL, callback = NULL, search_term = 
 #' ECHO CWA Parameter Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_cwa_parameters_post <- function(tidy = TRUE, body = NULL) {
+lookup_cwa_parameters_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1026,8 +1026,8 @@ lookup_cwa_parameters_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1048,13 +1048,13 @@ lookup_cwa_pollutants <- function(output = NULL, callback = NULL, search_term = 
 #' ECHO CWA Pollutants Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_cwa_pollutants_post <- function(tidy = TRUE, body = NULL) {
+lookup_cwa_pollutants_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1077,8 +1077,8 @@ lookup_cwa_pollutants_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1099,13 +1099,13 @@ lookup_ecatt_eis_types <- function(output = NULL, callback = NULL, search_term =
 #' ECHO Clean Air Targeting Tool EIS Types Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ecatt_eis_types_post <- function(tidy = TRUE, body = NULL) {
+lookup_ecatt_eis_types_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1127,8 +1127,8 @@ lookup_ecatt_eis_types_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1148,13 +1148,13 @@ lookup_ecatt_most_rcnt_cmmn_yr <- function(output = NULL, callback = NULL, searc
 #' ECHO Clean Air Targeting Tool Most Recent Common Year Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ecatt_most_rcnt_cmmn_yr_post <- function(tidy = TRUE, body = NULL) {
+lookup_ecatt_most_rcnt_cmmn_yr_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1176,8 +1176,8 @@ lookup_ecatt_most_rcnt_cmmn_yr_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1197,13 +1197,13 @@ lookup_ecatt_most_rcnt_yr <- function(output = NULL, callback = NULL, search_ter
 #' ECHO Clean Air Targeting Tool Most Recent Year Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ecatt_most_rcnt_yr_post <- function(tidy = TRUE, body = NULL) {
+lookup_ecatt_most_rcnt_yr_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1227,8 +1227,8 @@ lookup_ecatt_most_rcnt_yr_post <- function(tidy = TRUE, body = NULL) {
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
 #' @param scc_level scc_level
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1250,13 +1250,13 @@ lookup_ecatt_nei_scc_codes <- function(output = NULL, callback = NULL, search_te
 #' ECHO Clean Air Targeting Tool NEI SCC Code Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ecatt_nei_scc_codes_post <- function(tidy = TRUE, body = NULL) {
+lookup_ecatt_nei_scc_codes_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string"), scc_level = list(type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1279,8 +1279,8 @@ lookup_ecatt_nei_scc_codes_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1301,13 +1301,13 @@ lookup_ecatt_pcat_pgm <- function(output = NULL, callback = NULL, search_term = 
 #' ECHO Clean Air Targeting Tool Pollutant Category Programs Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ecatt_pcat_pgm_post <- function(tidy = TRUE, body = NULL) {
+lookup_ecatt_pcat_pgm_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1330,8 +1330,8 @@ lookup_ecatt_pcat_pgm_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1352,13 +1352,13 @@ lookup_ecatt_poll_categories <- function(output = NULL, callback = NULL, search_
 #' ECHO Clean Air Targeting Tool Pollutant Categories Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ecatt_poll_categories_post <- function(tidy = TRUE, body = NULL) {
+lookup_ecatt_poll_categories_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1381,8 +1381,8 @@ lookup_ecatt_poll_categories_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1403,13 +1403,13 @@ lookup_ecatt_poll_pgm <- function(output = NULL, callback = NULL, search_term = 
 #' ECHO Clean Air Targeting Tool Pollutant Programs Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ecatt_poll_pgm_post <- function(tidy = TRUE, body = NULL) {
+lookup_ecatt_poll_pgm_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1432,8 +1432,8 @@ lookup_ecatt_poll_pgm_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1454,13 +1454,13 @@ lookup_ecatt_pollutants <- function(output = NULL, callback = NULL, search_term 
 #' ECHO Clean Air Targeting Tool Pollutants Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ecatt_pollutants_post <- function(tidy = TRUE, body = NULL) {
+lookup_ecatt_pollutants_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1483,8 +1483,8 @@ lookup_ecatt_pollutants_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1505,13 +1505,13 @@ lookup_fac_universe_indicators <- function(output = NULL, callback = NULL, searc
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_fac_universe_indicators_post <- function(tidy = TRUE, body = NULL) {
+lookup_fac_universe_indicators_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1534,8 +1534,8 @@ lookup_fac_universe_indicators_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1556,13 +1556,13 @@ lookup_federal_agencies <- function(output = NULL, callback = NULL, search_term 
 #' ECHO Federal Agency Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_federal_agencies_post <- function(tidy = TRUE, body = NULL) {
+lookup_federal_agencies_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1585,8 +1585,8 @@ lookup_federal_agencies_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1607,13 +1607,13 @@ lookup_ghg_fac_types <- function(output = NULL, callback = NULL, search_term = N
 #' ECHO GHG Facility Types Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ghg_fac_types_post <- function(tidy = TRUE, body = NULL) {
+lookup_ghg_fac_types_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1636,8 +1636,8 @@ lookup_ghg_fac_types_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1658,13 +1658,13 @@ lookup_ghg_subparts <- function(output = NULL, callback = NULL, search_term = NU
 #' ECHO GHG Subparts Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ghg_subparts_post <- function(tidy = TRUE, body = NULL) {
+lookup_ghg_subparts_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1686,8 +1686,8 @@ lookup_ghg_subparts_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param descending Output Sort Column Descending Flag.  Enter Y to sort results in descending order.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1707,13 +1707,13 @@ lookup_ghg_years <- function(output = NULL, callback = NULL, descending = NULL, 
 #' ECHO GHG Years Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_ghg_years_post <- function(tidy = TRUE, body = NULL) {
+lookup_ghg_years_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to sort results in descending order.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1736,8 +1736,8 @@ lookup_ghg_years_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1758,13 +1758,13 @@ lookup_icis_inspection_types <- function(output = NULL, callback = NULL, search_
 #' ECHO ICIS NPDES Inspection Types Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_icis_inspection_types_post <- function(tidy = TRUE, body = NULL) {
+lookup_icis_inspection_types_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -1790,8 +1790,8 @@ lookup_icis_inspection_types_post <- function(tidy = TRUE, body = NULL) {
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
 #' @param sort_order sort_order
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1816,13 +1816,13 @@ lookup_icis_law_sections <- function(output = NULL, callback = NULL, statute_cod
 #' ECHO ICIS Law Sections Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_icis_law_sections_post <- function(tidy = TRUE, body = NULL) {
+lookup_icis_law_sections_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), statute_code = list(type = "string"), status_flag = list(type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string"), sort_order = list(type = "number")), required = list()), .api_validation$body_value, TRUE)
@@ -1848,8 +1848,8 @@ lookup_icis_law_sections_post <- function(tidy = TRUE, body = NULL) {
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
 #' @param sort_order sort_order
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1874,13 +1874,13 @@ lookup_icis_ref_program <- function(output = NULL, callback = NULL, statute_code
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_icis_ref_program_post <- function(tidy = TRUE, body = NULL) {
+lookup_icis_ref_program_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), statute_code = list(type = "string"), status_flag = list(type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string"), sort_order = list(type = "number")), required = list()), .api_validation$body_value, TRUE)
@@ -1904,8 +1904,8 @@ lookup_icis_ref_program_post <- function(tidy = TRUE, body = NULL) {
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
 #' @param n_year Year parameter in the YYYY format, defaults to 2022.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1927,13 +1927,13 @@ lookup_naics_codes <- function(output = NULL, callback = NULL, search_term = NUL
 #' ECHO NAICS Codes Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_naics_codes_post <- function(tidy = TRUE, body = NULL) {
+lookup_naics_codes_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string"), n_year = list(description = "Year parameter in the YYYY format, defaults to 2022.", default = 2022L, type = "number")), required = list()), .api_validation$body_value, TRUE)
@@ -1957,8 +1957,8 @@ lookup_naics_codes_post <- function(tidy = TRUE, body = NULL) {
 #' @param category_code category_code
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -1980,13 +1980,13 @@ lookup_national_priorities <- function(output = NULL, callback = NULL, category_
 #' ECHO National Priorities Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_national_priorities_post <- function(tidy = TRUE, body = NULL) {
+lookup_national_priorities_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), category_code = list(type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2009,8 +2009,8 @@ lookup_national_priorities_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2031,13 +2031,13 @@ lookup_nei_pollutants <- function(output = NULL, callback = NULL, search_term = 
 #' ECHO NEI Pollutants Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_nei_pollutants_post <- function(tidy = TRUE, body = NULL) {
+lookup_nei_pollutants_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2059,8 +2059,8 @@ lookup_nei_pollutants_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param descending Output Sort Column Descending Flag.  Enter Y to sort results in descending order.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2080,13 +2080,13 @@ lookup_nei_years <- function(output = NULL, callback = NULL, descending = NULL, 
 #' ECHO NEI Years Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_nei_years_post <- function(tidy = TRUE, body = NULL) {
+lookup_nei_years_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to sort results in descending order.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2108,8 +2108,8 @@ lookup_nei_years_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2129,13 +2129,13 @@ lookup_npdes_parameters <- function(output = NULL, callback = NULL, search_term 
 #' ECHO NPDES Parameters Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_npdes_parameters_post <- function(tidy = TRUE, body = NULL) {
+lookup_npdes_parameters_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2157,8 +2157,8 @@ lookup_npdes_parameters_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param registry_id registry_id
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2178,13 +2178,13 @@ lookup_npl_site_link <- function(output = NULL, callback = NULL, registry_id = N
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_npl_site_link_post <- function(tidy = TRUE, body = NULL) {
+lookup_npl_site_link_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), registry_id = list(type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2207,8 +2207,8 @@ lookup_npl_site_link_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2229,13 +2229,13 @@ lookup_prog_deficiency <- function(output = NULL, callback = NULL, search_term =
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_prog_deficiency_post <- function(tidy = TRUE, body = NULL) {
+lookup_prog_deficiency_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2257,8 +2257,8 @@ lookup_prog_deficiency_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param state_code Two-letter state code
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2279,13 +2279,13 @@ lookup_rcra_lu_state_districts <- function(output = NULL, callback = NULL, state
 #' ECHO RCRA State Districts Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_rcra_lu_state_districts_post <- function(tidy = TRUE, body) {
+lookup_rcra_lu_state_districts_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
@@ -2310,8 +2310,8 @@ lookup_rcra_lu_state_districts_post <- function(tidy = TRUE, body) {
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
 #' @param descending Output Sort Column Descending Flag.  Enter Y to sort results in descending order.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2333,13 +2333,13 @@ lookup_reporting_obligation <- function(output = NULL, callback = NULL, search_t
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_reporting_obligation_post <- function(tidy = TRUE, body = NULL) {
+lookup_reporting_obligation_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to sort results in descending order.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2362,8 +2362,8 @@ lookup_reporting_obligation_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2384,13 +2384,13 @@ lookup_rpo_regions <- function(output = NULL, callback = NULL, search_term = NUL
 #' ECHO RPO Regions Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_rpo_regions_post <- function(tidy = TRUE, body = NULL) {
+lookup_rpo_regions_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2413,8 +2413,8 @@ lookup_rpo_regions_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2435,13 +2435,13 @@ lookup_sdwa_contaminants <- function(output = NULL, callback = NULL, search_term
 #' ECHO SDWA Contaminants Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_sdwa_contaminants_post <- function(tidy = TRUE, body = NULL) {
+lookup_sdwa_contaminants_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2464,8 +2464,8 @@ lookup_sdwa_contaminants_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2486,13 +2486,13 @@ lookup_sdwis_tribes <- function(output = NULL, callback = NULL, search_term = NU
 #' ECHO SDWIS Tribes Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_sdwis_tribes_post <- function(tidy = TRUE, body = NULL) {
+lookup_sdwis_tribes_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2515,8 +2515,8 @@ lookup_sdwis_tribes_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2537,13 +2537,13 @@ lookup_states <- function(output = NULL, callback = NULL, search_term = NULL, se
 #' ECHO States Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_states_post <- function(tidy = TRUE, body = NULL) {
+lookup_states_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2566,8 +2566,8 @@ lookup_states_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param search_term Enter a partial or complete search phrase or word.
 #' @param search_code Enter a partial or complete code value.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2588,13 +2588,13 @@ lookup_tri_pollutants <- function(output = NULL, callback = NULL, search_term = 
 #' ECHO Tri Pollutants Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_tri_pollutants_post <- function(tidy = TRUE, body = NULL) {
+lookup_tri_pollutants_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), search_term = list(description = "Enter a partial or complete search phrase or word.", type = "string"), search_code = list(description = "Enter a partial or complete code value.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2616,8 +2616,8 @@ lookup_tri_pollutants_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param descending Output Sort Column Descending Flag.  Enter Y to sort results in descending order.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2637,13 +2637,13 @@ lookup_tri_years <- function(output = NULL, callback = NULL, descending = NULL, 
 #' ECHO Tri Years Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_tri_years_post <- function(tidy = TRUE, body = NULL) {
+lookup_tri_years_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to sort results in descending order.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2665,8 +2665,8 @@ lookup_tri_years_post <- function(tidy = TRUE, body = NULL) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param descending Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2686,13 +2686,13 @@ lookup_tri_current_year <- function(output = NULL, callback = NULL, descending =
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_tri_current_year_post <- function(tidy = TRUE, body = NULL) {
+lookup_tri_current_year_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), descending = list(description = "Output Sort Column Descending Flag.  Enter Y to column identified in the newsort parameter descending.  Enter N to use ascending sort order. Used only when newsort parameter is populated.", enum = list("Y", "N"), type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2715,8 +2715,8 @@ lookup_tri_current_year_post <- function(tidy = TRUE, body = NULL) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param wbd_code Two-digit watershed code [Hydrologic Unit Code (HUC)].
 #' @param wbd_level The number of digits of the watershed code [Hydrologic Unit Code (HUC)] returned in the ValueCode. Must be an even number between 4 and 12.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2737,13 +2737,13 @@ lookup_wbd_code_lu <- function(output = NULL, callback = NULL, wbd_code = NULL, 
 #' ECHO WBD Code Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_wbd_code_lu_post <- function(tidy = TRUE, body = NULL) {
+lookup_wbd_code_lu_post <- function(body = NULL, tidy = TRUE) {
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string"), wbd_code = list(description = "Two-digit watershed code [Hydrologic Unit Code (HUC)].", type = "string"), wbd_level = list(description = "The number of digits of the watershed code [Hydrologic Unit Code (HUC)] returned in the ValueCode. Must be an even number between 4 and 12.", type = "string")), required = list()), .api_validation$body_value, TRUE)
@@ -2768,8 +2768,8 @@ lookup_wbd_code_lu_post <- function(tidy = TRUE, body = NULL) {
 #' @param wbd_name Watershed Name Filter.
 #' @param wbd_level The number of digits of the watershed code [Hydrologic Unit Code (HUC)] returned in the ValueCode. Must be an even number between 4 and 12.
 #' @param exact_match exact_match
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2794,13 +2794,13 @@ lookup_wbd_lu <- function(output = NULL, callback = NULL, wbd_code = NULL, wbd_n
 #' Placeholder
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_wbd_lu_post <- function(tidy = TRUE, body) {
+lookup_wbd_lu_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
@@ -2824,8 +2824,8 @@ lookup_wbd_lu_post <- function(tidy = TRUE, body) {
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
 #' @param wbd_name Watershed Name Filter.
 #' @param wbd_level The number of digits of the watershed code [Hydrologic Unit Code (HUC)] returned in the ValueCode. Must be an even number between 4 and 12.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -2847,13 +2847,13 @@ lookup_wbd_name_lu <- function(output = NULL, callback = NULL, wbd_name, wbd_lev
 #' ECHO WBD Name Lookup Service
 #' 
 #' @noMd
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
 #' @param body Request body.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-lookup_wbd_name_lu_post <- function(tidy = TRUE, body) {
+lookup_wbd_name_lu_post <- function(body, tidy = TRUE) {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 

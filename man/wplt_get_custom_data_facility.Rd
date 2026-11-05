@@ -75,7 +75,8 @@ wplt_get_custom_data_facility(
   responseset = NULL,
   callback = NULL,
   qcolumns = NULL,
-  suppress_headers = NULL
+  suppress_headers = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -274,9 +275,11 @@ GTEx = greater than or equal to x\%}
 \item{qcolumns}{Used to customize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.}
 
 \item{suppress_headers}{Suppress Headers. A Y value will suppress download title and search criteria from being included in CSV output. Column headers will still be provided.}
+
+\item{tidy}{Return the records as a tibble of text columns. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the records (all text columns, blank values NA; the summary fields are in attr(, 'summary')) (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 }
 \description{
 Discharge Monitoring Report Custom Search Facility Loadings Service

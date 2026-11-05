@@ -27,8 +27,8 @@ articles:
 reference:
 - title: Session controls
   contents:
-  - epaechoverse_dry_run
-  - epaechoverse_run_verbose
+  - echoverse_dry_run
+  - echoverse_run_verbose
   - api_token
   - set_api_token
 - title: Facility search and drinking water

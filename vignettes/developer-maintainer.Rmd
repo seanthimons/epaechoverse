@@ -28,7 +28,7 @@ renv::restore()
 The generation toolchain includes compiled dependencies. The bootstrap script
 notes that V8 and yaml12 need a system libv8 and a Rust toolchain when built from
 source. Check the installation error for the missing prerequisite before
-changing package versions. Ordinary users of epaechoverse do not need specmill.
+changing package versions. Ordinary users of echoverse do not need specmill.
 
 Documentation work also needs knitr, rmarkdown, pkgdown and a working Pandoc.
 Install missing documentation tools in the development library, then review any
@@ -48,13 +48,12 @@ rmarkdown::pandoc_available()
 | Routes without a published schema | `apis/*.handwritten.swagger.json` | Keep `dev/undocumented-routes.md` consistent |
 | Shared Envirofacts request construction | `dev/callbacks.R` and `R/envirofacts_path.R` | Regenerate and run path tests |
 | Service errors and retries | `R/echo_response_policy.R` | Regenerate and run response-policy tests |
-| Output conversion | `R/envirofacts_tidy.R` or `R/echo_tidy.R` | Regenerate and run the corresponding tidy tests |
+| Output conversion | `R/envirofacts_tidy.R`, `R/echo_tidy.R` or `R/echo_mapping.R` | Regenerate and run the corresponding tidy tests |
 | Envirofacts column types | EPA schema and `dev/build_column_types.R` | Rebuild `inst/extdata/envirofacts-columns.csv` |
 | Articles and website navigation | `vignettes/*.Rmd` and `_pkgdown.yml` | Build vignettes and the website |
 
 Wrappers marked `Generated with specmill; do not edit by hand` and their generated
-help pages should change through the generation inputs. The four client-owned
-files named above are fingerprinted by specmill. Applying generation after editing
+help pages should change through the generation inputs. Client-owned runtime files are fingerprinted by specmill. Applying generation after editing
 them updates the recorded state even when wrapper text does not change.
 
 `dev/build_client.R` is a one-time bootstrap and refuses to run while
@@ -82,6 +81,14 @@ Rscript dev/build_column_types.R .
 Rscript dev/regenerate.R plan
 ```
 
+For a mapping schema refresh, reapply the verified optional-`p_id` fixes and
+shared format-hook settings before regeneration:
+
+```{r mapping-configuration}
+source("dev/configure_mapping.R")
+configure_mapping(".")
+```
+
 Downloading a schema does not by itself decide how new routes should be named
 or selected. Inspect the corresponding API configuration before applying.
 Handwritten schemas are not overwritten by the harvesting script.
@@ -104,7 +111,7 @@ the archive name printed by `R CMD build` if the version has changed.
 
 ```{bash package-check, eval=FALSE}
 R CMD build .
-R CMD check epaechoverse_0.0.0.9000.tar.gz
+R CMD check echoverse_0.1.0.tar.gz
 ```
 
 For documentation changes, build both the installed-package vignettes and the
@@ -127,9 +134,9 @@ request without sending it and still validates inputs.
 
 ```{r inspect-request}
 local({
-  old <- options(epaechoverse.dry_run = TRUE)
+  old <- options(echoverse.dry_run = TRUE)
   on.exit(options(old))
-  request <- epaechoverse::cwa_get_facilities(p_st = "RI", p_maj = "Y")
+  request <- echoverse::cwa_get_facilities(p_st = "RI", p_maj = "Y")
   request
 })
 ```
@@ -140,14 +147,14 @@ errors use the `echo_error` class, including error messages returned inside a
 successful HTTP response.
 
 ```{r diagnose-live}
-epaechoverse::epaechoverse_run_verbose(TRUE)
+echoverse::echoverse_run_verbose(TRUE)
 tryCatch(
-  epaechoverse::envirofacts_sdwis_water_system(
+  echoverse::envirofacts_sdwis_water_system(
     "state_code/equals/RI", first = 1, last = 5
   ),
   echo_error = function(error) conditionMessage(error)
 )
-epaechoverse::epaechoverse_run_verbose(FALSE)
+echoverse::echoverse_run_verbose(FALSE)
 ```
 
 Open a report in the [GitHub issue tracker](https://github.com/seanthimons/epaechoverse/issues)

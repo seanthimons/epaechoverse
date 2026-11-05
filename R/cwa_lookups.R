@@ -2,8 +2,8 @@
 #' 
 #' @noMd
 #' @param ascending Output Sort Column Ascending Flag.  Enter Y to sort results in ascending order.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
@@ -21,8 +21,8 @@ cwa_lookups_msgp_years <- function(ascending = NULL, tidy = TRUE) {
 #' 
 #' @noMd
 #' @param ascending Output Sort Column Ascending Flag.  Enter Y to sort results in ascending order.
-#' @param tidy Return a tibble. Types are guessed from the values: whole numbers, decimals and dates are converted, identifier columns (ID, Code, ...) stay text. FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
-#' @return A tibble with guessed column types (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
+#' @param tidy Return a tibble of text columns (blank values are NA). FALSE returns the decoded response. Non-JSON output formats are always returned as sent.
+#' @return A tibble of text columns (tidy = TRUE, the default for JSON output) or the decoded response (tidy = FALSE).
 #' @family Lookups endpoints
 #' @export
 # Generated with specmill; do not edit by hand.

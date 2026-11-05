@@ -80,7 +80,8 @@ case_get_case_info(
   p_pretty_print = NULL,
   p_ocmap_fy = NULL,
   p_qs = NULL,
-  p_has_map = NULL
+  p_has_map = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
@@ -289,9 +290,11 @@ case_get_case_info(
 \item{p_qs}{Quick Search. Allows entry for city, state, and/or zip code.}
 
 \item{p_has_map}{p_has_map}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 }
 \description{
 Enforcement Case Search (new version)

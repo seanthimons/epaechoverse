@@ -4,13 +4,15 @@
 \alias{caa_get_spatial_metadata_post}
 \title{Air Pollutant Report Spatial Metadata Service}
 \usage{
-caa_get_spatial_metadata_post(body)
+caa_get_spatial_metadata_post(body, format = "tidy")
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{format}{Client result format: tidy or raw. Coordinate provenance is not converted to geometry.}
 }
 \value{
-Decoded response returned by the client request helper.
+A provenance tibble (format = "tidy") or decoded response (format = "raw").
 }
 \description{
 Air Pollutant Report Spatial Metadata Service

@@ -4,13 +4,15 @@
 \alias{cwa_get_map_post}
 \title{Clean Water Act (CWA) Map Service}
 \usage{
-cwa_get_map_post(body)
+cwa_get_map_post(body, format = "tidy")
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{format}{Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.}
 }
 \value{
-Decoded response returned by the client request helper.
+A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 }
 \description{
 Clean Water Act (CWA) Map Service

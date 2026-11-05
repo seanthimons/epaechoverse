@@ -4,15 +4,17 @@
 \alias{cwa_viotrack_get_download}
 \title{CWA Violation Tracker download}
 \usage{
-cwa_viotrack_get_download(qid, qcolumns = NULL)
+cwa_viotrack_get_download(qid, qcolumns = NULL, tidy = TRUE)
 }
 \arguments{
 \item{qid}{Query ID returned by a previous search call (QueryID in its Results).}
 
 \item{qcolumns}{Comma-separated column IDs to return; see the metadata route for the IDs.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata like get_qid: numbers, dates and text; codes and IDs stay text). FALSE returns the CSV text as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the query rows read from the CSV, typed like the get_qid pages (tidy = TRUE, the default for the CSV output) or the CSV text as sent (tidy = FALSE).
 }
 \description{
 CWA Violation Tracker download

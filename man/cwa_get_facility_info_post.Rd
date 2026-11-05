@@ -4,13 +4,15 @@
 \alias{cwa_get_facility_info_post}
 \title{Clean Water Act (CWA) Facility Enhanced Search Service}
 \usage{
-cwa_get_facility_info_post(body = NULL)
+cwa_get_facility_info_post(body = NULL, tidy = TRUE)
 }
 \arguments{
 \item{body}{Request body.}
+
+\item{tidy}{Return a tibble (typed from ECHO metadata: numbers, dates and text; codes and IDs stay text). FALSE returns the decoded response. Non-JSON output formats and GeoJSON are always returned as sent.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble of the matching rows, typed from ECHO metadata, with the query summary, query ID and query parameters in attributes (tidy = TRUE, the default for JSON output), or the decoded response (tidy = FALSE).
 }
 \description{
 Clean Water Act (CWA) Facility Enhanced Search Service

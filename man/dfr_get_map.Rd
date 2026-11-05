@@ -4,7 +4,7 @@
 \alias{dfr_get_map}
 \title{Detailed Facility Report Map Service}
 \usage{
-dfr_get_map(output = NULL, p_id, callback = NULL)
+dfr_get_map(output = NULL, p_id, callback = NULL, format = "tidy")
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -15,9 +15,11 @@ dfr_get_map(output = NULL, p_id, callback = NULL)
 \item{p_id}{Either the EPA Facility Registry System's REGISTRY_ID for a facility or the facility identifier from an EPA System.}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{format}{Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.}
 }
 \value{
-Decoded response returned by the client request helper.
+A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 }
 \description{
 Detailed Facility Report Map Service

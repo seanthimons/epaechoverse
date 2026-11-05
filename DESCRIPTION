@@ -1,6 +1,6 @@
-Package: epaechoverse
+Package: echoverse
 Title: Client for the EPA ECHO and Envirofacts Web Services
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: person("Sean", "Thimons", email = "thimons.sean@gmail.com",
         role = c('aut', 'cre'))
 Description: Generated client for the U.S. EPA Enforcement and Compliance
@@ -10,6 +10,6 @@ Description: Generated client for the U.S. EPA Enforcement and Compliance
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: httr2, jsonlite, curl, tibble
-Suggests: testthat, knitr, rmarkdown
+Suggests: testthat, sf, knitr, rmarkdown
 VignetteBuilder: knitr
 Config/Needs/website: pkgdown

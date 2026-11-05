@@ -13,7 +13,8 @@ cwa_get_map(
   c1_long = NULL,
   c2_lat = NULL,
   c2_long = NULL,
-  p_id
+  p_id = NULL,
+  format = "tidy"
 )
 }
 \arguments{
@@ -37,9 +38,11 @@ cwa_get_map(
 \item{c2_long}{Longitude of 2nd corner of box that bounds the resulting facilities. The latitude and longitude of both corners of the bounding box must be provided.}
 
 \item{p_id}{Nine-character code used to uniquely identify a permitted NPDES facility. The NPDES permit program regulates the direct discharge of pollutants into US waters.}
+
+\item{format}{Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.}
 }
 \value{
-Decoded response returned by the client request helper.
+A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 }
 \description{
 Clean Water Act (CWA) Map Service
