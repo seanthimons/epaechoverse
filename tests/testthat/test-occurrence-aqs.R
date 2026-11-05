@@ -1,7 +1,7 @@
 occurrence_aqs_adapter <- function() {
   skip_if_not_installed('dplyr')
   env <- new.env()
-  sys.source(test_path('..', '..', 'inst', 'examples', 'occurrence_aqs.R'), envir = env)
+  sys.source(system.file('examples', 'occurrence_aqs.R', package = 'echoverse', mustWork = TRUE), envir = env)
   env$aqs_fetch
 }
 

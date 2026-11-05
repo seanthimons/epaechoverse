@@ -10,7 +10,7 @@ OpenAPI document. The wrappers are generated
 with [specmill](https://github.com/seanthimons/specmill) and need no API key.
 
 This is an unofficial client, not affiliated with or endorsed by the EPA. It is
-a development version (`0.0.0.9000`): names can still change.
+an early release (`0.1.0`): names can still change.
 
 ## Install
 
@@ -322,7 +322,27 @@ and 504. HTTP 500 is not retried: ECHO answers a query it cannot process with a
   10 in that document; those have no functions yet.
 - `set_api_token()` and `api_token()` are generated but unused: ECHO needs no key.
 
-## Development
+## Guides
+
+To install the guides with the package, use
+`remotes::install_github('seanthimons/epaechoverse', build_vignettes = TRUE)`.
+In the pkgdown site, both guides are available from the Guides menu.
+
+Start with `vignette('query-and-explore', package = 'echoverse')`
+for choosing a data domain, searching, paging and inspecting results.
+The `vignette('developer-maintainer', package = 'echoverse')` guide
+covers setup, regeneration, validation and support reports.
+
+To build the pkgdown site locally after installing the documentation tools:
+
+```r
+# install.packages(c('pkgdown', 'knitr', 'rmarkdown'))
+pkgdown::build_site()
+```
+
+The site is written to `docs/`. Building it does not publish it.
+
+## Package development
 
 The schemas in `apis/` are downloaded unchanged from ECHO and EPA
 (`dev/harvest_schemas.R`, with source URLs and SHA-256 in

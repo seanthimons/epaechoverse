@@ -1,0 +1,264 @@
+---
+title: "Query and explore EPA data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Query and explore EPA data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(echoverse)
+```
+
+Start with a question and a small geographic area. For example, which drinking
+water systems serve Rhode Island, or which permitted wastewater facilities
+operate there? Choose the service that matches the question before downloading
+records. An ECHO compliance search and an Envirofacts table query answer different
+parts of that question.
+
+The examples that contact EPA have `eval = FALSE`. They are recipes to run
+interactively, so building this vignette needs no network connection. The
+function discovery and dry-run examples below run locally.
+
+## Choose a domain
+
+| Question | Start here | What to explore next |
+|---|---|---|
+| Which facilities have air compliance records? | `air_get_facilities()` | `caa_*` air pollutant reports; `envirofacts_nei_*` inventory tables |
+| What do air monitoring stations report? | `ecattaqs_get_facilities()` | `ecattaqs_*` criteria pollutant reports; `ecattams_*` hazardous air pollutant reports |
+| Which wastewater facilities have permits or compliance records? | `cwa_get_facilities()` | `eff_*` effluent charts; `wplt_*` pollutant loading; `nncr_*` noncompliance reports |
+| Which drinking water systems and violations are recorded? | `sdw_get_systems()` | `envirofacts_sdwis_water_system()` and `envirofacts_sdwis_violation()` |
+| Which hazardous waste handlers have compliance records? | `rcra_get_facilities()` | `envirofacts_rcra_rcr_hd_handler()` and other `envirofacts_rcra_*` tables |
+| What chemical releases and transfers were reported? | `envirofacts_tri_tri_facility()` | `envirofacts_tri_tri_reporting_form()`, `envirofacts_tri_tri_release_qty()` and `envirofacts_tri_tri_transfer_qty()` |
+| What information spans several facility programs? | `echo_get_facilities()` | `dfr_get_dfr()` detailed reports; `envirofacts_frs_*` registry tables |
+| What enforcement cases are recorded? | `case_get_cases()` | `case_get_case_report()` and `case_get_cases_from_facility()` |
+
+A release quantity is not a measured ambient concentration, and a compliance
+record is not an exposure estimate. Read each endpoint's help for its filters,
+reporting period and returned fields before interpreting the results.
+
+## Find functions and fields locally
+
+Use the installed package's exports to discover a service without scrolling
+through the entire reference index.
+
+```{r discover}
+functions <- getNamespaceExports("echoverse")
+sort(grep("^sdw_", functions, value = TRUE))
+```
+
+For example, change the pattern to `"^wplt_"`, `"^envirofacts_tri_"` or
+`"^envirofacts_nei_"`. Use `?sdw_get_systems` to read a function's parameters.
+Lookup functions supply codes for filters; those calls contact EPA too.
+
+```{r lookups, eval=FALSE}
+lookup_states()
+lookup_naics_codes()
+```
+
+Envirofacts ships a column dictionary used to type its results. Inspect it before
+choosing a filter or planning a join.
+
+```{r dictionary}
+columns <- utils::read.csv(
+  system.file("extdata", "envirofacts-columns.csv", package = "echoverse"),
+  stringsAsFactors = FALSE
+)
+head(subset(columns, table == "sdwis.water_system"), 12)
+```
+
+Discover the other table families, including ACRES brownfields, SEMS cleanup,
+RadNet radiation monitoring and NGGS, from the same dictionary. The package
+covers the tables in its bundled schema, rather than every EPA dataset.
+
+```{r table-families}
+tables <- unique(columns$table)
+sort(unique(sub("\\..*$", "", tables)))
+head(grep("^(acres|sems|radnet|nggs)\\.", tables, value = TRUE), 12)
+```
+
+## Inspect a request before sending it
+
+Dry-run mode builds an `httr2` request without contacting EPA. Restore the prior
+option on exit so the example does not change later calls in your session.
+
+```{r dry-run}
+local({
+  previous <- options(echoverse.dry_run = TRUE)
+  on.exit(options(previous))
+  request <- cwa_get_facilities(p_st = "RI", p_maj = "Y")
+  request
+})
+```
+
+The same approach works for Envirofacts table calls. Dry-run mode checks local
+parameter rules; it cannot tell you whether a remote table or filter currently
+works.
+
+## Search ECHO, then retrieve the rows
+
+An ECHO search returns a typed one-row summary with a query ID. Use the
+matching service's `get_qid` function for a page or `echo_qid_all()` for
+successive pages. Keep the query ID as text and specify its service.
+
+```{r drinking-water, eval=FALSE}
+search <- sdw_get_systems(p_st = "RI")
+search$QueryRows
+qid <- search$QueryID
+
+if (length(qid) == 1L && search$QueryRows > 0) {
+  page <- sdw_get_qid(qid = qid, pageno = 1)
+  systems <- echo_qid_all(search, service = "sdw")
+  downloaded <- sdw_get_download(qid = qid) # typed tibble, not CSV text
+  head(systems)
+}
+
+# Escape hatches for the original decoded list or CSV text:
+raw_search <- sdw_get_systems(p_st = "RI", tidy = FALSE)
+raw_csv <- sdw_get_download(qid = qid, tidy = FALSE)
+```
+
+Search summaries, pages, and supported CSV downloads are tibbles by default;
+identifiers remain text. `echo_qid_all()` stops at the reported total, an empty
+page, or `max_pages` (default 20), warning when the cap leaves rows behind.
+Air-monitoring search rows carry their query ID in `attr(x, "query")` rather
+than a one-row summary. Supported nested DFR/CAA/effluent JSON reports return
+named lists of tibbles; inspect each report's help and returned table names.
+Use `tidy = FALSE` to inspect an original search/report response. Effluent
+reports require `output = "JSON"` for table conversion.
+
+To begin the same search in other compliance domains:
+
+```{r domain-searches, eval=FALSE}
+air <- air_get_facilities(p_st = "RI")
+water <- cwa_get_facilities(p_st = "RI")
+waste <- rcra_get_facilities(p_st = "RI")
+facilities <- echo_get_facilities(p_st = "RI")
+```
+
+Use `air_get_qid()`, `cwa_get_qid()`, `rcra_get_qid()` or
+`echo_get_qid()` with the ID from its own search. A query ID belongs to that
+search service. Inspect returned identifiers and the report function's help
+before passing an ID to `dfr_get_dfr()` or a case report.
+
+## Map search results and report locations
+
+Non-Esri map endpoints use `format` for the R result, independently of the
+API's `output` flag. The default is a tibble with numeric LAT/LON, text
+identifiers, and `.layer` indicating the source record array. `sf` is optional.
+
+```{r mapping, eval=FALSE}
+search <- cwa_get_facilities(p_st = "RI")
+points <- cwa_get_map(qid = search$QueryID)
+spatial <- cwa_get_map(qid = search$QueryID, format = "sf")
+geojson <- cwa_get_map(qid = search$QueryID, format = "geojson")
+raw <- cwa_get_map(qid = search$QueryID, format = "raw")
+attr(points, "map") # query ID, map center, popup/icon URLs and other metadata
+
+provenance <- dfr_get_spatial_metadata(p_id = "110000381989")
+```
+
+Map records may represent facilities or county/ZIP clusters; clusters are
+representative points, not polygons or complete facility extracts. DFR/CAA
+report maps can include neighboring facilities. AQS station and facility
+arrays retain their separate `.layer` values. Missing coordinates yield
+empty sf points or GeoJSON null geometries without dropping records. Invalid
+coordinates warn; their source values remain in coordinate diagnostics.
+Map LAT/LON uses the search schemas' WGS84 convention (also used for report
+maps); broader report-datum confirmation remains tracked in issue #5.
+Spatial-metadata endpoints support `tidy` and `raw` only, preserving provenance
+without guessing a datum from Latitude83/Longitude83. XML/JSONP requires
+`format = "raw"`. Esri ArcGIS services are planned for a later release.
+
+## Chemical occurrence example scripts
+
+The installed package includes `inst/examples/occurrence_chemicals.R`, which
+combines drinking-water and ambient-air discovery. It accepts selected chemical
+names or CASRNs, delegates AQS requests to aqsually, and uses ComptoxR for
+identity discovery. These examples need their own credentials and may install
+missing packages and download large datasets. Review the script header and
+choose a bounded geography/year before sourcing it; site builds never run it.
+
+```{r chemical-examples, eval=FALSE}
+options(occurrence.chemicals = c("atrazine", "117-81-7"))
+options(occurrence.aqs_scope = data.frame(state = "26", year = 2002))
+options(occurrence.mapping_only = TRUE) # discover identifiers first
+source(system.file("examples", "occurrence_chemicals.R", package = "echoverse"))
+```
+
+## Query Envirofacts tables
+
+Envirofacts functions return typed tibbles by default. Filters are character
+strings of `column/operator/value`; multiple filters are combined with AND.
+Use the column dictionary to get the exact column names.
+
+```{r envirofacts, eval=FALSE}
+systems <- envirofacts_sdwis_water_system(
+  filter = c("state_code/equals/RI", "pws_type_code/equals/CWS"),
+  first = 1, last = 25
+)
+names(systems)
+head(systems)
+sort(table(systems$pws_type_code, useNA = "ifany"), decreasing = TRUE)
+
+violations <- envirofacts_sdwis_violation(
+  filter = "pwsid/beginsWith/RI", first = 1, last = 25
+)
+str(violations)
+```
+
+These are bounded samples. A count of rows in `violations` is not a statewide
+violation total. For a larger extract, request consecutive ranges with the same
+filters, such as `1:100` followed by `101:200`. The default range is 1 through
+100 and the default per-call ceiling is 10,000 rows. Avoid assuming that a table
+has a stable order while it changes; save extracts with their retrieval date.
+
+For a new domain, retrieve a few rows before constructing a larger query:
+
+```{r inventory-samples, eval=FALSE}
+tri_facilities <- envirofacts_tri_tri_facility(first = 1, last = 5)
+tri_releases <- envirofacts_tri_tri_release_qty(first = 1, last = 5)
+nei_facilities <- envirofacts_nei_facility(first = 1, last = 5)
+waste_handlers <- envirofacts_rcra_rcr_hd_handler(first = 1, last = 5)
+registry <- envirofacts_frs_frs_facility_site(first = 1, last = 5)
+
+lapply(list(tri_facilities, tri_releases, nei_facilities,
+            waste_handlers, registry), names)
+```
+
+Filter values cannot contain a slash, backslash or percent sign. The service has
+also rejected values containing a dot. Inspect `?envirofacts_sdwis_water_system`
+for the client rules and available output options.
+
+## Check what the records mean
+
+Before aggregating or joining data:
+
+- Identify the row's unit: facility, permit, system, reporting form, chemical,
+  violation or action. Several rows can belong to the same facility.
+- Check the reporting year, quantity units and missing values. Do not sum
+  quantities with different units or compare samples covering different years.
+- Keep program identifiers as text. An FRS registry identifier and a drinking
+  water system identifier describe different entities. Check registry links and
+  join cardinality before combining programs.
+- Count unique keys and inspect duplicate keys before a join. Several chemicals
+  per form and several programs per facility can multiply rows.
+- Record the function, filters, row ranges and retrieval date alongside the
+  saved data. A live service response can change between runs.
+
+A useful first pass on a downloaded table is `dim(x)`, `names(x)`, `str(x)` and
+`colSums(is.na(x))`. Follow that with counts for fields whose meaning you have
+checked. Keep analysis of a small page separate from claims about a population.
+
+## Diagnose a failed query
+
+Narrow the geographic area or row range first. Check help and lookup codes, then
+inspect the request in dry-run mode. `echoverse_run_verbose(TRUE)` reports
+request methods and response statuses; set it back to `FALSE` afterwards.
+
+Service error messages become `echo_error` conditions. A failed call does not
+mean that the search returned zero records. Government-only `air_viotrack_*`
+and `ecatt_nif_*` routes require access this client does not provide. See the
+README's known quirks before investigating those endpoints.
