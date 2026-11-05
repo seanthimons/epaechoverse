@@ -222,39 +222,41 @@ caa_get_air_quality_post <- function(body, tidy = TRUE) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param p_id EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
-#' @return Decoded response returned by the client request helper.
+#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Pollution Report endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-caa_get_map <- function(output = NULL, p_id, callback = NULL) {
+caa_get_map <- function(output = NULL, p_id, callback = NULL, format = "tidy") {
   if (base::is.null(p_id)) base::stop("Required input: p_id")
   .api_validation$parameter_values(base::list("output" = output, "p_id" = p_id, "callback" = callback), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_id = list(name = "p_id", "in" = "query", description = "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases.", 
     type = "string"), callback = list(name = "callback", "in" = "query", description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string")), .api_validation$body_value, c(output = "query", p_id = "query", callback = "query"))
-  params <- base::list("output" = output, "p_id" = p_id, "callback" = callback)
+  params <- base::list("output" = output, "p_id" = p_id, "callback" = callback, "format" = format)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["p_id"]]) && base::any(!base::nzchar(params[["p_id"]]))) base::stop("Empty query parameter: p_id")
   if (base::is.character(params[["callback"]]) && base::any(!base::nzchar(params[["callback"]]))) base::stop("Empty query parameter: callback")
-  result <- caa_request(method = "GET", path = "/caa_poll_rpt_rest_services.get_map", path_params = base::list(), query = base::list("output" = params[["output"]], "p_id" = params[["p_id"]], "callback" = params[["callback"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
+  result <- caa_request("method" = "GET", "path" = "/caa_poll_rpt_rest_services.get_map", "path_params" = base::list(), "query" = params[base::setdiff(base::names(params), "format")], "body" = NULL, "form_schema" = NULL, "body_encoding" = list(), "body_media" = "application/json", "request_controls" = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), "response_policy" = echo_map_policy("/caa_poll_rpt_rest_services.get_map", params$format, params$output))
   result
 }
 
 #' Air Pollutant Report Map Service
 #' 
 #' @noMd
+#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Pollution Report endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-caa_get_map_post <- function(body) {
+caa_get_map_post <- function(body, format = "tidy") {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_id = list(description = "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases.", 
     type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string")), required = list("p_id")), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
-  result <- caa_request(method = "POST", path = "/caa_poll_rpt_rest_services.get_map", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), p_id = list(), callback = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_id = list(description = "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases.", 
-    type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string")), required = list("p_id")))
+  params <- base::list("format" = format, "body" = body)
+  result <- caa_request("method" = "POST", "path" = "/caa_poll_rpt_rest_services.get_map", "path_params" = base::list(), "query" = base::list(), "body" = params$body, "form_schema" = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_id = list(description = "EPA Facility Registry Service's REGISTRY_ID. A unique identifier for a facility across EPA program databases.", 
+    type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string")), required = list("p_id")), "body_encoding" = list(output = list(), p_id = list(), callback = list()), "body_media" = "application/x-www-form-urlencoded", "request_controls" = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), "response_policy" = echo_map_policy("/caa_poll_rpt_rest_services.get_map", params$format, params$body$output))
   result
 }
 
@@ -267,38 +269,40 @@ caa_get_map_post <- function(body) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param p_id Identifier for the service.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
-#' @return Decoded response returned by the client request helper.
+#' @param format Client result format: tidy or raw. Coordinate provenance is not converted to geometry.
+#' @return A provenance tibble (format = "tidy") or decoded response (format = "raw").
 #' @family Air Pollution Report endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-caa_get_spatial_metadata <- function(output = NULL, p_id, callback = NULL) {
+caa_get_spatial_metadata <- function(output = NULL, p_id, callback = NULL, format = "tidy") {
   if (base::is.null(p_id)) base::stop("Required input: p_id")
   .api_validation$parameter_values(base::list("output" = output, "p_id" = p_id, "callback" = callback), list(output = list(name = "output", "in" = "query", description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_id = list(name = "p_id", "in" = "query", description = "Identifier for the service.", type = "string"), callback = list(
     name = "callback", "in" = "query", description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", type = "string")), .api_validation$body_value, c(output = "query", p_id = "query", callback = "query"))
-  params <- base::list("output" = output, "p_id" = p_id, "callback" = callback)
+  params <- base::list("output" = output, "p_id" = p_id, "callback" = callback, "format" = format)
   if (base::is.character(params[["output"]]) && base::any(!base::nzchar(params[["output"]]))) base::stop("Empty query parameter: output")
   if (base::is.character(params[["p_id"]]) && base::any(!base::nzchar(params[["p_id"]]))) base::stop("Empty query parameter: p_id")
   if (base::is.character(params[["callback"]]) && base::any(!base::nzchar(params[["callback"]]))) base::stop("Empty query parameter: callback")
-  result <- caa_request(method = "GET", path = "/caa_poll_rpt_rest_services.get_spatial_metadata", path_params = base::list(), query = base::list("output" = params[["output"]], "p_id" = params[["p_id"]], "callback" = params[["callback"]]), body = NULL, response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list())
+  result <- caa_request("method" = "GET", "path" = "/caa_poll_rpt_rest_services.get_spatial_metadata", "path_params" = base::list(), "query" = params[base::setdiff(base::names(params), "format")], "body" = NULL, "form_schema" = NULL, "body_encoding" = list(), "body_media" = "application/json", "request_controls" = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), "response_policy" = echo_map_policy("/caa_poll_rpt_rest_services.get_spatial_metadata", params$format, params$output))
   result
 }
 
 #' Air Pollutant Report Spatial Metadata Service
 #' 
 #' @noMd
+#' @param format Client result format: tidy or raw. Coordinate provenance is not converted to geometry.
 #' @param body Request body.
-#' @return Decoded response returned by the client request helper.
+#' @return A provenance tibble (format = "tidy") or decoded response (format = "raw").
 #' @family Air Pollution Report endpoints
 #' @export
 # Generated with specmill; do not edit by hand.
-caa_get_spatial_metadata_post <- function(body) {
+caa_get_spatial_metadata_post <- function(body, format = "tidy") {
   if (base::missing(body)) base::stop("Required body")
   if (!base::missing(body)) {
     body <- .api_validation$form_value(body, list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_id = list(description = "Identifier for the service.", type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
     type = "string")), required = list("p_id")), .api_validation$body_value, TRUE)
   }
-  params <- base::list("body" = body)
-  result <- caa_request(method = "POST", path = "/caa_poll_rpt_rest_services.get_spatial_metadata", path_params = base::list(), query = base::list(), body = params[["body"]], response_policy = "echo_response_policy", request_controls = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), server = list(url = "https://echodata.epa.gov/echo"), auth = list(), body_media = "application/x-www-form-urlencoded", body_encoding = list(output = list(), p_id = list(), callback = list()), form_schema = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_id = list(description = "Identifier for the service.", type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
-    type = "string")), required = list("p_id")))
+  params <- base::list("format" = format, "body" = body)
+  result <- caa_request("method" = "POST", "path" = "/caa_poll_rpt_rest_services.get_spatial_metadata", "path_params" = base::list(), "query" = base::list(), "body" = params$body, "form_schema" = list(type = "object", properties = list(output = list(description = "Output Format Flag.  Enter one of the following keywords:\n- JSON = Data model formatted as Javascript Object Notation (default).\n- JSONP = Data model formatted as Javascript Object Notation with Padding.  \n- XML = Data model formatted as Extensible Markup Language.", enum = list("JSONP", "JSON", "XML"), type = "string"), p_id = list(description = "Identifier for the service.", type = "string"), callback = list(description = "JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.", 
+    type = "string")), required = list("p_id")), "body_encoding" = list(output = list(), p_id = list(), callback = list()), "body_media" = "application/x-www-form-urlencoded", "request_controls" = list(timeout = 60L, max_retries = 2L, retry_writes = TRUE, retry_policy = "echo_retry_policy"), "response_policy" = echo_map_policy("/caa_poll_rpt_rest_services.get_spatial_metadata", params$format, params$body$output))
   result
 }

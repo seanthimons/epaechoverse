@@ -10,4 +10,4 @@ Description: Generated client for the U.S. EPA Enforcement and Compliance
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: httr2, jsonlite, curl, tibble
-Suggests: testthat
+Suggests: testthat, sf

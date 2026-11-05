@@ -19,3 +19,21 @@ callbacks$dmap_policy <- function(operation) {
 callbacks$dmap_path <- function(operation) {
   bquote(envirofacts_path(.(operation$path), params$filter, params$first, params$last, params$format))
 }
+
+# Validate the client format before any HTTP work, then format decoded maps.
+callbacks$map_policy <- function(operation) {
+  output <- if (is.null(operation$body)) quote(params$output) else quote(params$body$output)
+  bquote(echo_map_policy(.(operation$path), params$format, .(output)))
+}
+
+callbacks$map_query <- function(operation) {
+  if (is.null(operation$body)) quote(params[base::setdiff(base::names(params), 'format')]) else quote(base::list())
+}
+callbacks$map_body <- function(operation) {
+  if (is.null(operation$body)) quote(NULL) else quote(params$body)
+}
+
+callbacks$map_empty <- function(operation) quote(base::list())
+
+callbacks$map_form_schema <- function(operation) operation$body
+callbacks$map_body_encoding <- function(operation) operation$body_encoding

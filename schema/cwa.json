@@ -4788,7 +4788,7 @@
                 "$ref": "#\/parameters\/q.c2_long"
             }
             ,{
-                "$ref": "#\/parameters\/q.p_id"
+                "name":"p_id","in":"query","description":"Nine-character code used to uniquely identify a permitted NPDES facility. The NPDES permit program regulates the direct discharge of pollutants into US waters.","type":"string","required":false
             }
          ]
          ,"tags": [
@@ -4853,7 +4853,7 @@
                 "$ref": "#\/parameters\/f.c2_long"
             }
             ,{
-                "$ref": "#\/parameters\/f.p_id"
+                "name":"p_id","in":"formData","description":"Nine-character code used to uniquely identify a permitted NPDES facility. The NPDES permit program regulates the direct discharge of pollutants into US waters.","type":"string","required":false
             }
          ]
          ,"tags": [

@@ -4,7 +4,7 @@
 \alias{caa_get_spatial_metadata}
 \title{Air Pollutant Report Spatial Metadata Service}
 \usage{
-caa_get_spatial_metadata(output = NULL, p_id, callback = NULL)
+caa_get_spatial_metadata(output = NULL, p_id, callback = NULL, format = "tidy")
 }
 \arguments{
 \item{output}{Output Format Flag.  Enter one of the following keywords:
@@ -15,9 +15,11 @@ caa_get_spatial_metadata(output = NULL, p_id, callback = NULL)
 \item{p_id}{Identifier for the service.}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{format}{Client result format: tidy or raw. Coordinate provenance is not converted to geometry.}
 }
 \value{
-Decoded response returned by the client request helper.
+A provenance tibble (format = "tidy") or decoded response (format = "raw").
 }
 \description{
 Air Pollutant Report Spatial Metadata Service

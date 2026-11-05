@@ -407,7 +407,7 @@ for (group in unique(vapply(report_ops, function(op) op$service, character(1))))
 # Nested reports (dfr, caa and the effluent charts): every route that returns a JSON
 # `Results` object goes through echo_tidy_nested, a total formatter that returns a list
 # of tibbles. The routes the schemas declare as files (CSV and ZIP downloads) stay as
-# they are, and so do the map and spatial-metadata routes (mapping is on hold).
+# they are. Map and spatial-metadata routes use their own response hook below.
 nested_apis <- c('dfr', 'caa', 'eff')
 nested_paths <- unlist(lapply(nested_apis, function(api) {
   paths <- jsonlite::fromJSON(schemas[[which(services$api == api)]], simplifyVector = FALSE)$paths
@@ -450,6 +450,10 @@ for (group in unique(vapply(nested_ops, function(op) op$service, character(1))))
   writeLines(lines, path, useBytes = TRUE)
 }
 
+# Configure maps after the other per-operation settings have been installed.
+source(file.path(script_dir, 'configure_mapping.R'))
+configure_mapping(root)
+
 # Package description and build ignores (apis/ and the root YAML/JSON are already
 # ignored by the scaffold; keep dev/ out of builds too).
 description <- file.path(root, 'DESCRIPTION')
@@ -466,6 +470,7 @@ text <- sub(
 )
 stopifnot(grepl('Imports: httr2, jsonlite, curl\n', text, fixed = TRUE))
 text <- sub('Imports: httr2, jsonlite, curl\n', 'Imports: httr2, jsonlite, curl, tibble\n', text, fixed = TRUE)
+text <- sub('Suggests: testthat', 'Suggests: testthat, sf', text, fixed = TRUE)
 writeLines(text, description)
 ignore <- file.path(root, '.Rbuildignore')
 rules <- readLines(ignore)

@@ -9,7 +9,8 @@ ecattaqs_get_rpt_map(
   output = NULL,
   p_site_code = NULL,
   p_map_facs = NULL,
-  callback = NULL
+  callback = NULL,
+  format = "tidy"
 )
 }
 \arguments{
@@ -23,9 +24,11 @@ ecattaqs_get_rpt_map(
 \item{p_map_facs}{p_map_facs}
 
 \item{callback}{JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.}
+
+\item{format}{Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.}
 }
 \value{
-Decoded response returned by the client request helper.
+A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 }
 \description{
 ECATT Air Monitoring Station (AMS) CAP Report Service

@@ -6,6 +6,14 @@
 
 ## Breaking changes
 
+* Non-Esri map/report-map routes and their POST twins now default to
+  `format = "tidy"`. Choose `"sf"` for optional sf points, `"geojson"` for a
+  FeatureCollection string, or `"raw"` for the previous decoded response.
+  Spatial-metadata routes support `"tidy"` and `"raw"`. Formatted results
+  require JSON; XML/JSONP remain available with `format = "raw"`.
+* Search-map routes for air, CWA, RCRA, and combined ECHO no longer require
+  `p_id` alongside `qid`; live GET and POST requests confirmed it is optional.
+
 * The 81 lookup functions and the searches of `sdw`, `cwa`, `rcra`, `air`, `echo`,
   `compscreen`, `case`, `ecattaqs`, `ecattams`, `ecattems`, `cwa_viotrack` and `rcra_viotrack`
   (`ecattems_get_ems`, `*_get_facilities`,

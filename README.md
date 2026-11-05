@@ -150,6 +150,50 @@ spaces, `0` versus empty), because the service renders them separately; a few
 services head their CSV with database column names, which are renamed to the field
 names.
 
+## Map results
+
+Non-Esri `*_get_map()` and `*_get_rpt_map()` endpoints (including their
+`_post` twins) use `format` to select the R result. This is separate from
+`output`, which selects the EPA wire format.
+
+```r
+search <- cwa_get_facilities(p_st = 'RI')
+qid <- search$QueryID
+points <- cwa_get_map(qid = qid)                     # format = 'tidy'
+spatial <- cwa_get_map(qid = qid, format = 'sf')       # requires optional sf
+geojson <- cwa_get_map(qid = qid, format = 'geojson')  # GeoJSON string
+original <- cwa_get_map(qid = qid, format = 'raw')    # decoded API response
+post <- cwa_get_map_post(list(qid = qid), format = 'tidy')
+```
+
+The default tibble has numeric `LAT`/`LON`; identifiers and other scalar
+fields remain text. `.layer` identifies the source array (`MapData` or
+`MapDataFacilities`), so AQS monitoring stations and nearby facilities can
+share one result without losing their origin. Nested fields remain list
+columns. `attr(points, 'map')` preserves query IDs, map centers, icon/popup
+URLs, query parameters, and other envelope metadata.
+
+`format = 'sf'` returns EPSG:4326 point geometries with the same columns and
+metadata. Map LAT/LON follows the search schemas' WGS84 convention; report
+maps use that same convention. Spatial provenance fields such as Latitude83
+are not used to infer a datum. Missing coordinates produce empty sf points
+or GeoJSON null geometries. Invalid or out-of-range coordinates warn and
+become NA; original values and row indices remain in
+`attr(points, 'coordinate_problems')`. GeoJSON preserves metadata and
+coordinate diagnostics in its `echo` member and does not require sf.
+
+Clusters remain representative points, identified by `TYPE`; they are not
+county/ZIP polygons or complete facility extracts. Report maps can include
+neighboring facilities. No 500-record limit is imposed by the client: a live
+air map exceeded the limit described in the schemas. Use `echo_qid_all()`
+when you need every facility rather than map clusters.
+
+`dfr_get_spatial_metadata()` and `caa_get_spatial_metadata()` also accept
+`format = 'tidy'` (default) or `'raw'`, returning coordinate provenance rather
+than geometry. Formatted results require JSON (the API default); for XML or
+JSONP, select `format = 'raw'`. These hooks do not cover the separate Esri
+ArcGIS services.
+
 ## Tidy lookups
 
 The 81 lookup functions (`lookup_*`, `wplt_lookups_*`, `cwa_lookups_*`,
@@ -296,6 +340,13 @@ callback (`dev/callbacks.R`) that builds each table's request path with
 specmill records a hash of the client-owned `R/echo_response_policy.R`,
 `R/envirofacts_path.R`, `R/envirofacts_tidy.R`, `R/echo_tidy.R` and `R/echo_pages.R`: after editing one, run
 `Rscript dev/regenerate.R apply` (its `check` reports stale output until then).
+
+After refreshing mapping schemas, run
+`Rscript -e 'source("dev/configure_mapping.R"); configure_mapping(".")'`
+before regeneration. This reapplies the verified optional-`p_id` corrections
+and map hook settings. The bootstrap runs it automatically. Mapping callbacks
+in `dev/callbacks.R` bind the shared response policy in `R/echo_mapping.R`;
+changes to that runtime file also require regeneration.
 
 Shared workflows come from [seanthimons/baseline](https://github.com/seanthimons/baseline):
 R CMD check, commit lint, secret scanning and workflow lint.
