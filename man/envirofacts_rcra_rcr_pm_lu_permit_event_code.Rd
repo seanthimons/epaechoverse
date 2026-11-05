@@ -17,7 +17,7 @@ envirofacts_rcra_rcr_pm_lu_permit_event_code(
 
 \item{first}{First row to return (1-based).}
 
-\item{last}{Last row to return; at most options(epaechoverse.max_rows) = 10000 rows per call.}
+\item{last}{Last row to return; at most options(echoverse.max_rows) = 10000 rows per call.}
 
 \item{format}{Output format: json or csv.}
 

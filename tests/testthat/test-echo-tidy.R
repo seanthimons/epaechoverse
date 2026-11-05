@@ -111,8 +111,8 @@ test_that('wrappers tidy by default, with no network', {
   expect_equal(raw$Results$LuValues[[1L]]$ValueCode, 'AL')
   post <- httr2::with_mocked_responses(mock, lookup_states_post())
   expect_s3_class(post, 'tbl_df')
-  epaechoverse_dry_run(TRUE)
-  on.exit(epaechoverse_dry_run(FALSE))
+  echoverse_dry_run(TRUE)
+  on.exit(echoverse_dry_run(FALSE))
   expect_s3_class(lookup_states(), 'httr2_request')
 })
 

@@ -4,7 +4,7 @@ page_of <- function(key, records, ...) {
 run <- function(formatter, result) formatter(list(result = result, params = list(tidy = TRUE)))
 
 test_that('the services table and the field map agree', {
-  fields <- utils::read.csv(system.file('extdata', 'echo-fields.csv', package = 'epaechoverse'), colClasses = 'character')
+  fields <- utils::read.csv(system.file('extdata', 'echo-fields.csv', package = 'echoverse'), colClasses = 'character')
   expect_named(fields, c('service', 'object', 'type', 'column'))
   expect_setequal(unique(fields$service), names(echo_search_services))
   expect_false(anyDuplicated(fields[c('service', 'object')]) > 0L)
@@ -63,7 +63,7 @@ test_that('the air monitoring searches return rows with their column list', {
 })
 
 test_that('every formatter a generated function looks up exists', {
-  ns <- asNamespace('epaechoverse')
+  ns <- asNamespace('echoverse')
   wanted <- unique(unlist(lapply(ls(ns, pattern = sprintf('^(%s)_', paste(c(names(echo_search_services), 'wplt', 'dfr', 'caa', 'eff'), collapse = '|'))), function(name) {
     fun <- get(name, ns)
     if (!is.function(fun)) return(character())

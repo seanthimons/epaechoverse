@@ -7,10 +7,10 @@
 # wrapper's path to this function (dev/callbacks.R), so a call can never be
 # unbounded: the range always has values, is validated here and is capped.
 
-# Rows one call may request. Raise it with options(epaechoverse.max_rows = n).
+# Rows one call may request. Raise it with options(echoverse.max_rows = n).
 envirofacts_max_rows <- function() {
-  cap <- getOption('epaechoverse.max_rows', 10000)
-  envirofacts_row(cap, 'epaechoverse.max_rows')
+  cap <- getOption('echoverse.max_rows', 10000)
+  envirofacts_row(cap, 'echoverse.max_rows')
   cap
 }
 
@@ -38,7 +38,7 @@ envirofacts_path <- function(table_path, filter = NULL, first = 1L, last = 100L,
   cap <- envirofacts_max_rows()
   if (rows > cap) {
     stop(sprintf(
-      'Requested %s rows but a call may return at most %s; request a smaller range or raise options(epaechoverse.max_rows).',
+      'Requested %s rows but a call may return at most %s; request a smaller range or raise options(echoverse.max_rows).',
       format(rows, scientific = FALSE, big.mark = ','), format(cap, scientific = FALSE, big.mark = ',')
     ), call. = FALSE)
   }

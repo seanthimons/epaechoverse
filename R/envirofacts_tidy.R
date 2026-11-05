@@ -20,7 +20,7 @@
 # Named list: table -> named character vector (column -> type).
 envirofacts_columns <- function() {
   if (is.null(.envirofacts_cache$columns)) {
-    path <- system.file('extdata', 'envirofacts-columns.csv', package = 'epaechoverse')
+    path <- system.file('extdata', 'envirofacts-columns.csv', package = 'echoverse')
     if (!nzchar(path)) {
       stop('The Envirofacts column types are missing from the installed package.', call. = FALSE)
     }

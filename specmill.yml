@@ -3,7 +3,7 @@
 # Authentication keys are API-name.scheme-name; values are environment variable names.
 # Never put tokens here. Share an environment variable only when explicitly intended.
 config_version: 1
-package: epaechoverse
+package: echoverse
 services:
 - apis/ecattaqs.yml
 - apis/ecattams.yml

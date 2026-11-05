@@ -154,7 +154,7 @@ echo_field_map <- function(service) {
     stop('`service` must be one of: ', paste(names(echo_search_services), collapse = ', '), '.', call. = FALSE)
   }
   if (is.null(.echo_cache$fields)) {
-    path <- system.file('extdata', 'echo-fields.csv', package = 'epaechoverse')
+    path <- system.file('extdata', 'echo-fields.csv', package = 'echoverse')
     if (!nzchar(path)) {
       stop('The ECHO field types are missing from the installed package.', call. = FALSE)
     }

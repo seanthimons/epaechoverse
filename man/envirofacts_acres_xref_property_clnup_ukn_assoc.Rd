@@ -17,7 +17,7 @@ envirofacts_acres_xref_property_clnup_ukn_assoc(
 
 \item{first}{First row to return (1-based).}
 
-\item{last}{Last row to return; at most options(epaechoverse.max_rows) = 10000 rows per call.}
+\item{last}{Last row to return; at most options(echoverse.max_rows) = 10000 rows per call.}
 
 \item{format}{Output format: json or csv.}
 

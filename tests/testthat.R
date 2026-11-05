@@ -1,4 +1,4 @@
 library(testthat)
-library(epaechoverse)
+library(echoverse)
 
-test_check('epaechoverse')
+test_check('echoverse')

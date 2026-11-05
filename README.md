@@ -1,4 +1,4 @@
-# epaechoverse
+# echoverse
 
 An R client for the web services of the U.S. EPA's
 [Enforcement and Compliance History Online (ECHO)](https://echo.epa.gov/tools/web-services)
@@ -25,7 +25,7 @@ ECHO searches are two-step. A search returns a summary with a query ID and a row
 count; you then fetch the rows with the query ID, or download them all as CSV.
 
 ```r
-library(epaechoverse)
+library(echoverse)
 
 # Drinking-water systems in Rhode Island
 res <- sdw_get_systems(p_st = 'RI')  # a one-row tibble: QueryRows, QueryID, counters
@@ -51,12 +51,12 @@ take named arguments or none, so check the help page.
 To see the request without sending it:
 
 ```r
-epaechoverse_dry_run(TRUE)
+echoverse_dry_run(TRUE)
 req <- cwa_get_facilities(p_st = 'RI', p_maj = 'Y')  # an httr2 request
-epaechoverse_dry_run(FALSE)
+echoverse_dry_run(FALSE)
 ```
 
-`epaechoverse_run_verbose(TRUE)` prints each method and response status.
+`echoverse_run_verbose(TRUE)` prints each method and response status.
 
 ## Search results as tibbles
 
@@ -194,7 +194,7 @@ violations$compl_per_begin_date  # POSIXct, not text
 - `first` and `last` are 1-based row numbers (default `1` and `100`). The service
   returns a whole table when no range is given, so the range is always sent and
   one call is limited to 10,000 rows. Raise the limit with
-  `options(epaechoverse.max_rows = 50000)`. For more rows, page with
+  `options(echoverse.max_rows = 50000)`. For more rows, page with
   consecutive ranges.
 - `format` is `'json'` (the default) or `'csv'`. Both give the same tibble.
 - `tidy = TRUE` (the default) returns a tibble whose columns have the types in
@@ -250,7 +250,7 @@ Envirofacts reports errors as `{"error": ...}` with HTTP 404 or 500; those becom
 ECHO requests time out after 60 seconds (Envirofacts: 120) and retry up to twice on 408, 429, 502, 503
 and 504. HTTP 500 is not retried: ECHO answers a query it cannot process with a
 500 every time. Override per session with
-`options(epaechoverse.request = list(timeout = 120, max_retries = 0))`.
+`options(echoverse.request = list(timeout = 120, max_retries = 0))`.
 
 ## Known quirks
 

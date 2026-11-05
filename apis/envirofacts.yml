@@ -32,7 +32,7 @@ defaults:
   inputs:
     filter: {type: character, default: ~, description: "Conditions as column/operator/value, for example pwsid/beginsWith/RI; several are combined with and. Values may not contain a slash, backslash or percent sign, and the service rejected a value containing a dot when tested. NULL for none."}
     first: {type: integer, default: 1, minimum: 1, description: First row to return (1-based).}
-    last: {type: integer, default: 100, minimum: 1, description: "Last row to return; at most options(epaechoverse.max_rows) = 10000 rows per call."}
+    last: {type: integer, default: 100, minimum: 1, description: "Last row to return; at most options(echoverse.max_rows) = 10000 rows per call."}
     format: {type: character, default: json, description: "Output format: json or csv."}
     tidy: {type: logical, default: true, description: "Return a tibble with typed columns (the same for json and csv). FALSE returns the service response as sent: a list of records for json, a string for csv."}
   request:

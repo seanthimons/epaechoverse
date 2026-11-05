@@ -1,4 +1,4 @@
-# One-time bootstrap of the epaechoverse package with specmill.
+# One-time bootstrap of the echoverse package with specmill.
 #
 # Usage, from the project root so .Rprofile activates renv and the build uses the
 # specmill release pinned in renv.lock, not whatever is installed in your user
@@ -102,7 +102,7 @@ stopifnot(setequal(catalogue$api, services$api), all(catalogue$include))
 specmill::initialize_client(
   root,
   catalogue,
-  package = 'epaechoverse',
+  package = 'echoverse',
   title = 'Client for the EPA ECHO and Envirofacts Web Services',
   author = list(given = 'Sean', family = 'Thimons', email = 'thimons.sean@gmail.com'),
   license = 'MIT + file LICENSE',
@@ -223,7 +223,7 @@ lines <- append(lines[-at], c(
   '  inputs:',
   '    filter: {type: character, default: ~, description: "Conditions as column/operator/value, for example pwsid/beginsWith/RI; several are combined with and. Values may not contain a slash, backslash or percent sign, and the service rejected a value containing a dot when tested. NULL for none."}',
   '    first: {type: integer, default: 1, minimum: 1, description: First row to return (1-based).}',
-  '    last: {type: integer, default: 100, minimum: 1, description: "Last row to return; at most options(epaechoverse.max_rows) = 10000 rows per call."}',
+  '    last: {type: integer, default: 100, minimum: 1, description: "Last row to return; at most options(echoverse.max_rows) = 10000 rows per call."}',
   '    format: {type: character, default: json, description: "Output format: json or csv."}',
   '    tidy: {type: logical, default: true, description: "Return a tibble with typed columns (the same for json and csv). FALSE returns the service response as sent: a list of records for json, a string for csv."}',
   '  request:',
@@ -484,4 +484,4 @@ stopifnot(sum(startsWith(names_all, 'envirofacts_')) == envirofacts_selected)
 stopifnot(!anyDuplicated(names_all), all(grepl('^[a-z][a-z0-9_]*$', names_all)))
 specmill::generate_client(root, config = 'specmill.yml', mode = 'apply', callbacks = callbacks)
 specmill::generate_client(root, config = 'specmill.yml', mode = 'check', callbacks = callbacks)
-cat('epaechoverse generated:', length(names_all), 'operations\n')
+cat('echoverse generated:', length(names_all), 'operations\n')

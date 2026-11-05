@@ -97,8 +97,8 @@ test_that('search wrappers, POST twins and tidy = FALSE through mocked responses
   info <- httr2::with_mocked_responses(info_mock, echo_get_facility_info(p_st = 'RI'))
   expect_equal(nrow(info), 1L)
   expect_equal(nrow(httr2::with_mocked_responses(info_mock, echo_get_facility_info_post(list(p_st = 'RI')))), 1L)
-  epaechoverse_dry_run(TRUE)
-  on.exit(epaechoverse_dry_run(FALSE))
+  echoverse_dry_run(TRUE)
+  on.exit(echoverse_dry_run(FALSE))
   expect_s3_class(cwa_get_facilities(p_st = 'RI'), 'httr2_request')
 })
 

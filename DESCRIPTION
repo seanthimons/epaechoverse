@@ -1,4 +1,4 @@
-Package: epaechoverse
+Package: echoverse
 Title: Client for the EPA ECHO and Envirofacts Web Services
 Version: 0.0.0.9000
 Authors@R: person("Sean", "Thimons", email = "thimons.sean@gmail.com",
