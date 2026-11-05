@@ -5,7 +5,7 @@
 # forces a refresh. Set occurrence.mapping_only = TRUE to discover mappings only.
 #
 # Sources
-#   Drinking water  SDWIS via epaechoverse: violation records (viol_measure is the
+#   Drinking water  SDWIS via echoverse: violation records (viol_measure is the
 #                   reported violation measure, possibly a compliance aggregate;
 #                   not an individual sample concentration).
 #                   EPA Six-Year Review 4 compliance data: the all-sample record
@@ -17,7 +17,7 @@
 #   ctx_api_key   CompTox API key (email ccte_api@epa.gov)
 #   AQS_EMAIL     e-mail registered with AQS
 #   AQS_KEY       AQS API key
-# Missing packages are installed automatically with pak. epaechoverse, aqsually
+# Missing packages are installed automatically with pak. echoverse, aqsually
 # and ComptoxR come from GitHub; the other dependencies come from CRAN.
 #
 # Live validation: SYR4 and AQS returned samples on 2026-11-04. MMDB returned
@@ -31,7 +31,7 @@
 if (!requireNamespace('pak', quietly = TRUE))
   utils::install.packages('pak', repos = 'https://cloud.r-project.org')
 occurrence_packages <- c(
-  epaechoverse = 'github::seanthimons/epaechoverse',
+  echoverse = 'github::seanthimons/epaechoverse',
   aqsually = 'github::seanthimons/aqsually',
   ComptoxR = 'github::seanthimons/ComptoxR',
   dplyr = 'dplyr', purrr = 'purrr', httr2 = 'httr2', tibble = 'tibble'
@@ -44,7 +44,7 @@ if (any(missing_packages))
 library(dplyr)
 library(purrr)
 library(httr2)
-library(epaechoverse)
+library(echoverse)
 
 # Example: options(occurrence.chemicals = c('atrazine', '117-81-7', 'benzene'))
 # No source codes or filenames are required. The optional chemical CSV is retained
@@ -58,7 +58,7 @@ chemical_file <- Sys.getenv('OCCURRENCE_CHEMICALS')
 scope_file <- Sys.getenv('OCCURRENCE_AQS_SCOPE',
                         unset = file.path(example_dir, 'occurrence_aqs_scope.csv'))
 syr4_dir <- Sys.getenv('OCCURRENCE_CACHE',
-                       unset = file.path(tools::R_user_dir('epaechoverse', 'cache'), 'occurrence'))
+                       unset = file.path(tools::R_user_dir('echoverse', 'cache'), 'occurrence'))
 dir.create(syr4_dir, recursive = TRUE, showWarnings = FALSE)
 
 read_chemicals <- function(path) {
@@ -212,7 +212,7 @@ if (isTRUE(getOption('occurrence.mapping_only', FALSE))) {
 # ---- 2. Optional SDWIS violation measures (not individual samples) ------------
 # Use only code/name candidates that were verified against the same DTXSID.
 sdwis_exceedances <- if (run_sdwis) safely_run('sdwis', {
-  old_options <- options(epaechoverse.request = list(timeout = 900))
+  old_options <- options(echoverse.request = list(timeout = 900))
   joined <- inner_join(select(chemicals, name, casrn), sdwis_mappings, by = 'casrn')
   pmap_dfr(select(joined, name, casrn, contaminant_code), function(name, casrn, contaminant_code) {
     out <- safely_run(paste('sdwis', casrn, contaminant_code), occurrence_sdwis_fetch(contaminant_code))

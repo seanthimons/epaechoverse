@@ -1,4 +1,4 @@
-# Keep examples usable with main and with epaechoverse's optional SDWIS wrappers.
+# Keep examples usable with main and with echoverse's optional SDWIS wrappers.
 # The fallback is limited to two known tables and a bounded 10,000-row request.
 occurrence_sdwis_fetch <- function(contaminant_code = NULL, request_fn = NULL) {
   catalog <- is.null(contaminant_code)
@@ -8,9 +8,9 @@ occurrence_sdwis_fetch <- function(contaminant_code = NULL, request_fn = NULL) {
   operation <- if (catalog) 'envirofacts_sdwis_ref_code_value' else 'envirofacts_sdwis_violation'
   filters <- if (catalog) 'value_type/equals/CONTAMINANT_CODE' else
     c(paste0('contaminant_code/equals/', contaminant_code), 'pws_type_code/equals/CWS')
-  if (is.null(request_fn) && requireNamespace('epaechoverse', quietly = TRUE) &&
-      operation %in% getNamespaceExports('epaechoverse')) {
-    return(getExportedValue('epaechoverse', operation)(filters, last = 10000))
+  if (is.null(request_fn) && requireNamespace('echoverse', quietly = TRUE) &&
+      operation %in% getNamespaceExports('echoverse')) {
+    return(getExportedValue('echoverse', operation)(filters, last = 10000))
   }
   table <- if (catalog) 'sdwis.ref_code_value' else 'sdwis.violation'
   url <- paste0('https://data.epa.gov/dmapservice/', table, '/',
