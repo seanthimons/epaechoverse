@@ -1,7 +1,7 @@
 test_that('SDWIS fallback uses bounded catalog and community-system requests', {
   skip_if_not_installed('dplyr')
   env <- new.env()
-  sys.source(test_path('..', '..', 'inst', 'examples', 'occurrence_sdwis.R'), envir = env)
+  sys.source(system.file('examples', 'occurrence_sdwis.R', package = 'echoverse', mustWork = TRUE), envir = env)
   fetch <- env$occurrence_sdwis_fetch
   catalog <- fetch(request_fn = function(url, timeout) {
     expect_match(url, '/sdwis.ref_code_value/value_type/equals/CONTAMINANT_CODE/1:10000/json', fixed = TRUE)

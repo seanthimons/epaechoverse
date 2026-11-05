@@ -1,9 +1,9 @@
 # Load only pure selection helpers; do not execute example network requests.
 occurrence_selection_helpers <- function() {
   skip_if_not_installed('dplyr')
-  path <- test_path('..', '..', 'inst', 'examples', 'occurrence_chemicals.R')
+  path <- system.file('examples', 'occurrence_chemicals.R', package = 'echoverse', mustWork = TRUE)
   env <- new.env(parent = asNamespace('dplyr'))
-  sys.source(test_path('..', '..', 'inst', 'examples', 'occurrence_mapping.R'), envir = env)
+  sys.source(system.file('examples', 'occurrence_mapping.R', package = 'echoverse', mustWork = TRUE), envir = env)
   wanted <- c('read_chemicals', 'read_aqs_scope', 'match_aqs_parameters')
   for (expr in parse(path)) {
     if (is.call(expr) && identical(expr[[1]], as.name('<-')) &&
