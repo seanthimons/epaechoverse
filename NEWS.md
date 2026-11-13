@@ -1,4 +1,4 @@
-# echoverse development version
+# echoverse 0.2.0
 
 * Add 35 public ArcGIS query, related-record and identify operations from six
   captured MapServers. Pin specmill v0.3.1 and retain bounded pagination.
@@ -8,6 +8,13 @@
   spatial query arguments. Record protected and unsupported service exclusions.
 * Chemical occurrence examples now use explicit run_occurrence() arguments and
   return a results list. Sourcing the helper no longer starts requests.
+
+## Compatibility
+
+* ArcGIS mapping calls default to tibbles. Use format = "raw" for native
+  responses/records. sf is installed as a required dependency.
+* Chemical search inputs no longer use occurrence.chemicals, occurrence.aqs_scope
+  or occurrence.mapping_only R options; pass ordinary run_occurrence() arguments.
 
 # echoverse 0.1.0
 
