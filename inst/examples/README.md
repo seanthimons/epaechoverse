@@ -6,7 +6,7 @@ choose. They combine three sources:
 | Medium | Source | Needs |
 |---|---|---|
 | Drinking water | SDWIS (via echoverse) and EPA Six-Year Review 4 compliance data | nothing |
-| Ambient air | EPA AQS Data API (via [aqsually](https://github.com/seanthimons/aqsually)) | AQS e-mail and key |
+| Ambient air | EPA AQS Data API (via [aqsually](https://github.com/seanthimons/aqsually)) | aqsually, AQS e-mail and key |
 | Both | CompTox Monitoring Media Database (via ComptoxR) | CompTox API key |
 
 Work through the steps in order. Run every command in the R console (or
@@ -50,9 +50,9 @@ nzchar(Sys.getenv(c("ctx_api_key", "AQS_EMAIL", "AQS_KEY")))
 If you already have a `~/.Renviron`, add the three lines to it and keep the
 rest. Never share the file or put the values in a script.
 
-The discovery run (step 4) needs only `ctx_api_key`. The AQS e-mail and key, and
-the aqsually package, are needed only for the full run (step 5), which is the
-only step that retrieves AQS air samples.
+Ambient-air data **requires** aqsually and the AQS e-mail and key; the full run
+(step 5) installs aqsually if it is missing. Only the discovery run (step 4)
+skips them: it needs just `ctx_api_key`, because it retrieves no air samples.
 
 ## 3. Load the script
 
@@ -96,7 +96,7 @@ results <- run_occurrence(
 
 Before you run it:
 
-- It installs `aqsually` if missing.
+- It installs `aqsually` if missing. This is the package that retrieves the air data.
 - AQS requests are paced at one every 6 seconds, so many chemicals, states or
   years make a long run. Keep the scope small the first time.
 - Six-Year Review 4 data are large ZIP downloads (about 95 MB and 81 MB) and are
@@ -146,12 +146,15 @@ the label in the brackets:
 | Message starts with | What to do |
 |---|---|
 | `[identity ...]`, `[synonyms ...]` or `[MMDB ...]` failed | CompTox lookup. Check `ctx_api_key` (step 2, then restart R). `HTTP 503` means the service is down; try again later. |
-| `[aqs ...]` failed | AQS request. Check `AQS_EMAIL` and `AQS_KEY` (step 2, then restart R), and that the `AQSUALLY_DRY_RUN` environment variable is not set. |
-| `[SDWIS catalog ...]`, `[SYR4 ...]` or `[syr4]` failed | EPA download or catalog. Try again later. |
+| `[aqs <chemical> <state> <year>]` failed | One AQS request. Check `AQS_EMAIL` and `AQS_KEY` (step 2, then restart R), and that the `AQSUALLY_DRY_RUN` environment variable is not set. |
+| `[aqs]` failed, with no chemical, state or year | No AQS parameter matched your chemicals, or the `[AQS parameter catalog]` download failed (see that row), so nothing was requested. This is not a credentials problem. Check `results$source_coverage`. |
+| `[AQS parameter catalog]`, `[SDWIS catalog ...]`, `[SYR4 ...]`, `[syr4]` or `[sdwis ...]` failed | An EPA download or catalog could not be fetched (`[sdwis ...]` appears only with `run_sdwis = TRUE`). Try again later. |
+| `[SDWIS identity verification ...]` failed | A possible SDWIS match was rejected, usually because it turned out to be a different chemical. This is normal; no action needed. If the message ends with an HTTP status such as `HTTP 503`, the CompTox service was down and a real match may have been dropped; try again later. |
+| `[mmdb]` failed | No chemical resolved to a CompTox ID, so the MMDB step was skipped. Fix the `[identity ...]` failure first. |
 | `Load this example with source()` | Use `source(...)`, not `Rscript`. |
 | `system.file(...)` returns `""` | echoverse is not installed; redo step 1. |
 
-Failed identifier, synonym, SDWIS catalog and SYR4 inventory lookups also show
-as `unresolved` in `results$mapping_status`. AQS, MMDB and sample-download
-failures appear only in the printed messages, so scroll back through them
+Failed identifier, synonym, SDWIS catalog, SDWIS identity verification and SYR4
+inventory lookups also show as `unresolved` in `results$mapping_status`. AQS,
+MMDB and sample-download failures appear only in the printed messages, so scroll back through them
 before trusting an empty table.
