@@ -13,9 +13,12 @@ on:
 permissions:
   contents: read
 
+# One group per ref. A new push to a pull request cancels its superseded build.
+# Main and release runs never cancel each other (they use different refs); the
+# reusable workflow's `pages` group serialises the actual deploys.
 concurrency:
-  group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
-  cancel-in-progress: true
+  group: pkgdown-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   pkgdown:

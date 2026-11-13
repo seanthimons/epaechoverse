@@ -1,0 +1,19 @@
+# Credentials for the chemical occurrence examples (see README.md in this folder).
+#
+# How to use this file
+#   1. Copy the three lines below into your own ~/.Renviron file.
+#      (In R: file.edit("~/.Renviron"). Do not rename or edit this template.)
+#   2. Replace each placeholder with your own value. No quotes, no spaces
+#      around the = sign.
+#   3. Save, then restart R. R reads ~/.Renviron only when it starts.
+#
+# Never commit a real ~/.Renviron or paste these values into a script.
+
+# CompTox API key. Request one by emailing ccte_api@epa.gov.
+ctx_api_key=your-comptox-api-key
+
+# E-mail address registered with the EPA AQS Data API.
+AQS_EMAIL=your-registered-aqs-email@example.com
+
+# AQS Data API key (sent to the e-mail address above when you sign up).
+AQS_KEY=your-aqs-api-key
