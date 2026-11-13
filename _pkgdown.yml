@@ -51,3 +51,6 @@ reference:
 - title: Envirofacts tables
   contents:
   - starts_with("envirofacts_")
+- title: ArcGIS public mapping services
+  contents:
+  - starts_with("arcgis_")

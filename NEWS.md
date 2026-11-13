@@ -1,3 +1,12 @@
+# echoverse development version
+
+* Add 35 public ArcGIS query, related-record and identify operations from six
+  captured MapServers. Pin specmill v0.3.1 and retain native geometry and bounded
+  pagination. Add arcgis_query_page() for single native response envelopes and
+  spatial query arguments. Record protected and unsupported service exclusions.
+* Chemical occurrence examples now use explicit run_occurrence() arguments and
+  return a results list. Sourcing the helper no longer starts requests.
+
 # echoverse 0.1.0
 
 * Renamed the package from `epaechoverse` to `echoverse`. Load it with

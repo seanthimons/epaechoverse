@@ -170,7 +170,43 @@ Map LAT/LON uses the search schemas' WGS84 convention (also used for report
 maps); broader report-datum confirmation remains tracked in issue #5.
 Spatial-metadata endpoints support `tidy` and `raw` only, preserving provenance
 without guessing a datum from Latitude83/Longitude83. XML/JSONP requires
-`format = "raw"`. Esri ArcGIS services are planned for a later release.
+`format = "raw"`. The separate ArcGIS services are described below.
+
+## Query ArcGIS mapping layers
+
+ArcGIS queries use different arguments and responses from ECHO search maps.
+Layer IDs come from the captured service directory, listed in the installed
+`extdata/arcgis-layers.csv`. The raw-response helper below preserves the
+reported spatial reference and transfer-limit flag.
+
+```{r arcgis-example, eval=FALSE}
+features <- arcgis_facilities_query_layer_0(
+  where = "FAC_STATE = 'RI'", outFields = 'REGISTRY_ID,FAC_STATE',
+  resultRecordCount = 5, all_pages = FALSE
+)
+features[[1]]$attributes
+features[[1]]$geometry
+
+page <- arcgis_query_page(
+  'facilities', layer = 0, where = "FAC_STATE = 'RI'",
+  outFields = 'REGISTRY_ID,FAC_STATE', resultRecordCount = 5, outSR = 4326
+)
+page$spatialReference
+page$exceededTransferLimit
+```
+
+To traverse a paginated layer, leave `all_pages = TRUE` and set an explicit
+`max_pages`. Server transfer-limit flags control completion; the helper warns
+when it reaches the page cap. Nonpaging layers retain their native response
+envelopes and have no paging controls. Related-record queries preserve groups.
+`arcgis_query_page()` also accepts native `geometry`, `geometryType`, `inSR`
+and `spatialRel` arguments for a single spatially filtered request.
+
+ArcGIS geometry remains native JSON. Do not treat a Web Mercator x/y pair as
+longitude/latitude or apply the ECHO `format` argument. Request `outSR = 4326`
+when geographic coordinates are required and verify the returned reference
+system. ECHOGov requires EPA login; GPServer and SymbolServer services are
+outside specmill 0.3.1's importer support.
 
 ## Chemical occurrence example scripts
 

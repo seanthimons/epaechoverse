@@ -281,6 +281,48 @@ Lookups that only one service describes keep that service's prefix (for example
 `wplt_lookups_dmr_watersheds`). Lookups that the `lookup` API also covers exist
 only as `lookup_*`.
 
+## ArcGIS mapping services
+
+The `arcgis_*` functions query EPA's separate ArcGIS services. The reviewed
+November 13 inventory covers six public MapServers, 21 layers/tables and 35
+operations: layer queries, related-record queries and service identify calls.
+Prefixes are `arcgis_facilities`, `arcgis_stormwater`, `arcgis_wqi`,
+`arcgis_monitor_checks`, `arcgis_monitor_check2`, and `arcgis_sample_cities`.
+The monitor and sample-city services are diagnostics/demo data.
+
+```r
+# One bounded page of Rhode Island facilities, with native geometry
+features <- arcgis_facilities_query_layer_0(
+  where = "FAC_STATE = 'RI'", resultRecordCount = 5, all_pages = FALSE
+)
+# Keep the response envelope and request an explicit output reference system
+page <- arcgis_query_page('facilities', 0, where = "FAC_STATE = 'RI'",
+                         outFields = 'REGISTRY_ID', resultRecordCount = 5,
+                         outSR = 4326)
+page$spatialReference
+```
+
+Paged wrappers return native feature records, including attributes and geometry.
+`resultRecordCount` controls both page size and offset stride; `max_pages` bounds
+requests and warns when it stops a longer result. `all_pages = FALSE` returns
+one page of feature records. Nonpaging layers return the native envelope and
+have no `all_pages` argument. `arcgis_query_page()` always returns one complete
+native JSON envelope, including CRS, fields and `exceededTransferLimit`; it also
+accepts native spatial query arguments through `...`. It does not paginate.
+Check transfer-limit flags before assuming a complete extract.
+
+Coordinates are **not automatically converted** to sf or GeoJSON. Several layers
+advertise Web Mercator, not longitude/latitude; use the response's
+`spatialReference` or explicitly request `outSR`. The installed
+`extdata/arcgis-layers.csv` lists captured layer IDs and reference systems.
+ECHO's existing `format` argument does not apply to these ArcGIS wrappers.
+
+ECHOGov redirects to EPA SAML login and is excluded from the public captures.
+`ECHO/getFacilities` and `Utilities/RasterUtilities` are GPServers, and
+`Utilities/Symbols` is a SymbolServer. Specmill 0.3.1 does not import those types.
+They remain documented exclusions, not generated endpoints. Reviewed metadata,
+source hashes and exclusion diagnostics live under `dev/arcgis/`.
+
 ## Errors and retries
 
 ECHO reports most errors as HTTP 200 with the message in the body. This client
@@ -320,7 +362,8 @@ and 504. HTTP 500 is not retried: ECHO answers a query it cannot process with a
 - **Envirofacts coverage follows EPA's OpenAPI document.** The service's own
   application lists more programs (for example GHGRP, ICIS-AIR and PCS) than the
   10 in that document; those have no functions yet.
-- `set_api_token()` and `api_token()` are generated but unused: ECHO needs no key.
+- `set_api_token()` and `api_token()` do not perform EPA sign-in. Public ECHO
+  and captured public ArcGIS endpoints need no key.
 
 ## Guides
 

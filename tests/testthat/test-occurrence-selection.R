@@ -108,7 +108,12 @@ test_that('search inputs are explicit and validated before dependencies or reque
 })
 
 test_that('mapping searches return results and ignore old global search options', {
+  skip_if_not_installed('purrr')
   h <- occurrence_selection_helpers()
+  # Cached fixtures do not need pak or CompTox installed, and must not install them.
+  h$requireNamespace <- function(package, ...) {
+    if (package %in% c('pak', 'ComptoxR')) TRUE else base::requireNamespace(package, ...)
+  }
   requests <- 0L
   local_mocked_bindings(req_perform = function(...) {
     requests <<- requests + 1L

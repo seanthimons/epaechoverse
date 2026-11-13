@@ -1,0 +1,169 @@
+{
+  "retrieved": "2026-11-13 00:19:19 UTC",
+  "checks": {
+    "arcgis_facilities_query_layer_0": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_facilities_query_layer_1": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_facilities_query_layer_2": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_facilities_query_layer_3": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_facilities_query_layer_4": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_facilities_query_layer_5": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_facilities_identify": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_stormwater_query_layer_0": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_stormwater_identify": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_layer_0": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_layer_1": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_layer_2": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_layer_3": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_layer_4": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_layer_5": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_layer_6": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_layer_7": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_layer_8": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_wqi_query_related_records_layer_8": {
+      "status": "ok",
+      "groups": 0
+    },
+    "arcgis_wqi_query_related_records_layer_0": {
+      "status": "ok",
+      "groups": 0
+    },
+    "arcgis_wqi_query_related_records_layer_1": {
+      "status": "ok",
+      "groups": 0
+    },
+    "arcgis_wqi_query_related_records_layer_2": {
+      "status": "ok",
+      "groups": 0
+    },
+    "arcgis_wqi_query_related_records_layer_3": {
+      "status": "ok",
+      "groups": 0
+    },
+    "arcgis_wqi_query_related_records_layer_4": {
+      "status": "ok",
+      "groups": 0
+    },
+    "arcgis_wqi_query_related_records_layer_5": {
+      "status": "ok",
+      "groups": 0
+    },
+    "arcgis_wqi_query_related_records_layer_6": {
+      "status": "ok",
+      "groups": 0
+    },
+    "arcgis_wqi_identify": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_monitor_checks_query_layer_0": {
+      "status": "ok",
+      "rows": 9
+    },
+    "arcgis_monitor_checks_identify": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_monitor_check2_query_layer_0": {
+      "status": "ok",
+      "rows": 9
+    },
+    "arcgis_monitor_check2_identify": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_sample_cities_query_layer_0": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_sample_cities_query_layer_1": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_sample_cities_query_layer_2": {
+      "status": "ok",
+      "rows": 0
+    },
+    "arcgis_sample_cities_identify": {
+      "status": "ok",
+      "rows": 4
+    },
+    "facilities_two_pages": {
+      "status": "ok",
+      "rows": 2,
+      "pagination": {
+        "requests": 2,
+        "item_count": 2,
+        "stop_reason": "max_pages"
+      },
+      "first_geometry": {
+        "x": -7954446.6473,
+        "y": 5129078.8089
+      }
+    },
+    "native_output_sr": {
+      "status": "ok",
+      "spatialReference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+      },
+      "geometry": {
+        "x": -82.6683,
+        "y": 39.7346
+      }
+    }
+  }
+}

@@ -5,7 +5,7 @@
 #' @return Credential string. Treat this value as a secret.
 #' @export
 api_token <- function(scheme = NULL) {
-  envvars <- base::evalq(structure(list(), names = character(0)), envir = base::baseenv())
+  envvars <- base::evalq(list(arcgis_facilities.arcgis_token = "ECHOVERSE_ARCGIS_FACILITIES_ARCGIS_TOKEN", arcgis_stormwater.arcgis_token = "ECHOVERSE_ARCGIS_STORMWATER_ARCGIS_TOKEN", arcgis_monitor_check2.arcgis_token = "ECHOVERSE_ARCGIS_MONITOR_CHECK2_ARCGIS_TOKEN", arcgis_monitor_checks.arcgis_token = "ECHOVERSE_ARCGIS_MONITOR_CHECKS_ARCGIS_TOKEN", arcgis_sample_cities.arcgis_token = "ECHOVERSE_ARCGIS_SAMPLE_CITIES_ARCGIS_TOKEN", arcgis_wqi.arcgis_token = "ECHOVERSE_ARCGIS_WQI_ARCGIS_TOKEN"), envir = base::baseenv())
   if (is.null(scheme) && length(envvars) == 1L) {
     scheme <- names(envvars)[[1L]]
   }
@@ -62,7 +62,7 @@ api_token <- function(scheme = NULL) {
 #' @export
 set_api_token <- function(token, scheme = NULL, persist = FALSE,
   file = Sys.getenv('R_ENVIRON_USER', unset = path.expand('~/.Renviron'))) {
-  envvars <- base::evalq(structure(list(), names = character(0)), envir = base::baseenv())
+  envvars <- base::evalq(list(arcgis_facilities.arcgis_token = "ECHOVERSE_ARCGIS_FACILITIES_ARCGIS_TOKEN", arcgis_stormwater.arcgis_token = "ECHOVERSE_ARCGIS_STORMWATER_ARCGIS_TOKEN", arcgis_monitor_check2.arcgis_token = "ECHOVERSE_ARCGIS_MONITOR_CHECK2_ARCGIS_TOKEN", arcgis_monitor_checks.arcgis_token = "ECHOVERSE_ARCGIS_MONITOR_CHECKS_ARCGIS_TOKEN", arcgis_sample_cities.arcgis_token = "ECHOVERSE_ARCGIS_SAMPLE_CITIES_ARCGIS_TOKEN", arcgis_wqi.arcgis_token = "ECHOVERSE_ARCGIS_WQI_ARCGIS_TOKEN"), envir = base::baseenv())
   if (is.null(scheme) && length(envvars) == 1L) scheme <- names(envvars)[[1L]]
   if (!is.character(scheme) || length(scheme) != 1L || is.na(scheme) || !scheme %in% names(envvars)) {
     stop('Choose a configured credential scheme: ', paste(names(envvars), collapse = ', '), call. = FALSE)

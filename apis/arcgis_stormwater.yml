@@ -1,0 +1,91 @@
+# One file per API. Tag groups below control naming and R-file layout.
+# selection: shared method limits and path exclusions for this API only.
+# Package limits still apply; groups can only narrow selection further.
+# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
+# helper/authentication/defaults are inherited by every group.
+# Under groups, edit names and defaults.file; keep excluded include/name entries.
+# Group selection.exclude is for additional restrictions, not copies of API policy.
+# Group defaults and operation overrides take precedence over API defaults.
+# defaults: {} inherits project settings; add batch limits here to override them.
+# documentation: true # Optional API override; otherwise inherit the project.
+# Never put credential tokens here; authentication values reference project keys.
+api: arcgis_stormwater
+schemas:
+  files:
+  - schema/arcgis_stormwater.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: arcgis_stormwater_request
+authentication:
+  arcgis_token: arcgis_stormwater.arcgis_token
+defaults: {}
+groups:
+  arcgis_stormwater_layer_0:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /0/query
+    names:
+      GET /0/query: arcgis_stormwater_query_layer_0
+    defaults:
+      file: R/arcgis_stormwater_layer_0.R
+      docs:
+        tags:
+          family: layer_0 endpoints
+      response_policy: arcgis_stormwater_request_arcgis_response
+    operations:
+      GET /0/query:
+        pagination:
+          mode: offset
+          parameter: resultOffset
+          size_parameter: resultRecordCount
+          page_size: 2000
+          start: 0
+          completed: arcgis_stormwater_request_arcgis_completed
+          items: arcgis_stormwater_request_arcgis_features
+          stop_on_empty: no
+    format: arcgis-rest
+  arcgis_stormwater_service:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /identify
+    names:
+      GET /identify: arcgis_stormwater_identify
+    defaults:
+      file: R/arcgis_stormwater_service.R
+      docs:
+        tags:
+          family: service endpoints
+      response_policy: arcgis_stormwater_request_arcgis_response
+    operations: {}
+    format: arcgis-rest
