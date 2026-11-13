@@ -1,0 +1,227 @@
+api: arcgis_sample_cities
+schemas:
+  files:
+  - schema/arcgis_sample_cities.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: arcgis_sample_cities_request
+authentication:
+  arcgis_token: arcgis_sample_cities.arcgis_token
+defaults: {}
+groups:
+  arcgis_sample_cities_layer_0:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /0/query
+    names:
+      GET /0/query: arcgis_sample_cities_query_layer_0
+    defaults:
+      file: R/arcgis_sample_cities_layer_0.R
+      docs:
+        tags:
+          family: layer_0 endpoints
+      response_policy: arcgis_sample_cities_request_arcgis_response
+    operations:
+      GET /0/query:
+        pagination:
+          mode: offset
+          parameter: resultOffset
+          size_parameter: resultRecordCount
+          page_size: 1000
+          start: 0
+          completed: arcgis_sample_cities_request_arcgis_completed
+          items: arcgis_page_items
+          stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
+    format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_sample_cities_query_layer_0:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+  arcgis_sample_cities_layer_1:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /1/query
+    names:
+      GET /1/query: arcgis_sample_cities_query_layer_1
+    defaults:
+      file: R/arcgis_sample_cities_layer_1.R
+      docs:
+        tags:
+          family: layer_1 endpoints
+      response_policy: arcgis_sample_cities_request_arcgis_response
+    operations:
+      GET /1/query:
+        pagination:
+          mode: offset
+          parameter: resultOffset
+          size_parameter: resultRecordCount
+          page_size: 1000
+          start: 0
+          completed: arcgis_sample_cities_request_arcgis_completed
+          items: arcgis_page_items
+          stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
+    format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_sample_cities_query_layer_1:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+  arcgis_sample_cities_layer_2:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /2/query
+    names:
+      GET /2/query: arcgis_sample_cities_query_layer_2
+    defaults:
+      file: R/arcgis_sample_cities_layer_2.R
+      docs:
+        tags:
+          family: layer_2 endpoints
+      response_policy: arcgis_sample_cities_request_arcgis_response
+    operations:
+      GET /2/query:
+        pagination:
+          mode: offset
+          parameter: resultOffset
+          size_parameter: resultRecordCount
+          page_size: 1000
+          start: 0
+          completed: arcgis_sample_cities_request_arcgis_completed
+          items: arcgis_page_items
+          stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
+    format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_sample_cities_query_layer_2:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+  arcgis_sample_cities_service:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /identify
+    names:
+      GET /identify: arcgis_sample_cities_identify
+    defaults:
+      file: R/arcgis_sample_cities_service.R
+      docs:
+        tags:
+          family: service endpoints
+      response_policy: arcgis_sample_cities_request_arcgis_response
+    operations:
+      GET /identify:
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
+    format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_sample_cities_identify:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response

@@ -160,7 +160,7 @@ Non-Esri `*_get_map()` and `*_get_rpt_map()` endpoints (including their
 search <- cwa_get_facilities(p_st = 'RI')
 qid <- search$QueryID
 points <- cwa_get_map(qid = qid)                     # format = 'tidy'
-spatial <- cwa_get_map(qid = qid, format = 'sf')       # requires optional sf
+spatial <- cwa_get_map(qid = qid, format = 'sf')       # sf points
 geojson <- cwa_get_map(qid = qid, format = 'geojson')  # GeoJSON string
 original <- cwa_get_map(qid = qid, format = 'raw')    # decoded API response
 post <- cwa_get_map_post(list(qid = qid), format = 'tidy')
@@ -281,6 +281,66 @@ Lookups that only one service describes keep that service's prefix (for example
 `wplt_lookups_dmr_watersheds`). Lookups that the `lookup` API also covers exist
 only as `lookup_*`.
 
+## ArcGIS mapping services
+
+The `arcgis_*` functions query EPA's separate ArcGIS services. The reviewed
+November 13 inventory covers six public MapServers, 21 layers/tables and 35
+operations: layer queries, related-record queries and service identify calls.
+Prefixes are `arcgis_facilities`, `arcgis_stormwater`, `arcgis_wqi`,
+`arcgis_monitor_checks`, `arcgis_monitor_check2`, and `arcgis_sample_cities`.
+The monitor and sample-city services are diagnostics/demo data.
+
+```r
+# A tibble with attributes and native geometry in the .geometry list-column
+facilities <- arcgis_facilities_query_layer_0(
+  where = "FAC_STATE = 'RI'", resultRecordCount = 5, all_pages = FALSE
+)
+points <- arcgis_facilities_query_layer_0(
+  where = "FAC_STATE = 'RI'", resultRecordCount = 5, all_pages = FALSE,
+  format = 'sf'
+)
+geojson <- arcgis_facilities_query_layer_0(
+  where = "FAC_STATE = 'RI'", resultRecordCount = 5, all_pages = FALSE,
+  format = 'geojson'
+)
+# Keep one native envelope and its server flags
+page <- arcgis_query_page('facilities', 0, where = "FAC_STATE = 'RI'",
+                         resultRecordCount = 5, format = 'raw')
+page$spatialReference
+```
+
+All generated ArcGIS queries, identify calls and related-record calls support
+`format = 'tidy' | 'sf' | 'geojson' | 'raw'`. The shared post-request hook returns
+a tibble by default. It preserves attribute types and identifiers, native
+geometry in `.geometry`, layer/service identity and related-record parent IDs.
+`attr(result, 'arcgis')` retains field definitions, coordinate systems, group
+metadata and server flags. Paged results keep their `pagination` attribute.
+
+Both `sf` and GeoJSON output transform the **reported** source coordinate system
+to EPSG:4326. GeoJSON is a FeatureCollection string with metadata in its `arcgis`
+member. Missing geometries remain empty sf geometries or GeoJSON nulls; records
+are retained. Missing or unsupported source CRS and quantized or measured geometry raise
+errors for spatial output; use tidy/raw to inspect them. No CRS is inferred from
+coordinate magnitudes or field names. sf is a hard dependency; Linux source
+builds need GDAL, GEOS, PROJ and UDUNITS development libraries.
+
+Formatting runs once after paged responses combine. `resultRecordCount` controls
+page size and offset stride; `max_pages` bounds requests and warns when it stops
+a longer result. `all_pages = FALSE` formats one page. Nonpaging layers have no
+`all_pages` argument. Raw paged wrappers retain native feature/group lists;
+raw identify/nonpaging calls retain envelopes. `arcgis_query_page()` never pages,
+uses the same formatter, and returns a complete native envelope with
+`format = 'raw'`. It also accepts native spatial query arguments through `...`.
+Check transfer-limit flags before assuming a raw page is a complete extract.
+The installed `extdata/arcgis-layers.csv` lists captured layer IDs and source CRSs.
+The API `f` parameter selects JSON encoding; client `format` is not sent to EPA.
+
+ECHOGov redirects to EPA SAML login and is excluded from the public captures.
+`ECHO/getFacilities` and `Utilities/RasterUtilities` are GPServers, and
+`Utilities/Symbols` is a SymbolServer. Specmill 0.3.1 does not import those types.
+They remain documented exclusions, not generated endpoints. Reviewed metadata,
+source hashes and exclusion diagnostics live under `dev/arcgis/`.
+
 ## Errors and retries
 
 ECHO reports most errors as HTTP 200 with the message in the body. This client
@@ -320,7 +380,8 @@ and 504. HTTP 500 is not retried: ECHO answers a query it cannot process with a
 - **Envirofacts coverage follows EPA's OpenAPI document.** The service's own
   application lists more programs (for example GHGRP, ICIS-AIR and PCS) than the
   10 in that document; those have no functions yet.
-- `set_api_token()` and `api_token()` are generated but unused: ECHO needs no key.
+- `set_api_token()` and `api_token()` do not perform EPA sign-in. Public ECHO
+  and captured public ArcGIS endpoints need no key.
 
 ## Guides
 

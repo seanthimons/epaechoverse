@@ -87,7 +87,7 @@ groups:
           format:
             type: string
             default: tidy
-            description: 'Client result format: tidy (default), sf (optional sf package),
+            description: 'Client result format: tidy (default), sf,
               geojson (string), or raw. Formatted output requires JSON. Metadata is retained
               in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays.
               Missing coordinates yield empty geometries.'
@@ -126,7 +126,7 @@ groups:
           format:
             type: string
             default: tidy
-            description: 'Client result format: tidy (default), sf (optional sf package),
+            description: 'Client result format: tidy (default), sf,
               geojson (string), or raw. Formatted output requires JSON. Metadata is retained
               in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays.
               Missing coordinates yield empty geometries.'

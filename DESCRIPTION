@@ -1,15 +1,18 @@
 Package: echoverse
-Title: Client for the EPA ECHO and Envirofacts Web Services
-Version: 0.1.0
+Title: Client for EPA ECHO, Envirofacts and ArcGIS Web Services
+Version: 0.2.0
 Authors@R: person("Sean", "Thimons", email = "thimons.sean@gmail.com",
         role = c('aut', 'cre'))
 Description: Generated client for the U.S. EPA Enforcement and Compliance
-    History Online (ECHO) web service APIs and the Envirofacts (DMAP) data
-    tables (26 APIs, 995 operations),
-    built with specmill from local Swagger and OpenAPI schemas.
+    History Online (ECHO), Envirofacts (DMAP), and public ArcGIS mapping
+    services (32 APIs, 1030 operations), built with specmill from local
+    Swagger and OpenAPI schemas and reviewed ArcGIS metadata.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Imports: httr2, jsonlite, curl, tibble
-Suggests: testthat, sf, knitr, rmarkdown
+Imports: httr2 (>= 1.3.0), jsonlite, curl, tibble, digest, sf
+Suggests: testthat, knitr, rmarkdown
 VignetteBuilder: knitr
 Config/Needs/website: pkgdown
+Config/roxygen2/version: 8.1.1
+URL: https://seanthimons.github.io/epaechoverse/, https://github.com/seanthimons/epaechoverse
+BugReports: https://github.com/seanthimons/epaechoverse/issues

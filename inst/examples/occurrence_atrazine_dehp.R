@@ -1,4 +1,14 @@
-# Compatibility entry point. Set options(occurrence.chemicals = c(...)) to change chemicals.
-entry <- sys.frame(1)$ofile
-example_dir <- if (is.null(entry)) 'inst/examples' else dirname(normalizePath(entry))
-source(file.path(example_dir, 'occurrence_chemicals.R'))
+# Search for atrazine and DEHP in the selected state and year.
+example_dir <- local({
+  paths <- vapply(sys.frames(), function(frame) {
+    if (is.null(frame$ofile)) '' else frame$ofile
+  }, character(1))
+  paths <- paths[nzchar(paths)]
+  if (!length(paths)) stop('Load this example with source()')
+  dirname(normalizePath(tail(paths, 1)))
+})
+source(file.path(example_dir, 'occurrence_chemicals.R'), local = TRUE)
+
+chemicals <- c('atrazine', '117-81-7')
+aqs_scope <- data.frame(state = '26', year = 2002)
+results <- run_occurrence(chemical_queries = chemicals, aqs_scope = aqs_scope)

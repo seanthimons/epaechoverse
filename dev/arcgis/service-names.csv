@@ -1,0 +1,7 @@
+url,api
+https://echogeo.epa.gov/arcgis/rest/services/ECHO/Facilities/MapServer,arcgis_facilities
+https://echogeo.epa.gov/arcgis/rest/services/ECHO/FacilityFinderStateStormWater/MapServer,arcgis_stormwater
+https://echogeo.epa.gov/arcgis/rest/services/monitor/ncc_arcgis_check2/MapServer,arcgis_monitor_check2
+https://echogeo.epa.gov/arcgis/rest/services/monitor/ncc_arcgis_checks/MapServer,arcgis_monitor_checks
+https://echogeo.epa.gov/arcgis/rest/services/SampleWorldCities/MapServer,arcgis_sample_cities
+https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer,arcgis_wqi

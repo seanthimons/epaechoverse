@@ -1,0 +1,50 @@
+{
+  "retrieved": "2026-11-13 01:46:46 UTC",
+  "checks": {
+    "tidy": {
+      "status": "ok",
+      "records": 2,
+      "source_crs": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "sf": {
+      "status": "ok",
+      "records": 2,
+      "source_crs": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "geojson": {
+      "status": "ok",
+      "records": 2,
+      "source_crs": {
+        "wkid": 102100,
+        "latestWkid": 3857
+      }
+    },
+    "paged_sf": {
+      "status": "ok",
+      "records": 2,
+      "pagination": {
+        "requests": 2,
+        "item_count": 2,
+        "stop_reason": "max_pages"
+      }
+    },
+    "polygon_sf": {
+      "status": "ok",
+      "records": 1
+    },
+    "polygon_geojson": {
+      "status": "ok",
+      "records": 1
+    },
+    "nonspatial_table": {
+      "status": "ok",
+      "records": 1
+    }
+  }
+}

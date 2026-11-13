@@ -1,0 +1,639 @@
+{
+  "retrieved": "2026-11-13T00:10:09.717849+00:00",
+  "checks": [
+    {
+      "check": "cwa-qid-only",
+      "method": "GET",
+      "path": "cwa_rest_services.get_map",
+      "rows": 25,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "5907b15fe5ce3d159970b3845da5d3f7c8961355cf197124daa97923a1835508"
+    },
+    {
+      "check": "cwa-qid-only",
+      "method": "POST",
+      "path": "cwa_rest_services.get_map",
+      "rows": 25,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "5907b15fe5ce3d159970b3845da5d3f7c8961355cf197124daa97923a1835508"
+    },
+    {
+      "check": "cwa-bbox",
+      "method": "GET",
+      "path": "cwa_rest_services.get_map",
+      "rows": 25,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "5907b15fe5ce3d159970b3845da5d3f7c8961355cf197124daa97923a1835508"
+    },
+    {
+      "check": "cwa-bbox",
+      "method": "POST",
+      "path": "cwa_rest_services.get_map",
+      "rows": 25,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "5907b15fe5ce3d159970b3845da5d3f7c8961355cf197124daa97923a1835508"
+    },
+    {
+      "check": "cwa-tablelist",
+      "method": "GET",
+      "path": "cwa_rest_services.get_map",
+      "rows": 25,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "5907b15fe5ce3d159970b3845da5d3f7c8961355cf197124daa97923a1835508"
+    },
+    {
+      "check": "cwa-tablelist",
+      "method": "POST",
+      "path": "cwa_rest_services.get_map",
+      "rows": 25,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "5907b15fe5ce3d159970b3845da5d3f7c8961355cf197124daa97923a1835508"
+    },
+    {
+      "check": "ecatt_ams-qid-only",
+      "method": "GET",
+      "path": "ecatt_ams_rest_services.get_map",
+      "rows": 7,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "8aa6d2b8940801bdfea15b88839a3d1570c6e9d835141fc079203fc71bf07afd"
+    },
+    {
+      "check": "ecatt_ams-qid-only",
+      "method": "POST",
+      "path": "ecatt_ams_rest_services.get_map",
+      "rows": 7,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "8aa6d2b8940801bdfea15b88839a3d1570c6e9d835141fc079203fc71bf07afd"
+    },
+    {
+      "check": "ecatt_ams-bbox",
+      "method": "GET",
+      "path": "ecatt_ams_rest_services.get_map",
+      "rows": 0,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [],
+      "record_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "ecatt_ams-bbox",
+      "method": "POST",
+      "path": "ecatt_ams_rest_services.get_map",
+      "rows": 0,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [],
+      "record_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "ecatt_ams-tablelist",
+      "method": "GET",
+      "path": "ecatt_ams_rest_services.get_map",
+      "rows": 7,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "8aa6d2b8940801bdfea15b88839a3d1570c6e9d835141fc079203fc71bf07afd"
+    },
+    {
+      "check": "ecatt_ams-tablelist",
+      "method": "POST",
+      "path": "ecatt_ams_rest_services.get_map",
+      "rows": 7,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "8aa6d2b8940801bdfea15b88839a3d1570c6e9d835141fc079203fc71bf07afd"
+    },
+    {
+      "check": "ecatt_ams-xmin",
+      "method": "GET",
+      "path": "ecatt_ams_rest_services.get_map",
+      "rows": 0,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [],
+      "record_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "ecatt_ams-xmin",
+      "method": "POST",
+      "path": "ecatt_ams_rest_services.get_map",
+      "rows": 0,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [],
+      "record_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "case-qid-only",
+      "method": "GET",
+      "path": "case_rest_services.get_map",
+      "rows": 237,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility",
+        "ZIP"
+      ],
+      "record_hash": "e64c7c1f93469bade385f36410e65c2299efb687024f75e23f3d7475215ba9de"
+    },
+    {
+      "check": "case-qid-only",
+      "method": "POST",
+      "path": "case_rest_services.get_map",
+      "rows": 237,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility",
+        "ZIP"
+      ],
+      "record_hash": "e64c7c1f93469bade385f36410e65c2299efb687024f75e23f3d7475215ba9de"
+    },
+    {
+      "check": "case-bbox",
+      "method": "GET",
+      "path": "case_rest_services.get_map",
+      "rows": 237,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility",
+        "ZIP"
+      ],
+      "record_hash": "e64c7c1f93469bade385f36410e65c2299efb687024f75e23f3d7475215ba9de"
+    },
+    {
+      "check": "case-bbox",
+      "method": "POST",
+      "path": "case_rest_services.get_map",
+      "rows": 237,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility",
+        "ZIP"
+      ],
+      "record_hash": "e64c7c1f93469bade385f36410e65c2299efb687024f75e23f3d7475215ba9de"
+    },
+    {
+      "check": "case-tablelist",
+      "method": "GET",
+      "path": "case_rest_services.get_map",
+      "rows": 237,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility",
+        "ZIP"
+      ],
+      "record_hash": "e64c7c1f93469bade385f36410e65c2299efb687024f75e23f3d7475215ba9de"
+    },
+    {
+      "check": "case-tablelist",
+      "method": "POST",
+      "path": "case_rest_services.get_map",
+      "rows": 237,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "Facility",
+        "ZIP"
+      ],
+      "record_hash": "e64c7c1f93469bade385f36410e65c2299efb687024f75e23f3d7475215ba9de"
+    },
+    {
+      "check": "case-mapset-1",
+      "method": "GET",
+      "path": "case_rest_services.get_map",
+      "rows": 1,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "State"
+      ],
+      "record_hash": "ca76e3b0b736aa14692c2acc92368f4d3b0c42a62d11eb94461e076bd1c1d8d7"
+    },
+    {
+      "check": "case-mapset-1",
+      "method": "POST",
+      "path": "case_rest_services.get_map",
+      "rows": 1,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "State"
+      ],
+      "record_hash": "ca76e3b0b736aa14692c2acc92368f4d3b0c42a62d11eb94461e076bd1c1d8d7"
+    },
+    {
+      "check": "case-mapset-10",
+      "method": "GET",
+      "path": "case_rest_services.get_map",
+      "rows": 5,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "County"
+      ],
+      "record_hash": "a32d460fe21b70d3b03234202b0a61304cfbedac5d5fb312dfdda3b6f8ffc6c0"
+    },
+    {
+      "check": "case-mapset-10",
+      "method": "POST",
+      "path": "case_rest_services.get_map",
+      "rows": 5,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [
+        "County"
+      ],
+      "record_hash": "a32d460fe21b70d3b03234202b0a61304cfbedac5d5fb312dfdda3b6f8ffc6c0"
+    },
+    {
+      "check": "dfr-get_map",
+      "method": "GET",
+      "path": "dfr_rest_services.get_map",
+      "rows": 4,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "bc9c673ba0c639866a95e3afc9b3d55b0a02a197f8eec8410a43735a3a43ac66"
+    },
+    {
+      "check": "dfr-get_map",
+      "method": "POST",
+      "path": "dfr_rest_services.get_map",
+      "rows": 4,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "bc9c673ba0c639866a95e3afc9b3d55b0a02a197f8eec8410a43735a3a43ac66"
+    },
+    {
+      "check": "dfr-get_spatial_metadata",
+      "method": "GET",
+      "path": "dfr_rest_services.get_spatial_metadata",
+      "rows": 0,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "SpatialMetadata"
+      ],
+      "types": [],
+      "spatial_metadata": {
+        "RegistryID": "110000381989",
+        "Latitude83": "39.73456",
+        "Longitude83": "-82.66827",
+        "CollectionMethod": "ADDRESS MATCHING-HOUSE NUMBER",
+        "ReferencePoint": "CENTER OF A FACILITY OR STATION",
+        "CalculatedAccuracy": "30 Meters",
+        "CoordinateSourceSystem": "TRIS",
+        "CoordinateSourceSystemId": "43130KRSLH3165W"
+      },
+      "record_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "dfr-get_spatial_metadata",
+      "method": "POST",
+      "path": "dfr_rest_services.get_spatial_metadata",
+      "rows": 0,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "SpatialMetadata"
+      ],
+      "types": [],
+      "spatial_metadata": {
+        "RegistryID": "110000381989",
+        "Latitude83": "39.73456",
+        "Longitude83": "-82.66827",
+        "CollectionMethod": "ADDRESS MATCHING-HOUSE NUMBER",
+        "ReferencePoint": "CENTER OF A FACILITY OR STATION",
+        "CalculatedAccuracy": "30 Meters",
+        "CoordinateSourceSystem": "TRIS",
+        "CoordinateSourceSystemId": "43130KRSLH3165W"
+      },
+      "record_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "caa_poll_rpt-get_map",
+      "method": "GET",
+      "path": "caa_poll_rpt_rest_services.get_map",
+      "rows": 4,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "bc9c673ba0c639866a95e3afc9b3d55b0a02a197f8eec8410a43735a3a43ac66"
+    },
+    {
+      "check": "caa_poll_rpt-get_map",
+      "method": "POST",
+      "path": "caa_poll_rpt_rest_services.get_map",
+      "rows": 4,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "MapOutput"
+      ],
+      "types": [
+        "Facility"
+      ],
+      "record_hash": "bc9c673ba0c639866a95e3afc9b3d55b0a02a197f8eec8410a43735a3a43ac66"
+    },
+    {
+      "check": "caa_poll_rpt-get_spatial_metadata",
+      "method": "GET",
+      "path": "caa_poll_rpt_rest_services.get_spatial_metadata",
+      "rows": 0,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "SpatialMetadata"
+      ],
+      "types": [],
+      "spatial_metadata": {
+        "RegistryID": "110000381989",
+        "Latitude83": "39.73456",
+        "Longitude83": "-82.66827",
+        "CollectionMethod": "ADDRESS MATCHING-HOUSE NUMBER",
+        "ReferencePoint": "CENTER OF A FACILITY OR STATION",
+        "CalculatedAccuracy": "30 Meters",
+        "CoordinateSourceSystem": "TRIS",
+        "CoordinateSourceSystemId": "43130KRSLH3165W"
+      },
+      "record_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "caa_poll_rpt-get_spatial_metadata",
+      "method": "POST",
+      "path": "caa_poll_rpt_rest_services.get_spatial_metadata",
+      "rows": 0,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "SpatialMetadata"
+      ],
+      "types": [],
+      "spatial_metadata": {
+        "RegistryID": "110000381989",
+        "Latitude83": "39.73456",
+        "Longitude83": "-82.66827",
+        "CollectionMethod": "ADDRESS MATCHING-HOUSE NUMBER",
+        "ReferencePoint": "CENTER OF A FACILITY OR STATION",
+        "CalculatedAccuracy": "30 Meters",
+        "CoordinateSourceSystem": "TRIS",
+        "CoordinateSourceSystemId": "43130KRSLH3165W"
+      },
+      "record_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "ecatt_ams-get_rpt_map",
+      "method": "GET",
+      "path": "ecatt_ams_rest_services.get_rpt_map",
+      "rows": 1,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "MapOutput"
+      ],
+      "types": [
+        "Monitoring Station"
+      ],
+      "record_hash": "1c8f8a260f96dce12d27331ebdc895b0833d2de7ce6d4b7c9be5ad7312a9fb24"
+    },
+    {
+      "check": "ecatt_ams-get_rpt_map",
+      "method": "POST",
+      "path": "ecatt_ams_rest_services.get_rpt_map",
+      "rows": 1,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "MapOutput"
+      ],
+      "types": [
+        "Monitoring Station"
+      ],
+      "record_hash": "1c8f8a260f96dce12d27331ebdc895b0833d2de7ce6d4b7c9be5ad7312a9fb24"
+    },
+    {
+      "check": "ecatt_aqs-get_rpt_map",
+      "method": "GET",
+      "path": "ecatt_aqs_rest_services.get_rpt_map",
+      "rows": 1,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "QueryParameters",
+        "MapOutput"
+      ],
+      "types": [
+        "Monitoring Station"
+      ],
+      "record_hash": "45a2822a3d3a0b300fbe03aed469bf0ac1c5288da05af92479fb2cc1de0f880d"
+    },
+    {
+      "check": "ecatt_aqs-get_rpt_map",
+      "method": "POST",
+      "path": "ecatt_aqs_rest_services.get_rpt_map",
+      "rows": 1,
+      "facility_rows": 0,
+      "message": "Success",
+      "error": null,
+      "keys": [
+        "Message",
+        "QueryParameters",
+        "MapOutput"
+      ],
+      "types": [
+        "Monitoring Station"
+      ],
+      "record_hash": "45a2822a3d3a0b300fbe03aed469bf0ac1c5288da05af92479fb2cc1de0f880d"
+    },
+    {
+      "check": "unknown-qid",
+      "method": "GET",
+      "path": "cwa_rest_services.get_map",
+      "rows": 0,
+      "facility_rows": 0,
+      "message": null,
+      "error": null,
+      "keys": [
+        "MapOutput"
+      ],
+      "types": [],
+      "record_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

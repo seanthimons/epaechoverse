@@ -2320,7 +2320,7 @@ dfr_get_watersheds_post <- function(body, tidy = TRUE) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param p_id Either the EPA Facility Registry System's REGISTRY_ID for a facility or the facility identifier from an EPA System.
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
-#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @param format Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Detailed Facility Report endpoints
 #' @export
@@ -2340,7 +2340,7 @@ dfr_get_map <- function(output = NULL, p_id, callback = NULL, format = "tidy") {
 #' Detailed Facility Report Map Service
 #' 
 #' @noMd
-#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @param format Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @param body Request body.
 #' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Detailed Facility Report endpoints

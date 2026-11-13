@@ -416,7 +416,7 @@ ecattams_get_rpt_pollrose_post <- function(body) {
 #' - XML = Data model formatted as Extensible Markup Language.
 #' @param p_site_code The AMA site code of the station
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
-#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @param format Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Monitoring Station Hazardous Air Pollutant Report Services endpoints
 #' @export
@@ -435,7 +435,7 @@ ecattams_get_rpt_map <- function(output = NULL, p_site_code = NULL, callback = N
 #' ECATT Air Monitoring Station (AMS) HAP Report Service
 #' 
 #' @noMd
-#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @param format Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @param body Request body.
 #' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Monitoring Station Hazardous Air Pollutant Report Services endpoints

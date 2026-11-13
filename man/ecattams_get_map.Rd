@@ -49,7 +49,7 @@ ecattams_get_map(
 
 \item{ymax}{Maximum latitude value in decimal degrees.}
 
-\item{format}{Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.}
+\item{format}{Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.}
 }
 \value{
 A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.

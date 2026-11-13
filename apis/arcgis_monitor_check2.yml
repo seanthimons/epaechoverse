@@ -1,0 +1,108 @@
+api: arcgis_monitor_check2
+schemas:
+  files:
+  - schema/arcgis_monitor_check2.json
+  patterns: []
+  exclude: []
+selection:
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - HEAD
+  - OPTIONS
+  - TRACE
+  exclude: []
+helper: arcgis_monitor_check2_request
+authentication:
+  arcgis_token: arcgis_monitor_check2.arcgis_token
+defaults: {}
+groups:
+  arcgis_monitor_check2_layer_0:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /0/query
+    names:
+      GET /0/query: arcgis_monitor_check2_query_layer_0
+    defaults:
+      file: R/arcgis_monitor_check2_layer_0.R
+      docs:
+        tags:
+          family: layer_0 endpoints
+      response_policy: arcgis_monitor_check2_request_arcgis_response
+    operations:
+      GET /0/query:
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
+    format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_monitor_check2_query_layer_0:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+  arcgis_monitor_check2_service:
+    selection:
+      methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD
+      - OPTIONS
+      - TRACE
+      exclude: []
+      include:
+      - GET /identify
+    names:
+      GET /identify: arcgis_monitor_check2_identify
+    defaults:
+      file: R/arcgis_monitor_check2_service.R
+      docs:
+        tags:
+          family: service endpoints
+      response_policy: arcgis_monitor_check2_request_arcgis_response
+    operations:
+      GET /identify:
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
+    format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_monitor_check2_identify:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response

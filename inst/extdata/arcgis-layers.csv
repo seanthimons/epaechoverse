@@ -1,0 +1,22 @@
+service,layer,name,geometry_type,wkid,latest_wkid,pagination,url
+monitor_checks,0,city1,esriGeometryPoint,102100,3857,False,https://echogeo.epa.gov/arcgis/rest/services/monitor/ncc_arcgis_checks/MapServer/0
+wqi,0,Water Quality Monitoring Stations,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer/0
+wqi,1,High Concern,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer/1
+wqi,2,Concern,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer/2
+wqi,3,Possible Concern,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer/3
+wqi,4,No Concern,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer/4
+wqi,5,Only Rejected Samples,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer/5
+wqi,6,No Samples,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer/6
+wqi,7,No Samples - Other Pollutants,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer/7
+wqi,8,Monthly Sample Data,,,,True,https://echogeo.epa.gov/arcgis/rest/services/WQI/WQI_stations_with_data/MapServer/8
+monitor_check2,0,city1,esriGeometryPoint,102100,3857,False,https://echogeo.epa.gov/arcgis/rest/services/monitor/ncc_arcgis_check2/MapServer/0
+stormwater,0,Facility Finder Industrial Stormwater,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/ECHO/FacilityFinderStateStormWater/MapServer/0
+facilities,0,All ECHO Facilities,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/ECHO/Facilities/MapServer/0
+facilities,1,Air Facilities,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/ECHO/Facilities/MapServer/1
+facilities,2,CWA Facilities,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/ECHO/Facilities/MapServer/2
+facilities,3,RCRA Facilities,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/ECHO/Facilities/MapServer/3
+facilities,4,Inactive Facilities,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/ECHO/Facilities/MapServer/4
+facilities,5,Oil and Gas ICIS Air Facilities,esriGeometryPoint,102100,3857,True,https://echogeo.epa.gov/arcgis/rest/services/ECHO/Facilities/MapServer/5
+sample_cities,0,Cities,esriGeometryPoint,4326,4326,True,https://echogeo.epa.gov/arcgis/rest/services/SampleWorldCities/MapServer/0
+sample_cities,1,Continent,esriGeometryPolygon,4326,4326,True,https://echogeo.epa.gov/arcgis/rest/services/SampleWorldCities/MapServer/1
+sample_cities,2,World,esriGeometryPolygon,4326,4326,True,https://echogeo.epa.gov/arcgis/rest/services/SampleWorldCities/MapServer/2

@@ -10,7 +10,7 @@ echo_map_policy <- function(path, format, output) {
     stop('Formatted maps require output = "JSON"; use format = "raw" for XML or JSONP.', call. = FALSE)
   }
   if (format == 'sf' && !requireNamespace('sf', quietly = TRUE)) {
-    stop('Install the optional `sf` package to use format = "sf".', call. = FALSE)
+    stop('Install the `sf` package to use format = "sf".', call. = FALSE)
   }
   force(path)
   force(format)

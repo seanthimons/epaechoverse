@@ -31,6 +31,12 @@ services:
 - apis/pipeline.yml
 - apis/caa_csv.yml
 - apis/envirofacts.yml
+- apis/arcgis_facilities.yml
+- apis/arcgis_stormwater.yml
+- apis/arcgis_monitor_check2.yml
+- apis/arcgis_monitor_checks.yml
+- apis/arcgis_sample_cities.yml
+- apis/arcgis_wqi.yml
 selection:
   methods:
   - GET
@@ -59,4 +65,10 @@ defaults:
     max_bytes: ~
 callback_files:
 - dev/callbacks.R
-authentication: {}
+authentication:
+  arcgis_facilities.arcgis_token: ECHOVERSE_ARCGIS_FACILITIES_ARCGIS_TOKEN
+  arcgis_stormwater.arcgis_token: ECHOVERSE_ARCGIS_STORMWATER_ARCGIS_TOKEN
+  arcgis_monitor_check2.arcgis_token: ECHOVERSE_ARCGIS_MONITOR_CHECK2_ARCGIS_TOKEN
+  arcgis_monitor_checks.arcgis_token: ECHOVERSE_ARCGIS_MONITOR_CHECKS_ARCGIS_TOKEN
+  arcgis_sample_cities.arcgis_token: ECHOVERSE_ARCGIS_SAMPLE_CITIES_ARCGIS_TOKEN
+  arcgis_wqi.arcgis_token: ECHOVERSE_ARCGIS_WQI_ARCGIS_TOKEN

@@ -322,7 +322,7 @@ ecattams_get_qid_post <- function(body, tidy = TRUE) {
 #' @param ymin Minimum latitude value in decimal degrees.
 #' @param xmax Maximum longitude value in decimal degrees.
 #' @param ymax Maximum latitude value in decimal degrees.
-#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @param format Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Monitoring Station Hazardous Air Pollutant Search Services endpoints
 #' @export
@@ -354,7 +354,7 @@ ecattams_get_map <- function(output = NULL, qid, callback = NULL, tablelist = NU
 #' ECATT Air Monitoring Station (AMS) HAP SearchMap Service
 #' 
 #' @noMd
-#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @param format Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @param body Request body.
 #' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Monitoring Station Hazardous Air Pollutant Search Services endpoints
