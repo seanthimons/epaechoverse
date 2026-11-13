@@ -51,7 +51,7 @@ ecattaqs_get_rpt_facs_post <- function(body = NULL) {
 #' @param p_site_code Enter the AQS Site Code(s) for the monitoring stations. Provide multiple values as a comma-delimited list.
 #' @param p_map_facs p_map_facs
 #' @param callback JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
-#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @param format Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Monitoring Station Criteria Air Pollutant Report Services endpoints
 #' @export
@@ -71,7 +71,7 @@ ecattaqs_get_rpt_map <- function(output = NULL, p_site_code = NULL, p_map_facs =
 #' ECATT Air Monitoring Station (AMS) CAP Report Service
 #' 
 #' @noMd
-#' @param format Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
+#' @param format Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.
 #' @param body Request body.
 #' @return A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.
 #' @family Air Monitoring Station Criteria Air Pollutant Report Services endpoints

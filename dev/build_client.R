@@ -11,7 +11,8 @@
 # (DESCRIPTION, NAMESPACE, LICENSE, R/ except the client-owned echo_response_policy.R,
 # envirofacts_path.R, envirofacts_tidy.R, echo_tidy.R, echo_services.R, echo_formatters.R and
 # echo_pages.R, man/, schema/, apis/*.yml, specmill*.yml,
-# .specmill/, .Rbuildignore) aside first; tests/ and inst/ stay. To change the
+# .specmill/, .Rbuildignore) aside first; tests/ and inst/ stay. Preserve the
+# client-owned ArcGIS formatter/query R files and ArcGIS request helpers too. To change the
 # client afterwards, edit apis/*.yml and run dev/regenerate.R (plan -> apply -> check);
 # generation needs the callbacks in dev/callbacks.R.
 #
@@ -468,9 +469,10 @@ text <- sub(
   ),
   text
 )
-stopifnot(grepl('Imports: httr2, jsonlite, curl\n', text, fixed = TRUE))
-text <- sub('Imports: httr2, jsonlite, curl\n', 'Imports: httr2, jsonlite, curl, tibble\n', text, fixed = TRUE)
-text <- sub('Suggests: testthat', 'Suggests: testthat, sf', text, fixed = TRUE)
+imports <- trimws(strsplit(read.dcf(description)[1L, 'Imports'], ',')[[1L]])
+text <- sub('Imports:[^\n]*(\n[ \t]+[^\n]*)*',
+            paste0('Imports: ', paste(unique(c(imports, 'tibble', 'sf')), collapse = ', ')),
+            text, perl = TRUE)
 writeLines(text, description)
 ignore <- file.path(root, '.Rbuildignore')
 rules <- readLines(ignore)

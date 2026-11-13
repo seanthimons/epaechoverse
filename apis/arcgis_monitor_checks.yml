@@ -1,14 +1,3 @@
-# One file per API. Tag groups below control naming and R-file layout.
-# selection: shared method limits and path exclusions for this API only.
-# Package limits still apply; groups can only narrow selection further.
-# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
-# helper/authentication/defaults are inherited by every group.
-# Under groups, edit names and defaults.file; keep excluded include/name entries.
-# Group selection.exclude is for additional restrictions, not copies of API policy.
-# Group defaults and operation overrides take precedence over API defaults.
-# defaults: {} inherits project settings; add batch limits here to override them.
-# documentation: true # Optional API override; otherwise inherit the project.
-# Never put credential tokens here; authentication values reference project keys.
 api: arcgis_monitor_checks
 schemas:
   files:
@@ -53,8 +42,27 @@ groups:
         tags:
           family: layer_0 endpoints
       response_policy: arcgis_monitor_checks_request_arcgis_response
-    operations: {}
+    operations:
+      GET /0/query:
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_monitor_checks_query_layer_0:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
   arcgis_monitor_checks_service:
     selection:
       methods:
@@ -77,5 +85,24 @@ groups:
         tags:
           family: service endpoints
       response_policy: arcgis_monitor_checks_request_arcgis_response
-    operations: {}
+    operations:
+      GET /identify:
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_monitor_checks_identify:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response

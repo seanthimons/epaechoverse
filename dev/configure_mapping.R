@@ -33,7 +33,7 @@ configure_mapping <- function(root) {
         metadata <- grepl('get_spatial_metadata$', op)
         entry$operations[[op]] <- list(
           docs = list(return = if (metadata) 'A provenance tibble (format = "tidy") or decoded response (format = "raw").' else 'A map tibble, sf points, GeoJSON FeatureCollection string, or decoded response, selected by format. Map coordinates use EPSG:4326; clusters are representative points.'),
-          extra_parameters = list(format = list(type = 'string', default = 'tidy', description = if (metadata) 'Client result format: tidy or raw. Coordinate provenance is not converted to geometry.' else 'Client result format: tidy (default), sf (optional sf package), geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.')),
+          extra_parameters = list(format = list(type = 'string', default = 'tidy', description = if (metadata) 'Client result format: tidy or raw. Coordinate provenance is not converted to geometry.' else 'Client result format: tidy (default), sf, geojson (string), or raw. Formatted output requires JSON. Metadata is retained in the map attribute (GeoJSON: echo member); .layer distinguishes record arrays. Missing coordinates yield empty geometries.')),
           request = list(arguments = list(
             method = list(value = sub(' .*$', '', op)),
             path = list(value = sub('^[^ ]+ ', '', op)),

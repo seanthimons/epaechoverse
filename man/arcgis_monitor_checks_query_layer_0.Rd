@@ -8,7 +8,8 @@ arcgis_monitor_checks_query_layer_0(
   where = "1=1",
   outFields = "*",
   returnGeometry = TRUE,
-  f = "json"
+  f = "json",
+  format = "tidy"
 )
 }
 \arguments{
@@ -19,9 +20,11 @@ arcgis_monitor_checks_query_layer_0(
 \item{returnGeometry}{returnGeometry}
 
 \item{f}{f}
+
+\item{format}{Client result: tidy tibble (default), sf, geojson string, or raw. Spatial output is transformed from the reported CRS to EPSG:4326; tidy retains native geometry. Metadata and pagination are retained.}
 }
 \value{
-Decoded response returned by the client request helper.
+A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string, or native response/record list, selected by format. Metadata is retained in the arcgis attribute and GeoJSON arcgis member.
 }
 \description{
 Query city1

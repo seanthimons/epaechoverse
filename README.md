@@ -160,7 +160,7 @@ Non-Esri `*_get_map()` and `*_get_rpt_map()` endpoints (including their
 search <- cwa_get_facilities(p_st = 'RI')
 qid <- search$QueryID
 points <- cwa_get_map(qid = qid)                     # format = 'tidy'
-spatial <- cwa_get_map(qid = qid, format = 'sf')       # requires optional sf
+spatial <- cwa_get_map(qid = qid, format = 'sf')       # sf points
 geojson <- cwa_get_map(qid = qid, format = 'geojson')  # GeoJSON string
 original <- cwa_get_map(qid = qid, format = 'raw')    # decoded API response
 post <- cwa_get_map_post(list(qid = qid), format = 'tidy')
@@ -291,31 +291,49 @@ Prefixes are `arcgis_facilities`, `arcgis_stormwater`, `arcgis_wqi`,
 The monitor and sample-city services are diagnostics/demo data.
 
 ```r
-# One bounded page of Rhode Island facilities, with native geometry
-features <- arcgis_facilities_query_layer_0(
+# A tibble with attributes and native geometry in the .geometry list-column
+facilities <- arcgis_facilities_query_layer_0(
   where = "FAC_STATE = 'RI'", resultRecordCount = 5, all_pages = FALSE
 )
-# Keep the response envelope and request an explicit output reference system
+points <- arcgis_facilities_query_layer_0(
+  where = "FAC_STATE = 'RI'", resultRecordCount = 5, all_pages = FALSE,
+  format = 'sf'
+)
+geojson <- arcgis_facilities_query_layer_0(
+  where = "FAC_STATE = 'RI'", resultRecordCount = 5, all_pages = FALSE,
+  format = 'geojson'
+)
+# Keep one native envelope and its server flags
 page <- arcgis_query_page('facilities', 0, where = "FAC_STATE = 'RI'",
-                         outFields = 'REGISTRY_ID', resultRecordCount = 5,
-                         outSR = 4326)
+                         resultRecordCount = 5, format = 'raw')
 page$spatialReference
 ```
 
-Paged wrappers return native feature records, including attributes and geometry.
-`resultRecordCount` controls both page size and offset stride; `max_pages` bounds
-requests and warns when it stops a longer result. `all_pages = FALSE` returns
-one page of feature records. Nonpaging layers return the native envelope and
-have no `all_pages` argument. `arcgis_query_page()` always returns one complete
-native JSON envelope, including CRS, fields and `exceededTransferLimit`; it also
-accepts native spatial query arguments through `...`. It does not paginate.
-Check transfer-limit flags before assuming a complete extract.
+All generated ArcGIS queries, identify calls and related-record calls support
+`format = 'tidy' | 'sf' | 'geojson' | 'raw'`. The shared post-request hook returns
+a tibble by default. It preserves attribute types and identifiers, native
+geometry in `.geometry`, layer/service identity and related-record parent IDs.
+`attr(result, 'arcgis')` retains field definitions, coordinate systems, group
+metadata and server flags. Paged results keep their `pagination` attribute.
 
-Coordinates are **not automatically converted** to sf or GeoJSON. Several layers
-advertise Web Mercator, not longitude/latitude; use the response's
-`spatialReference` or explicitly request `outSR`. The installed
-`extdata/arcgis-layers.csv` lists captured layer IDs and reference systems.
-ECHO's existing `format` argument does not apply to these ArcGIS wrappers.
+Both `sf` and GeoJSON output transform the **reported** source coordinate system
+to EPSG:4326. GeoJSON is a FeatureCollection string with metadata in its `arcgis`
+member. Missing geometries remain empty sf geometries or GeoJSON nulls; records
+are retained. Missing or unsupported source CRS and quantized or measured geometry raise
+errors for spatial output; use tidy/raw to inspect them. No CRS is inferred from
+coordinate magnitudes or field names. sf is a hard dependency; Linux source
+builds need GDAL, GEOS, PROJ and UDUNITS development libraries.
+
+Formatting runs once after paged responses combine. `resultRecordCount` controls
+page size and offset stride; `max_pages` bounds requests and warns when it stops
+a longer result. `all_pages = FALSE` formats one page. Nonpaging layers have no
+`all_pages` argument. Raw paged wrappers retain native feature/group lists;
+raw identify/nonpaging calls retain envelopes. `arcgis_query_page()` never pages,
+uses the same formatter, and returns a complete native envelope with
+`format = 'raw'`. It also accepts native spatial query arguments through `...`.
+Check transfer-limit flags before assuming a raw page is a complete extract.
+The installed `extdata/arcgis-layers.csv` lists captured layer IDs and source CRSs.
+The API `f` parameter selects JSON encoding; client `format` is not sent to EPA.
 
 ECHOGov redirects to EPA SAML login and is excluded from the public captures.
 `ECHO/getFacilities` and `Utilities/RasterUtilities` are GPServers, and

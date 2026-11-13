@@ -1,8 +1,10 @@
 # echoverse development version
 
 * Add 35 public ArcGIS query, related-record and identify operations from six
-  captured MapServers. Pin specmill v0.3.1 and retain native geometry and bounded
-  pagination. Add arcgis_query_page() for single native response envelopes and
+  captured MapServers. Pin specmill v0.3.1 and retain bounded pagination.
+  A shared post-request hook returns tibbles by default, sf or GeoJSON in
+  EPSG:4326, or native results with format = "raw". sf is now an Imports
+  dependency. Add arcgis_query_page() for single native response envelopes and
   spatial query arguments. Record protected and unsupported service exclusions.
 * Chemical occurrence examples now use explicit run_occurrence() arguments and
   return a results list. Sourcing the helper no longer starts requests.

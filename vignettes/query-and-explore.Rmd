@@ -147,7 +147,7 @@ before passing an ID to `dfr_get_dfr()` or a case report.
 
 Non-Esri map endpoints use `format` for the R result, independently of the
 API's `output` flag. The default is a tibble with numeric LAT/LON, text
-identifiers, and `.layer` indicating the source record array. `sf` is optional.
+identifiers, and `.layer` indicating the source record array. `sf` is an installed dependency.
 
 ```{r mapping, eval=FALSE}
 search <- cwa_get_facilities(p_st = "RI")
@@ -174,39 +174,48 @@ without guessing a datum from Latitude83/Longitude83. XML/JSONP requires
 
 ## Query ArcGIS mapping layers
 
-ArcGIS queries use different arguments and responses from ECHO search maps.
-Layer IDs come from the captured service directory, listed in the installed
-`extdata/arcgis-layers.csv`. The raw-response helper below preserves the
-reported spatial reference and transfer-limit flag.
+ArcGIS queries use different arguments from ECHO search maps, but share the
+client result choices `tidy`, `sf`, `geojson` and `raw`. Layer IDs are listed in
+the installed `extdata/arcgis-layers.csv`.
 
 ```{r arcgis-example, eval=FALSE}
-features <- arcgis_facilities_query_layer_0(
+facilities <- arcgis_facilities_query_layer_0(
   where = "FAC_STATE = 'RI'", outFields = 'REGISTRY_ID,FAC_STATE',
   resultRecordCount = 5, all_pages = FALSE
 )
-features[[1]]$attributes
-features[[1]]$geometry
+facilities$REGISTRY_ID
+facilities$.geometry
 
-page <- arcgis_query_page(
-  'facilities', layer = 0, where = "FAC_STATE = 'RI'",
-  outFields = 'REGISTRY_ID,FAC_STATE', resultRecordCount = 5, outSR = 4326
+points <- arcgis_facilities_query_layer_0(
+  where = "FAC_STATE = 'RI'", resultRecordCount = 5,
+  all_pages = FALSE, format = 'sf'
 )
+sf::st_crs(points) # EPSG:4326, transformed from the reported native CRS
+
+geojson <- arcgis_facilities_query_layer_0(
+  where = "FAC_STATE = 'RI'", resultRecordCount = 5,
+  all_pages = FALSE, format = 'geojson'
+)
+
+page <- arcgis_query_page('facilities', layer = 0, where = "FAC_STATE = 'RI'",
+                         resultRecordCount = 5, format = 'raw')
 page$spatialReference
 page$exceededTransferLimit
 ```
 
-To traverse a paginated layer, leave `all_pages = TRUE` and set an explicit
-`max_pages`. Server transfer-limit flags control completion; the helper warns
-when it reaches the page cap. Nonpaging layers retain their native response
-envelopes and have no paging controls. Related-record queries preserve groups.
-`arcgis_query_page()` also accepts native `geometry`, `geometryType`, `inSR`
-and `spatialRel` arguments for a single spatially filtered request.
+The hook formats results after paging finishes. Set an explicit `max_pages` when
+traversing a paginated layer. Metadata, layer IDs and related-record parent IDs
+survive combination. Missing geometry keeps its row. Identify and nonpaging
+calls use the same formats. Spatial outputs transform from reported CRS metadata
+to EPSG:4326; a missing CRS produces an error rather than a guess. Tidy output
+keeps native geometry, and `attr(result, 'arcgis')` retains source metadata.
+GeoJSON includes that metadata in its `arcgis` member. `format = 'raw'` preserves
+the native result shape.
 
-ArcGIS geometry remains native JSON. Do not treat a Web Mercator x/y pair as
-longitude/latitude or apply the ECHO `format` argument. Request `outSR = 4326`
-when geographic coordinates are required and verify the returned reference
-system. ECHOGov requires EPA login; GPServer and SymbolServer services are
-outside specmill 0.3.1's importer support.
+`arcgis_query_page()` accepts native `geometry`, `geometryType`, `inSR` and
+`spatialRel` arguments for one spatially filtered request. With `format = 'raw'`
+it retains the complete envelope and transfer-limit flag. ECHOGov requires EPA
+login; GPServer and SymbolServer services remain outside the importer support.
 
 ## Chemical occurrence example scripts
 

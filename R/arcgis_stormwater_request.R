@@ -543,6 +543,13 @@ arcgis_stormwater_request_each <- function(send, items, size, on_error = 'stop',
 # batched wrapper's, so tables are typed once. Every control the pagination option could change is fixed here,
 # so the shape of a wrapper's result never depends on it. A dry run returns its first prepared request.
 arcgis_stormwater_request_pages <- function(send, parameter, start, max_pages, completed = NULL, mode = 'page', next_cursor = NULL, items = NULL, error_policy = 'stop', warn_limits = TRUE, warn_errors = TRUE, stop_on_empty = TRUE, on_limit = NULL, size_parameter = NULL, page_size = NULL, advance = NULL) {
+  native_arcgis_pages <- base::list()
+  native_arcgis_send <- send
+  send <- function(...) {
+    value <- native_arcgis_send(...)
+    if (!base::inherits(value, "httr2_request")) native_arcgis_pages[base::length(native_arcgis_pages) + 1L] <<- base::list(value)
+    value
+  }
   for (callback in base::list(completed, next_cursor, items, on_limit, advance)) if (!base::is.null(callback) && !base::is.function(callback)) base::stop('Pagination callbacks must be functions', call. = FALSE)
   pages <- base::list()
   prepared <- NULL
@@ -567,6 +574,7 @@ arcgis_stormwater_request_pages <- function(send, parameter, start, max_pages, c
   if (warn_limits && !base::is.null(on_limit) && base::length(pages) >= max_pages) on_limit(paged, max_pages)
   result <- arcgis_stormwater_request_combine(pages)
   base::attr(result, 'pagination') <- base::list(requests = base::as.integer(paged$requests), item_count = base::as.integer(paged$item_count), stop_reason = paged$stop_reason)
+  base::attr(result, "arcgis_pages") <- native_arcgis_pages
   result
 }
 

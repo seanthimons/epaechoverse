@@ -1,14 +1,3 @@
-# One file per API. Tag groups below control naming and R-file layout.
-# selection: shared method limits and path exclusions for this API only.
-# Package limits still apply; groups can only narrow selection further.
-# schemas.exclude filters filenames; selection.exclude filters endpoint paths.
-# helper/authentication/defaults are inherited by every group.
-# Under groups, edit names and defaults.file; keep excluded include/name entries.
-# Group selection.exclude is for additional restrictions, not copies of API policy.
-# Group defaults and operation overrides take precedence over API defaults.
-# defaults: {} inherits project settings; add batch limits here to override them.
-# documentation: true # Optional API override; otherwise inherit the project.
-# Never put credential tokens here; authentication values reference project keys.
 api: arcgis_wqi
 schemas:
   files:
@@ -64,8 +53,19 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_completed
-          items: arcgis_wqi_request_arcgis_features
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
       GET /0/queryRelatedRecords:
         pagination:
           mode: offset
@@ -74,9 +74,36 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_related_completed
-          items: arcgis_wqi_request_arcgis_related
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_query_layer_0:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+      arcgis_wqi_query_related_records_layer_0:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
   arcgis_wqi_layer_1:
     selection:
       methods:
@@ -110,8 +137,19 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_completed
-          items: arcgis_wqi_request_arcgis_features
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
       GET /1/queryRelatedRecords:
         pagination:
           mode: offset
@@ -120,9 +158,36 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_related_completed
-          items: arcgis_wqi_request_arcgis_related
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_query_layer_1:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+      arcgis_wqi_query_related_records_layer_1:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
   arcgis_wqi_layer_2:
     selection:
       methods:
@@ -156,8 +221,19 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_completed
-          items: arcgis_wqi_request_arcgis_features
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
       GET /2/queryRelatedRecords:
         pagination:
           mode: offset
@@ -166,9 +242,36 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_related_completed
-          items: arcgis_wqi_request_arcgis_related
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_query_layer_2:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+      arcgis_wqi_query_related_records_layer_2:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
   arcgis_wqi_layer_3:
     selection:
       methods:
@@ -202,8 +305,19 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_completed
-          items: arcgis_wqi_request_arcgis_features
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
       GET /3/queryRelatedRecords:
         pagination:
           mode: offset
@@ -212,9 +326,36 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_related_completed
-          items: arcgis_wqi_request_arcgis_related
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_query_layer_3:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+      arcgis_wqi_query_related_records_layer_3:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
   arcgis_wqi_layer_4:
     selection:
       methods:
@@ -248,8 +389,19 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_completed
-          items: arcgis_wqi_request_arcgis_features
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
       GET /4/queryRelatedRecords:
         pagination:
           mode: offset
@@ -258,9 +410,36 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_related_completed
-          items: arcgis_wqi_request_arcgis_related
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_query_layer_4:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+      arcgis_wqi_query_related_records_layer_4:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
   arcgis_wqi_layer_5:
     selection:
       methods:
@@ -294,8 +473,19 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_completed
-          items: arcgis_wqi_request_arcgis_features
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
       GET /5/queryRelatedRecords:
         pagination:
           mode: offset
@@ -304,9 +494,36 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_related_completed
-          items: arcgis_wqi_request_arcgis_related
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_query_layer_5:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+      arcgis_wqi_query_related_records_layer_5:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
   arcgis_wqi_layer_6:
     selection:
       methods:
@@ -340,8 +557,19 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_completed
-          items: arcgis_wqi_request_arcgis_features
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
       GET /6/queryRelatedRecords:
         pagination:
           mode: offset
@@ -350,9 +578,36 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_related_completed
-          items: arcgis_wqi_request_arcgis_related
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_query_layer_6:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+      arcgis_wqi_query_related_records_layer_6:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
   arcgis_wqi_layer_7:
     selection:
       methods:
@@ -384,9 +639,29 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_completed
-          items: arcgis_wqi_request_arcgis_features
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_query_layer_7:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
   arcgis_wqi_layer_8:
     selection:
       methods:
@@ -420,8 +695,19 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_completed
-          items: arcgis_wqi_request_arcgis_features
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
       GET /8/queryRelatedRecords:
         pagination:
           mode: offset
@@ -430,9 +716,36 @@ groups:
           page_size: 2000
           start: 0
           completed: arcgis_wqi_request_arcgis_related_completed
-          items: arcgis_wqi_request_arcgis_related
+          items: arcgis_page_items
           stop_on_empty: no
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_query_layer_8:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
+      arcgis_wqi_query_related_records_layer_8:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response
+        post_combine:
+        - arcgis_post_combine
   arcgis_wqi_service:
     selection:
       methods:
@@ -455,5 +768,24 @@ groups:
         tags:
           family: service endpoints
       response_policy: arcgis_wqi_request_arcgis_response
-    operations: {}
+    operations:
+      GET /identify:
+        extra_parameters:
+          format:
+            type: string
+            default: tidy
+            description: 'Client result: tidy tibble (default), sf, geojson string,
+              or raw. Spatial output is transformed from the reported CRS to EPSG:4326;
+              tidy retains native geometry. Metadata and pagination are retained.'
+        docs:
+          return: A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string,
+            or native response/record list, selected by format. Metadata is retained
+            in the arcgis attribute and GeoJSON arcgis member.
     format: arcgis-rest
+    hook_callback: arcgis_hook
+    hooks:
+      arcgis_wqi_identify:
+        pre_request:
+        - arcgis_validate_format
+        post_response:
+        - arcgis_post_response

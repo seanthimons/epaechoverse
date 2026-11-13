@@ -37,3 +37,6 @@ local({
     schemas = unique(c(schemas, file.path(root, 'dev/arcgis/directory.json'))),
     choices = choices, review = FALSE, mode = 'apply'))
 })
+
+source("dev/configure_arcgis_format.R")
+configure_arcgis_format(root)

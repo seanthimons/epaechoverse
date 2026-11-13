@@ -50,15 +50,24 @@ transport policy require deliberate review rather than another initialization.
 
 ## Response and geometry contracts
 
-Generated paged wrappers return native feature records and use server transfer
-flags, captured page limits, caller page size and a bounded page cap. Related
-queries preserve groups. Nonpaging queries retain envelopes. The public
-`arcgis_query_page()` helper retains the entire envelope for one native request,
-including spatialReference and exceededTransferLimit, and accepts native spatial
-filters and output reference systems. It does not infer a CRS or silently
-convert ArcGIS geometry to sf/GeoJSON. Several EPA layers report WKID 102100 /
-latestWKID 3857; the city demo reports 4326, and the monthly sample table has no
-geometry. Use the response's reference system or request outSR explicitly.
+Generated ArcGIS operations use the shared client-owned post-request hook with
+`format = tidy | sf | geojson | raw`. A pre-hook validates the client format,
+and the transport's ArcGIS response policy still raises API errors. Single
+responses format immediately; paged requests retain their native envelopes
+until the post-combine hook runs, so completion checks see unmodified server
+flags and formatting retains metadata even for empty pages. The small collector
+in each client-owned `_pages` helper is configured idempotently by
+`dev/configure_arcgis_format.R`; it does not alter offset/limit/completion logic.
+
+Tidy output preserves native attribute types and geometry, with service/layer
+and related-record parent IDs. sf and GeoJSON transform from the reported source
+CRS to EPSG:4326. GDAL's ESRIJSON driver handles point, multipoint, line and polygon
+ring geometry, including holes. Missing geometries keep their records; unknown
+source CRS and quantized or measured geometry cannot be silently converted. Metadata lives
+in the `arcgis` attribute, or the GeoJSON `arcgis` member. Raw generated wrappers
+retain their existing feature/group/envelope shape. `arcgis_query_page()` uses
+the same formatter and returns a complete single-page native envelope when
+`format = 'raw'`.
 
 `live-checks.json` records bounded zero-match queries and identify calls for all
 35 emitted operations, plus a nonempty two-request Facilities paging check.
@@ -66,3 +75,8 @@ Zero-match queries establish that the operations accept requests, not that the
 entire underlying datasets are correct or complete. Raw-response output-SR
 checks verify a bounded Facilities request with outSR=4326 and matching native
 reference metadata. No write/edit operations were exercised.
+
+`Rscript dev/verify_arcgis_format.R` checks bounded live tibble, sf and GeoJSON
+output plus two-page sf output. It writes format-checks.json. Offline fixtures
+cover null and empty geometries, missing CRS, typed attributes, polygon holes,
+lines/multipoints, identify layers, related-record parent IDs and empty pages.

@@ -2,9 +2,9 @@
 % Please edit documentation in R/arcgis_query.R
 \name{arcgis_query_page}
 \alias{arcgis_query_page}
-\title{Request one native ArcGIS query response}
+\title{Request and format one ArcGIS query response}
 \usage{
-arcgis_query_page(service, layer = 0L, where = "1=0", ...)
+arcgis_query_page(service, layer = 0L, where = "1=0", ..., format = "tidy")
 }
 \arguments{
 \item{service}{One of facilities, stormwater, wqi, monitor_checks,
@@ -19,24 +19,27 @@ extdata/arcgis-layers.csv inventory, or the ArcGIS service directory.}
 resultRecordCount, outSR, geometry, geometryType, inSR or spatialRel.
 Supply geometry as JSON text, not an sf object. The response format is JSON.
 Offset and page-size controls work only on layers that advertise pagination.}
+
+\item{format}{Client output: tidy, sf, geojson or raw. Spatial output uses EPSG:4326.}
 }
 \value{
-The decoded native response list, or a prepared httr2 request when
+A tibble, sf object, GeoJSON string, native response with format = 'raw',
+  or a prepared httr2 request when
   echoverse_dry_run(TRUE) is active. Check exceededTransferLimit before treating
   one page as a complete extract. Root ArcGIS service errors raise R errors.
 }
 \description{
 Query a captured public EPA MapServer layer or table. This single-request
-escape hatch retains the complete JSON envelope, including spatialReference,
-fields, features and exceededTransferLimit. Unlike the generated paged
-wrappers, it does not extract or combine features. Geometry stays in ArcGIS
-format, with the reference system reported by the response. No CRS is guessed.
+helper never paginates. Choose format = 'raw' to retain the complete JSON
+envelope including spatialReference, fields, features and exceededTransferLimit.
+Formatted output retains metadata; sf and GeoJSON transform the reported
+coordinate system to EPSG:4326. No source CRS is guessed.
 }
 \examples{
 \dontrun{
 page <- arcgis_query_page('facilities', 0, where = "FAC_STATE = 'RI'",
                           outFields = 'REGISTRY_ID', resultRecordCount = 5,
-                          outSR = 4326)
+                          outSR = 4326, format = 'raw')
 page$spatialReference
 }
 }

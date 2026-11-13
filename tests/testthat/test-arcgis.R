@@ -14,7 +14,7 @@ test_that('ArcGIS paging obeys server flags, changes offset by page size, and ke
     # A sparse page does not stop paging while the server advertises more.
     httr2::response_json(body = arcgis_response(if (length(offsets) == 1) 1L else 2:3,
                                          more = length(offsets) == 1))
-  }, arcgis_facilities_query_layer_0(resultRecordCount = 2L, max_pages = 3L))
+  }, arcgis_facilities_query_layer_0(resultRecordCount = 2L, max_pages = 3L, format = 'raw'))
   expect_equal(offsets, c('0', '2'))
   expect_length(result, 3L)
   expect_equal(result[[1]]$geometry$x, -7900000)
@@ -30,7 +30,7 @@ test_that('ArcGIS single-page raw helper retains CRS and native query parameters
     expect_equal(params$geometryType, 'esriGeometryEnvelope')
     expect_equal(params$f, 'json')
     httr2::response_json(body = envelope)
-  }, arcgis_query_page('facilities', 0L, where = "STATE = 'RI'", outSR = 4326,
+  }, arcgis_query_page('facilities', 0L, where = "FAC_STATE = 'RI'", format = 'raw', outSR = 4326,
                        geometry = '-72,41,-71,42', geometryType = 'esriGeometryEnvelope'))
   expect_equal(result$spatialReference$latestWkid, 3857)
   expect_true(result$exceededTransferLimit)
@@ -42,7 +42,7 @@ test_that('ArcGIS single-page raw helper retains CRS and native query parameters
 test_that('ArcGIS service errors sent as HTTP 200 raise without echoing server messages', {
   expect_error(httr2::with_mocked_responses(function(req) {
     httr2::response_json(body = list(error = list(code = 400L, message = 'private query text')))
-  }, arcgis_facilities_query_layer_0(all_pages = FALSE)),
+  }, arcgis_facilities_query_layer_0(all_pages = FALSE, format = 'raw')),
   '^ArcGIS service error \\(400\\)$', class = 'specmill_call_error')
 })
 
@@ -50,7 +50,7 @@ test_that('ArcGIS nonpaging layers retain envelopes and omit offset controls', {
   expect_false('all_pages' %in% names(formals(arcgis_monitor_checks_query_layer_0)))
   envelope <- arcgis_response(1L)
   result <- httr2::with_mocked_responses(function(req) httr2::response_json(body = envelope),
-                                        arcgis_monitor_checks_query_layer_0())
+                                        arcgis_monitor_checks_query_layer_0(format = 'raw'))
   expect_equal(result$spatialReference$wkid, 102100)
 })
 
@@ -62,7 +62,7 @@ test_that('related-record paging probes a full page without a transfer flag', {
     httr2::response_json(body = list(relatedRecordGroups = list(
       list(objectId = 7L, relatedRecords = records))))
   }, arcgis_wqi_query_related_records_layer_0(objectIds = '7', relationshipId = 0L,
-                                               resultRecordCount = 1L, max_pages = 3L))
+                                               resultRecordCount = 1L, max_pages = 3L, format = 'raw'))
   expect_equal(offsets, c('0', '1'))
   expect_equal(result[[1]]$objectId, 7L)
   expect_equal(result[[1]]$relatedRecords[[1]]$attributes$SAMPLE, 'a')
@@ -71,6 +71,6 @@ test_that('related-record paging probes a full page without a transfer flag', {
 test_that('ArcGIS page caps warn rather than silently reporting complete results', {
   expect_warning(result <- httr2::with_mocked_responses(function(req) {
     httr2::response_json(body = arcgis_response(1L, more = TRUE))
-  }, arcgis_facilities_query_layer_0(resultRecordCount = 1L, max_pages = 1L)))
+  }, arcgis_facilities_query_layer_0(resultRecordCount = 1L, max_pages = 1L, format = 'raw')))
   expect_equal(attr(result, 'pagination')$stop_reason, 'max_pages')
 })

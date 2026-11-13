@@ -11,6 +11,7 @@ arcgis_facilities_query_layer_2(
   resultOffset = 0L,
   resultRecordCount = 1000L,
   f = "json",
+  format = "tidy",
   all_pages = TRUE,
   max_pages = 100L
 )
@@ -28,12 +29,14 @@ arcgis_facilities_query_layer_2(
 
 \item{f}{f}
 
+\item{format}{Client result: tidy tibble (default), sf, geojson string, or raw. Spatial output is transformed from the reported CRS to EPSG:4326; tidy retains native geometry. Metadata and pagination are retained.}
+
 \item{all_pages}{TRUE (the default) requests page after page, starting at resultOffset, until a page comes back empty or the client says it was the last or max_pages is reached, and returns the pages combined. FALSE requests only the page given in resultOffset.}
 
 \item{max_pages}{Maximum number of pages requested when all_pages is TRUE. Reaching it stops paging with a warning; attr(result, 'pagination')$stop_reason records why paging stopped.}
 }
 \value{
-Decoded response returned by the client request helper. With all_pages = TRUE the pages are combined, and attr(result, 'pagination') lists requests, item_count and stop_reason.
+A tibble, sf object in EPSG:4326, GeoJSON FeatureCollection string, or native response/record list, selected by format. Metadata is retained in the arcgis attribute and GeoJSON arcgis member.
 }
 \description{
 Query CWA Facilities
