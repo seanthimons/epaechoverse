@@ -1,3 +1,9 @@
+# echoverse 0.2.1
+
+* Add a step-by-step guide and a credentials template for the chemical
+  occurrence example scripts (`inst/examples/README.md` and
+  `inst/examples/Renviron.example`).
+
 # echoverse 0.2.0
 
 * Add 35 public ArcGIS query, related-record and identify operations from six
