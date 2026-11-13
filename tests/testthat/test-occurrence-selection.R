@@ -1,14 +1,10 @@
-# Load only pure selection helpers; do not execute example network requests.
+# Sourcing defines helpers without installing dependencies or making requests.
 occurrence_selection_helpers <- function() {
   skip_if_not_installed('dplyr')
   path <- system.file('examples', 'occurrence_chemicals.R', package = 'echoverse', mustWork = TRUE)
-  env <- new.env(parent = asNamespace('dplyr'))
+  env <- new.env(parent = globalenv())
   sys.source(system.file('examples', 'occurrence_mapping.R', package = 'echoverse', mustWork = TRUE), envir = env)
-  wanted <- c('read_chemicals', 'read_aqs_scope', 'match_aqs_parameters')
-  for (expr in parse(path)) {
-    if (is.call(expr) && identical(expr[[1]], as.name('<-')) &&
-        is.symbol(expr[[2]]) && as.character(expr[[2]]) %in% wanted) eval(expr, env)
-  }
+  source(path, local = env)
   env
 }
 
@@ -98,4 +94,59 @@ test_that('SYR4 archive URLs come from the EPA page rather than chemical-specifi
                  '<a href="https://other.example/syr4.zip">Other</a>')
   expect_equal(h$syr4_archive_urls(html, 'https://www.epa.gov/page'),
                'https://www.epa.gov/system/files/other-files/syr4_example.zip')
+})
+
+test_that('search inputs are explicit and validated before dependencies or requests', {
+  h <- occurrence_selection_helpers()
+  h$requireNamespace <- function(...) stop('unexpected dependency setup')
+  expect_error(h$run_occurrence(character(), data.frame()), 'chemical_queries')
+  expect_error(h$run_occurrence(NA_character_, data.frame()), 'chemical_queries')
+  expect_error(h$run_occurrence('atrazine', data.frame(), mapping_only = NA), 'mapping_only')
+  expect_error(h$run_occurrence('atrazine', data.frame(), run_sdwis = NA), 'run_sdwis')
+  expect_error(h$read_aqs_scope(data.frame(state = '6', year = 2002)), 'two-digit')
+  expect_equal(h$read_aqs_scope(data.frame(state = '26', year = 2002))$state, '26')
+})
+
+test_that('mapping searches return results and ignore old global search options', {
+  h <- occurrence_selection_helpers()
+  requests <- 0L
+  local_mocked_bindings(req_perform = function(...) {
+    requests <<- requests + 1L
+    stop('Unexpected network request')
+  }, .package = 'httr2')
+  cache <- tempfile()
+  dir.create(cache)
+  on.exit(unlink(cache, recursive = TRUE))
+  # Populate every catalog used by discovery; any cache miss would request the network.
+  identity <- list(time = Sys.time(), value = data.frame(
+    casrn = '71-43-2', dtxsid = 'BENZENE', preferredName = 'benzene'))
+  saveRDS(list('71-43-2' = identity, benzene = identity),
+    file.path(cache, 'chemical-lookups-v1.rds'))
+  saveRDS(data.frame(valid = 'benzene'), file.path(cache, 'BENZENE-synonyms.rds'))
+  saveRDS(data.frame(value_code = '2990', value_description = 'benzene'),
+    file.path(cache, 'sdwis-contaminants-v1.rds'))
+  url <- 'https://www.epa.gov/syr4_test.zip'
+  saveRDS(url, file.path(cache, 'syr4-archive-urls-v1.rds'))
+  saveRDS('SUMMARY_ANALYTE_BENZENE.txt', file.path(cache, 'syr4_test.zip.members.rds'))
+  saveRDS(data.frame('CAS Number' = '71-43-2', 'Parameter Code' = '45201',
+    Parameter = 'benzene', 'Standard Units' = 'ppb', 'Still Valid' = 'YES',
+    check.names = FALSE), file.path(cache, 'aqs-parameters-v1.rds'))
+  old <- options(occurrence.chemicals = 'atrazine',
+                 occurrence.aqs_scope = data.frame(state = '01', year = 2020),
+                 occurrence.mapping_only = FALSE, occurrence.refresh_catalogs = FALSE)
+  on.exit(options(old), add = TRUE)
+  output <- file.path(cache, 'output')
+  capture.output(result <- h$run_occurrence('71-43-2',
+    data.frame(state = '26', year = 2002), mapping_only = TRUE,
+    cache_dir = cache, output_dir = output))
+  expect_identical(requests, 0L)
+  expect_identical(result$chemicals$casrn, '71-43-2')
+  expect_identical(result$aqs_scope$state, '26')
+  expect_identical(result$aqs_scope$year, '2002')
+  expect_true(result$source_coverage$aqs_mapped)
+  expect_true(result$source_coverage$sdwis_mapped)
+  expect_null(result$air_samples)
+  expect_equal(readRDS(file.path(output, 'occurrence_results.rds')), result)
+  expect_false(exists('chemicals', envir = h, inherits = FALSE))
+  expect_identical(getOption('occurrence.chemicals'), 'atrazine')
 })

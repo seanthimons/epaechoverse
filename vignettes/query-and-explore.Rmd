@@ -179,14 +179,26 @@ combines drinking-water and ambient-air discovery. It accepts selected chemical
 names or CASRNs, delegates AQS requests to aqsually, and uses ComptoxR for
 identity discovery. These examples need their own credentials and may install
 missing packages and download large datasets. Review the script header and
-choose a bounded geography/year before sourcing it; site builds never run it.
+choose a bounded geography/year before calling `run_occurrence()`. Sourcing the
+helper only defines functions; site builds never run the search.
 
 ```{r chemical-examples, eval=FALSE}
-options(occurrence.chemicals = c("atrazine", "117-81-7"))
-options(occurrence.aqs_scope = data.frame(state = "26", year = 2002))
-options(occurrence.mapping_only = TRUE) # discover identifiers first
 source(system.file("examples", "occurrence_chemicals.R", package = "echoverse"))
+chemicals <- c("atrazine", "117-81-7")
+aqs_scope <- data.frame(state = "26", year = 2002)
+results <- run_occurrence(
+  chemical_queries = chemicals,
+  aqs_scope = aqs_scope,
+  mapping_only = TRUE # discover identifiers first
+)
+results$source_coverage
 ```
+
+Set `mapping_only = FALSE` to retrieve samples. Optional `run_sdwis`,
+`cache_dir`, and `output_dir` arguments control violation retrieval, caching,
+and exports. For CSV inputs, pass `read_chemicals(path)$casrn` and
+`read_aqs_scope(path)` explicitly. Search inputs no longer use R options or
+`OCCURRENCE_*` environment variables.
 
 ## Query Envirofacts tables
 
