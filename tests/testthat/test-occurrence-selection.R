@@ -70,6 +70,34 @@ test_that('source names generate candidates but cannot override chemical identit
   expect_equal(nrow(h$match_syr4_candidates(aliases, inventory, candidates[0, ])), 0L)
 })
 
+test_that('a failed synonym lookup still yields the preferred name and query', {
+  h <- occurrence_selection_helpers()
+  identity <- tibble::tibble(query = '1912-24-9', name = 'Atrazine',
+                            casrn = '1912-24-9', dtxsid = 'ATRAZINE')
+  aliases <- h$chemical_aliases(identity, NULL)
+  expect_setequal(aliases$alias, c('Atrazine', '1912-24-9'))
+  expect_equal(nrow(h$chemical_aliases(identity, data.frame(valid = NA_character_))), 2L)
+})
+
+test_that('ComptoxR request failures become errors and are not cached', {
+  h <- occurrence_selection_helpers()
+  failed <- function() {
+    warning('Request for DTXSID1 failed: HTTP 503 application/problem+json response')
+    tibble::tibble()
+  }
+  expect_error(h$strict_comptox(failed()), 'HTTP 503')
+  # Unrelated warnings and genuine empty results pass through unchanged.
+  expect_warning(expect_equal(h$strict_comptox({ warning('unrelated'); 'value' }), 'value'),
+                 'unrelated')
+  expect_equal(nrow(h$strict_comptox(tibble::tibble(x = integer()))), 0L)
+  cache <- tempfile()
+  dir.create(cache)
+  on.exit(unlink(cache, recursive = TRUE))
+  lookup <- h$cached_chemical_lookup(cache, function(query) h$strict_comptox(failed()))
+  expect_error(lookup('atrazine'), 'HTTP 503')
+  expect_false(file.exists(file.path(cache, 'chemical-lookups-v2.rds')))
+})
+
 test_that('remote ZIP directory parser agrees with a real ZIP and rejects truncation', {
   skip_if(Sys.which('zip') == '', 'zip executable unavailable')
   h <- occurrence_selection_helpers()
@@ -126,8 +154,8 @@ test_that('mapping searches return results and ignore old global search options'
   identity <- list(time = Sys.time(), value = data.frame(
     casrn = '71-43-2', dtxsid = 'BENZENE', preferredName = 'benzene'))
   saveRDS(list('71-43-2' = identity, benzene = identity),
-    file.path(cache, 'chemical-lookups-v1.rds'))
-  saveRDS(data.frame(valid = 'benzene'), file.path(cache, 'BENZENE-synonyms.rds'))
+    file.path(cache, 'chemical-lookups-v2.rds'))
+  saveRDS(data.frame(valid = 'benzene'), file.path(cache, 'BENZENE-synonyms-v2.rds'))
   saveRDS(data.frame(value_code = '2990', value_description = 'benzene'),
     file.path(cache, 'sdwis-contaminants-v1.rds'))
   url <- 'https://www.epa.gov/syr4_test.zip'

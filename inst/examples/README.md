@@ -79,7 +79,10 @@ results$source_coverage
 ```
 
 The first call installs any missing packages (`ComptoxR` and a few CRAN
-packages) and can look idle for several minutes. That is normal.
+packages) and can look idle for several minutes. That is normal. It installs
+ComptoxR v4.0.5 and replaces an older ComptoxR if you have one. If it then stops
+with "An older ComptoxR is loaded in this R session", restart R and repeat
+steps 3 and 4.
 
 ## 5. Full run
 
@@ -96,9 +99,11 @@ results <- run_occurrence(
 
 Before you run it:
 
-- It installs `aqsually` if missing. This is the package that retrieves the air data.
+- It installs `aqsually` (v0.1.0) if missing. This is the package that retrieves the air data.
 - AQS requests are paced at one every 6 seconds, so many chemicals, states or
   years make a long run. Keep the scope small the first time.
+- CompTox MMDB records can be large: atrazine alone is about 100,000 records and
+  takes around 3 minutes. Each MMDB request may run for up to 10 minutes.
 - Six-Year Review 4 data are large ZIP downloads (about 95 MB and 81 MB) and are
   cached for later runs in the `occurrence` folder under `tools::R_user_dir("echoverse", "cache")`.
 - SDWIS violation records are off by default. Add `run_sdwis = TRUE` to include
@@ -145,11 +150,11 @@ the label in the brackets:
 
 | Message starts with | What to do |
 |---|---|
-| `[identity ...]`, `[synonyms ...]` or `[MMDB ...]` failed | CompTox lookup. Check `ctx_api_key` (step 2, then restart R). `HTTP 503` means the service is down; try again later. |
+| `[identity ...]`, `[synonyms ...]` or `[MMDB ...]` failed | CompTox lookup. `HTTP 401`: check `ctx_api_key` (step 2, then restart R). `HTTP 400` on `[identity ...]`: CompTox did not recognize the name; check the spelling or use the CASRN. `timeout` or `HTTP 503`: the service is slow or down; try again later. |
 | `[aqs <chemical> <state> <year>]` failed | One AQS request. Check `AQS_EMAIL` and `AQS_KEY` (step 2, then restart R), and that the `AQSUALLY_DRY_RUN` environment variable is not set. |
 | `[aqs]` failed, with no chemical, state or year | No AQS parameter matched your chemicals, or the `[AQS parameter catalog]` download failed (see that row), so nothing was requested. This is not a credentials problem. Check `results$source_coverage`. |
 | `[AQS parameter catalog]`, `[SDWIS catalog ...]`, `[SYR4 ...]`, `[syr4]` or `[sdwis ...]` failed | An EPA download or catalog could not be fetched (`[sdwis ...]` appears only with `run_sdwis = TRUE`). Try again later. |
-| `[SDWIS identity verification ...]` failed | A possible SDWIS match was rejected, usually because it turned out to be a different chemical. This is normal; no action needed. If the message ends with an HTTP status such as `HTTP 503`, the CompTox service was down and a real match may have been dropped; try again later. |
+| `[SDWIS identity verification ...]` failed | A possible SDWIS match was rejected, usually because it turned out to be a different chemical. This is normal; no action needed, including when the message ends with `HTTP 400` (CompTox did not recognize that SDWIS name). If it ends with `timeout` or `HTTP 503`, the CompTox service was slow or down and a real match may have been dropped; try again later. |
 | `[mmdb]` failed | No chemical resolved to a CompTox ID, so the MMDB step was skipped. Fix the `[identity ...]` failure first. |
 | `Load this example with source()` | Use `source(...)`, not `Rscript`. |
 | `system.file(...)` returns `""` | echoverse is not installed; redo step 1. |
@@ -158,3 +163,7 @@ Failed identifier, synonym, SDWIS catalog, SDWIS identity verification and SYR4
 inventory lookups also show as `unresolved` in `results$mapping_status`. AQS,
 MMDB and sample-download failures appear only in the printed messages, so scroll back through them
 before trusting an empty table.
+
+Lookups and catalogs are cached for seven days. Failed lookups are not cached,
+so running again retries them. To force a fresh download of everything, run
+`options(occurrence.refresh_catalogs = TRUE)` before `run_occurrence()`.

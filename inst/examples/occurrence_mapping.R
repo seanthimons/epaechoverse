@@ -4,6 +4,16 @@
 
 chemical_name_key <- function(x) tolower(gsub('[^[:alnum:]]', '', x))
 
+# ComptoxR reports a failed request (timeout, HTTP error) as a warning plus an empty
+# table. Raise those as errors so failures are reported and never cached as no data.
+# Other warnings, and empty results without a warning, pass through unchanged.
+strict_comptox <- function(expr) {
+  withCallingHandlers(expr, warning = function(w) {
+    if (grepl('^Request for .+ failed: ', conditionMessage(w)))
+      stop(conditionMessage(w), call. = FALSE)
+  })
+}
+
 resolve_chemical_identity <- function(query, lookup = ComptoxR::ct_chemical_search_equal) {
   hits <- lookup(query)
   if (!all(c('dtxsid', 'casrn', 'preferredName') %in% names(hits)))
@@ -28,9 +38,11 @@ cached_catalog <- function(path, fetch, max_age_days = 7) {
   value
 }
 
-# Cache each successful lookup, keyed by its complete query string.
-cached_chemical_lookup <- function(cache_dir, lookup = ComptoxR::ct_chemical_search_equal) {
-  path <- file.path(cache_dir, 'chemical-lookups-v1.rds')
+# Cache each successful lookup, keyed by its complete query string. v2: earlier
+# versions could cache an empty result from a failed request.
+cached_chemical_lookup <- function(cache_dir,
+                                   lookup = function(query) strict_comptox(ComptoxR::ct_chemical_search_equal(query))) {
+  path <- file.path(cache_dir, 'chemical-lookups-v2.rds')
   entries <- if (file.exists(path)) readRDS(path) else list()
   function(query) {
     entry <- entries[[query]]
@@ -47,9 +59,11 @@ cached_chemical_lookup <- function(cache_dir, lookup = ComptoxR::ct_chemical_sea
 chemical_aliases <- function(identity, synonyms) {
   # CompTox's valid/good fields are semicolon-delimited; deleted/other names and
   # alternate CASRNs are deliberately excluded from candidate generation.
+  # A failed synonym lookup (NULL) still yields the preferred name and query.
   values <- unlist(synonyms[intersect(c('valid', 'good'), names(synonyms))], use.names = FALSE)
+  values <- as.character(values[!is.na(values)])
   aliases <- unique(trimws(c(identity$name, identity$query,
-                             unlist(strsplit(values[!is.na(values)], ';', fixed = TRUE)))))
+                             unlist(strsplit(values, ';', fixed = TRUE)))))
   aliases <- aliases[!is.na(aliases) & nzchar(aliases)]
   tibble::tibble(casrn = identity$casrn, dtxsid = identity$dtxsid,
                  alias = aliases, key = chemical_name_key(aliases)) |>

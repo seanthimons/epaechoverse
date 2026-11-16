@@ -18,10 +18,11 @@
 #   AQS_EMAIL     e-mail registered with AQS
 #   AQS_KEY       AQS API key
 # Missing packages are installed automatically with pak. echoverse, aqsually
-# and ComptoxR come from GitHub; the other dependencies come from CRAN.
+# and ComptoxR come from GitHub (aqsually v0.1.0 and ComptoxR v4.0.5 are pinned);
+# the other dependencies come from CRAN.
 #
-# Live validation: SYR4 and AQS returned samples on 2026-11-04. MMDB returned
-# records earlier that day; subsequent CompTox lookups returned HTTP 503.
+# Live validation: on 2026-11-16, a clean install with ComptoxR v4.0.5 and
+# aqsually v0.1.0 returned SYR4, AQS and MMDB records for atrazine and DEHP.
 # No returned data means no records in the requested scope, not proof of zero concentration.
 # Community systems include public and private owners; they are not necessarily
 # municipally owned. MMDB drinking-water records are not restricted to CWS.
@@ -90,19 +91,29 @@ run_occurrence <- function(chemical_queries, aqs_scope, mapping_only = FALSE,
 
   # Bootstrap pak, then install only missing dependencies. Existing installations
   # are retained; this does not force package upgrades each time data are queried.
+  # ComptoxR and aqsually are pinned to tested releases. A ComptoxR older than
+  # 4.0.5 lacks the function names used here, so it is replaced as if missing.
   if (!requireNamespace('pak', quietly = TRUE))
     utils::install.packages('pak', repos = 'https://cloud.r-project.org')
   occurrence_packages <- c(
     echoverse = 'github::seanthimons/epaechoverse',
-    ComptoxR = 'github::seanthimons/ComptoxR',
+    ComptoxR = 'github::seanthimons/ComptoxR@v4.0.5',
     dplyr = 'dplyr', purrr = 'purrr', httr2 = 'httr2', tibble = 'tibble'
   )
   if (!mapping_only)
-    occurrence_packages <- c(occurrence_packages, aqsually = 'github::seanthimons/aqsually')
-  missing_packages <- !vapply(names(occurrence_packages), requireNamespace,
-                              quietly = TRUE, FUN.VALUE = logical(1))
+    occurrence_packages <- c(occurrence_packages, aqsually = 'github::seanthimons/aqsually@v0.1.0')
+  # Read the installed version without loading it, so pak can replace an old copy.
+  comptox_path <- system.file(package = 'ComptoxR')
+  comptox_outdated <- nzchar(comptox_path) &&
+    utils::packageVersion('ComptoxR', lib.loc = dirname(comptox_path)) < '4.0.5'
+  missing_packages <- vapply(names(occurrence_packages), function(package)
+    (package == 'ComptoxR' && comptox_outdated) || !requireNamespace(package, quietly = TRUE),
+    logical(1))
   if (any(missing_packages))
     pak::pkg_install(unname(occurrence_packages[missing_packages]), ask = FALSE, upgrade = FALSE)
+  if ('ComptoxR' %in% loadedNamespaces() &&
+      package_version(getNamespaceVersion('ComptoxR')) < '4.0.5')
+    stop('An older ComptoxR is loaded in this R session. Restart R, then run again.')
 
   library(dplyr)
   library(purrr)
@@ -116,12 +127,18 @@ run_occurrence <- function(chemical_queries, aqs_scope, mapping_only = FALSE,
   syr4_dir <- cache_dir
   dir.create(syr4_dir, recursive = TRUE, showWarnings = FALSE)
   aqs_pause <- 6 # AQS allows ~10 requests/minute
+  # ComptoxR's default 30 s request limit is too short for large MMDB records
+  # (atrazine: about 100,000 rows in 3 minutes on 2026-11-16).
+  old_comptox <- options(comptoxr_native.request = utils::modifyList(
+    getOption('comptoxr_native.request', list()), list(timeout = 600)))
+  on.exit(options(old_comptox), add = TRUE)
 
   `%||%` <- function(x, y) if (is.null(x)) y else x
 
   safely_run <- function(label, expr) {
     tryCatch(expr, error = function(e) {
-      http_status <- regmatches(conditionMessage(e), regexpr('HTTP [0-9]{3}', conditionMessage(e)))
+      http_status <- regmatches(conditionMessage(e),
+                                regexpr('HTTP [0-9]{3}|timeout', conditionMessage(e)))
       message('[', label, '] failed', if (length(http_status)) paste0(': ', http_status) else
                 ' (check configuration, service availability and credentials)')
       NULL
@@ -151,8 +168,9 @@ run_occurrence <- function(chemical_queries, aqs_scope, mapping_only = FALSE,
     identity <- chemicals[i, ]
     if (is.na(identity$dtxsid)) return(NULL)
     synonyms <- mapping_attempt('synonyms', identity$casrn,
-      cached_catalog(file.path(syr4_dir, paste0(identity$dtxsid, '-synonyms.rds')),
-                     function() ComptoxR::ct_chemical_synonym_search(identity$dtxsid)))
+      cached_catalog(file.path(syr4_dir, paste0(identity$dtxsid, '-synonyms-v2.rds')),
+                     function() strict_comptox(
+                       ComptoxR::ct_chemical_synonym_search_by_dtxsid(identity$dtxsid))))
     chemical_aliases(identity, synonyms)
   })
   # Keep a typed empty table if no identity could be resolved.
@@ -331,7 +349,8 @@ run_occurrence <- function(chemical_queries, aqs_scope, mapping_only = FALSE,
     ids <- stats::na.omit(chemicals$dtxsid)
     if (!length(ids)) stop('no resolved DTXSIDs; MMDB skipped')
     map_dfr(ids, function(id) {
-      safely_run(paste('MMDB', id), ComptoxR::ct_exposure_mmdb_single_sample(id))
+      safely_run(paste('MMDB', id),
+                 strict_comptox(ComptoxR::ct_exposure_mmdb_single_sample_by_dtxsid(id)))
     })
   })
   # MMDB is supplementary; its drinking-water records are not restricted to CWS.
