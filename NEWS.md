@@ -1,3 +1,14 @@
+# echoverse 0.2.2
+
+* Fix the chemical occurrence example scripts, which stopped at the identifier
+  stage with ComptoxR 4.0.5. They now use ComptoxR's renamed synonym and MMDB
+  functions, install pinned ComptoxR v4.0.5 and aqsually v0.1.0 (replacing an
+  older ComptoxR), and continue when a synonym lookup fails.
+* CompTox request failures in the occurrence example are now reported as
+  `[label] failed: HTTP nnn` or `failed: timeout` and are no longer cached as
+  empty results. CompTox requests may take up to 10 minutes, enough for large
+  MMDB records.
+
 # echoverse 0.2.1
 
 * Add a step-by-step guide and a credentials template for the chemical
