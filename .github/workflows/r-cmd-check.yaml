@@ -17,7 +17,7 @@ jobs:
   r-cmd-check:
     name: R CMD check
     # Pinned to the baseline v1.4.0 commit. Dependabot bumps this.
-    uses: seanthimons/baseline/.github/workflows/r-cmd-check.yaml@e53831a23ef8f543c3fee58edd390089b0f13a27 # v1.4.0
+    uses: seanthimons/baseline/.github/workflows/r-cmd-check.yaml@f6ca03d08be881f191de2a6b41a9b72421e0a845 # v2.1.1
     with:
       # Linux only. The baseline default also runs Windows and macOS.
       matrix: '[{"os":"ubuntu-latest","r":"release"}]'
